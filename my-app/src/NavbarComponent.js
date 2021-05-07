@@ -24,7 +24,7 @@ function NavbarComponent(props) {
 
     return(
         <div>
-            <Navbar style={{'background-color':'#e6e6e6','height':'150px','color':'#000000'}}>
+            <Navbar style={{'background-color':'#0c343d','height':'150px','color':'#000000'}}>
                 <div className="col-md-3">
                     <NavbarBrand style={{'color':'#000000'}} href="/"><img style={{'width':'100px'}} src="http://localhost:8085/testiiiing.jpg"/></NavbarBrand>
                 </div>
@@ -33,7 +33,7 @@ function NavbarComponent(props) {
                 </div>
                 <div className="col-md-3">
                     <Dropdown style={{ 'right':'18%'}} isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle style={{'background-color':'#e6e6e6', 'border-color':'#e6e6e6'}} caret>
+                    <DropdownToggle style={{'background-color':'#0c343d', 'border-color':'#0c343d'}} caret>
                         &nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-cart" style={{'color':'#000000'}} aria-hidden="true"></i>&nbsp; <span style={{'font-size':'20px','color':'#000000'}}>Cart</span>
                     </DropdownToggle>
                     <DropdownMenu style={{'width':'350px'}} >
