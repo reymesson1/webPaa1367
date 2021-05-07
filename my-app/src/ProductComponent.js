@@ -19,6 +19,7 @@ class Product extends Component {
                     <div className="row">
                         <div className="card" style={{'margin':'5%'}}>
                             <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                            {product.id}
                         </div>
                     </div>
                 </div>

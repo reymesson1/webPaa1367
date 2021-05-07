@@ -146,7 +146,16 @@ class App extends Component {
         showModal: !this.state.showModal
       })
     }
-  
+ 
+    newestClicked(){
+
+      console.log('newest');
+    } 
+
+    oldestClicked(){
+
+      console.log('oldest');
+    } 
 
     render(){
       
@@ -170,7 +179,10 @@ class App extends Component {
             search={this.search.bind(this)}
             orders={this.state.orders}
           />  
-          <BreadcrumbComponent/>
+          <BreadcrumbComponent
+            newestClicked={this.newestClicked.bind(this)}
+            oldestClicked={this.oldestClicked.bind(this)}
+          />
           <Product
             filterText={this.state.filterText}
             orders={this.state.orders}
