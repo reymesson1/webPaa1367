@@ -1,7 +1,7 @@
 import React, { useState, Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
 
 function NavbarComponent(props) {
@@ -30,7 +30,20 @@ function NavbarComponent(props) {
                         <div style={{'color':'#ef8d09', 'font-size':'16px'}} href="/"> eCatalog </div>
                 </div>
                 <div className="col-md-6">
-                    <Input type="text" onChange={props.search.bind(this)} placeholder="Seach" />
+                    {/* <Input type="text" onChange={props.search.bind(this)} placeholder="Seach" /> */}
+                    <div className="row">
+                        <h1>&nbsp;</h1>
+                    </div>
+                    <div className="row">
+                        <Nav>
+                            <NavItem>
+                                <NavLink href="/components/">Components</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/components/">Components</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </div>
                 </div>
                 <div className="col-md-3">
                     <Dropdown style={{ 'right':'18%'}} isOpen={dropdownOpen} toggle={toggle}>
