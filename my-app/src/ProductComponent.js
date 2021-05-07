@@ -9,10 +9,39 @@ class Product extends Component {
     }
 
     render() {
-        let filterData = this.props.products.filter(
 
-            (product) => product.description.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
-        )
+        let filterData
+
+        if(this.props.newest){
+            filterData = this.props.products.sort( 
+                (a,b) =>{
+                    if(a.id>b.id){
+                        return 1
+                    }
+                    if(a.id<b.id){
+                        return -1
+                    }
+                    return 0
+                }
+            )
+        }else{
+            filterData = this.props.products.sort( 
+                (a,b) =>{
+                    if(a.id<b.id){
+                        return 1
+                    }
+                    if(a.id>b.id){
+                        return -1
+                    }
+                    return 0
+                }
+            )
+
+        }
+        // let filterData = this.props.products.filter(
+
+        //     (product) => product.description.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
+        // )
         const menu = filterData.map((product) => {
             return (
                 <div key={product.id} className="col-md-1">

@@ -21,6 +21,7 @@ class App extends Component {
       super(props);
       this.state = {
           showModal: false,
+          newest: false,
           filterText: "",
           orders:[{
             id : "0001",
@@ -150,9 +151,16 @@ class App extends Component {
     newestClicked(){
 
       console.log('newest');
+      this.setState({
+        newest : true
+      })
     } 
 
     oldestClicked(){
+
+      this.setState({
+        newest : false
+      })
 
       console.log('oldest');
     } 
@@ -184,6 +192,7 @@ class App extends Component {
             oldestClicked={this.oldestClicked.bind(this)}
           />
           <Product
+            newest={this.state.newest}
             filterText={this.state.filterText}
             orders={this.state.orders}
             products={this.state.products}
