@@ -13,6 +13,7 @@ import { Button,
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import BreadcrumbComponent from './BreadcrumbComponent';
+import PaginationComponent from './PaginationComponent';
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
@@ -198,6 +199,8 @@ class App extends Component {
             products={this.state.products}
             addToCart={this.addToCart.bind(this)}
           />
+          <br/>
+          <PaginationComponent/>
 
         </div>
       );
