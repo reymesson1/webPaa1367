@@ -23,9 +23,7 @@ class BreadcrumbComponent extends Component {
                     <div className="col-md-6">
                     <Breadcrumb tag="nav" listTag="div">
                         <BreadcrumbItem tag="a" href="#">Home</BreadcrumbItem>
-                        <BreadcrumbItem tag="a" href="#">Library</BreadcrumbItem>
-                        <BreadcrumbItem tag="a" href="#">Data</BreadcrumbItem>
-                        <BreadcrumbItem active tag="span">Bootstrap</BreadcrumbItem>
+                        <BreadcrumbItem tag="a" href="#">Browse</BreadcrumbItem>
                     </Breadcrumb>
                     </div>
                     <div className="col-md-5"></div>
