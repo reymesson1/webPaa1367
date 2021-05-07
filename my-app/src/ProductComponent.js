@@ -15,40 +15,10 @@ class Product extends Component {
         )
         const menu = filterData.map((product) => {
             return (
-                <div key={product.id} className="col-md-4" style={{'padding-left':'34px'}} >
+                <div key={product.id} className="col-md-1">
                     <div className="row">
-                        <div className="card" style={{'margin-top':'10%'}}>
-                            <div className="row" style={{'height':'150px','width':'450px'}}>
-                                <div className="col-md-6">
-                                    <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"94%","height":"93%","padding-left":"10px","padding-right":"10px"}}/>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="row">
-                                        <h5 >
-                                            <i style={{'color':'gold'}} className="fa fa-star" aria-hidden="true"></i>
-                                            <i style={{'color':'gold'}} className="fa fa-star" aria-hidden="true"></i>
-                                            <i style={{'color':'gold'}} className="fa fa-star" aria-hidden="true"></i>
-                                            <i className="fa fa-star" aria-hidden="true"></i>
-                                            <i className="fa fa-star" aria-hidden="true"></i>
-                                        </h5>
-                                    </div>
-                                    <div className="row">
-                                        <p>{product.description}</p>
-                                    </div>
-                                    <div className="row">
-                                        <p>{'$'}{product.price}</p>
-                                    </div>
-                                    <div className="row">
-                                        <AddToCart
-                                            id={product.id}
-                                            description={product.description}
-                                            price={product.price}
-                                            addToCart={this.props.addToCart.bind(this)}
-                                        />
-                                        {/* <button className="btn btn-primary" name="like" value={'{"id":'+product.id+',"press":""}'} ><i className="fa fa-shopping-cart" aria-hidden="true"></i> {'Add To Cart'}</button>                                     */}
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="card" style={{'margin':'5%'}}>
+                            <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                         </div>
                     </div>
                 </div>
@@ -56,8 +26,10 @@ class Product extends Component {
         })
         
         return(
-            <div className="row">
-                {menu}
+            <div style={{'padding-left':'3%'}} >
+                <div className="row">                    
+                    {menu}
+                </div>
             </div>
         );
     }
