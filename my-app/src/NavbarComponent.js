@@ -63,7 +63,7 @@ function NavbarComponent(props) {
                 <div className="col-md-3">
                     <Dropdown style={{ 'right':'18%'}} isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle style={{'background-color':'#0c343d', 'border-color':'#0c343d'}} caret>
-                        &nbsp;&nbsp;&nbsp;<i className="fa fa-user" style={{'color':'#aaafaf'}} aria-hidden="true"></i>&nbsp; <span style={{'font-size':'20px','color':'#aaafaf'}}>@amseluser</span>
+                        <span style={{'font-size':'20px','color':'#aaafaf'}}>@amseluser</span>
                     </DropdownToggle>
                     <DropdownMenu style={{'width':'350px'}} >
                         <DropdownItem header style={{'color':'#aaafaf'}} ><h4>Cart</h4></DropdownItem>
