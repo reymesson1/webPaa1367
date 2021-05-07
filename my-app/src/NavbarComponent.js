@@ -37,10 +37,25 @@ function NavbarComponent(props) {
                     <div className="row">
                         <Nav>
                             <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} href="/components/">Browse</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Products</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Companies</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Styles</NavLink>
                             </NavItem>
                         </Nav>
                     </div>
@@ -48,10 +63,10 @@ function NavbarComponent(props) {
                 <div className="col-md-3">
                     <Dropdown style={{ 'right':'18%'}} isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle style={{'background-color':'#0c343d', 'border-color':'#0c343d'}} caret>
-                        &nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-cart" style={{'color':'#000000'}} aria-hidden="true"></i>&nbsp; <span style={{'font-size':'20px','color':'#000000'}}>Cart</span>
+                        &nbsp;&nbsp;&nbsp;<i className="fa fa-user" style={{'color':'#aaafaf'}} aria-hidden="true"></i>&nbsp; <span style={{'font-size':'20px','color':'#aaafaf'}}>@amseluser</span>
                     </DropdownToggle>
                     <DropdownMenu style={{'width':'350px'}} >
-                        <DropdownItem header><h4>Cart</h4></DropdownItem>
+                        <DropdownItem header style={{'color':'#aaafaf'}} ><h4>Cart</h4></DropdownItem>
                         <DropdownItem>
                         <div className="row">
                             <Table>
