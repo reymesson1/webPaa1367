@@ -15,10 +15,10 @@ class Product extends Component {
         if(this.props.newest){
             filterData = this.props.products.sort( 
                 (a,b) =>{
-                    if(a.id>b.id){
+                    if(a.id<b.id){
                         return 1
                     }
-                    if(a.id<b.id){
+                    if(a.id>b.id){
                         return -1
                     }
                     return 0
@@ -27,10 +27,10 @@ class Product extends Component {
         }else{
             filterData = this.props.products.sort( 
                 (a,b) =>{
-                    if(a.id<b.id){
+                    if(a.id>b.id){
                         return 1
                     }
-                    if(a.id>b.id){
+                    if(a.id<b.id){
                         return -1
                     }
                     return 0

@@ -21,7 +21,7 @@ class App extends Component {
       super(props);
       this.state = {
           showModal: false,
-          newest: false,
+          newest: true,
           filterText: "",
           orders:[{
             id : "0001",
