@@ -12,6 +12,7 @@ import { Button,
   ModalFooter } from 'reactstrap';
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
+import BreadcrumbComponent from './BreadcrumbComponent';
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
@@ -169,6 +170,7 @@ class App extends Component {
             search={this.search.bind(this)}
             orders={this.state.orders}
           />  
+          <BreadcrumbComponent/>
           <Product
             filterText={this.state.filterText}
             orders={this.state.orders}
