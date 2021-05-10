@@ -3,17 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table } from 'reactstrap';
-import { Button,
-  Container,
-  Modal,
-  ModalTitle,
-  ModalHeader,
-  ModalBody,
-  ModalFooter } from 'reactstrap';
+import { Button, Container, Modal, ModalTitle, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import BreadcrumbComponent from './BreadcrumbComponent';
 import PaginationComponent from './PaginationComponent';
+import CompaniesComponent from './CompaniesComponent';
+import { BrowserRouter as Router,  Route, Link, Switch, Redirect } from 'react-router-dom';
+
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
@@ -169,40 +166,48 @@ class App extends Component {
     render(){
       
       return (
-        <div className="App">
-          <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
-            <ModalHeader>
-              <p>Transaction ID 00001</p>
-            </ModalHeader>
-            <ModalBody>
-              Your checkout has been successfully completed.
-            </ModalBody>
-            <ModalFooter>  
-              <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
-            </ModalFooter>
-          </Modal>
+        <Router>
+          <Route path="/" component={App}>
+          <Route path="order" component={PaginationComponent}/>
+          <Route path="companies" component={CompaniesComponent}/>
 
-          <NavbarComponent
-            doCheckout={this.doCheckout.bind(this)}
-            deleteItem={this.deleteItem.bind(this)}
-            search={this.search.bind(this)}
-            orders={this.state.orders}
-          />  
-          <BreadcrumbComponent
-            newestClicked={this.newestClicked.bind(this)}
-            oldestClicked={this.oldestClicked.bind(this)}
-          />
-          <Product
-            newest={this.state.newest}
-            filterText={this.state.filterText}
-            orders={this.state.orders}
-            products={this.state.products}
-            addToCart={this.addToCart.bind(this)}
-          />
-          <br/>
-          <PaginationComponent/>
+          <div className="App">
+            <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
+              <ModalHeader>
+                <p>Transaction ID 00001</p>
+              </ModalHeader>
+              <ModalBody>
+                Your checkout has been successfully completed.
+              </ModalBody>
+              <ModalFooter>  
+                <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
+              </ModalFooter>
+            </Modal>
 
-        </div>
+            <NavbarComponent
+              doCheckout={this.doCheckout.bind(this)}
+              deleteItem={this.deleteItem.bind(this)}
+              search={this.search.bind(this)}
+              orders={this.state.orders}
+            />  
+            <BreadcrumbComponent
+              newestClicked={this.newestClicked.bind(this)}
+              oldestClicked={this.oldestClicked.bind(this)}
+            />
+            <Product
+              newest={this.state.newest}
+              filterText={this.state.filterText}
+              orders={this.state.orders}
+              products={this.state.products}
+              addToCart={this.addToCart.bind(this)}
+            />
+            <br/>
+            <PaginationComponent/>
+
+          </div>
+          </Route>
+        </Router>
+
       );
   }
 }

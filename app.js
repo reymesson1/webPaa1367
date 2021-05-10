@@ -13,6 +13,8 @@ app.use(cors({
   }));
 app.use(express.static('static'));
 
+var sql = require('mssql');
+
 app.use(bodyParser.json());
 
 var masterController = require('./controller/masterController');

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
+import { BrowserRouter as Router,  Route, Link, Switch, Redirect } from 'react-router-dom';
 
 function NavbarComponent(props) {
     
@@ -46,10 +47,11 @@ function NavbarComponent(props) {
                                 <NavLink style={{'color':'#aaafaf'}} href="/components/">Products</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}}>|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Companies</NavLink>
+                            <Link to={'/companies'}>Master</Link>
+                                <NavLink style={{'color':'#aaafaf'}} to="/companies">Companies</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
