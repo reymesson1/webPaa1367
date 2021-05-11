@@ -18,6 +18,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
+import StylesComponent from './StylesComponent';
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
@@ -195,7 +196,16 @@ class App extends Component {
             orders={this.state.orders}
           />  
           <Route path="/" exact component= {HomeComponent}   />
-          <Route path="/product" component= {CompanyComponent}   />
+          <Route path="/companies" component= {CompanyComponent}   />
+          <Route path="/styles" component= {StylesComponent}   />
+          <Route path="/product" component= {() => <Product
+                      newest={this.state.newest}
+                      filterText={this.state.filterText}
+                      orders={this.state.orders}
+                      products={this.state.products}
+                      addToCart={this.addToCart.bind(this)}                
+                      />}    
+           />
           </BrowserRouter>          
         </div>
       );
