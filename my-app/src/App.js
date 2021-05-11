@@ -14,6 +14,10 @@ import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import BreadcrumbComponent from './BreadcrumbComponent';
 import PaginationComponent from './PaginationComponent';
+import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import HomeComponent from './HomeComponent';
+import CompanyComponent from './CompanyComponent';
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
@@ -181,6 +185,8 @@ class App extends Component {
               <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
             </ModalFooter>
           </Modal>
+          
+          <BrowserRouter>
 
           <NavbarComponent
             doCheckout={this.doCheckout.bind(this)}
@@ -188,20 +194,9 @@ class App extends Component {
             search={this.search.bind(this)}
             orders={this.state.orders}
           />  
-          <BreadcrumbComponent
-            newestClicked={this.newestClicked.bind(this)}
-            oldestClicked={this.oldestClicked.bind(this)}
-          />
-          <Product
-            newest={this.state.newest}
-            filterText={this.state.filterText}
-            orders={this.state.orders}
-            products={this.state.products}
-            addToCart={this.addToCart.bind(this)}
-          />
-          <br/>
-          <PaginationComponent/>
-
+          <Route path="/" exact component= {HomeComponent}   />
+          <Route path="/product" component= {CompanyComponent}   />
+          </BrowserRouter>          
         </div>
       );
   }

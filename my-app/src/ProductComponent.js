@@ -44,7 +44,7 @@ class Product extends Component {
         // )
         const menu = filterData.map((product) => {
             return (
-                <div key={product.id} className="col-md-1">
+                <div key={product.id} className="col-md-3">
                     <div className="row">
                         <div className="card" style={{'margin':'5%'}}>
                             <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>

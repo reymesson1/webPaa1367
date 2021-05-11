@@ -37,22 +37,22 @@ function NavbarComponent(props) {
                     <div className="row">
                         <Nav>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/components/">Browse</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} href="/">Browse</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Products</NavLink>
+                                <NavLink style={{'color':'#aaafaf'}} href="/product/">Products</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Companies</NavLink>
+                                <NavLink style={{'color':'#aaafaf'}} href="/product/">Companies</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/components/">|</NavLink>
+                                <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink style={{'color':'#aaafaf'}} href="/components/">Styles</NavLink>
