@@ -49,13 +49,13 @@ function NavbarComponent(props) {
                                 <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/product/">Companies</NavLink>
+                                <NavLink style={{'color':'#aaafaf'}} href="/companies/">Companies</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/components/">Styles</NavLink>
+                                <NavLink style={{'color':'#aaafaf'}} href="/styles/">Styles</NavLink>
                             </NavItem>
                         </Nav>
                     </div>
