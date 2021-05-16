@@ -4,40 +4,40 @@ var sql     = require('mssql');
 exports.getMaster = async(req,res)=>{
 
     console.log(req.body);
-    // var dbConfig = {
-    //   host:'localhost',
-    //   server:'DESKTOP-4CBHF69',
-    //   database:'WideWorldImporters',
-    //   user:'',
-    //   password:'',
-    //   port:1433,
-    //   options: {
-    //     encrypt: false,
-    //     trustedConnection: true,
-    //   },
-  
-    // };
-
-    // sql.connect(dbConfig)
-    // .then((conn) => 
-    //     conn.query("SELECT * FROM Sales.Orders")
-    //       .then((v) => console.log(v))
-    //       .then(() => conn.close())
-    // )
-
-    const config  = {
-      database: "WideWorldImporters",
-      server: "DESKTOP-4CBHF69",
+    var dbConfig = {
+      host:'localhost',
+      server:'DESKTOP-4CBHF69',
+      database:'WideWorldImporters',
+      user:'sa',
+      password:'1234',
+      port:1433,
       options: {
-        // trustedConnection: true,
-        trustServerCertificate: true,
-        useUTC: true
-      }
+        encrypt: false,
+        trustedConnection: true,
+      },
+  
     };
 
-    await sql.connect(config)
-    const result = await sql.query`select * from Sales.Orders`
-    console.log(result)
+    sql.connect(dbConfig)
+    .then((conn) => 
+        conn.query("SELECT * FROM Sales.Orders")
+          .then((v) => console.log(v))
+          .then(() => conn.close())
+    )
+
+    // const config  = {
+    //   database: "WideWorldImporters",
+    //   server: "DESKTOP-4CBHF69",
+    //   options: {
+    //     // trustedConnection: true,
+    //     trustServerCertificate: true,
+    //     useUTC: true
+    //   }
+    // };
+
+    // await sql.connect(config)
+    // const result = await sql.query`select * from Sales.Orders`
+    // console.log(result)
     
 
     
