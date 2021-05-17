@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Media } from 'reactstrap';
 import { AddToCart } from './AddToCartComponent';
+import Pagination from './PaginationComponent';
 
 class Product extends Component {
 
@@ -59,6 +60,9 @@ class Product extends Component {
             <div style={{'padding-left':'3%'}} >
                 <div className="row">                    
                     {menu}
+                </div>
+                <div className="row">                    
+                    <Pagination  />
                 </div>
             </div>
         );
