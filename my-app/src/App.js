@@ -21,7 +21,14 @@ import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
 // import PaginationComponent from './PaginationComponent';
 
-let API_URL = "http://localhost:8085"
+let API_URL = "http://localhost:8085";
+
+const API_HEADERS = {
+
+  'Content-Type':'application/json',
+  Authentication: 'any-string-you-like'
+}
+
 class App extends Component {
 
   constructor(props) {
@@ -185,6 +192,26 @@ class App extends Component {
       console.log('oldest');
     } 
 
+    onClickPagination(event){
+
+      fetch(API_URL+'/pagination', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"id":"1","paginationNumber":"1"})
+              // body: JSON.stringify({"id":"1","paginationNumber":event.target.number.value})
+      })
+      .then((response)=>response.json())
+      .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+      })
+
+      console.log('test from App.js')
+    }
+
     render(){
       
       return (
@@ -217,7 +244,8 @@ class App extends Component {
                       filterText={this.state.filterText}
                       orders={this.state.orders}
                       products={this.state.products}
-                      addToCart={this.addToCart.bind(this)}                
+                      addToCart={this.addToCart.bind(this)}    
+                      onClickPagination={this.onClickPagination.bind(this)}            
                       />}    
            />
           </BrowserRouter>          

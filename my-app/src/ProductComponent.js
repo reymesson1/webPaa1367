@@ -64,7 +64,9 @@ class Product extends Component {
                 <div className="row">   
                     <div className="col-md-4"></div>                 
                     <div className="col-md-4">
-                        <Pagination/>
+                        <Pagination
+                            onClickPagination={this.props.onClickPagination.bind(this)}
+                        />
                     </div>                 
                     <div className="col-md-4"></div>                 
                 </div>
