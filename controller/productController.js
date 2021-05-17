@@ -20,7 +20,7 @@ exports.getMaster = async(req,res)=>{
 
     sql.connect(dbConfig)
     .then((conn) => 
-        conn.query("SELECT TOP 80 * FROM Sales.Orders")
+        conn.query("SELECT TOP 10 * FROM Sales.Orders")
           // .then((v) => console.log(v.recordset))
           .then( (v) => {
 
