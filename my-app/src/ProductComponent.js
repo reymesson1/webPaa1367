@@ -57,12 +57,16 @@ class Product extends Component {
         })
         
         return(
-            <div style={{'padding-left':'3%'}} >
+            <div className="container">
                 <div className="row">                    
                     {menu}
                 </div>
-                <div className="row">                    
-                    <Pagination  />
+                <div className="row">   
+                    <div className="col-md-4"></div>                 
+                    <div className="col-md-4">
+                        <Pagination/>
+                    </div>                 
+                    <div className="col-md-4"></div>                 
                 </div>
             </div>
         );

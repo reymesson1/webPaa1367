@@ -14,10 +14,7 @@ class PaginationComponent extends Component {
     render() {
         
         return(
-            <div className="row">
-                <div className="col-md-4"></div>
-                <div className="col-md-4">
-                    <Pagination aria-label="Page navigation example">
+            <Pagination aria-label="Page navigation example">
                         <PaginationItem>
                             <PaginationLink first href="#" />
                         </PaginationItem>
@@ -55,10 +52,7 @@ class PaginationComponent extends Component {
                         <PaginationItem>
                             <PaginationLink last href="#" />
                         </PaginationItem>
-                    </Pagination>
-                </div>
-                <div className="col-md-4"></div>
-            </div>
+            </Pagination>
         );
     }
 

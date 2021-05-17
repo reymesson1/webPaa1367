@@ -19,6 +19,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
+// import PaginationComponent from './PaginationComponent';
 
 let API_URL = "http://localhost:8085"
 class App extends Component {
