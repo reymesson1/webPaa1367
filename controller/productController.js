@@ -20,9 +20,15 @@ exports.getMaster = async(req,res)=>{
 
     sql.connect(dbConfig)
     .then((conn) => 
-        conn.query("SELECT * FROM Sales.Orders")
-          .then((v) => console.log(v))
+        conn.query("SELECT TOP 80 * FROM Sales.Orders")
+          // .then((v) => console.log(v.recordset))
+          .then( (v) => {
+
+            return res.send(v.recordset);
+
+          })
           .then(() => conn.close())
+          // .then((v) => res.send(v)  )
     )
 
     // const config  = {
@@ -585,7 +591,7 @@ exports.getMaster = async(req,res)=>{
       }                
     ];
 
-    res.send(products);
+    // res.send(products);
 
 
 }
