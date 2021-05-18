@@ -41,3 +41,8 @@
 
   background-color: #ffffff !important;
 }
+
+.load_more p{
+  text-decoration: underline;
+  color: rgb(24, 24, 163);
+}
