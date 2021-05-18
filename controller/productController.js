@@ -1,4 +1,4 @@
-var sql     = require('mssql');
+var sql = require('mssql');
 
 exports.getMaster = async(req,res)=>{
 
@@ -41,7 +41,11 @@ exports.setMaster = async(req,res)=>{
 }
 
 exports.setPagination = async(req,res)=>{
-  
+
+    var obj = req.body;
+
+
+
     console.log(req.body)
 
 }

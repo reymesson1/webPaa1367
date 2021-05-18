@@ -19,7 +19,6 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
-// import PaginationComponent from './PaginationComponent';
 
 let API_URL = "http://localhost:8085";
 
@@ -199,7 +198,6 @@ class App extends Component {
               method: 'post',
               headers: API_HEADERS,
               body: JSON.stringify({"id":"1","paginationNumber":"1"})
-              // body: JSON.stringify({"id":"1","paginationNumber":event.target.number.value})
       })
       .then((response)=>response.json())
       .then((responseData)=>{
