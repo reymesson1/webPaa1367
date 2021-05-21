@@ -24,7 +24,7 @@ class ProductDetailComponent extends Component {
                     <div className="card" style={{'margin':'5%'}}>
                         <div className="row">
                             <div className="col-md-6">
-                                <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                                <img src={"http://localhost:8085/executed/"+ this.state.id + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                             </div>
                             <div className="col-md-6">
                                 {/* <h3>{"Product Detail Component " + this.state.id} </h3> */}
