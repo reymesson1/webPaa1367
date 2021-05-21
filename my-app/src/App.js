@@ -19,6 +19,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
+import ProductDetailComponent from './ProductDetailComponent';
 
 let API_URL = "http://localhost:8085";
 
@@ -237,6 +238,8 @@ class App extends Component {
           <Route path="/" exact component= {HomeComponent}   />
           <Route path="/companies" component= {CompanyComponent}   />
           <Route path="/styles" component= {StylesComponent}   />
+          <Route path="/styles" component= {StylesComponent}   />
+          <Route path="/productdetail/:id" component={ProductDetailComponent}/>
           <Route path="/product" component= {() => <Product
                       newest={this.state.newest}
                       filterText={this.state.filterText}

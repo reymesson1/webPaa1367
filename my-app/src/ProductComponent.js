@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Media } from 'reactstrap';
 import { AddToCart } from './AddToCartComponent';
 import Pagination from './PaginationComponent';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
 
@@ -47,11 +48,14 @@ class Product extends Component {
             return (
                 <div key={product.id} className="col-md-3">
                     <div className="row">
+                    <Link to={'/productdetail/'+index}> 
+                    {/* <Link className="btn btn-default" to={'/updatecustomer/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link> */}
                         <div className="card" style={{'margin':'5%'}}>
                             {/* <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                             <img src={"http://localhost:8085/executed/"+ index + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                             {product.id}
                         </div>
+                    </Link>
                     </div>
                 </div>
             )
