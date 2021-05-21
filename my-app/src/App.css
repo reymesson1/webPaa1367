@@ -41,3 +41,8 @@
 
   background-color: #ffffff !important;
 }
+
+.card-text{
+
+  text-align: left;
+}
