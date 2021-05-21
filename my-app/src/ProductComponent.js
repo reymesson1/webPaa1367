@@ -43,12 +43,13 @@ class Product extends Component {
 
         //     (product) => product.description.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
         // )
-        const menu = filterData.map((product) => {
+        const menu = filterData.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-3">
                     <div className="row">
                         <div className="card" style={{'margin':'5%'}}>
-                            <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                            {/* <img src={"http://localhost:8085/executed/gray.jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                            <img src={"http://localhost:8085/executed/"+ index + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                             {product.id}
                         </div>
                     </div>
