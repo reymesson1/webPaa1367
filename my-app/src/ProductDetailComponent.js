@@ -11,15 +11,21 @@ class ProductDetailComponent extends Component {
         this.state = {
             id: 0,
             backgroundImage: `url(${src})`,
+            // backgroundImage: `url(${this.state.src})`,
             // backgroundImage: '',
-            backgroundPosition: '0% 0%'
+            backgroundPosition: '0% 0%',
+            // src: ''
         }
     }
 
     componentDidMount(){
         this.setState({
             id: this.props.match.params.id,
-            backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
+            // backgroundImage: `url(${"http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"})`,
+            // src: "http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"
+
+            // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
+            // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
         })
     }
 
@@ -42,6 +48,7 @@ class ProductDetailComponent extends Component {
                                 <figure onMouseMove={this.handleMouseMove} style={this.state}>
                                     {/* <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                     <img src={src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
+                                    {/* <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} /> */}
                                 </figure>
                             </div>
                             <div className="col-md-5">
