@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-const src = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0'
+// const src = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0'
+const src = "http://localhost:8085/executed/"+ "7" + ".jpg"
 
 class ProductDetailComponent extends Component {
 
@@ -17,7 +18,8 @@ class ProductDetailComponent extends Component {
 
     componentDidMount(){
         this.setState({
-            id: this.props.match.params.id
+            id: this.props.match.params.id,
+            backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
         })
     }
 
