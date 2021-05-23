@@ -36,13 +36,13 @@ class ProductDetailComponent extends Component {
                 <div className="row">
                     <div className="card" style={{'margin':'5%'}}>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-7">
                                 <figure onMouseMove={this.handleMouseMove} style={this.state}>
                                     {/* <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                    <img src={src} />
+                                    <img src={src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
                                 </figure>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-5">
                                 {/* <h3>{"Product Detail Component " + this.state.id} </h3> */}
                                 <div class="card-body">
                                     <div className="row">
