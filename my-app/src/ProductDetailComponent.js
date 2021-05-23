@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
+const src = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0'
+
 class ProductDetailComponent extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            id: 0
+            id: 0,
+            backgroundImage: `url(${src})`,
+            // backgroundImage: '',
+            backgroundPosition: '0% 0%'
         }
     }
 
@@ -16,6 +21,14 @@ class ProductDetailComponent extends Component {
         })
     }
 
+    handleMouseMove = e => {
+        const { left, top, width, height } = e.target.getBoundingClientRect()
+        const x = (e.pageX - left) / width * 100
+        const y = (e.pageY - top) / height * 100
+        this.setState({ backgroundPosition: `${x}% ${y}%` })
+    }
+    
+
     render() {
         
         return(
@@ -24,7 +37,10 @@ class ProductDetailComponent extends Component {
                     <div className="card" style={{'margin':'5%'}}>
                         <div className="row">
                             <div className="col-md-6">
-                                <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                                <figure onMouseMove={this.handleMouseMove} style={this.state}>
+                                    {/* <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                    <img src={src} />
+                                </figure>
                             </div>
                             <div className="col-md-6">
                                 {/* <h3>{"Product Detail Component " + this.state.id} </h3> */}
