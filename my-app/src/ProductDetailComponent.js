@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // const src = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0'
-const src = "http://localhost:8085/executed/"+ "7" + ".jpg"
+// const src = "http://localhost:8085/executed/"+ "7" + ".jpg"
 
 class ProductDetailComponent extends Component {
 
@@ -10,18 +10,18 @@ class ProductDetailComponent extends Component {
 
         this.state = {
             id: 0,
-            backgroundImage: `url(${src})`,
+            backgroundImage: `url(${'"http://localhost:8085/executed/"+ "7" + ".jpg"'})`,
             // backgroundImage: `url(${this.state.src})`,
             // backgroundImage: '',
             backgroundPosition: '0% 0%',
-            // src: ''
+            src: "http://localhost:8085/executed/"+ "7" + ".jpg"
         }
     }
 
     componentDidMount(){
         this.setState({
             id: this.props.match.params.id,
-            // backgroundImage: `url(${"http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"})`,
+            backgroundImage: `url(${"http://localhost:8085/executed/"+ "7" + ".jpg"})`,
             // src: "http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"
 
             // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
@@ -47,7 +47,7 @@ class ProductDetailComponent extends Component {
                             <div className="col-md-7">
                                 <figure onMouseMove={this.handleMouseMove} style={this.state}>
                                     {/* <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                    <img src={src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
+                                    <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
                                     {/* <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} /> */}
                                 </figure>
                             </div>
