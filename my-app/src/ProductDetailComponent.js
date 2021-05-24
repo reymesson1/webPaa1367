@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
 
+// const src = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0'
+const src = "http://localhost:8085/executed/"+ "7" + ".jpg"
+
 class ProductDetailComponent extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            id: 0
+            id: 0,
+            backgroundImage: `url(${src})`,
+            // backgroundImage: `url(${this.state.src})`,
+            // backgroundImage: '',
+            backgroundPosition: '0% 0%',
+            // src: ''
         }
     }
 
     componentDidMount(){
         this.setState({
-            id: this.props.match.params.id
+            id: this.props.match.params.id,
+            // backgroundImage: `url(${"http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"})`,
+            // src: "http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"
+
+            // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
+            // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
         })
     }
+
+    handleMouseMove = e => {
+        const { left, top, width, height } = e.target.getBoundingClientRect()
+        const x = (e.pageX - left) / width * 100
+        const y = (e.pageY - top) / height * 100
+        this.setState({ backgroundPosition: `${x}% ${y}%` })
+    }
+    
 
     render() {
         
@@ -23,10 +44,14 @@ class ProductDetailComponent extends Component {
                 <div className="row">
                     <div className="card" style={{'margin':'5%'}}>
                         <div className="row">
-                            <div className="col-md-6">
-                                <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                            <div className="col-md-7">
+                                <figure onMouseMove={this.handleMouseMove} style={this.state}>
+                                    {/* <img src={"http://localhost:8085/executed/"+ this.state.id + ".png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                    <img src={src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
+                                    {/* <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} /> */}
+                                </figure>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-5">
                                 {/* <h3>{"Product Detail Component " + this.state.id} </h3> */}
                                 <div class="card-body">
                                     <div className="row">
