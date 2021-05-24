@@ -10,18 +10,18 @@ class ProductDetailComponent extends Component {
 
         this.state = {
             id: 0,
-            backgroundImage: `url(${'"http://localhost:8085/executed/"+ "7" + ".jpg"'})`,
+            backgroundImage: `url(${'"http://localhost:8085/executed/"+ '+ this.props.match.params.id +' + ".jpg"'})`,
             // backgroundImage: `url(${this.state.src})`,
             // backgroundImage: '',
             backgroundPosition: '0% 0%',
-            src: "http://localhost:8085/executed/"+ "7" + ".jpg"
+            src: "http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"
         }
     }
 
     componentDidMount(){
         this.setState({
             id: this.props.match.params.id,
-            backgroundImage: `url(${"http://localhost:8085/executed/"+ "7" + ".jpg"})`,
+            backgroundImage: `url(${"http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"})`,
             // src: "http://localhost:8085/executed/"+ this.props.match.params.id + ".jpg"
 
             // backgroundImage: "http://localhost:8085/executed/"+ this.state.id + ".png"
