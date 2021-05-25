@@ -101,6 +101,24 @@ exports.getMaster = async(req,res)=>{
           category: 'mains',
           label:'Hot',
           price:'4.99',
+          description:'Vidalia onion'                                       
+        },                
+        {
+          id: 8,
+          description:'Uthappizza',
+          image: 'assets/images/uthappizza.png',
+          category: 'mains',
+          label:'Hot',
+          price:'4.99',
+          description:'Vidalia onion'                        
+        },                
+        {
+          id: 9,
+          description:'Uthappizza',
+          image: 'assets/images/uthappizza.png',
+          category: 'mains',
+          label:'Hot',
+          price:'4.99',
           description:'Vidalia onion'                        
         }                
       ];
