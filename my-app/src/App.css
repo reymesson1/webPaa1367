@@ -50,6 +50,7 @@
 figure {
   width: 600px;
   background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 figure:hover img {
