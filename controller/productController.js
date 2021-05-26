@@ -1,4 +1,4 @@
-var sql = require('mssql');
+// var sql = require('mssql');
 
 exports.getMaster = async(req,res)=>{
 
