@@ -40,8 +40,7 @@ class ProductDetailComponent extends Component {
                                     <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
                                 </figure>
                             </div>
-                            <div className="col-md-5">
-                                {/* <h3>{"Product Detail Component " + this.state.id} </h3> */}
+                            {/* <div className="col-md-5">
                                 <div class="card-body">
                                     <div className="row">
                                         <h5 class="card-title">{"Product Detail Component " + this.state.id}</h5>
@@ -64,7 +63,7 @@ class ProductDetailComponent extends Component {
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> */}
                         </div>
                         {/* <div class="card-body">
                             <h5 class="card-title">Card title</h5>

@@ -22,6 +22,7 @@ import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
 
 let API_URL = "http://143.198.124.234:8085";
+// let API_URL = "http://localhost:8085";
 
 const API_HEADERS = {
 

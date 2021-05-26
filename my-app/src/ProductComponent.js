@@ -44,36 +44,64 @@ class Product extends Component {
 
         //     (product) => product.description.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
         // )
+        // const menu = filterData.map((product, index) => {
+        //     return (
+        //         <div key={product.id} className="col-md-3">
+        //             <div className="row">
+        //             <Link to={'/productdetail/'+index}> 
+        //                 <div className="card" style={{'margin':'5%'}}>
+        //                     {/* <img src={"http://143.198.124.234:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+        //                     <img src={"http://localhost:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+        //                     {product.id}
+        //                 </div>
+        //             </Link>
+        //             </div>
+        //         </div>
+        //     )
+        // })
+
         const menu = filterData.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-3">
-                    <div className="row">
                     <Link to={'/productdetail/'+index}> 
                         <div className="card" style={{'margin':'5%'}}>
-                            <img src={"http://143.198.124.234:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
-                            {/* <img src={"http://localhost:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                            {product.id}
+                                <img src={"http://143.198.124.234:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                         </div>
                     </Link>
-                    </div>
                 </div>
             )
+
         })
         
         return(
             <div className="container">
                 <div className="row">                    
                     {menu}
+                    {/* <div className="col-md-3">
+                        <div className="card" style={{'margin':'5%'}}>
+                            <img src={"http://localhost:8085/executed/"+ "0" + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card" style={{'margin':'5%'}}>
+                            <img src={"http://localhost:8085/executed/"+ "1" + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card" style={{'margin':'5%'}}>
+                            <img src={"http://localhost:8085/executed/"+ "2" + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card" style={{'margin':'5%'}}>
+                            <img src={"http://localhost:8085/executed/"+ "4" + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                        </div>
+                    </div> */}
                 </div>
-                <div className="row">   
+                {/* <div className="row">   
                     <div className="col-md-4"></div>                 
-                    <div className="col-md-4">
-                        <Pagination
-                            onClickPagination={this.props.onClickPagination.bind(this)}
-                        />
-                    </div>                 
                     <div className="col-md-4"></div>                 
-                </div>
+                </div> */}
             </div>
         );
     }
