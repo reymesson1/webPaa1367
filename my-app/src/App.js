@@ -21,7 +21,8 @@ import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
 
-let API_URL = "http://143.198.124.234:8085";
+// let API_URL = "http://143.198.124.234:8085";
+let API_URL = "http://localhost:8085";
 
 const API_HEADERS = {
 
@@ -153,17 +154,37 @@ class App extends Component {
 
     doCheckout(event){
 
-      event.preventDefault();
+      // console.log('upload');
 
-      let nextState = this.state.orders;
+      if (event.target.files && event.target.files[0]) {
+        let img = event.target.files[0];
 
-      nextState[0].orderDetails = [];
+        fetch(API_URL+'/uploadimage', {
+
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify({"id":"1","paginationNumber":img})
+        })
+        .then((response)=>response.json())
+        .then((responseData)=>{
+  
+          console.log(responseData);
+        })
+  
+
+      }
+
+      // event.preventDefault();
+
+      // let nextState = this.state.orders;
+
+      // nextState[0].orderDetails = [];
 
       this.toggleModal();
 
-      this.setState({
-          orders: nextState
-      });
+      // this.setState({
+      //     orders: nextState
+      // });
 
 
     }
@@ -220,10 +241,19 @@ class App extends Component {
               <p>Transaction ID 00001</p>
             </ModalHeader>
             <ModalBody>
-              Your checkout has been successfully completed.
+              <div className="row">
+                  <input type="file" className="btn btn-dark" onChange={this.doCheckout.bind(this)} id="file-input" name="ImageStyle"  />
+              </div>
+              <div className="row">
+                <button className="btn btn-primary">Upload</button>
+              </div>
             </ModalBody>
             <ModalFooter>  
-              <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
+              <div className="row">
+                <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
+              </div>
+              <div className="row">
+              </div>
             </ModalFooter>
           </Modal>
           

@@ -27,6 +27,8 @@ app.get('/product', productController.getMaster);
 
 app.post('/pagination', productController.setPagination);
 
+app.post('/uploadimage', productController.setImage);
+
 app.get('/order', orderController.getMaster);
 
 app.post('/master', masterController.setMaster);
