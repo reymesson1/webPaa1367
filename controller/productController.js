@@ -1,4 +1,9 @@
 // var sql = require('mssql');
+var fs = require('fs');
+var multer  = require('multer');
+var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
+var upload = multer({ dest: uploadsFolder }); // setting path for multer
+
 
 exports.getMaster = async(req,res)=>{
 
@@ -130,8 +135,32 @@ exports.getMaster = async(req,res)=>{
 }
 
 exports.setMaster = async(req,res)=>{
+  // app.post('/file_upload', upload.single('single-file'), function(request, response) {
 
-    console.log(req.body);
+  console.log(req.body);
+
+  // var oldPath = req.body.image;
+  // var newPath = 'c:/Downloads/fromNodeFile.jpg';
+
+  // fs.rename(oldPath, newPath, function (err) {
+  //   if (err) throw err
+  //   console.log('Successfully renamed - AKA moved!')
+  // })
+
+  var fileName = req.file.originalname; // original file name
+  var file = req.file.path; // real file path with temporary name
+
+  fs.rename(file, "c:/Downloads/" + fileName, async (err) => {
+    if (err) {
+      console.log(err);
+      res.json({success:false, message: err});
+      return;
+    }
+
+    // response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
+    console.log({success:true, message: 'File uploaded successfully', fileName: fileName});
+  });
+
 
 }
 

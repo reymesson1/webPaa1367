@@ -17,6 +17,7 @@ import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
 import CreateProductComponent from './CreateProductComponent';
+import  axios  from 'axios'
 
 let API_URL = "http://localhost:8085";
 // let API_URL = "http://143.198.124.234:8085";
@@ -35,6 +36,7 @@ class App extends Component {
           showModal: false,
           newest: true,
           filterText: "",
+          image: "",
           orders:[{
             id : "0001",
             orderDetails:[],
@@ -209,31 +211,38 @@ class App extends Component {
       console.log('test from App.js')
     }
 
+    onCreateProductUpload(event){
+
+      if (event.target.files && event.target.files[0]) {
+        let img = event.target.files[0];
+        this.setState({
+          image: img
+        });  
+      }
+  
+
+    }
     onCreateProduct(event){
 
       event.preventDefault(); 
 
-      let obj = {
-        "id":"1",
-        "description": event.target.description.value,
-        "price": event.target.price.value,
-        "company": event.target.company.value,
-        "style": event.target.style.value,
-        "image": event.target.image.value
-      }
+      const data = new FormData();
+      data.append("description",event.target.description.value);
+      data.append("price", event.target.price.value);
+      data.append("company", event.target.company.value);
+      data.append("style", event.target.style.value);
+      data.append("single-file", this.state.image);
 
-      console.log(obj);
+      axios({
+          url: API_URL+'/createproduct',
+          method: "POST",
+          headers: {
+            authorization: 'done'              
+          },
+          data: data
+      }).then((res)=>{
 
-      fetch(API_URL+'/createproduct', {
-
-              method: 'post',
-              headers: API_HEADERS,
-              body: JSON.stringify(obj)
-      })
-      .then((response)=>response.json())
-      .then((responseData)=>{
-          console.log(responseData);
-      })
+      });
 
       console.log('create new product from App.js')
     }
@@ -268,6 +277,7 @@ class App extends Component {
           <Route path="/styles" component= {StylesComponent}   />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       onCreateProduct={this.onCreateProduct.bind(this)}
+                      onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       /> } 
           />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>

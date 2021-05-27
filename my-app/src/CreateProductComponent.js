@@ -18,7 +18,7 @@ class CreateProductComponent extends Component {
                 <br/>
                 <div className="row">
                     <div className="col-md-8">
-                    <Form onSubmit={this.props.onCreateProduct.bind(this)}>
+                    <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                     {/* <Form > */}
                         <FormGroup row>
                             <Label for="description" sm={2}>Description</Label>
@@ -47,7 +47,7 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="style" sm={2}>Image</Label>
                             <Col sm={10}>
-                            <Input type="file" name="image" id="image" placeholder="Image" />
+                            <Input type="file" name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
