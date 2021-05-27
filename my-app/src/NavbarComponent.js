@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function NavbarComponent(props) {
     
@@ -66,74 +67,27 @@ function NavbarComponent(props) {
                         <span style={{'font-size':'20px','color':'#aaafaf'}}>@amseluser</span>
                     </DropdownToggle>
                     <DropdownMenu style={{'width':'350px'}} >
-                        <DropdownItem header style={{'color':'#aaafaf'}} ><h4>Cart</h4></DropdownItem>
+                        <DropdownItem header style={{'color':'#aaafaf'}} >
+                            <div className="row">
+                                <div className="col-md-5">
+                                    <h4>Hide</h4>
+                                </div>
+                                <div className="col-md-2">
+                                    <h4>|</h4>
+                                </div>
+                                <div className="col-md-5">
+                                    <h4>Show</h4>
+                                </div>
+                            </div>
+                        </DropdownItem>
                         <DropdownItem>
                         <div className="row">
                             <Table>
                             <tbody>
-                                {props.orders[0].orderDetails.map(
-                                    (order,index) => <tr>
-                                                    <td>
-                                                        <div className="row">
-                                                            <div className="col-md-7">
-                                                                <span>{order.description}</span>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <span>{order.price}</span>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <button onClick={props.deleteItem.bind(this)} value={'{"id":'+ order.id +','+' , "user":"jperez"}'} className="btn btn-danger">                                                                    
-                                                                    <i className="fa fa-trash-alt" style={{'font-size':'15px'}} aria-hidden="true"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                )}
-                                <tr>
-                                <td>
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">&nbsp;</p>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">Subtotal:</p>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">
-                                                {subTotal.toFixed(2)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">&nbsp;</p>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">Tax (18%):</p>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <p className="col-md-offset-10">
-                                                {(total-subTotal).toFixed(2)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                        <h5>&nbsp;</h5>
-                                        </div>
-                                        <div className="col-md-4">
-                                        <h5>Total:</h5>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <h5>{total.toFixed(2)}</h5>
-                                        </div>
-                                    </div>
-                                </td>
-                                </tr>
                                 <tr>
                                 <td>                                            
-                                    <button className="btn btn-dark" onClick={props.doCheckout.bind(this)} style={{'width':'100%'}}  >Complete Order</button>
+                                    {/* <button className="btn btn-dark" onClick={props.doCheckout.bind(this)} style={{'width':'100%'}}  >Create a New Product</button> */}
+                                    <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link>
                                 </td>
                                 </tr>
                             </tbody>

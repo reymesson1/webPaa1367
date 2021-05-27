@@ -131,7 +131,7 @@ exports.getMaster = async(req,res)=>{
 
 exports.setMaster = async(req,res)=>{
 
-    console.log(req.body)
+    console.log(req.body);
 
 }
 

@@ -1,8 +1,6 @@
 import React, { useState, Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Navbar, NavbarBrand } from 'reactstrap';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table } from 'reactstrap';
 import { Button,
   Container,
   Modal,
@@ -12,14 +10,13 @@ import { Button,
   ModalFooter } from 'reactstrap';
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
-import BreadcrumbComponent from './BreadcrumbComponent';
-import PaginationComponent from './PaginationComponent';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
+import CreateProductComponent from './CreateProductComponent';
 
 let API_URL = "http://localhost:8085";
 // let API_URL = "http://143.198.124.234:8085";
@@ -212,6 +209,35 @@ class App extends Component {
       console.log('test from App.js')
     }
 
+    onCreateProduct(event){
+
+      event.preventDefault(); 
+
+      let obj = {
+        "id":"1",
+        "description": event.target.description.value,
+        "price": event.target.price.value,
+        "company": event.target.company.value,
+        "style": event.target.style.value,
+        "image": event.target.image.value
+      }
+
+      console.log(obj);
+
+      fetch(API_URL+'/createproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(obj)
+      })
+      .then((response)=>response.json())
+      .then((responseData)=>{
+          console.log(responseData);
+      })
+
+      console.log('create new product from App.js')
+    }
+
     render(){
       
       return (
@@ -240,6 +266,10 @@ class App extends Component {
           <Route path="/companies" component= {CompanyComponent}   />
           <Route path="/styles" component= {StylesComponent}   />
           <Route path="/styles" component= {StylesComponent}   />
+          <Route path="/createproduct" component= {() => <CreateProductComponent 
+                      onCreateProduct={this.onCreateProduct.bind(this)}
+                      /> } 
+          />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>
           <Route path="/product" component= {() => <Product
                       newest={this.state.newest}
