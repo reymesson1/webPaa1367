@@ -19,8 +19,8 @@ import ProductDetailComponent from './ProductDetailComponent';
 import CreateProductComponent from './CreateProductComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.124.234:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.124.234:8085";
 
 const API_HEADERS = {
 
