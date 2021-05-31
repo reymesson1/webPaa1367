@@ -66,9 +66,9 @@ class Product extends Component {
                     <Link to={'/productdetail/'+index}> 
                         <div className="card" style={{'margin':'5%'}}>
                                 {/* <img src={"http://localhost:3000/book.png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                <img src={"http://localhost:3000/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                                {/* <img src={"http://localhost:3000/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://localhost:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://143.198.124.234:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                <img src={"http://143.198.124.234:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                         </div>
                     </Link>
                 </div>
