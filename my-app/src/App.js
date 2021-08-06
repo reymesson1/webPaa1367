@@ -255,25 +255,32 @@ class App extends Component {
 
     onCreateStyle(event){
 
-      // event.preventDefault(); 
+      event.preventDefault(); 
 
-      const data = new FormData();
-      data.append("description",event.target.description.value);
-      data.append("price", event.target.price.value);
-      data.append("company", event.target.company.value);
-      data.append("style", event.target.style.value);
-      data.append("single-file", this.state.image);
+      let newStyle = {
 
-      axios({
-          url: API_URL+'/createstyle',
-          method: "POST",
-          headers: {
-            authorization: 'done'              
-          },
-          data: data
-      }).then((res)=>{
+        "id": Date.now(),
+        "description": event.target.description.value,
+        "notes": event.target.notes.value
+      }
 
-      });
+      fetch(API_URL+'/createstyle', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newStyle)
+      })
+
+      // axios({
+      //     url: API_URL+'/createstyle',
+      //     method: "POST",
+      //     headers: {
+      //       authorization: 'done'              
+      //     },
+      //     data: data
+      // }).then((res)=>{
+
+      // });
 
       console.log('create new style from App.js')
     }
