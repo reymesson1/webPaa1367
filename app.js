@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 
 var fs = require('fs');
 
+// var mongoose = require('mongoose');
+
 var multer  = require('multer');
 var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
@@ -27,6 +29,9 @@ var masterController = require('./controller/masterController');
 var productController = require('./controller/productController');
 
 var orderController = require('./controller/orderController');
+
+var styleController = require('./controller/styleController');
+
 
 app.get('/master', masterController.getMaster);
 
@@ -57,6 +62,11 @@ app.post('/pagination', productController.setPagination);
 app.get('/order', orderController.getMaster);
 
 app.post('/master', masterController.setMaster);
+
+app.get('/style', masterController.getStyle);
+
+app.post('/createstyle', masterController.setStyle);
+
 
 app.listen(8085, function(){
     console.log("Listening from 8085...");

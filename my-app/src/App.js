@@ -17,6 +17,7 @@ import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
 import CreateProductComponent from './CreateProductComponent';
+import CreateStyleComponent from './CreateStyleComponent';
 import  axios  from 'axios'
 
 let API_URL = "http://localhost:8085";
@@ -252,6 +253,33 @@ class App extends Component {
       console.log('create new product from App.js')
     }
 
+    onCreateStyle(event){
+
+      // event.preventDefault(); 
+
+      const data = new FormData();
+      data.append("description",event.target.description.value);
+      data.append("price", event.target.price.value);
+      data.append("company", event.target.company.value);
+      data.append("style", event.target.style.value);
+      data.append("single-file", this.state.image);
+
+      axios({
+          url: API_URL+'/createstyle',
+          method: "POST",
+          headers: {
+            authorization: 'done'              
+          },
+          data: data
+      }).then((res)=>{
+
+      });
+
+      console.log('create new style from App.js')
+    }
+
+
+
     render(){
       
       return (
@@ -283,6 +311,10 @@ class App extends Component {
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       fileUploaded={this.state.fileUploaded}
+                      /> } 
+          />
+          <Route path="/createstyle" component= {() => <CreateStyleComponent 
+                      onCreateStyle={this.onCreateStyle.bind(this)}
                       /> } 
           />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>

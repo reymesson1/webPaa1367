@@ -18,14 +18,6 @@ class StylesComponent extends Component {
             <div className="container">
                 <br/>
                 <div className="row">
-                    <div className="col-md-6">
-                        <h1>&nbsp;</h1>
-                    </div>
-                    <div className="col-md-6">
-                        <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Style</Link>
-                    </div>
-                </div>
-                <div className="row">
                     {/* <Input type="text" placeholder="Search" ></Input> */}
                     <Card style={{'width':'100%'}}>
                         <CardBody>
@@ -36,6 +28,15 @@ class StylesComponent extends Component {
                             <Input type="text" placeholder="Search" ></Input>
                         </CardBody>
                     </Card>
+                </div>
+                <br/>
+                <div className="row">
+                    <div className="col-md-6">
+                        <h1>&nbsp;</h1>
+                    </div>
+                    <div className="col-md-6">
+                        <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Style</Link>
+                    </div>
                 </div>
                 <div className="row">
                 <Table>
