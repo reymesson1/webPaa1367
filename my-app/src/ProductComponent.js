@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Media } from 'reactstrap';
+import { Input, Media, Panel,   Card,
+    CardBody,
+    CardTitle,
+    CardSubtitle } from 'reactstrap';
 import { AddToCart } from './AddToCartComponent';
 import Pagination from './PaginationComponent';
 import { Link } from 'react-router-dom';
@@ -78,7 +81,26 @@ class Product extends Component {
         
         return(
             <div className="container">
+                <br/>
                 <div className="row">
+                    <div className="col-md-6">
+                        <h1>&nbsp;</h1>
+                    </div>
+                    <div className="col-md-6">
+                        <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link>
+                    </div>
+                </div>
+                <div className="row">
+                    {/* <Input type="text" placeholder="Search" ></Input> */}
+                    <Card style={{'width':'100%'}}>
+                        <CardBody>
+                            {/* <CardTitle tag="h5">Card title</CardTitle> */}
+                            {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
+                        </CardBody>
+                        <CardBody>
+                            <Input type="text" placeholder="Search" ></Input>
+                        </CardBody>
+                    </Card>
                 </div>
                 <div className="row">                    
                     {menu}
