@@ -45,7 +45,8 @@ class App extends Component {
             total: "0.00"
           }],
           products: [],
-          fileUploaded: false
+          fileUploaded: false,
+          styles: []
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -87,6 +88,19 @@ class App extends Component {
             this.setState({
 
                 orders: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        fetch(API_URL+'/style')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            console.log(responseData);
+            this.setState({
+
+                styles: responseData
             })
         })
         .catch((error)=>{
@@ -255,7 +269,7 @@ class App extends Component {
 
     onCreateStyle(event){
 
-      event.preventDefault(); 
+      // event.preventDefault(); 
 
       let newStyle = {
 
@@ -313,7 +327,11 @@ class App extends Component {
           />  
           <Route path="/" exact component= {HomeComponent}   />
           <Route path="/companies" component= {CompanyComponent}   />
-          <Route path="/styles" component= {StylesComponent}   />
+          <Route path="/styles" component= {() => <StylesComponent
+                    styles={this.state.styles} 
+                    
+                    />}
+          />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
