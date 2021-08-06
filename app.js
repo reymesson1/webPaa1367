@@ -2,9 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static('static'));
-
 app.use(bodyParser.json());
-
 var fs = require('fs');
 var cors = require('cors')
 app.use(cors())
@@ -17,11 +15,9 @@ app.use(cors({
     'preflightContinue': false
   }));
 var mongoose = require('mongoose');
-
 var multer  = require('multer');
 var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
-
 
 var masterController = require('./controller/masterController');
 
@@ -36,9 +32,9 @@ var companyController = require('./controller/companyController');
 
 // app.get('/master', masterController.getMaster);
 
-// app.get('/product', productController.getMaster);
+app.get('/product', productController.getMaster);
 
-// app.post('/createproduct', upload.single('single-file'), productController.setMaster);
+app.post('/createproduct2', productController.setMaster);
 
 app.post('/createproduct', upload.single('single-file'), function(request, response) {
 

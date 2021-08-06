@@ -279,6 +279,23 @@ class App extends Component {
 
       });
 
+      let newProduct = {
+
+        "id": Date.now(),
+        "description": event.target.description.value,
+        "price": event.target.price.value,
+        "company": event.target.company.value,
+        "style": event.target.style.value,  
+      }
+
+      fetch(API_URL+'/createproduct2', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newProduct)
+      })
+
+
       console.log('create new product from App.js')
     }
 
@@ -399,6 +416,10 @@ class App extends Component {
           />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>
           <Route path="/product" component= {() => <Product
+                    products={this.state.products} 
+                       />}
+          />
+          {/* <Route path="/product" component= {() => <Product
                       newest={this.state.newest}
                       filterText={this.state.filterText}
                       orders={this.state.orders}
@@ -406,7 +427,7 @@ class App extends Component {
                       addToCart={this.addToCart.bind(this)}    
                       onClickPagination={this.onClickPagination.bind(this)}            
                       />}    
-           />
+           /> */}
           </BrowserRouter>          
         </div>
       );
