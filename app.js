@@ -31,6 +31,8 @@ var productController = require('./controller/productController');
 
 var styleController = require('./controller/styleController');
 
+var companyController = require('./controller/companyController');
+
 
 // app.get('/master', masterController.getMaster);
 
@@ -65,6 +67,10 @@ app.post('/createproduct', upload.single('single-file'), function(request, respo
 app.get('/style', styleController.getStyle);
 
 app.post('/createstyle', styleController.setStyle);
+
+app.get('/companies', companyController.getCompany);
+
+app.post('/createcompany', companyController.setCompany);
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){

@@ -18,6 +18,7 @@ import StylesComponent from './StylesComponent';
 import ProductDetailComponent from './ProductDetailComponent';
 import CreateProductComponent from './CreateProductComponent';
 import CreateStyleComponent from './CreateStyleComponent';
+import CreateCompanyComponent from './CreateCompanyComponent';
 import  axios  from 'axios'
 
 let API_URL = "http://localhost:8085";
@@ -46,7 +47,8 @@ class App extends Component {
           }],
           products: [],
           fileUploaded: false,
-          styles: []
+          styles: [],
+          companies: []
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -101,6 +103,19 @@ class App extends Component {
             this.setState({
 
                 styles: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        fetch(API_URL+'/companies')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            console.log(responseData);
+            this.setState({
+
+                companies: responseData
             })
         })
         .catch((error)=>{
@@ -299,6 +314,38 @@ class App extends Component {
       console.log('create new style from App.js')
     }
 
+    onCreateCompany(event){
+
+      event.preventDefault(); 
+
+      let newStyle = {
+
+        "id": Date.now(),
+        "description": event.target.description.value,
+        "notes": event.target.notes.value
+      }
+
+      fetch(API_URL+'/createcompany', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newStyle)
+      })
+
+      // axios({
+      //     url: API_URL+'/createstyle',
+      //     method: "POST",
+      //     headers: {
+      //       authorization: 'done'              
+      //     },
+      //     data: data
+      // }).then((res)=>{
+
+      // });
+
+      console.log('create new company from App.js')
+    }
+
 
 
     render(){
@@ -326,9 +373,13 @@ class App extends Component {
             orders={this.state.orders}
           />  
           <Route path="/" exact component= {HomeComponent}   />
-          <Route path="/companies" component= {CompanyComponent}   />
           <Route path="/styles" component= {() => <StylesComponent
                     styles={this.state.styles} 
+                    
+                    />}
+          />
+          <Route path="/companies" component= {() => <CompanyComponent
+                    companies={this.state.companies} 
                     
                     />}
           />
@@ -340,6 +391,10 @@ class App extends Component {
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
                       onCreateStyle={this.onCreateStyle.bind(this)}
+                      /> } 
+          />
+          <Route path="/createcompany" component= {() => <CreateCompanyComponent 
+                      onCreateCompany={this.onCreateCompany.bind(this)}
                       /> } 
           />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>
