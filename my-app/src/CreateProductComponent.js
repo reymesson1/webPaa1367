@@ -8,6 +8,16 @@ class CreateProductComponent extends Component {
     }
 
     render() {
+
+        let showUpload;
+
+        if(this.props.fileUploaded){
+            showUpload = <Input type="file" style={{'display':'none'}} name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <label> Image selected </label>
+
+        }else{
+            showUpload = <Input type="file" name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+        }
         
         return(
             <div className="container">
@@ -20,6 +30,12 @@ class CreateProductComponent extends Component {
                     <div className="col-md-8">
                     <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                     {/* <Form > */}
+                        <FormGroup row>
+                            <Label for="style" sm={2}>Image</Label>
+                            <Col sm={10}>
+                                {showUpload}
+                            </Col>
+                        </FormGroup>
                         <FormGroup row>
                             <Label for="description" sm={2}>Description</Label>
                             <Col sm={10}>
@@ -42,12 +58,6 @@ class CreateProductComponent extends Component {
                             <Label for="style" sm={2}>Style</Label>
                             <Col sm={10}>
                             <Input type="text" name="style" id="style" placeholder="Style" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="style" sm={2}>Image</Label>
-                            <Col sm={10}>
-                            <Input type="file" name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>

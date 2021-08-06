@@ -7,7 +7,7 @@ import { Button,
   ModalTitle,
   ModalHeader,
   ModalBody,
-  ModalFooter } from 'reactstrap';
+  ModalFooter, Panel  } from 'reactstrap';
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import { BrowserRouter } from 'react-router-dom';
@@ -43,7 +43,8 @@ class App extends Component {
             subtotal: "0.00",
             total: "0.00"
           }],
-          products: []
+          products: [],
+          fileUploaded: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -213,6 +214,10 @@ class App extends Component {
 
     onCreateProductUpload(event){
 
+      this.setState({
+        fileUploaded: true
+      })
+
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
         this.setState({
@@ -224,7 +229,7 @@ class App extends Component {
     }
     onCreateProduct(event){
 
-      event.preventDefault(); 
+      // event.preventDefault(); 
 
       const data = new FormData();
       data.append("description",event.target.description.value);
@@ -278,6 +283,7 @@ class App extends Component {
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
+                      fileUploaded={this.state.fileUploaded}
                       /> } 
           />
           <Route path="/productdetail/:id" component={ProductDetailComponent}/>
