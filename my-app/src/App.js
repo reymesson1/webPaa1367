@@ -19,8 +19,8 @@ import ProductDetailComponent from './ProductDetailComponent';
 import CreateProductComponent from './CreateProductComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -278,7 +278,6 @@ class App extends Component {
           />  
           <Route path="/" exact component= {HomeComponent}   />
           <Route path="/companies" component= {CompanyComponent}   />
-          <Route path="/styles" component= {StylesComponent}   />
           <Route path="/styles" component= {StylesComponent}   />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       onCreateProduct={this.onCreateProduct.bind(this)}
