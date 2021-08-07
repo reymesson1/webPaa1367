@@ -11,12 +11,24 @@ class Product extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            searchText: ""
+        }  
+    }
 
+    onChangeField(event){
+
+        this.setState({
+            searchText: event.target.value
+        })
     }
 
     render() {
 
-        let filteredData = this.props.products;
+        let filteredData = this.props.products.filter(
+
+            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+        );
         
         return(
             <div className="container">
@@ -29,7 +41,7 @@ class Product extends Component {
                             {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
                         </CardBody>
                         <CardBody>
-                            <Input type="text" placeholder="Search" ></Input>
+                            <Input type="text" onChange={this.onChangeField.bind(this)} placeholder="Search" ></Input>
                         </CardBody>
                     </Card>
                 </div>
