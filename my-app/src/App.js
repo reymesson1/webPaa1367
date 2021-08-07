@@ -30,11 +30,14 @@ const API_HEADERS = {
   Authentication: 'any-string-you-like'
 }
 
-class App extends Component {
 
+class App extends Component {
+  
   constructor(props) {
-      super(props);
-      this.state = {
+    super(props);
+    this.state = {
+        URLExternal: 'http://143.198.171.44:8085',
+          // URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -376,12 +379,14 @@ class App extends Component {
             orders={this.state.orders}
           />  
           <Route path="/" exact component= {() => <HomeComponent   
+                    URLExternal={this.state.URLExternal}
                     newest={this.state.newest}
                     filterText={this.state.filterText}
                     orders={this.state.orders}
                     products={this.state.products}
                     addToCart={this.addToCart.bind(this)}    
-                    onClickPagination={this.onClickPagination.bind(this)}            
+                    onClickPagination={this.onClickPagination.bind(this)}    
+                            
                     />}
           />
           <Route path="/styles" component= {() => <StylesComponent
@@ -411,7 +416,18 @@ class App extends Component {
                       onCreateCompany={this.onCreateCompany.bind(this)}
                       /> } 
           />
-          <Route path="/productdetail/:id" component={ProductDetailComponent}/>
+         <Route 
+              path="/productdetail/:id" 
+              location={this.props.location} 
+              render={({ 
+                  location, 
+                  match 
+              }) => (
+                  <ProductDetailComponent match={match}
+                    URLExternal={this.state.URLExternal}   
+                  />
+              )} 
+    />
           <Route path="/product" component= {() => <Product
                     products={this.state.products} 
                        />}
