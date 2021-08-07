@@ -389,7 +389,15 @@ class App extends Component {
             search={this.search.bind(this)}
             orders={this.state.orders}
           />  
-          <Route path="/" exact component= {HomeComponent}   />
+          <Route path="/" exact component= {() => <HomeComponent   
+                    newest={this.state.newest}
+                    filterText={this.state.filterText}
+                    orders={this.state.orders}
+                    products={this.state.products}
+                    addToCart={this.addToCart.bind(this)}    
+                    onClickPagination={this.onClickPagination.bind(this)}            
+                    />}
+          />
           <Route path="/styles" component= {() => <StylesComponent
                     styles={this.state.styles} 
                     
