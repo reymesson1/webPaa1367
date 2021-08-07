@@ -12,6 +12,7 @@ class CreateProductComponent extends Component {
         console.log(this.props.styles);
 
         let showUpload;
+        let hiddenBtnCheck
 
         if(this.props.fileUploaded){
             showUpload = <Input type="file" style={{'display':'none'}} name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
@@ -20,6 +21,15 @@ class CreateProductComponent extends Component {
         }else{
             showUpload = <Input type="file" name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
         }
+
+        if(!this.props.productHiddenBtn){
+
+            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+        }else{
+            
+            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+        }
+
         
         return(
             <div className="container">
@@ -87,7 +97,8 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="style" sm={2}>&nbsp;</Label>
                             <Col sm={10}>
-                            <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+                            {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled /> */}
+                            {hiddenBtnCheck}
                             </Col>
                         </FormGroup>
                     </Form>

@@ -48,7 +48,8 @@ class App extends Component {
           products: [],
           fileUploaded: false,
           styles: [],
-          companies: []
+          companies: [],
+          productHiddenBtn: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -274,6 +275,10 @@ class App extends Component {
 
       console.log('create new product from App.js')
 
+      this.setState({
+        productHiddenBtn: true
+      })
+
       setTimeout(() => {
         window.location.reload()
       }, 2000);
@@ -395,6 +400,7 @@ class App extends Component {
                       fileUploaded={this.state.fileUploaded}
                       styles={this.state.styles}
                       companies={this.state.companies}
+                      productHiddenBtn={this.state.productHiddenBtn}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
