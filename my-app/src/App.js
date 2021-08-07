@@ -286,6 +286,7 @@ class App extends Component {
         "price": event.target.price.value,
         "company": event.target.company.value,
         "style": event.target.style.value,  
+        "image": event.target.description.value +'-'+ event.target.style.value + '.jpg' 
       }
 
       fetch(API_URL+'/createproduct2', {

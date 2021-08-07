@@ -5,7 +5,8 @@ var userSchema = new mongoose.Schema({
     description: String,
     price: String,
     company: String,
-    style: String
+    style: String,
+    image: String
 })
 
 module.exports = mongoose.model('Product', userSchema)
