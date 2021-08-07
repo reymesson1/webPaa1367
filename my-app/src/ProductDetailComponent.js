@@ -9,14 +9,16 @@ class ProductDetailComponent extends Component {
             id: 0,
             // backgroundImage: `url(${'"http://localhost:3000/"+ '+ this.props.match.params.id +' + ".jpg"'})`,
             // backgroundImage: `url(${'"http://localhost:8085/executed/"+ '+ this.props.match.params.id})`,
-            backgroundImage: `url(${'"http://localhost:8085/images/"+ '+ this.props.match.params.id})`,
+            // backgroundImage: `url(${'"http://localhost:8085/images/"+ '+ this.props.match.params.id})`,
+            backgroundImage: `url(${'"http://143.198.171.44:8085/images/"+ '+ this.props.match.params.id +' + ".jpg"'})`,
             // backgroundImage: `url(${'"http://143.198.171.44:8085/executed/"+ '+ this.props.match.params.id +' + ".jpg"'})`,
             // backgroundImage: `url(${'http://localhost:3000/book.png'})`,
             backgroundPosition: '0% 0%',
             // src: "http://localhost:3000/"+ this.props.match.params.id + ".jpg"
             // src: "http://localhost:8085/executed/"+ this.props.match.params.id
-            src: "http://localhost:8085/images/"+ this.props.match.params.id
+            // src: "http://localhost:8085/images/"+ this.props.match.params.id
             // src: "http://143.198.171.44:8085/executed/"+ this.props.match.params.id + ".jpg"
+            src: "http://143.198.171.44:8085/images/"+ this.props.match.params.id + ".jpg"
             // src: "http://localhost:3000/book.png"
         }
     }
@@ -25,9 +27,10 @@ class ProductDetailComponent extends Component {
         this.setState({
             id: this.props.match.params.id,
             // backgroundImage: `url(${"http://localhost:3000/"+ this.props.match.params.id + ".jpg"})`,
-            backgroundImage: `url(${"http://localhost:8085/images/"+ this.props.match.params.id})`,
+            // backgroundImage: `url(${"http://localhost:8085/images/"+ this.props.match.params.id})`,
             // backgroundImage: `url(${"http://localhost:8085/executed/"+ this.props.match.params.id})`,
             // backgroundImage: `url(${"http://143.198.171.44:8085/executed/"+ this.props.match.params.id + ".jpg"})`,
+            backgroundImage: `url(${"http://143.198.171.44:8085/images/"+ this.props.match.params.id + ".jpg"})`,
             // backgroundImage: `url(${"http://localhost:3000/book.png"})`,
         })
     }
