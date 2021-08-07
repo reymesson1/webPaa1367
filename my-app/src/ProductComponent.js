@@ -64,6 +64,7 @@ class Product extends Component {
                     <th>Style</th>
                     <th>Category</th>
                     <th>Company</th>
+                    <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,6 +77,16 @@ class Product extends Component {
                                                 <td>{data.style}</td>
                                                 <td>{data.category}</td>
                                                 <td>{data.company}</td>
+                                                <td>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <button className="btn btn-primary">Edit</button>                                                        
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <button className="btn btn-danger">Delete</button>                                                        
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
                     )}
                 </tbody>
