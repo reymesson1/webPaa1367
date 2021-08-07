@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
     price: String,
     company: String,
     style: String,
+    category: String,
     image: String
 })
 

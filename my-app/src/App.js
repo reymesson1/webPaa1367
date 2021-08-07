@@ -260,6 +260,7 @@ class App extends Component {
         "price": event.target.price.value,
         "company": event.target.company.value,
         "style": event.target.style.value,  
+        "category": event.target.category.value,  
         "image": event.target.description.value +'-'+ event.target.style.value + '.jpg' 
       }
 

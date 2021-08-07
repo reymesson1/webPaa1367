@@ -62,6 +62,7 @@ class Product extends Component {
                     <th>Description</th>
                     <th>Price</th>
                     <th>Style</th>
+                    <th>Category</th>
                     <th>Company</th>
                     </tr>
                 </thead>
@@ -73,6 +74,7 @@ class Product extends Component {
                                                 <td>{data.description}</td>
                                                 <td>{data.price}</td>
                                                 <td>{data.style}</td>
+                                                <td>{data.category}</td>
                                                 <td>{data.company}</td>
                                             </tr>
                     )}

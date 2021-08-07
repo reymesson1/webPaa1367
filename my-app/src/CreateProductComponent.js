@@ -72,6 +72,19 @@ class CreateProductComponent extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
+                            <Label for="exampleSelect" sm={2}>Category</Label>
+                            <Col sm={10}>
+                                <Input type="select" name="category" id="category" placeholder="Category" >
+                                    <option>{'Bracelet'}</option>
+                                    <option>{'Rings'}</option>
+                                    <option>{'Necklace'}</option>
+                                    <option>{'Pendant'}</option>
+                                    <option>{'Crowns'}</option>
+                                    <option>{'Gems'}</option>
+                            </Input>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
                             <Label for="style" sm={2}>&nbsp;</Label>
                             <Col sm={10}>
                             <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />

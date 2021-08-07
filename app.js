@@ -16,7 +16,8 @@ app.use(cors({
   }));
 var mongoose = require('mongoose');
 var multer  = require('multer');
-var uploadsFolder = __dirname + '/static/executed/';  // defining real upload path
+var uploadsFolder = __dirname + '/static/images/';  // defining real upload path
+// var uploadsFolder = __dirname + '/static/executed/';  // defining real upload path
 // var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
 
