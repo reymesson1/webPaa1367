@@ -413,6 +413,8 @@ class App extends Component {
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       fileUploaded={this.state.fileUploaded}
+                      styles={this.state.styles}
+                      companies={this.state.companies}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 

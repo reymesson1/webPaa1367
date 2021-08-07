@@ -9,6 +9,8 @@ class CreateProductComponent extends Component {
 
     render() {
 
+        console.log(this.props.styles);
+
         let showUpload;
 
         if(this.props.fileUploaded){
@@ -49,15 +51,24 @@ class CreateProductComponent extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="company" sm={2}>Company</Label>
+                            <Label for="exampleSelect" sm={2}>Company</Label>
                             <Col sm={10}>
-                            <Input type="text" name="company" id="company" placeholder="Company" />
+                                <Input type="select" name="company" id="company" placeholder="Company" >
+                                {this.props.companies.map( 
+                                    (data,index) => <option>{data.description}</option>
+                                )}
+
+                            </Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="style" sm={2}>Style</Label>
+                            <Label for="exampleSelect" sm={2}>Style</Label>
                             <Col sm={10}>
-                            <Input type="text" name="style" id="style" placeholder="Style" />
+                                <Input type="select" name="style" id="style" placeholder="Style" >
+                                {this.props.styles.map( 
+                                    (data,index) => <option>{data.description}</option>
+                                )}
+                            </Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
