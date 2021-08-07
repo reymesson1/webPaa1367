@@ -233,7 +233,7 @@ class App extends Component {
     }
     onCreateProduct(event){
 
-      // event.preventDefault(); 
+      event.preventDefault(); 
 
       const data = new FormData();
       data.append("description",event.target.description.value);
@@ -272,6 +272,11 @@ class App extends Component {
 
 
       console.log('create new product from App.js')
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000);
+
     }
 
     onCreateStyle(event){

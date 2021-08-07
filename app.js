@@ -28,6 +28,8 @@ var styleController = require('./controller/styleController');
 
 var companyController = require('./controller/companyController');
 
+app.get('/restaurants', masterController.getMaster);
+
 app.get('/product', productController.getMaster);
 
 app.post('/createproduct2', productController.setMaster);

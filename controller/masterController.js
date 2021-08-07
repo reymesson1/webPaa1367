@@ -7,7 +7,26 @@ var today = moment(new Date()).format('YYYY-MM-DD');
 
 exports.getMaster = async(req,res)=>{
 
-  var master = await Master.find({})
+  // var master = await Master.find({})
+
+  var master = [
+    {
+    "categoryID": "1",
+    "name": "eCatalog",
+    "iconImageName": "circle.fill",
+    "restaurants": [{
+      "restaurantID": "M1",
+      "name": "Bracelet",
+      "imageName": "bracelets",
+      "description": "List of Bracelet and accesories",
+      "ratings": [],
+      "images": [
+        "1.jpg",
+        "2.jpg"
+      ]
+    }]
+    }
+  ];
   
   res.send(master);
 }
