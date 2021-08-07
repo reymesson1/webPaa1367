@@ -22,14 +22,19 @@ class HomeComponent extends Component {
             searchText: event.target.value
         })
 
+        console.log(event.target.value)
+
     }
 
     render() {
 
-        let filterData
+        let filterData = this.props.products.filter(
+
+            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+        );
 
         if(this.props.newest){
-            filterData = this.props.products.sort( 
+            filterData = filterData.sort( 
                 (a,b) =>{
                     if(a.id<b.id){
                         return 1
@@ -41,7 +46,7 @@ class HomeComponent extends Component {
                 }
             )
         }else{
-            filterData = this.props.products.sort( 
+            filterData = filterData.sort( 
                 (a,b) =>{
                     if(a.id>b.id){
                         return 1
@@ -66,6 +71,7 @@ class HomeComponent extends Component {
                                 {/* <img src={"http://143.198.171.44:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                         </div>
                     </Link>
+                    <h1>{product.description}</h1>
                 </div>
             )
 
