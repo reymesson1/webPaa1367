@@ -352,7 +352,9 @@ class App extends Component {
       console.log('create new company from App.js')
     }
 
-    onEditProduct(id){
+    onEditProduct(event,id){
+
+      event.preventDefault();
 
       console.log('Clicked edit '+ id);
     }

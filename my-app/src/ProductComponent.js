@@ -37,8 +37,6 @@ class Product extends Component {
             showModal: true
         })
 
-        console.log(id)
-
         let filteredData = this.props.products.filter(
 
             (data, index) => data.id.toLowerCase().indexOf(id.toLowerCase()) !== -1
@@ -52,7 +50,6 @@ class Product extends Component {
             category: filteredData[0].category
         })
         
-        console.log(filteredData)
     }
 
     onChangeField(event){
@@ -72,13 +69,23 @@ class Product extends Component {
         return(
             <div className="container">
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
-                    <ModalHeader>
-                    <p>Edit | {this.state.description}</p>
+                    <ModalHeader style={{'display':'block !important'}}>
+                        <div className="row">
+
+                            <div className="col-md-10">
+                                <p>Edit | {this.state.description}</p>                                
+                            </div>
+                            <div className="col-md-2">
+                                <button type="button" class="close" aria-label="Close" onClick={this.toggleModal} ><span aria-hidden="true">×</span></button>
+                            </div>
+
+                        </div>
+
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            {/* <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" > */}
-                            <Form>
+                            <Form onSubmit={this.props.onEditProduct.bind(this)}>
+                            {/* <Form> */}
                                 <FormGroup row>
                                     <Label for="description" sm={1}>&nbsp;</Label>
                                     <Label for="description" sm={3}>Description</Label>
@@ -121,12 +128,16 @@ class Product extends Component {
                                     </Input>
                                     </Col>
                                 </FormGroup>
+                                <FormGroup row>
+                                    <Label sm={1}>&nbsp;</Label>
+                                    <Col sm={10}>
+                                        <Input type="submit" className="btn btn-success" name="submit" id="submit" placeholder="Submit" />
+                                    </Col>
+                                    <Label sm={1}>&nbsp;</Label>
+                                </FormGroup>
                             </Form>
                         </div>
                     </ModalBody>
-                    <ModalFooter>  
-                    <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
-                    </ModalFooter>
                 </Modal>
 
                 <br/>
