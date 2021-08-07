@@ -65,6 +65,19 @@ exports.setMaster = async(req,res)=>{
 
 }
 
+exports.deleteProduct = async(req,res)=>{
+
+  var obj = req.body;
+
+  var product = await Product.remove({"id":req.body.id},function(err,master){
+    if(!err){
+      console.log("Product removed ");
+    }
+  })
+
+  res.send(product);
+}
+
 exports.setPagination = async(req,res)=>{
 
     var obj = req.body;

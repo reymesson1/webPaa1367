@@ -80,10 +80,10 @@ class Product extends Component {
                                                 <td>
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-primary">Edit</button>                                                        
+                                                            <button className="btn btn-primary" onClick={this.props.onEditProduct.bind(this, data.id)} >Edit</button>                                                        
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-danger">Delete</button>                                                        
+                                                            <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} >Delete</button>                                                        
                                                         </div>
                                                     </div>
                                                 </td>

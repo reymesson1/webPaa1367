@@ -35,6 +35,8 @@ app.get('/product', productController.getMaster);
 
 app.post('/createproduct2', productController.setMaster);
 
+app.post('/deleteproduct', productController.deleteProduct);
+
 app.post('/createproduct', upload.single('single-file'), function(request, response) {
 
   console.log(request.body)
