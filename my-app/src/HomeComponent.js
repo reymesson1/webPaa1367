@@ -70,7 +70,7 @@ class HomeComponent extends Component {
                                 {/* <img src={"http://localhost:8085/executed/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://localhost:8085/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://143.198.171.44:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                <img src={"http://143.198.171.44:8085/images/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                                <img src={"http://143.198.171.44:8085/images/"+ index}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                         </div>
                     </Link>
                     <h1>{product.description}</h1>
