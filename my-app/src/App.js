@@ -356,8 +356,6 @@ class App extends Component {
 
       event.preventDefault();
 
-      console.log('Clicked edit '+ id);
-
       let editProduct = {
         "id": event.target.id.value,
         "description": event.target.description.value,
@@ -367,7 +365,12 @@ class App extends Component {
         "style": event.target.style.value
       }
 
-      console.log(editProduct);
+      fetch(API_URL+'/editproduct', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(editProduct)
+      })
 
     }
 

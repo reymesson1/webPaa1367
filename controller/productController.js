@@ -65,6 +65,29 @@ exports.setMaster = async(req,res)=>{
 
 }
 
+exports.editProduct = async(req,res)=>{
+
+  var obj = req.body;
+
+  // var product = await Product.remove({"id":req.body.id},function(err,master){
+  //   if(!err){
+  //     console.log("Product removed ");
+  //   }
+  // })
+
+  // var product = await Product.findOne({"id":obj.id},function(err,master){
+  //   master.fechaentrega = obj.fechaentrega + " "
+  //   master.save(function(err,m){
+  //     console.log("Master updated");
+  //   })
+  // })
+
+
+  console.log(obj);
+
+  // res.send(product);
+}
+
 exports.deleteProduct = async(req,res)=>{
 
   var obj = req.body;

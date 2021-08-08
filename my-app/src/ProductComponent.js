@@ -43,6 +43,7 @@ class Product extends Component {
         );
 
         this.setState({
+            id: filteredData[0].id,
             description: filteredData[0].description,
             price: filteredData[0].price,
             style: filteredData[0].style,
@@ -69,16 +70,9 @@ class Product extends Component {
         return(
             <div className="container">
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
-                    <ModalHeader style={{'display':'block !important'}}>
+                    <ModalHeader >
                         <div className="row">
-
-                            <div className="col-md-10">
                                 <p>Edit | {this.state.description}</p>                                
-                            </div>
-                            <div className="col-md-2">
-                                <button type="button" class="close" aria-label="Close" onClick={this.toggleModal} ><span aria-hidden="true">×</span></button>
-                            </div>
-
                         </div>
 
                     </ModalHeader>
@@ -86,6 +80,11 @@ class Product extends Component {
                         <div className="row">
                             <Form onSubmit={this.props.onEditProduct.bind(this)}>
                             {/* <Form> */}
+                                <FormGroup row>
+                                    <Col sm={8}>
+                                    <Input type="text" value={this.state.id} name="id" id="id" placeholder="id" disabled style={{'display':'none'}} />
+                                    </Col>
+                                </FormGroup>
                                 <FormGroup row>
                                     <Label for="description" sm={1}>&nbsp;</Label>
                                     <Label for="description" sm={3}>Description</Label>
@@ -131,7 +130,7 @@ class Product extends Component {
                                 <FormGroup row>
                                     <Label sm={1}>&nbsp;</Label>
                                     <Col sm={10}>
-                                        <Input type="submit" className="btn btn-success" name="submit" id="submit" placeholder="Submit" />
+                                        <Input type="submit" className="btn btn-success" name="submit" id="submit" placeholder="Submit" disabled />
                                     </Col>
                                     <Label sm={1}>&nbsp;</Label>
                                 </FormGroup>
@@ -149,7 +148,7 @@ class Product extends Component {
                             {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
                         </CardBody>
                         <CardBody>
-                            <Input type="text" placeholder="Search" ></Input>
+                            <Input type="text" onChange={this.onChangeField.bind(this)} placeholder="Search" ></Input>
                         </CardBody>
                     </Card>
                 </div>
