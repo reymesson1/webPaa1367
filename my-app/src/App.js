@@ -357,6 +357,18 @@ class App extends Component {
       event.preventDefault();
 
       console.log('Clicked edit '+ id);
+
+      let editProduct = {
+        "id": event.target.id.value,
+        "description": event.target.description.value,
+        "price": event.target.price.value,
+        "company": event.target.company.value,
+        "category": event.target.category.value,
+        "style": event.target.style.value
+      }
+
+      console.log(editProduct);
+
     }
 
     onDeleteProduct(id){
