@@ -9,35 +9,35 @@ var Product = require('../models/product.js');
 
 exports.getMaster = async(req,res)=>{
 
-  var productBracelet = await Product.find({category:'Bracelet'},{_id:0, image:1});
+  var productBracelet = await Product.find({category:'Bracelet'},{_id:0, image:1, price:1});
   var imagesBracelet = []
   for(var x=0;x<productBracelet.length;x++){
-    imagesBracelet.push( productBracelet[x].image )
+    imagesBracelet.push({ "name":productBracelet[x].image, "price":productBracelet[x].price } )
   }
-  var productRings = await Product.find({category:'Rings'},{_id:0, image:1});
+  var productRings = await Product.find({category:'Rings'},{_id:0, image:1, price:1});
   var imagesRings = []
   for(var x=0;x<productRings.length;x++){
-    imagesRings.push( productRings[x].image )
+    imagesRings.push({ "name":productRings[x].image, "price": productRings[x].price } )
   }
-  var productNecklace = await Product.find({category:'Necklace'},{_id:0, image:1});
+  var productNecklace = await Product.find({category:'Necklace'},{_id:0, image:1, price:1});
   var imagesNecklace = []
   for(var x=0;x<productNecklace.length;x++){
-    imagesNecklace.push( productNecklace[x].image )
+    imagesNecklace.push({ "name": productNecklace[x].image,"price": productNecklace[x].price } )
   }
-  var productPendant = await Product.find({category:'Pendant'},{_id:0, image:1});
+  var productPendant = await Product.find({category:'Pendant'},{_id:0, image:1, price:1});
   var imagesPendant = []
   for(var x=0;x<productPendant.length;x++){
-    imagesPendant.push( productPendant[x].image )
+    imagesPendant.push( { "name": productPendant[x].image, "price": productPendant[x].image } )
   }
-  var productCrowns = await Product.find({category:'Crowns'},{_id:0, image:1});
+  var productCrowns = await Product.find({category:'Crowns'},{_id:0, image:1, price:1});
   var imagesCrowns = []
   for(var x=0;x<productCrowns.length;x++){
-    imagesCrowns.push( productCrowns[x].image )
+    imagesCrowns.push({ "name": productCrowns[x].image, "price": productCrowns[x].price })
   }
-  var productGems = await Product.find({category:'Gems'},{_id:0, image:1});
+  var productGems = await Product.find({category:'Gems'},{_id:0, image:1, price:1});
   var imagesGems = []
   for(var x=0;x<productGems.length;x++){
-    imagesGems.push( productGems[x].image )
+    imagesGems.push({ "name": productGems[x].image, "price": productGems[x].price})
   }
 
 
