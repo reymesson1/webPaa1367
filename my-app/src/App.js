@@ -36,7 +36,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      
         URLExternal: 'http://143.198.171.44:8085', 
           // URLExternal: 'http://localhost:8085',
           showModal: false,
@@ -224,7 +223,8 @@ class App extends Component {
     onCreateProductUpload(event){
 
       this.setState({
-        fileUploaded: true
+        fileUploaded: true,
+        productHiddenBtn: true
       })
 
       if (event.target.files && event.target.files[0]) {
@@ -233,6 +233,12 @@ class App extends Component {
           image: img
         });  
       }
+
+      setTimeout(() => {
+        this.setState({
+          productHiddenBtn: false
+        })  
+      }, 20000);
   
 
     }
@@ -285,7 +291,7 @@ class App extends Component {
 
       setTimeout(() => {
         window.location.reload()
-      }, 2000);
+      }, 20000);
 
     }
 
@@ -388,6 +394,10 @@ class App extends Component {
         headers: API_HEADERS,
         body: JSON.stringify(deleteProduct)
       })
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 500);
 
     }
 

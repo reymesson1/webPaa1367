@@ -9,8 +9,6 @@ class CreateProductComponent extends Component {
 
     render() {
 
-        console.log(this.props.styles);
-
         let showUpload;
         let hiddenBtnCheck
 
@@ -27,7 +25,7 @@ class CreateProductComponent extends Component {
             hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
         }else{
             
-            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+            hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
         
