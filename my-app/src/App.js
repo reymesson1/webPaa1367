@@ -238,7 +238,7 @@ class App extends Component {
         this.setState({
           productHiddenBtn: false
         })  
-      }, 20000);
+      }, 50000);
   
 
     }
@@ -246,12 +246,18 @@ class App extends Component {
 
       event.preventDefault(); 
 
+      let trimDescription = event.target.description.value;
+      let replaced = trimDescription.split(' ').join('');
+
       const data = new FormData();
-      data.append("description",event.target.description.value);
+      data.append("description", replaced);
       data.append("price", event.target.price.value);
       data.append("company", event.target.company.value);
       data.append("style", event.target.style.value);
       data.append("single-file", this.state.image);
+
+      console.log(data)
+      console.log(replaced)
 
       axios({
           url: API_URL+'/createproduct',
@@ -267,13 +273,15 @@ class App extends Component {
       let newProduct = {
 
         "id": Date.now(),
-        "description": event.target.description.value,
+        "description": replaced,
         "price": event.target.price.value,
         "company": event.target.company.value,
         "style": event.target.style.value,  
         "category": event.target.category.value,  
-        "image": event.target.description.value +'-'+ event.target.style.value + '.jpg' 
+        "image": replaced +'-'+ event.target.style.value + '.jpg' 
       }
+
+      // // console.log(newProduct);
 
       fetch(API_URL+'/createproduct2', {
 
@@ -283,7 +291,7 @@ class App extends Component {
       })
 
 
-      console.log('create new product from App.js')
+      // console.log('create new product from App.js')
 
       this.setState({
         productHiddenBtn: true
@@ -291,7 +299,7 @@ class App extends Component {
 
       setTimeout(() => {
         window.location.reload()
-      }, 20000);
+      }, 50000);
 
     }
 
@@ -299,10 +307,14 @@ class App extends Component {
 
       // event.preventDefault(); 
 
+      var trimDescription = event.target.description.value;
+      var replaced = trimDescription.split(' ').join('');
+
+
       let newStyle = {
 
         "id": Date.now(),
-        "description": event.target.description.value,
+        "description": replaced,
         "notes": event.target.notes.value
       }
 

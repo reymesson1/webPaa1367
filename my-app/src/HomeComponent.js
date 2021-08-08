@@ -74,7 +74,7 @@ class HomeComponent extends Component {
                                 <img src={this.props.URLExternal+"/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
                         </div>
                     </Link>
-                    <h1>{product.description}</h1>
+                    <h5>{product.description}</h5>
                 </div>
             )
 
