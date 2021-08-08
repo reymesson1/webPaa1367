@@ -67,9 +67,13 @@ app.get('/style', styleController.getStyle);
 
 app.post('/createstyle', styleController.setStyle);
 
+app.post('/deletestyle', styleController.deleteStyle);
+
 app.get('/companies', companyController.getCompany);
 
 app.post('/createcompany', companyController.setCompany);
+
+app.post('/deletecompany', companyController.deleteCompany);
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){

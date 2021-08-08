@@ -325,6 +325,10 @@ class App extends Component {
         body: JSON.stringify(newStyle)
       })
 
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+
       // axios({
       //     url: API_URL+'/createstyle',
       //     method: "POST",
@@ -356,6 +360,10 @@ class App extends Component {
         headers: API_HEADERS,
         body: JSON.stringify(newStyle)
       })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
 
       // axios({
       //     url: API_URL+'/createstyle',
@@ -413,6 +421,45 @@ class App extends Component {
 
     }
 
+    onDeleteCompany(id){
+
+      let deleteProduct = {
+
+        "id": id
+      }
+
+      fetch(API_URL+'/deletecompany', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(deleteProduct)
+      })
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 500);
+
+    }
+    onDeleteStyle(id){
+
+      let deleteProduct = {
+
+        "id": id
+      }
+
+      fetch(API_URL+'/deletestyle', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(deleteProduct)
+      })
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 500);
+
+    }
+
 
 
     render(){
@@ -452,12 +499,12 @@ class App extends Component {
           />
           <Route path="/styles" component= {() => <StylesComponent
                     styles={this.state.styles} 
-                    
+                    onDeleteStyle={this.onDeleteStyle.bind(this)} 
                     />}
           />
           <Route path="/companies" component= {() => <CompanyComponent
                     companies={this.state.companies} 
-                    
+                    onDeleteCompany={this.onDeleteCompany.bind(this)} 
                     />}
           />
           <Route path="/createproduct" component= {() => <CreateProductComponent 

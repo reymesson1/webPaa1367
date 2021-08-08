@@ -31,3 +31,16 @@ exports.setCompany = async(req,res)=>{
     
   res.send(req.body);
 }
+
+exports.deleteCompany = async(req,res)=>{
+
+  var obj = req.body;
+
+  var company = await Company.remove({"id":req.body.id},function(err,master){
+    if(!err){
+      console.log("Product removed ");
+    }
+  })
+
+  res.send(company);
+}

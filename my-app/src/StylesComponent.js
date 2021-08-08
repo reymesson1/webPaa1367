@@ -60,6 +60,7 @@ class StylesComponent extends Component {
                     <th>#</th>
                     <th>Description</th>
                     <th>Notes</th>
+                    <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,16 @@ class StylesComponent extends Component {
                                                 <td>{data.id}</td>
                                                 <td>{data.description}</td>
                                                 <td>{data.notes}</td>
+                                                <td>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <button className="btn btn-danger" onClick={this.props.onDeleteStyle.bind(this, data.id)} >Delete</button>                                                        
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
                     )}
                 </tbody>

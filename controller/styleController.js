@@ -14,20 +14,33 @@ exports.getStyle = async(req,res)=>{
 }
 
 exports.setStyle = async(req,res)=>{
-
+  
   let newStyle = req.body;
   
   let style = new Style(newStyle);
   
   console.log(style);
-
+  
   style.save(function(err){
     if(!err){
       console.log('Style saved');
     }else{
-        console.log(err)
+      console.log(err)
     }
   })
-    
+  
   res.send(req.body);
+}
+
+exports.deleteStyle = async(req,res)=>{
+
+  var obj = req.body;
+
+  var style = await Style.remove({"id":req.body.id},function(err,master){
+    if(!err){
+      console.log("Product removed ");
+    }
+  })
+
+  res.send(style);
 }
