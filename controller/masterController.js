@@ -27,7 +27,7 @@ exports.getMaster = async(req,res)=>{
   var productPendant = await Product.find({category:'Pendant'},{_id:0, image:1, price:1});
   var imagesPendant = []
   for(var x=0;x<productPendant.length;x++){
-    imagesPendant.push( { "name": productPendant[x].image, "price": productPendant[x].image } )
+    imagesPendant.push( { "name": productPendant[x].image, "price": productPendant[x].price } )
   }
   var productCrowns = await Product.find({category:'Crowns'},{_id:0, image:1, price:1});
   var imagesCrowns = []
