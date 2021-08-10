@@ -157,7 +157,7 @@ class CreateProductComponent extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Company Name</Label>
+                            <Label for="exampleSelect" sm={2}>Company</Label>
                             <Col sm={8}>
                                 <Input type="select" name="company" id="company" placeholder="Company Name" >
                                 {this.props.companies.map( 
