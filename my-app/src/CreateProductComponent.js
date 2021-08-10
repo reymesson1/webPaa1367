@@ -151,21 +151,15 @@ class CreateProductComponent extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="description" sm={2}>Description</Label>
+                            <Label for="description" sm={2}>Style Number</Label>
                             <Col sm={10}>
-                            <Input type="text" name="description" id="description" placeholder="Description" />
+                            <Input type="text" name="description" id="description" placeholder="Style Number" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="price" sm={2}>Price</Label>
-                            <Col sm={10}>
-                            <Input type="number" name="price" id="price" placeholder="Price" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Company</Label>
+                            <Label for="exampleSelect" sm={2}>Company Name</Label>
                             <Col sm={8}>
-                                <Input type="select" name="company" id="company" placeholder="Company" >
+                                <Input type="select" name="company" id="company" placeholder="Company Name" >
                                 {this.props.companies.map( 
                                     (data,index) => <option>{data.description}</option>
                                 )}
@@ -173,6 +167,19 @@ class CreateProductComponent extends Component {
                             </Input>
                             </Col>
                             <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for="exampleSelect" sm={2}>Category</Label>
+                            <Col sm={10}>
+                                <Input type="select" name="category" id="category" placeholder="Category" >
+                                    <option>{'Bracelet'}</option>
+                                    <option>{'Rings'}</option>
+                                    <option>{'Necklace'}</option>
+                                    <option>{'Pendant'}</option>
+                                    <option>{'Crowns'}</option>
+                                    <option>{'Gems'}</option>
+                            </Input>
+                            </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="exampleSelect" sm={2}>Style</Label>
@@ -186,16 +193,9 @@ class CreateProductComponent extends Component {
                             <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}>Create Style</Label>
                         </FormGroup>
                         <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Category</Label>
+                            <Label for="price" sm={2}>Price</Label>
                             <Col sm={10}>
-                                <Input type="select" name="category" id="category" placeholder="Category" >
-                                    <option>{'Bracelet'}</option>
-                                    <option>{'Rings'}</option>
-                                    <option>{'Necklace'}</option>
-                                    <option>{'Pendant'}</option>
-                                    <option>{'Crowns'}</option>
-                                    <option>{'Gems'}</option>
-                            </Input>
+                            <Input type="number" name="price" id="price" placeholder="Price" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
