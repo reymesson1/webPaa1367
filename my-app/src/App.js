@@ -305,7 +305,7 @@ class App extends Component {
 
     onCreateStyle(event){
 
-      // event.preventDefault(); 
+      event.preventDefault(); 
 
       var trimDescription = event.target.description.value;
       var replaced = trimDescription.split(' ').join('');
@@ -318,6 +318,15 @@ class App extends Component {
         "notes": event.target.notes.value
       }
 
+      let nextState = this.state.styles;
+
+      nextState.push(newStyle);
+
+      this.setState({
+
+        styles: nextState
+      })
+
       fetch(API_URL+'/createstyle', {
 
         method: 'post',
@@ -325,9 +334,9 @@ class App extends Component {
         body: JSON.stringify(newStyle)
       })
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 500);
 
       // axios({
       //     url: API_URL+'/createstyle',
@@ -524,6 +533,7 @@ class App extends Component {
                       companies={this.state.companies}
                       productHiddenBtn={this.state.productHiddenBtn}
                       onCreateCompany={this.onCreateCompany.bind(this)}
+                      onCreateStyle={this.onCreateStyle.bind(this)}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
