@@ -165,6 +165,7 @@ class Product extends Component {
                 <Table>
                 <thead>
                     <tr>
+                    <th>&nbsp;</th>
                     <th>#</th>
                     <th>Description</th>
                     <th>Price</th>
@@ -178,6 +179,7 @@ class Product extends Component {
                     {filteredData.map(
                         (data, index) => 
                                             <tr>
+                                                <td><img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar" style={{"width":"25%","height":"25%"}}/></td>
                                                 <td>{data.id}</td>
                                                 <td>{data.description}</td>
                                                 <td>{data.price}</td>

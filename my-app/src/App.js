@@ -537,6 +537,7 @@ class App extends Component {
               )} 
     />
           <Route path="/product" component= {() => <Product
+                    URLExternal={this.state.URLExternal}
                     products={this.state.products} 
                     onEditProduct={this.onEditProduct.bind(this)} 
                     onDeleteProduct={this.onDeleteProduct.bind(this)} 
