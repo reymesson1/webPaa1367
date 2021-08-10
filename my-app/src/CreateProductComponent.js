@@ -1,16 +1,41 @@
 import React, { Component } from 'react';
 import { Button, Col, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Media, Panel,   Card,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter } from 'reactstrap';
 
 class CreateProductComponent extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            newCompanyModal: false
+        }
+    }
+
+
+    toggleModal = () => {
+        this.setState({
+            newCompanyModal: !this.state.newCompanyModal
+        })
+    }
+
+    openNewCompanyModal(){
+
+        this.setState({
+
+            newCompanyModal: true
+        })
+        console.log('open modal');
+
     }
 
     render() {
 
         let showUpload;
-        let hiddenBtnCheck
+        let hiddenBtnCheck;
 
         if(this.props.fileUploaded){
             showUpload = <Input type="file" style={{'display':'none'}} name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
@@ -31,6 +56,38 @@ class CreateProductComponent extends Component {
         
         return(
             <div className="container">
+                <Modal isOpen={this.state.newCompanyModal} toggle={this.toggleModal}>
+                    <ModalHeader>
+                    <p>Create a new Company</p>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                                <Form onSubmit={this.props.onCreateCompany.bind(this)}>
+                                    <FormGroup row>
+                                        <Label for="description" sm={2}>Name</Label>
+                                        <Col sm={10}>
+                                        <Input type="text" name="description" id="description" placeholder="Name" />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="style" sm={2}>Notes</Label>
+                                        <Col sm={10}>
+                                        <Input type="textarea" name="notes" id="notes" placeholder="Notes" />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="style" sm={2}>&nbsp;</Label>
+                                        <Col sm={10}>
+                                        <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+                                        </Col>
+                                    </FormGroup>
+                                </Form>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>  
+                    <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
+                    </ModalFooter>
+                </Modal>
                 <br/>
                 <div className="row">
                     <h1>Create New Product</h1>
@@ -60,7 +117,7 @@ class CreateProductComponent extends Component {
                         </FormGroup>
                         <FormGroup row>
                             <Label for="exampleSelect" sm={2}>Company</Label>
-                            <Col sm={10}>
+                            <Col sm={8}>
                                 <Input type="select" name="company" id="company" placeholder="Company" >
                                 {this.props.companies.map( 
                                     (data,index) => <option>{data.description}</option>
@@ -68,6 +125,7 @@ class CreateProductComponent extends Component {
 
                             </Input>
                             </Col>
+                            <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="exampleSelect" sm={2}>Style</Label>
