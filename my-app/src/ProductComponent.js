@@ -169,9 +169,11 @@ class Product extends Component {
                     <th>#</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Price Optional</th>
                     <th>Style</th>
                     <th>Category</th>
                     <th>Company</th>
+                    <th>Notes</th>
                     <th>Action</th>
                     </tr>
                 </thead>
@@ -183,9 +185,11 @@ class Product extends Component {
                                                 <td>{data.id}</td>
                                                 <td>{data.description}</td>
                                                 <td>{data.price}</td>
+                                                <td>{data.priceopt}</td>
                                                 <td>{data.style}</td>
                                                 <td>{data.category}</td>
                                                 <td>{data.company}</td>
+                                                <td>{data.notes}</td>
                                                 <td>
                                                     <div className="row">
                                                         <div className="col-md-6">
