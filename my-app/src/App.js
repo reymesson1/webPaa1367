@@ -278,6 +278,8 @@ class App extends Component {
         "company": event.target.company.value,
         "style": event.target.style.value,  
         "category": event.target.category.value,  
+        "priceopt": event.target.priceopt.value,  
+        "notes": event.target.notes.value,  
         "image": replaced +'-'+ event.target.style.value + '.jpg' 
       }
 
@@ -291,7 +293,7 @@ class App extends Component {
       })
 
 
-      // console.log('create new product from App.js')
+      console.log('create new product from App.js')
 
       this.setState({
         productHiddenBtn: true

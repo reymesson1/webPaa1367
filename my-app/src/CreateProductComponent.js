@@ -194,10 +194,20 @@ class CreateProductComponent extends Component {
                         </FormGroup>
                         <FormGroup row>
                             <Label for="price" sm={2}>Price</Label>
-                            <Col sm={10}>
+                            <Col sm={5}>
                             <Input type="number" name="price" id="price" placeholder="Price" />
                             </Col>
+                            <Col sm={5}>
+                            <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" />
+                            </Col>
                         </FormGroup>
+                        <FormGroup row>
+                            <Label for="notes" sm={2}>Notes</Label>
+                            <Col sm={10}>
+                            <Input type="textarea" name="notes" id="notes" placeholder="Notes" />
+                            </Col>
+                        </FormGroup>
+                        <br/>
                         <FormGroup row>
                             <Label for="style" sm={2}>&nbsp;</Label>
                             <Col sm={10}>
