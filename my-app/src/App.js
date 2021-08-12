@@ -294,6 +294,7 @@ class App extends Component {
         "category": event.target.category.value,  
         "priceopt": event.target.priceopt.value,  
         "notes": event.target.notes.value,  
+        "hidden": false,  
         "image": replaced +'-'+ event.target.style.value + '.jpg' 
       }
 
