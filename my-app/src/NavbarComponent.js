@@ -70,7 +70,7 @@ class NavbarComponent extends Component {
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
+                    <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Presentation Mode" />
                 </div>
             </Navbar>
         </div>
