@@ -12,7 +12,8 @@ class CreateProductComponent extends Component {
         super(props);
         this.state = {
             newCompanyModal: false,
-            newStyleModal: false
+            newStyleModal: false,
+
         }
     }
 
@@ -141,6 +142,9 @@ class CreateProductComponent extends Component {
                 </div>
                 <br/>
                 <div className="row">
+                    <div className="col-md-4">
+                        <img src={this.props.file}/>
+                    </div>
                     <div className="col-md-8">
                     <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                     {/* <Form > */}
