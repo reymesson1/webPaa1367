@@ -53,7 +53,8 @@ class App extends Component {
           styles: [],
           companies: [],
           productHiddenBtn: false,
-          onHiddenMode: true
+          onHiddenMode: true,
+          file: null
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -244,7 +245,8 @@ class App extends Component {
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
         this.setState({
-          image: img
+          image: img,
+          file: URL.createObjectURL(event.target.files[0])
         });  
       }
 
@@ -573,6 +575,7 @@ class App extends Component {
                       productHiddenBtn={this.state.productHiddenBtn}
                       onCreateCompany={this.onCreateCompany.bind(this)}
                       onCreateStyle={this.onCreateStyle.bind(this)}
+                      file={this.state.file}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 

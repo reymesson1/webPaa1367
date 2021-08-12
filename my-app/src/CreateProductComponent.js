@@ -141,6 +141,9 @@ class CreateProductComponent extends Component {
                 </div>
                 <br/>
                 <div className="row">
+                    <div className="col-md-4">
+                        <img src={this.props.file} style={{'width':'350px','height':'350px'}}/>
+                    </div>
                     <div className="col-md-8">
                     <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                     {/* <Form > */}
