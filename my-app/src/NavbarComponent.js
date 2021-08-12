@@ -2,26 +2,34 @@ import React, { useState, Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
+import { ButtonToggle ,CustomInput,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function NavbarComponent(props) {
+// function NavbarComponent(props) {
+class NavbarComponent extends Component {
+
+        constructor(props) {
+            super(props);
+        }        
+ 
+    // const [dropdownOpen, setDropdownOpen] = useState(false);
     
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    
-    const toggle = () => setDropdownOpen(prevState => !prevState);  
+    // const toggle = () => setDropdownOpen(prevState => !prevState);  
 
 
-    let subTotal = 0;
-    let total = 0;
+    // let subTotal = 0;
+    // let total = 0;
 
-    props.orders[0].orderDetails.map(
-        (product) => {
-            total += product.price
-        }            
-    )
+    // props.orders[0].orderDetails.map(
+    //     (product) => {
+    //         total += product.price
+    //     }            
+    // )
 
-    subTotal = (total)-(total*5/100).toFixed(2);
+    // subTotal = (total)-(total*5/100).toFixed(2);
+
+    render(){
+
 
     return(
         <div>
@@ -62,44 +70,12 @@ function NavbarComponent(props) {
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <Dropdown style={{ 'right':'18%'}} isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle style={{'background-color':'#0c343d', 'border-color':'#0c343d'}} caret>
-                        <span style={{'font-size':'20px','color':'#aaafaf'}}>@amseluser</span>
-                    </DropdownToggle>
-                    <DropdownMenu style={{'width':'350px'}} >
-                        <DropdownItem header style={{'color':'#aaafaf'}} >
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <h4>Hide</h4>
-                                </div>
-                                <div className="col-md-2">
-                                    <h4>|</h4>
-                                </div>
-                                <div className="col-md-5">
-                                    <h4>Show</h4>
-                                </div>
-                            </div>
-                        </DropdownItem>
-                        <DropdownItem>
-                        <div className="row">
-                            <Table>
-                            <tbody>
-                                <tr>
-                                <td>                                            
-                                    {/* <button className="btn btn-dark" onClick={props.doCheckout.bind(this)} style={{'width':'100%'}}  >Create a New Product</button> */}
-                                    <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link>
-                                </td>
-                                </tr>
-                            </tbody>
-                            </Table>
-                        </div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </Dropdown>
+                    <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
                 </div>
             </Navbar>
         </div>
     );
+    }
 }
 
 

@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
     category: String,
     priceopt: String,
     notes: String,
+    hidden: Boolean,
     image: String
 })
 

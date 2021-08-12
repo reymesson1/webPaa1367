@@ -52,7 +52,8 @@ class App extends Component {
           fileUploaded: false,
           styles: [],
           companies: [],
-          productHiddenBtn: false
+          productHiddenBtn: false,
+          onHiddenMode: true
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -94,6 +95,19 @@ class App extends Component {
             this.setState({
 
                 companies: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        fetch(API_URL+'/gethiddenmode')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            console.log(responseData.hidden);
+            this.setState({
+
+                onHiddenMode: responseData.hidden
             })
         })
         .catch((error)=>{
@@ -480,6 +494,26 @@ class App extends Component {
 
     }
 
+    onHiddenApp(event){
+
+      let newHiddenApp = {
+
+        "onhiddenmode": this.state.onHiddenMode
+      }
+
+      fetch(API_URL+'/onhiddenmode', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newHiddenApp)
+      })
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 500);
+
+    }
+
 
 
     render(){
@@ -505,6 +539,8 @@ class App extends Component {
             deleteItem={this.deleteItem.bind(this)}
             search={this.search.bind(this)}
             orders={this.state.orders}
+            onHiddenApp={this.onHiddenApp.bind(this)}
+            onHiddenMode={this.state.onHiddenMode}
           />  
           <Route path="/" exact component= {() => <HomeComponent   
                     URLExternal={this.state.URLExternal}

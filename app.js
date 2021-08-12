@@ -75,6 +75,10 @@ app.post('/createcompany', companyController.setCompany);
 
 app.post('/deletecompany', companyController.deleteCompany);
 
+app.get('/gethiddenmode', productController.getHidden);
+
+app.post('/onhiddenmode', productController.setHidden);
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');

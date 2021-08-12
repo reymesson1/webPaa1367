@@ -108,3 +108,25 @@ exports.setPagination = async(req,res)=>{
     console.log(req.body)
 
 }
+
+exports.getHidden = async(req,res)=>{
+
+
+  let productBracelet = await Product.findOne({category:'Bracelet'},{_id:0, hidden:1});
+
+  console.log(productBracelet);
+
+  res.send(productBracelet)
+
+}
+exports.setHidden = async(req,res)=>{
+
+  let obj = req.body;
+
+  let reverse = !obj.onhiddenmode
+
+  let product = await Product.updateMany({}, {"$set":{"hidden": reverse}});
+
+
+
+}
