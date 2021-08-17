@@ -21,8 +21,8 @@ import CreateStyleComponent from './CreateStyleComponent';
 import CreateCompanyComponent from './CreateCompanyComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -36,8 +36,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -54,7 +54,8 @@ class App extends Component {
           companies: [],
           productHiddenBtn: false,
           onHiddenMode: true,
-          file: null
+          file: null,
+          fileName: ""
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -246,7 +247,8 @@ class App extends Component {
         let img = event.target.files[0];
         this.setState({
           image: img,
-          file: URL.createObjectURL(event.target.files[0])
+          file: URL.createObjectURL(event.target.files[0]),
+          fileName: event.target.files[0].name
         });  
       }
 
@@ -318,7 +320,7 @@ class App extends Component {
 
       setTimeout(() => {
         window.location.reload()
-      }, 50000);
+      }, 10000);
 
     }
 
@@ -576,6 +578,7 @@ class App extends Component {
                       onCreateCompany={this.onCreateCompany.bind(this)}
                       onCreateStyle={this.onCreateStyle.bind(this)}
                       file={this.state.file}
+                      fileName={this.state.fileName}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 

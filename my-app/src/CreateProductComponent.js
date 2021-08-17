@@ -142,7 +142,12 @@ class CreateProductComponent extends Component {
                 <br/>
                 <div className="row">
                     <div className="col-md-4">
-                        <img src={this.props.file} style={{'width':'350px','height':'350px'}}/>
+                        <div className="row">
+                            <img src={this.props.file} style={{'width':'350px','height':'350px'}}/>
+                        </div>
+                        <div style={{'text-align':'center'}}>
+                            <h5  >{this.props.fileName}</h5>
+                        </div>
                     </div>
                     <div className="col-md-8">
                     <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
