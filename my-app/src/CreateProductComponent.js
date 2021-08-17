@@ -146,7 +146,7 @@ class CreateProductComponent extends Component {
                             <img src={this.props.file} style={{'width':'350px','height':'350px'}}/>
                         </div>
                         <div style={{'text-align':'center'}}>
-                            <h5  >{this.props.fileName}</h5>
+                            <h5>{this.props.fileName}</h5>
                         </div>
                     </div>
                     <div className="col-md-8">
@@ -175,6 +175,12 @@ class CreateProductComponent extends Component {
                             </Input>
                             </Col>
                             <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for="companystyle" sm={2}>Comp Style #</Label>
+                            <Col sm={10}>
+                            <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" />
+                            </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="exampleSelect" sm={2}>Category</Label>

@@ -295,6 +295,7 @@ class App extends Component {
         "price": event.target.price.value,
         "company": event.target.company.value,
         "style": event.target.style.value,  
+        "companystyle": event.target.companystyle.value,  
         "category": event.target.category.value,  
         "priceopt": event.target.priceopt.value,  
         "notes": event.target.notes.value,  
@@ -320,7 +321,7 @@ class App extends Component {
 
       setTimeout(() => {
         window.location.reload()
-      }, 10000);
+      }, 2000);
 
     }
 
