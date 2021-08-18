@@ -12,7 +12,8 @@ class CreateProductComponent extends Component {
         super(props);
         this.state = {
             newCompanyModal: false,
-            newStyleModal: false
+            newStyleModal: false,
+            newLoadingModal: true
         }
     }
 
@@ -71,6 +72,16 @@ class CreateProductComponent extends Component {
         
         return(
             <div className="container">
+                <Modal isOpen={this.props.productLoadingModal}>
+                    <ModalHeader>
+                    <p>Message</p>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>{this.props.productLoadingModalLabel}</h5>
+                        </div>
+                    </ModalBody>
+                </Modal>
                 <Modal isOpen={this.state.newStyleModal} toggle={this.toggleModalStyle}>
                     <ModalHeader>
                     <p>Create a new Style</p>

@@ -54,6 +54,8 @@ class App extends Component {
           styles: [],
           companies: [],
           productHiddenBtn: false,
+          productLoadingModal: false,
+          productLoadingModalLabel: "Loading...",
           onHiddenMode: true,
           file: null,
           fileName: ""
@@ -239,9 +241,13 @@ class App extends Component {
 
     onCreateProductUpload(event){
 
+      // event.preventDefault();
+ 
       this.setState({
-        fileUploaded: true,
-        productHiddenBtn: true
+        productLoadingModal: true,
+        productLoadingModalLabel: "Loading...."
+
+
       })
 
       if (event.target.files && event.target.files[0]) {
@@ -255,7 +261,7 @@ class App extends Component {
 
       setTimeout(() => {
         this.setState({
-          productHiddenBtn: false
+          productLoadingModal: false
         })  
       }, 50000);
   
@@ -289,40 +295,62 @@ class App extends Component {
 
       });
 
-      let newProduct = {
+      if(event.target.description.value==""){
 
-        "id": Date.now(),
-        "description": replaced,
-        "price": event.target.price.value,
-        "company": event.target.company.value,
-        "style": event.target.style.value,  
-        "companystyle": event.target.companystyle.value,  
-        "category": event.target.category.value,  
-        "priceopt": event.target.priceopt.value,  
-        "notes": event.target.notes.value,  
-        "hidden": false,  
-        "image": replaced +'-'+ event.target.style.value + '.jpg' 
+        this.setState({
+          productLoadingModal: true,
+          productLoadingModalLabel: "Style Number field couldn't be empty"
+        })
+
+        setTimeout(() => {
+
+          this.setState({
+            productLoadingModal: false
+          })  
+          
+        }, 5000);
+
+      }else{
+
+
+        let newProduct = {
+
+          "id": Date.now(),
+          "description": replaced,
+          "price": event.target.price.value,
+          "company": event.target.company.value,
+          "style": event.target.style.value,  
+          "companystyle": event.target.companystyle.value,  
+          "category": event.target.category.value,  
+          "priceopt": event.target.priceopt.value,  
+          "notes": event.target.notes.value,  
+          "hidden": false,  
+          "image": replaced +'-'+ event.target.style.value + '.jpg' 
+        }
+  
+        fetch(API_URL+'/createproduct2', {
+  
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(newProduct)
+        })
+  
+  
+        console.log('create new product from App.js')
+  
+        this.setState({
+          productHiddenBtn: true
+        })
+  
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+
+
+
       }
 
-      // // console.log(newProduct);
 
-      fetch(API_URL+'/createproduct2', {
-
-        method: 'post',
-        headers: API_HEADERS,
-        body: JSON.stringify(newProduct)
-      })
-
-
-      console.log('create new product from App.js')
-
-      this.setState({
-        productHiddenBtn: true
-      })
-
-      setTimeout(() => {
-        window.location.reload()
-      }, 2000);
 
     }
 
@@ -592,6 +620,8 @@ class App extends Component {
                       onCreateStyle={this.onCreateStyle.bind(this)}
                       file={this.state.file}
                       fileName={this.state.fileName}
+                      productLoadingModal={this.state.productLoadingModal}
+                      productLoadingModalLabel={this.state.productLoadingModalLabel}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
