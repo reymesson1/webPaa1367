@@ -62,10 +62,10 @@ class CreateProductComponent extends Component {
 
         if(!this.props.productHiddenBtn){
 
-            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+            hiddenBtnCheck = <Input type="submit" value={this.props.productHiddenBtnLabel} className="btn btn-success" name="image" id="image" placeholder="Image" />
         }else{
             
-            hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+            hiddenBtnCheck = <Input type="submit" value={this.props.productHiddenBtnLabel} className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
         
@@ -161,7 +161,7 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="description" sm={2}>Style Number</Label>
                             <Col sm={10}>
-                            <Input type="text" name="description" id="description" placeholder="Style Number" />
+                            <Input type="text" name="description" id="description" placeholder="Style Number"  onChange={this.props.productHiddenBtnOnChange.bind(this)}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>

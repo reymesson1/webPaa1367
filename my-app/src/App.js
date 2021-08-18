@@ -21,8 +21,8 @@ import CreateStyleComponent from './CreateStyleComponent';
 import CreateCompanyComponent from './CreateCompanyComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -36,8 +36,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -52,7 +52,8 @@ class App extends Component {
           fileUploaded: false,
           styles: [],
           companies: [],
-          productHiddenBtn: false,
+          productHiddenBtn: true,
+          productHiddenBtnLabel: "Submit",
           onHiddenMode: true,
           file: null,
           fileName: ""
@@ -240,7 +241,8 @@ class App extends Component {
 
       this.setState({
         fileUploaded: true,
-        productHiddenBtn: true
+        productHiddenBtn: true,
+        productHiddenBtnLabel: "Loading..."
       })
 
       if (event.target.files && event.target.files[0]) {
@@ -254,7 +256,8 @@ class App extends Component {
 
       setTimeout(() => {
         this.setState({
-          productHiddenBtn: false
+          productHiddenBtn: false,
+          productHiddenBtnLabel: "Submit"
         })  
       }, 50000);
   
@@ -316,7 +319,8 @@ class App extends Component {
       console.log('create new product from App.js')
 
       this.setState({
-        productHiddenBtn: true
+        productHiddenBtn: true,
+        productHiddenBtnLabel: "Submit"
       })
 
       setTimeout(() => {
@@ -520,6 +524,15 @@ class App extends Component {
 
     }
 
+    productHiddenBtnOnChange(event){
+
+      if(event.target.value==""){
+
+        console.log(event.target.value);
+      }
+
+    }
+
 
 
     render(){
@@ -576,6 +589,8 @@ class App extends Component {
                       styles={this.state.styles}
                       companies={this.state.companies}
                       productHiddenBtn={this.state.productHiddenBtn}
+                      productHiddenBtnLabel={this.state.productHiddenBtnLabel}
+                      productHiddenBtnOnChange={this.productHiddenBtnOnChange.bind(this)}
                       onCreateCompany={this.onCreateCompany.bind(this)}
                       onCreateStyle={this.onCreateStyle.bind(this)}
                       file={this.state.file}
