@@ -16,21 +16,22 @@ class HomeComponent extends Component {
         }  
     }
 
+    componentDidMount(){
+        this.setState({
+            searchText: this.props.match.params.id
+        })   
+    }
     onChangeField(event){
-
         this.setState({
             searchText: event.target.value
         })
-
-        console.log(event.target.value)
-
     }
 
     render() {
 
         let filterData = this.props.products.filter(
 
-            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         );
 
         if(this.props.newest){
@@ -81,9 +82,11 @@ class HomeComponent extends Component {
         })
         
         return(
-            <div className="container">
-                
-                    <br/>
+            <div className="container">                
+                <br/>
+                <div className="row">
+                    <h1>{this.props.match.params.id.toUpperCase()}</h1>
+                </div>
                 <div className="row">
                     <br/>
                     {/* <Input type="text" placeholder="Search" ></Input> */}

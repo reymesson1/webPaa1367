@@ -22,8 +22,8 @@ import CreateCompanyComponent from './CreateCompanyComponent';
 import CategoryComponent from './CategoryComponent';
 import  axios  from 'axios'
 
-let API_URL = "http://localhost:8085";
-// let API_URL = "http://143.198.171.44:8085";
+// let API_URL = "http://localhost:8085";
+let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -37,8 +37,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        // URLExternal: 'http://143.198.171.44:8085', 
-          URLExternal: 'http://localhost:8085',
+        URLExternal: 'http://143.198.171.44:8085', 
+          // URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -550,9 +550,17 @@ class App extends Component {
             onHiddenMode={this.state.onHiddenMode}
           />  
           <Route path="/" exact component= {() => <CategoryComponent
-                    />}
+                    URLExternal={this.state.URLExternal}
+                />}
           />
-          <Route path="/home" component= {() => <HomeComponent   
+          <Route 
+              path="/home/:id" 
+              location={this.props.location} 
+              render={({ 
+                  location, 
+                  match 
+              }) => (
+                  <HomeComponent match={match}
                     URLExternal={this.state.URLExternal}
                     newest={this.state.newest}
                     filterText={this.state.filterText}
@@ -560,8 +568,8 @@ class App extends Component {
                     products={this.state.products}
                     addToCart={this.addToCart.bind(this)}    
                     onClickPagination={this.onClickPagination.bind(this)}    
-                            
-                    />}
+                />
+              )} 
           />
           <Route path="/styles" component= {() => <StylesComponent
                     styles={this.state.styles} 
