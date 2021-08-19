@@ -39,27 +39,28 @@ app.post('/editproduct', productController.editProduct);
 
 app.post('/deleteproduct', productController.deleteProduct);
 
-app.post('/createproduct', upload.single('single-file'), function(request, response) {
+// app.post('/createproduct', upload.single('single-file'), function(request, response) {
+app.post('/createproduct', upload.array('single-file'), function(request, response) {
 
-  console.log(request.body)
+  // var description = request.body.description;
+  // var style = request.body.style;
 
-  var description = request.body.description;
-  var style = request.body.style;
+  // var fileName = request.file.originalname; // original file name
+  // var file = request.file.path; // real file path with temporary name
 
-  var fileName = request.file.originalname; // original file name
-  var file = request.file.path; // real file path with temporary name
+  console.log(request.files);
 
-  // renaming real file to it's original name
-  fs.rename(file, uploadsFolder + description +'-'+style+'.jpg', function (err) {
-  // fs.rename(file, uploadsFolder + fileName, function (err) {
-    if (err) {
-      console.log(err);
-      response.json({success:false, message: err});
-      return;
-    }
+  // // renaming real file to it's original name
+  // fs.rename(file, uploadsFolder + description +'-'+style+'.jpg', function (err) {
+  // // fs.rename(file, uploadsFolder + fileName, function (err) {
+  //   if (err) {
+  //     console.log(err);
+  //     response.json({success:false, message: err});
+  //     return;
+  //   }
 
-    response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
-  });
+  //   response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
+  // });
 
 });
 

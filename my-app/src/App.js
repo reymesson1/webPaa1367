@@ -244,21 +244,26 @@ class App extends Component {
 
       // event.preventDefault();
 
+      this.setState({
+        productLoadingModal: true,
+        productLoadingModalLabel: "Loading...."
+      })
+
       // for(var x=0;x<event.target.files.length;x++){
       let nextState = this.state.images;
 
       if (event.target.files && event.target.files[0]) {
-        for(var x=0;x<2;x++){
-          let img = event.target.files[x];
-          nextState.push(img);
+        // for(var x=0;x<2;x++){
+          // let img = event.target.files;
+          // nextState.push(img);
           // console.log(event.target.files[x].name);
-        }
+        // }
       }
 
       if (event.target.files && event.target.files[0]) {
-        let img = event.target.files[0];
+        let img = event.target.files;
         this.setState({
-          image: img,
+          image: img, 
           images: nextState,
           file: URL.createObjectURL(event.target.files[0]),
           fileName: event.target.files[0].name
@@ -274,11 +279,6 @@ class App extends Component {
       }, 50000);
 
  
-      // this.setState({
-      //   productLoadingModal: true,
-      //   productLoadingModalLabel: "Loading...."
-      // })
-
       // if (event.target.files && event.target.files[0]) {
       //   let img = event.target.files[0];
       //   this.setState({
@@ -308,76 +308,71 @@ class App extends Component {
       data.append("price", event.target.price.value);
       data.append("company", event.target.company.value);
       data.append("style", event.target.style.value);
-      data.append("single-file", this.state.image);
-
-      console.log(data)
-      console.log(replaced)
+      data.append("single-file", this.state.images);
 
       axios({
           url: API_URL+'/createproduct',
           method: "POST",
           headers: {
-            authorization: 'done'              
+            authorization: 'done'
           },
           data: data
       }).then((res)=>{
 
       });
 
-      if(event.target.description.value==""){
+      // if(event.target.description.value==""){
 
-        this.setState({
-          productLoadingModal: true,
-          productLoadingModalLabel: "Style Number field couldn't be empty"
-        })
+      //   this.setState({
+      //     productLoadingModal: true,
+      //     productLoadingModalLabel: "Style Number field couldn't be empty"
+      //   })
 
-        setTimeout(() => {
+      //   setTimeout(() => {
 
           this.setState({
             productLoadingModal: false
           })  
           
-        }, 5000);
-
-      }else{
+      // }else{
 
 
-        let newProduct = {
+      //   let newProduct = {
 
-          "id": Date.now(),
-          "description": replaced,
-          "price": event.target.price.value,
-          "company": event.target.company.value,
-          "style": event.target.style.value,  
-          "companystyle": event.target.companystyle.value,  
-          "category": event.target.category.value,  
-          "priceopt": event.target.priceopt.value,  
-          "notes": event.target.notes.value,  
-          "hidden": false,  
-          "image": replaced +'-'+ event.target.style.value + '.jpg' 
-        }
+      //     "id": Date.now(),
+      //     "description": replaced,
+      //     "price": event.target.price.value,
+      //     "company": event.target.company.value,
+      //     "style": event.target.style.value,  
+      //     "companystyle": event.target.companystyle.value,  
+      //     "category": event.target.category.value,  
+      //     "priceopt": event.target.priceopt.value,  
+      //     "notes": event.target.notes.value,  
+      //     "hidden": false,  
+      //     "image": replaced +'-'+ event.target.style.value + '.jpg' 
+      //   }
   
-        fetch(API_URL+'/createproduct2', {
+      //   fetch(API_URL+'/createproduct2', {
   
-          method: 'post',
-          headers: API_HEADERS,
-          body: JSON.stringify(newProduct)
-        })
+      //     method: 'post',
+      //     headers: API_HEADERS,
+      //     body: JSON.stringify(newProduct)
+      //   })
   
   
-        console.log('create new product from App.js')
+      //   console.log('create new product from App.js')
   
-        this.setState({
-          productHiddenBtn: true
-        })
+      //   this.setState({
+      //     productHiddenBtn: true
+      //   })
   
-        setTimeout(() => {
-          window.location.reload()
-        }, 2000);
+      //   setTimeout(() => {
+      //     window.location.reload()
+      //   }, 2000);
 
 
 
-      }
+      // }
 
 
 
