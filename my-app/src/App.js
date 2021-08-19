@@ -263,7 +263,7 @@ class App extends Component {
         this.setState({
           productLoadingModal: false
         })  
-      }, 50000);
+      }, 90000);
   
 
     }
