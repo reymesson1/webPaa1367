@@ -43,6 +43,7 @@ class App extends Component {
           newest: true,
           filterText: "",
           image: "",
+          images: [],
           orders:[{
             id : "0001",
             orderDetails:[],
@@ -70,9 +71,7 @@ class App extends Component {
       fetch(API_URL+'/product')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
-
                 products: responseData
             })
         })
@@ -83,7 +82,6 @@ class App extends Component {
         fetch(API_URL+'/style')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
 
                 styles: responseData
@@ -96,7 +94,6 @@ class App extends Component {
         fetch(API_URL+'/companies')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
 
                 companies: responseData
@@ -109,7 +106,6 @@ class App extends Component {
         fetch(API_URL+'/gethiddenmode')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData.hidden);
             this.setState({
 
                 onHiddenMode: responseData.hidden
@@ -154,13 +150,6 @@ class App extends Component {
 
       let nextState = this.state.orders;
 
-      // let parseId = JSON.parse(event.target.value);
-
-      console.log(event.target.value);
-
-      console.log(this.state.orders);
-
-      // console.log(parseId)
 
       nextState[0].orderDetails.splice(0,1);
 
@@ -245,15 +234,15 @@ class App extends Component {
  
       this.setState({
         productLoadingModal: true,
-        productLoadingModalLabel: "Loading...."
-
-
+        productLoadingModalLabel: "Loading....",
+        fileUploaded: true
       })
 
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
         this.setState({
           image: img,
+          images: event.target.files,
           file: URL.createObjectURL(event.target.files[0]),
           fileName: event.target.files[0].name
         });  
@@ -263,7 +252,7 @@ class App extends Component {
         this.setState({
           productLoadingModal: false
         })  
-      }, 50000);
+      }, 120000);
   
 
     }
@@ -279,8 +268,11 @@ class App extends Component {
       data.append("price", event.target.price.value);
       data.append("company", event.target.company.value);
       data.append("style", event.target.style.value);
-      data.append("single-file", this.state.image);
 
+      for (let i = 0; i < this.state.images.length; i++) {
+        data.append('single-file', this.state.images[i])
+      }
+    
       console.log(data)
       console.log(replaced)
 
@@ -312,6 +304,12 @@ class App extends Component {
 
       }else{
 
+        let imagesArr = [];
+
+        for (let i = 0; i < this.state.images.length; i++) {  
+           imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
+        }
+  
 
         let newProduct = {
 
@@ -325,7 +323,8 @@ class App extends Component {
           "priceopt": event.target.priceopt.value,  
           "notes": event.target.notes.value,  
           "hidden": false,  
-          "image": replaced +'-'+ event.target.style.value + '.jpg' 
+          "image": replaced +'-'+ event.target.style.value + '-0.jpg',
+          "images": imagesArr
         }
   
         fetch(API_URL+'/createproduct2', {
