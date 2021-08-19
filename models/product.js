@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
     priceopt: String,
     notes: String,
     hidden: Boolean,
-    image: String
+    image: String,
+    images: Array
 })
 
 module.exports = mongoose.model('Product', userSchema)

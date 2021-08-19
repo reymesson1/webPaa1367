@@ -246,7 +246,8 @@ class App extends Component {
  
       this.setState({
         productLoadingModal: true,
-        productLoadingModalLabel: "Loading...."
+        productLoadingModalLabel: "Loading....",
+        fileUploaded: true
       })
 
       if (event.target.files && event.target.files[0]) {
@@ -263,7 +264,7 @@ class App extends Component {
         this.setState({
           productLoadingModal: false
         })  
-      }, 90000);
+      }, 120000);
   
 
     }
@@ -279,11 +280,7 @@ class App extends Component {
       data.append("price", event.target.price.value);
       data.append("company", event.target.company.value);
       data.append("style", event.target.style.value);
-      // data.append("single-file", this.state.images);
 
-      // for (let i = 0; i < this.state.images.length; i++) {
-      //   data.append(`images[${i}]`, this.state.images[i])
-      // }
       for (let i = 0; i < this.state.images.length; i++) {
         data.append('single-file', this.state.images[i])
       }
@@ -319,6 +316,12 @@ class App extends Component {
 
       }else{
 
+        let imagesArr = [];
+
+        for (let i = 0; i < this.state.images.length; i++) {  
+           imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
+        }
+  
 
         let newProduct = {
 
@@ -332,8 +335,13 @@ class App extends Component {
           "priceopt": event.target.priceopt.value,  
           "notes": event.target.notes.value,  
           "hidden": false,  
-          "image": replaced +'-'+ event.target.style.value + '.jpg' 
+          "image": replaced +'-'+ event.target.style.value + '-0.jpg',
+          "images": imagesArr
         }
+
+        console.log(newProduct);
+
+        console.log(this.state.images);
   
         fetch(API_URL+'/createproduct2', {
   
