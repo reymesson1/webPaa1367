@@ -343,7 +343,8 @@ class App extends Component {
         })
   
         setTimeout(() => {
-          window.location.reload()
+          // window.location.reload()
+          window.location.href = '/'
         }, 2000);
 
 
