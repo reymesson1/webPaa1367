@@ -22,8 +22,8 @@ import CreateCompanyComponent from './CreateCompanyComponent';
 import CategoryComponent from './CategoryComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -37,12 +37,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
           image: "",
+          images: [],
           orders:[{
             id : "0001",
             orderDetails:[],
@@ -242,28 +243,56 @@ class App extends Component {
     onCreateProductUpload(event){
 
       // event.preventDefault();
- 
-      this.setState({
-        productLoadingModal: true,
-        productLoadingModalLabel: "Loading...."
 
+      // for(var x=0;x<event.target.files.length;x++){
+      let nextState = this.state.images;
 
-      })
+      if (event.target.files && event.target.files[0]) {
+        for(var x=0;x<2;x++){
+          let img = event.target.files[x];
+          nextState.push(img);
+          // console.log(event.target.files[x].name);
+        }
+      }
 
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
         this.setState({
           image: img,
+          images: nextState,
           file: URL.createObjectURL(event.target.files[0]),
           fileName: event.target.files[0].name
         });  
       }
+
+      console.log(this.state.images);
 
       setTimeout(() => {
         this.setState({
           productLoadingModal: false
         })  
       }, 50000);
+
+ 
+      // this.setState({
+      //   productLoadingModal: true,
+      //   productLoadingModalLabel: "Loading...."
+      // })
+
+      // if (event.target.files && event.target.files[0]) {
+      //   let img = event.target.files[0];
+      //   this.setState({
+      //     image: img,
+      //     file: URL.createObjectURL(event.target.files[0]),
+      //     fileName: event.target.files[0].name
+      //   });  
+      // }
+
+      // setTimeout(() => {
+      //   this.setState({
+      //     productLoadingModal: false
+      //   })  
+      // }, 50000);
   
 
     }
