@@ -338,10 +338,6 @@ class App extends Component {
           "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
-
-        console.log(newProduct);
-
-        console.log(this.state.images);
   
         fetch(API_URL+'/createproduct2', {
   

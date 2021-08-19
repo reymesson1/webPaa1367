@@ -57,24 +57,24 @@ app.post('/createproduct', upload.array('single-file'), function(request, respon
   console.log(request.files);
 
 
-  var err = 0;
+  var errorcode = 0;
   for (var i = 0; i < request.files.length; i++) {
 
-      // fs.rename(request.files[i], uploadsFolder + description +'-'+style+'-'+i+'.jpg', function (err) {
       fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'-'+i+'.jpg', function (err) {  //working fine
       // fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'.jpg', function (err) {
+        errorcode=err
       });
-
-      if (err) {
-        console.log(err);
-        response.json({success:false, message: err});
-        // return res.sendStatus(200).json({ data: result });
-        return;
-      }
-
-      response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
-
   }
+
+  if (errorcode) {
+    console.log(err);
+    response.json({success:false, message: err});
+    // return res.sendStatus(200).json({ data: result });
+    return;
+  }
+
+  response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
+
 
 
   // // renaming real file to it's original name
