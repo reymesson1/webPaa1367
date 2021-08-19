@@ -39,29 +39,20 @@ app.post('/editproduct', productController.editProduct);
 
 app.post('/deleteproduct', productController.deleteProduct);
 
-// app.post('/createproduct', upload.single('single-file'), function(request, response) {
 app.post('/createproduct', upload.array('single-file'), function(request, response) {
 
   response.setHeader("Content-Type", "text/html");
 
-  console.log(request.body)
-
   var description = request.body.description;
   var style = request.body.style;
 
-  // var fileName = request.file.originalname; // original file name
-  // var file = request.file.path; // real file path with temporary name
   var fileName = request.files[0].originalname; // original file name
   var file = request.files[0].path; // real file path with temporary name
-
-  console.log(request.files);
-
 
   var errorcode = 0;
   for (var i = 0; i < request.files.length; i++) {
 
       fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'-'+i+'.jpg', function (err) {  //working fine
-      // fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'.jpg', function (err) {
         errorcode=err
       });
   }
@@ -69,25 +60,10 @@ app.post('/createproduct', upload.array('single-file'), function(request, respon
   if (errorcode) {
     console.log(err);
     response.json({success:false, message: err});
-    // return res.sendStatus(200).json({ data: result });
     return;
   }
 
   response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
-
-
-
-  // // renaming real file to it's original name
-  // fs.rename(file, uploadsFolder + description +'-'+style+'.jpg', function (err) {
-  // // fs.rename(file, uploadsFolder + fileName, function (err) {
-  //   if (err) {
-  //     console.log(err);
-  //     response.json({success:false, message: err});
-  //     return;
-  //   }
-
-  //   response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
-  // });
 
 });
 

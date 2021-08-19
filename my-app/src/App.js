@@ -22,8 +22,8 @@ import CreateCompanyComponent from './CreateCompanyComponent';
 import CategoryComponent from './CategoryComponent';
 import  axios  from 'axios'
 
-let API_URL = "http://localhost:8085";
-// let API_URL = "http://143.198.171.44:8085";
+// let API_URL = "http://localhost:8085";
+let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -37,8 +37,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        // URLExternal: 'http://143.198.171.44:8085', 
-          URLExternal: 'http://localhost:8085',
+        URLExternal: 'http://143.198.171.44:8085', 
+          // URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -71,9 +71,7 @@ class App extends Component {
       fetch(API_URL+'/product')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
-
                 products: responseData
             })
         })
@@ -84,7 +82,6 @@ class App extends Component {
         fetch(API_URL+'/style')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
 
                 styles: responseData
@@ -97,7 +94,6 @@ class App extends Component {
         fetch(API_URL+'/companies')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
 
                 companies: responseData
@@ -110,7 +106,6 @@ class App extends Component {
         fetch(API_URL+'/gethiddenmode')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData.hidden);
             this.setState({
 
                 onHiddenMode: responseData.hidden
@@ -155,13 +150,6 @@ class App extends Component {
 
       let nextState = this.state.orders;
 
-      // let parseId = JSON.parse(event.target.value);
-
-      console.log(event.target.value);
-
-      console.log(this.state.orders);
-
-      // console.log(parseId)
 
       nextState[0].orderDetails.splice(0,1);
 
