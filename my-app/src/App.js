@@ -22,8 +22,8 @@ import CreateCompanyComponent from './CreateCompanyComponent';
 import CategoryComponent from './CategoryComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -37,12 +37,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
           image: "",
+          images: [],
           orders:[{
             id : "0001",
             orderDetails:[],
@@ -246,14 +247,13 @@ class App extends Component {
       this.setState({
         productLoadingModal: true,
         productLoadingModalLabel: "Loading...."
-
-
       })
 
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
         this.setState({
           image: img,
+          images: event.target.files,
           file: URL.createObjectURL(event.target.files[0]),
           fileName: event.target.files[0].name
         });  
@@ -279,8 +279,15 @@ class App extends Component {
       data.append("price", event.target.price.value);
       data.append("company", event.target.company.value);
       data.append("style", event.target.style.value);
-      data.append("single-file", this.state.image);
+      // data.append("single-file", this.state.images);
 
+      // for (let i = 0; i < this.state.images.length; i++) {
+      //   data.append(`images[${i}]`, this.state.images[i])
+      // }
+      for (let i = 0; i < this.state.images.length; i++) {
+        data.append('single-file', this.state.images[i])
+      }
+    
       console.log(data)
       console.log(replaced)
 

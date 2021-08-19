@@ -54,11 +54,11 @@ class CreateProductComponent extends Component {
         let hiddenBtnCheck;
 
         if(this.props.fileUploaded){
-            showUpload = <Input type="file" style={{'display':'none'}} name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
             showUpload = <label> Image selected </label>
 
         }else{
-            showUpload = <Input type="file" name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
         }
 
         if(!this.props.productHiddenBtn){
