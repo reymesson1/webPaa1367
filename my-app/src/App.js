@@ -640,7 +640,8 @@ class App extends Component {
                   match 
               }) => (
                   <ProductDetailComponent match={match}
-                    URLExternal={this.state.URLExternal}   
+                    URLExternal={this.state.URLExternal}  
+                    products={this.state.products} 
                   />
               )} 
     />
