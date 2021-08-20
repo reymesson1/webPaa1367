@@ -250,19 +250,12 @@ class App extends Component {
         });  
       }
 
-      if(event.target.files.length<=2){
-        setTimeout(() => {
-          this.setState({
-            productLoadingModal: false
-          })  
-        }, 50000);
-      }else{
-        setTimeout(() => {
-          this.setState({
-            productLoadingModal: false
-          })  
-        }, 120000);
-      }
+
+      setTimeout(() => {
+        this.setState({
+          productLoadingModal: false
+        })  
+      }, 120000);
 
     }
     onCreateProduct(event){
@@ -350,12 +343,10 @@ class App extends Component {
           productHiddenBtn: true
         })
   
-        setTimeout(() => {
-          // window.location.reload()
-          window.location.href = '/'
-        }, 2000);
-
-
+        // setTimeout(() => {
+        //   // window.location.reload()
+        //   window.location.href = '/'
+        // }, 15000);
 
       }
 
