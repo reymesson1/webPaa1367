@@ -197,7 +197,9 @@ class Product extends Component {
                                                 <td>
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                        
+                                                            {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
+                                                            
+                                                            <Link className="btn btn-primary" to={'/editproduct/'+data.id} >Edit</Link>                                                        
                                                         </div>
                                                         <div className="col-md-6">
                                                             <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} >Delete</button>                                                        

@@ -37,6 +37,8 @@ app.post('/createproduct2', productController.setMaster);
 
 app.post('/editproduct', productController.editProduct);
 
+app.post('/defaultimage', productController.editPictureProduct);
+
 app.post('/deleteproduct', productController.deleteProduct);
 
 app.post('/createproduct', upload.array('single-file'), function(request, response) {

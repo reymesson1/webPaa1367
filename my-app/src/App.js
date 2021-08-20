@@ -20,9 +20,10 @@ import CreateProductComponent from './CreateProductComponent';
 import CreateStyleComponent from './CreateStyleComponent';
 import CreateCompanyComponent from './CreateCompanyComponent';
 import CategoryComponent from './CategoryComponent';
+import EditProductComponent from './EditProductComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
+// let API_URL = "http://localhost:8085"; 
 let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
@@ -59,7 +60,8 @@ class App extends Component {
           productLoadingModalLabel: "Loading...",
           onHiddenMode: true,
           file: null,
-          fileName: ""
+          fileName: "",
+          defaultImageSelected: {}
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -248,12 +250,19 @@ class App extends Component {
         });  
       }
 
-      setTimeout(() => {
-        this.setState({
-          productLoadingModal: false
-        })  
-      }, 120000);
-  
+      if(event.target.files.length<=2){
+        setTimeout(() => {
+          this.setState({
+            productLoadingModal: false
+          })  
+        }, 50000);
+      }else{
+        setTimeout(() => {
+          this.setState({
+            productLoadingModal: false
+          })  
+        }, 120000);
+      }
 
     }
     onCreateProduct(event){
@@ -456,10 +465,15 @@ class App extends Component {
         "id": event.target.id.value,
         "description": event.target.description.value,
         "price": event.target.price.value,
+        "priceopt": event.target.priceopt.value,
         "company": event.target.company.value,
+        "companystyle": event.target.companystyle.value,
         "category": event.target.category.value,
-        "style": event.target.style.value
+        "style": event.target.style.value,
+        "notes": event.target.notes.value
       }
+
+      console.log(editProduct);
 
       fetch(API_URL+'/editproduct', {
 
@@ -549,7 +563,38 @@ class App extends Component {
 
     }
 
+    imageClickEdit = (dataImage, dataId) => {
+      // console.log(dataImage.id);//id product
+      // console.log(dataId);//image name
+      let objSelected = {
+        "productId": dataImage.id,
+        "name": dataId
+      }
+      let nextState = this.state.products.filter(
 
+        (data, index) => data.id.indexOf(dataImage.id) !== -1
+      );
+      nextState[0].image = dataId
+      this.setState({
+        products: nextState,
+        defaultImageSelected: objSelected
+      })
+      // console.log(nextState);
+    }
+
+    defaultImageSelectedFunc(){
+
+      console.log(this.state.defaultImageSelected);
+
+      fetch(API_URL+'/defaultimage', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(this.state.defaultImageSelected)
+      })
+
+
+    }
 
     render(){
       
@@ -644,7 +689,35 @@ class App extends Component {
                     products={this.state.products} 
                   />
               )} 
-    />
+          />
+         <Route 
+              path="/editproduct/:id" 
+              location={this.props.location} 
+              render={({ 
+                  location, 
+                  match 
+              }) => (
+                  <EditProductComponent match={match}
+                    URLExternal={this.state.URLExternal}  
+                    products={this.state.products} 
+                    onCreateProduct={this.onCreateProduct.bind(this)}
+                    onCreateProductUpload={this.onCreateProductUpload.bind(this)}
+                    fileUploaded={this.state.fileUploaded}
+                    styles={this.state.styles}
+                    companies={this.state.companies}
+                    productHiddenBtn={this.state.productHiddenBtn}
+                    onCreateCompany={this.onCreateCompany.bind(this)}
+                    onCreateStyle={this.onCreateStyle.bind(this)}
+                    file={this.state.file}
+                    fileName={this.state.fileName}
+                    productLoadingModal={this.state.productLoadingModal}
+                    productLoadingModalLabel={this.state.productLoadingModalLabel}
+                    onEditProduct={this.onEditProduct.bind(this)} 
+                    imageClickEdit={this.imageClickEdit.bind(this)}
+                    defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
+                  />
+              )} 
+          />
           <Route path="/product" component= {() => <Product
                     URLExternal={this.state.URLExternal}
                     products={this.state.products} 
