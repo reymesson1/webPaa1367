@@ -343,10 +343,10 @@ class App extends Component {
           productHiddenBtn: true
         })
   
-        // setTimeout(() => {
-        //   // window.location.reload()
-        //   window.location.href = '/'
-        // }, 15000);
+        setTimeout(() => {
+          // window.location.reload()
+          window.location.href = '/'
+        }, 50000);
 
       }
 
