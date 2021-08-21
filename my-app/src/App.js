@@ -23,8 +23,8 @@ import CategoryComponent from './CategoryComponent';
 import EditProductComponent from './EditProductComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085"; 
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085"; 
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -38,8 +38,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -573,6 +573,32 @@ class App extends Component {
       // console.log(nextState);
     }
 
+    imageClickDetails = (dataImage, dataId) => {
+
+      let objSelected = {
+        "productId": dataImage.id,
+        "name": dataId
+      }
+      let nextState = this.state.products.filter(
+
+        (data, index) => data.id.indexOf(dataImage.id) !== -1
+      );
+
+      // nextState[0].image = dataId
+      nextState[0].image = "rings-gold-small-Style4-3.jpg"
+
+      console.log(nextState);
+      console.log(dataId);
+
+      // this.setState({
+      //   products: nextState
+      // })
+
+
+    }
+
+
+
     defaultImageSelectedFunc(){
 
       console.log(this.state.defaultImageSelected);
@@ -678,6 +704,7 @@ class App extends Component {
                   <ProductDetailComponent match={match}
                     URLExternal={this.state.URLExternal}  
                     products={this.state.products} 
+                    imageClickDetails={this.imageClickDetails.bind(this)} 
                   />
               )} 
           />

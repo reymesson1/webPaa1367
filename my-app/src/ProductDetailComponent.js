@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProductDetailComponent extends Component {
 
@@ -41,6 +42,8 @@ class ProductDetailComponent extends Component {
 
             (data, index) => data.image.indexOf(this.props.match.params.id) !== -1 
         );
+
+        console.log(filterData);
         
         return(
             <div className="container">
@@ -58,7 +61,13 @@ class ProductDetailComponent extends Component {
                                 {filterData[0].images.map(
                                     (data, index) =>
                                     <div className="col-md-3">
-                                        <img onClick={this.onClicked.bind(this)} src={this.props.URLExternal+"/images/"+data} ></img>
+                                        {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filterData[0],data)}> */}
+                                        {/* <button className="btn btn-white" onClick={this.props.imageClickDetails.bind(this,filterData[0],data)}> */}
+                                        {/* <button className="btn btn-white"> */}
+                                        <Link to={'/productdetail/'+data}>
+                                            <img src={this.props.URLExternal+"/images/"+data} ></img>
+                                        </Link>
+                                        {/* </button> */}
                                     </div>                                         
                                 )}
                             </div>
