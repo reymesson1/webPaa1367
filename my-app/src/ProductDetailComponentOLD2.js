@@ -27,24 +27,6 @@ class ProductDetailComponent extends Component {
         }
     }
 
-    componentDidMount(){
-
-        let filteredData = this.props.products.filter(
-
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
-        );
-
-        this.setState({
-            descriptionValue: filteredData[0].description,
-            companystyleValue: filteredData[0].companystyle,
-            priceValue: filteredData[0].price,
-            priceoptValue: filteredData[0].priceopt,
-            notesValue: filteredData[0].notes,
-        })
-
-    }
-
-
     toggleModal = () => {
         this.setState({
             newCompanyModal: !this.state.newCompanyModal
@@ -116,29 +98,21 @@ class ProductDetailComponent extends Component {
 
         let filteredData = this.props.products.filter(
 
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            (data, index) => data.image.indexOf(this.props.match.params.id) !== -1
         );
-        let filteredDataCompany = this.props.companies.filter(
 
-            (data, index) => data.description.indexOf(filteredData[0].company) !== -1
-        );
-        let filteredDataStyle = this.props.styles.filter(
+        console.log(this.props.match.params.id);
 
-            (data, index) => data.description.indexOf(filteredData[0].style) !== -1
-        );
+        console.log(this.props.products);
+
+        console.log(filteredData);
         
         return(
             <div className="container">
-                <br/>
                 <div className="row">
-                    <div className="col-md-2"></div>
-                    <div className="col-md-8">
-                        <div className="row">
-                            <img src={this.props.URLExternal+'/images/'+filteredData[0].image} style={{'height':'20%', 'width':'20%'}} />
-                        </div>
-                        <br/>
-                        <br/>
-                        <div className="row">
+                    <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                </div>
+                <div className="row">
                         {filteredData[0].images.map(
                                     (data, index) =>
                                     <div className="col-md-3">
@@ -148,10 +122,9 @@ class ProductDetailComponent extends Component {
                                         </button>
                                     </div>                                         
                         )}
-                        </div>
-                    </div>
-                    <div className="col-md-2"></div>
                 </div>
+
+
             </div>
         );
     }

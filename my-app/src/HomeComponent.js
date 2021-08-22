@@ -64,7 +64,7 @@ class HomeComponent extends Component {
         const menu = filterData.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-3">
-                    <Link to={'/productdetail/'+product.image}> 
+                    <Link to={'/productdetail/'+product.id}> 
                         <div className="card" style={{'margin':'5%'}}>
                                 {/* <img src={"http://localhost:3000/book.png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://localhost:3000/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}

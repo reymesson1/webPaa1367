@@ -182,7 +182,7 @@ class Product extends Component {
                         (data, index) => 
                                             <tr>
                                                 <td style={{"width":"12%","height":"12%"}}>
-                                                    <Link to={'/productdetail/'+data.image}> 
+                                                    <Link to={'/productdetail/'+data.id}> 
                                                         <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
                                                     </Link>
                                                 </td>
