@@ -139,6 +139,89 @@ exports.setHidden = async(req,res)=>{
 
   let product = await Product.updateMany({}, {"$set":{"hidden": reverse}});
 
+}
 
+exports.getMasterIpad = async(req,res)=>{
+
+  let data = {
+
+    "error": false,
+    "message": "successfully",
+    "data": [
+      {
+      "id": "1",
+      "title": "testing",
+      "post": "newData"
+    },{
+      "id": "2",
+      "title": "testing",
+      "post": "newData"
+    }]
+  }
+
+  let products = await Product.find({})
+
+  
+  let data2 = {
+
+    "error": false,
+    "message": "successfully",
+    "data": products
+  }
+  
+  res.send(data2);
+
+
+  // res.send(data);
+}
+
+exports.setMasterIpad = async(req,res)=>{
+
+  console.log(req.body);
+
+  var obj = req.body;
+
+  let data = {
+
+    "error": false,
+    "message": "successfully",
+    "data": [
+      {
+      "id": "1",
+      "title": "testing",
+      "post": "newData"
+    },{
+      "id": "2",
+      "title": "testing",
+      "post": "newData"
+    }]
+  }
+
+
+  let products;
+
+  if(obj.company!=''){
+
+    products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
+  } else if(obj.companystyle!=''){
+
+    products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
+  }
+
+
+
+  
+  let data2 = {
+
+    "error": false,
+    "message": "successfully",
+    "data": products
+  }
+  
+  res.send(data2);
+
+
+
+  // res.send(data);
 
 }

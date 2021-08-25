@@ -33,6 +33,10 @@ app.get('/restaurants', masterController.getMaster);
 
 app.get('/product', productController.getMaster);
 
+app.get('/posts', productController.getMasterIpad);
+
+app.post('/createpost', productController.setMasterIpad);
+
 app.post('/createproduct2', productController.setMaster);
 
 app.post('/editproduct', productController.editProduct);
