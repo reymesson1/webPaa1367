@@ -166,7 +166,68 @@ exports.getMasterIpad = async(req,res)=>{
 
     "error": false,
     "message": "successfully",
-    "data": products
+    "data": [
+      {
+        "id": "1629658342738",
+        "description": "rings-new-water-point",
+        "price": "",
+        "company": "Company1",
+        "style": "Style1",
+        "companystyle": "",
+        "category": "Bracelet",
+        "priceopt": "",
+        "notes": "4 pics",
+        "hidden": false,
+        "image": "rings-new-water-point-Style1-0.jpg",
+        "images": products
+
+      },
+      {
+        "id": "1629658342738",
+        "description": "rings-new-water-point",
+        "price": "",
+        "company": "Company1",
+        "style": "Style1",
+        "companystyle": "",
+        "category": "RM",
+        "priceopt": "",
+        "notes": "4 pics",
+        "hidden": false,
+        "image": "rings-new-water-point-Style1-0.jpg",
+        "images": products
+
+      },
+      {
+        "id": "1629658342738",
+        "description": "rings-new-water-point",
+        "price": "",
+        "company": "Company1",
+        "style": "Style1",
+        "companystyle": "",
+        "category": "Rings",
+        "priceopt": "",
+        "notes": "4 pics",
+        "hidden": false,
+        "image": "rings-new-water-point-Style1-0.jpg",
+        "images": products
+
+      },
+      {
+        "id": "1629658342738",
+        "description": "rings-new-water-point",
+        "price": "",
+        "company": "Company1",
+        "style": "Style1",
+        "companystyle": "",
+        "category": "Pendant",
+        "priceopt": "",
+        "notes": "4 pics",
+        "hidden": false,
+        "image": "rings-new-water-point-Style1-0.jpg",
+        "images": products
+
+      },
+    ]
   }
   
   res.send(data2);
@@ -215,7 +276,21 @@ exports.setMasterIpad = async(req,res)=>{
 
     "error": false,
     "message": "successfully",
-    "data": products
+    "data": [{
+      "id": "1629658342738",
+      "description": "rings-new-water-point",
+      "price": "",
+      "company": "Company1",
+      "style": "Style1",
+      "companystyle": "",
+      "category": "Bracelet",
+      "priceopt": "",
+      "notes": "4 pics",
+      "hidden": false,
+      "image": "rings-new-water-point-Style1-0.jpg",
+      "images": products
+
+    }]
   }
   
   res.send(data2);
