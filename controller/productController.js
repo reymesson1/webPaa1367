@@ -197,7 +197,19 @@ exports.setMasterIpad = async(req,res)=>{
     }]
   }
 
-  let products = await Product.find({"company" : { $regex: '.*' + obj.title + '.*' }  })
+
+  let products;
+
+  if(obj.company!=''){
+
+    products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
+  } else if(obj.companystyle!=''){
+
+    products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
+  }
+
+
+
   
   let data2 = {
 
