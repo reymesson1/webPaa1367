@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProductDetailComponent extends Component {
 
@@ -43,7 +44,14 @@ class ProductDetailComponent extends Component {
         );
         
         return(
-            <div className="container">
+            <div className="container">                
+                <br/>
+                <div className="row">
+                    <div className="col-md-4"></div>
+                    <div className="col-md-8">
+                        <Link className="btn btn-primary" to={'/editproduct/'+filterData[0].id} >Edit</Link>                                                        
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-md-8">
                         <div className="card" style={{'margin':'5%'}}>
