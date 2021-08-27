@@ -61,7 +61,8 @@ class App extends Component {
           onHiddenMode: true,
           file: null,
           fileName: "",
-          defaultImageSelected: {}
+          defaultImageSelected: {},
+          progressImage: 0
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -234,11 +235,11 @@ class App extends Component {
 
       // event.preventDefault();
  
-      this.setState({
-        productLoadingModal: true,
-        productLoadingModalLabel: "Loading....",
-        fileUploaded: true
-      })
+      // this.setState({
+      //   productLoadingModal: true,
+      //   productLoadingModalLabel: "Loading....",
+      //   fileUploaded: true
+      // })
 
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
@@ -251,16 +252,23 @@ class App extends Component {
       }
 
 
-      setTimeout(() => {
-        this.setState({
-          productLoadingModal: false
-        })  
-      }, 120000);
+      // setTimeout(() => {
+      //   this.setState({
+      //     productLoadingModal: false
+      //   })  
+      // }, 120000);
 
     }
     onCreateProduct(event){
 
       event.preventDefault(); 
+
+      this.setState({
+        productLoadingModal: true,
+        productLoadingModalLabel: "Loading....",
+        // fileUploaded: true
+      })
+
 
       let trimDescription = event.target.description.value;
       let replaced = trimDescription.split(' ').join('');
@@ -275,19 +283,41 @@ class App extends Component {
         data.append('single-file', this.state.images[i])
       }
     
-      console.log(data)
-      console.log(replaced)
+      // console.log(data)
+      // console.log(replaced)
 
-      axios({
-          url: API_URL+'/createproduct',
-          method: "POST",
-          headers: {
-            authorization: 'done'              
-          },
-          data: data
+      // axios({
+      //     url: API_URL+'/createproduct',
+      //     method: "POST",
+      //     headers: {
+      //       authorization: 'done'              
+      //     },
+      //     data: data
+      // }).then((res)=>{
+
+      // });
+
+      axios.post(API_URL+'/createproduct', data, {
+        onUploadProgress: ProgressEvent =>{
+          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+          // this.setState({
+          //   productLoadingModalLabel: "Loading.... " + dataProgress + "%"
+          // })  
+          if(dataProgress == 100){
+
+            this.setState({
+              productLoadingModal: false
+            })  
+  
+
+
+          }
+        }
       }).then((res)=>{
-
+        console.log(res);
       });
+
 
       if(event.target.description.value==""){
 
@@ -339,14 +369,14 @@ class App extends Component {
   
         console.log('create new product from App.js')
   
-        this.setState({
-          productHiddenBtn: true
-        })
+        // this.setState({
+        //   productHiddenBtn: true
+        // })
   
-        setTimeout(() => {
-          // window.location.reload()
-          window.location.href = '/'
-        }, 50000);
+        // setTimeout(() => {
+        //   // window.location.reload()
+        //   window.location.href = '/'
+        // }, 50000);
 
       }
 
@@ -452,6 +482,12 @@ class App extends Component {
 
       event.preventDefault();
 
+      this.setState({
+        productLoadingModal: true,
+        productLoadingModalLabel: "Loading....",
+        // fileUploaded: true
+      })
+
       let trimDescription = event.target.description.value;
       let replaced = trimDescription.split(' ').join('');
 
@@ -473,16 +509,36 @@ class App extends Component {
         data.append('single-file', this.state.images[i])
       }
 
-      axios({
-          url: API_URL+'/editpictureproduct',
-          method: "POST",
-          headers: {
-            authorization: 'done'              
-          },
-          data: data
-      }).then((res)=>{
+      // axios({
+      //     url: API_URL+'/editpictureproduct',
+      //     method: "POST",
+      //     headers: {
+      //       authorization: 'done'              
+      //     },
+      //     data: data
+      // }).then((res)=>{
 
+      // });
+      axios.post(API_URL+'/editpictureproduct', data, {
+        onUploadProgress: ProgressEvent =>{
+          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+
+          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+          // this.setState({
+          //   productLoadingModalLabel: "Loading.... " + dataProgress + "%"
+          // })  
+          if(dataProgress == 100){
+
+            this.setState({
+              productLoadingModal: false
+            })  
+          }
+
+        }
+      }).then((res)=>{
+        console.log(res);
       });
+
 
       replacedImages.push(newImage);
 
