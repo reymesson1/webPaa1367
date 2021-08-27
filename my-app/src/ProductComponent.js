@@ -64,7 +64,7 @@ class Product extends Component {
 
         let filteredData = this.props.products.filter(
 
-            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         );
         
         return(
