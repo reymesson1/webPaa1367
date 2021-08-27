@@ -452,6 +452,18 @@ class App extends Component {
 
       event.preventDefault();
 
+      let trimDescription = event.target.description.value;
+      let replaced = trimDescription.split(' ').join('');
+
+      let trimImages = event.target.images.value;
+      let replacedImages = trimImages.split(',');
+
+      let imagesLen = replacedImages.length;
+
+      let newImage = replaced +'-'+ event.target.style.value + '-'+ imagesLen +'.jpg';
+
+      replacedImages.push(newImage);
+
       let editProduct = {
         "id": event.target.id.value,
         "description": event.target.description.value,
@@ -461,10 +473,10 @@ class App extends Component {
         "companystyle": event.target.companystyle.value,
         "category": event.target.category.value,
         "style": event.target.style.value,
-        "notes": event.target.notes.value
+        "notes": event.target.notes.value,
+        "image": newImage,
+        "images": replacedImages,
       }
-
-      console.log(editProduct);
 
       fetch(API_URL+'/editproduct', {
 
@@ -624,6 +636,44 @@ class App extends Component {
 
     }
 
+    onEditAddPicture(dataImage, dataId){
+
+      console.log(dataImage);
+      console.log(dataId);
+      // let nextState = this.state.products.filter(
+
+      //   (data, index) => data.id.indexOf(dataImage.id) !== -1
+      // );
+
+      // let nextStateFilter = nextState[0].images.filter(
+
+      //   (data, index) => data.indexOf(dataId) !== 0
+      // );
+
+      // nextState[0].images = nextStateFilter
+
+      // this.setState({
+      //   products: nextState
+      // })
+
+      // let objSelected = {
+      //   "productId": dataImage.id,
+      //   "name": dataId,
+      //   "images": nextStateFilter
+      // }
+
+
+
+      // fetch(API_URL+'/editdeletepicture', {
+
+      //   method: 'post',
+      //   headers: API_HEADERS,
+      //   body: JSON.stringify(objSelected)
+      // })
+
+    }
+
+
     render(){
       
       return (
@@ -744,6 +794,7 @@ class App extends Component {
                     onEditDeletePicture={this.onEditDeletePicture.bind(this)}
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
+                    onEditAddPicture={this.onEditAddPicture.bind(this)}
                   />
               )} 
           />

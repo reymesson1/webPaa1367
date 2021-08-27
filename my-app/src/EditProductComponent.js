@@ -24,6 +24,8 @@ class EditProductComponent extends Component {
             companystyleValue: "",
             priceValue: "",
             priceoptValue: "",
+            notesValue: "",
+            imagesValue: [],
         }
     }
 
@@ -40,6 +42,7 @@ class EditProductComponent extends Component {
             priceValue: filteredData[0].price,
             priceoptValue: filteredData[0].priceopt,
             notesValue: filteredData[0].notes,
+            imagesValue: filteredData[0].images,
         })
 
     }
@@ -107,6 +110,12 @@ class EditProductComponent extends Component {
             notesValue: value
         })      
     }
+    onChangeImagesValue(value){
+        // console.log(event.target.description.value);
+        this.setState({
+            imagesValue: value
+        })      
+    }
 
     imageClick = (data) => {
         console.log(data);
@@ -129,6 +138,17 @@ class EditProductComponent extends Component {
         
         return(
             <div className="container">
+                <Modal isOpen={this.props.productLoadingModal}>
+                    <ModalHeader>
+                    <p>Message</p>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>{this.props.productLoadingModalLabel}</h5>
+                        </div>
+                    </ModalBody>
+                </Modal>
+
                 <br/>
                 <div className="row">
                     <div className="col-md-4">
@@ -163,8 +183,16 @@ class EditProductComponent extends Component {
                     <div className="col-md-8">
                     <br/>
                     <br/>
+                    <div className="row">
+                    </div>
                     <Form onSubmit={this.props.onEditProduct.bind(this)} enctype="multipart/form-data" >
                         {/* <Form > */}
+                            <FormGroup row>
+                                <Label for="description" sm={2}>&nbsp;</Label>
+                                <Col sm={10}>
+                                <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+                                </Col>
+                            </FormGroup>
                             <FormGroup row>
                                 <Col sm={10}>
                                 <Input type="text" style={{'display':'none'}} name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled />
@@ -225,6 +253,11 @@ class EditProductComponent extends Component {
                                 <Label for="notes" sm={2}>Notes</Label>
                                 <Col sm={10}>
                                 <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Col sm={10}>
+                                <Input type="textarea" style={{'display':'none'}} name="images" id="images" placeholder="Images" onChange={e => this.onChangeImagesValue(e.target.value)} value={this.state.imagesValue} disabled />
                                 </Col>
                             </FormGroup>
                             <br/>

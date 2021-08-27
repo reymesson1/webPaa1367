@@ -93,10 +93,15 @@ exports.editProduct = async(req,res)=>{
     master.category = obj.category,
     master.style = obj.style,
     master.notes = obj.notes
+    master.images.push( obj.image );
     master.save(function(err,m){
       console.log("Product Edit updated");
     })
   })
+
+  console.log(obj);
+
+  // res.send(product);
 
 }
 
@@ -117,14 +122,12 @@ exports.editDeletePicture = async(req,res)=>{
 
   var obj = req.body;
 
-  var product = await Product.findOne({"id":obj.id},function(err,master){
-    master.images = obj.images
+  var product = await Product.findOne({"id":obj.productId},function(err,master){
+    master.images.pull( obj.name );
     master.save(function(err,m){
-      console.log("Product Edit updated");
+      console.log("Product Edit delete picture");
     })
   })
-
-  console.log(obj);
 
   res.send(product);
 }
