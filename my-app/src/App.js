@@ -23,8 +23,8 @@ import CategoryComponent from './CategoryComponent';
 import EditProductComponent from './EditProductComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085"; 
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085"; 
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -38,8 +38,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -587,6 +587,43 @@ class App extends Component {
 
     }
 
+    onEditDeletePicture(dataImage, dataId){
+
+      console.log(dataImage);
+      console.log(dataId);
+      let nextState = this.state.products.filter(
+
+        (data, index) => data.id.indexOf(dataImage.id) !== -1
+      );
+
+      let nextStateFilter = nextState[0].images.filter(
+
+        (data, index) => data.indexOf(dataId) !== 0
+      );
+
+      nextState[0].images = nextStateFilter
+
+      this.setState({
+        products: nextState
+      })
+
+      let objSelected = {
+        "productId": dataImage.id,
+        "name": dataId,
+        "images": nextStateFilter
+      }
+
+
+
+      fetch(API_URL+'/editdeletepicture', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(objSelected)
+      })
+
+    }
+
     render(){
       
       return (
@@ -704,6 +741,7 @@ class App extends Component {
                     productLoadingModal={this.state.productLoadingModal}
                     productLoadingModalLabel={this.state.productLoadingModalLabel}
                     onEditProduct={this.onEditProduct.bind(this)} 
+                    onEditDeletePicture={this.onEditDeletePicture.bind(this)}
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
                   />

@@ -113,6 +113,23 @@ exports.deleteProduct = async(req,res)=>{
   res.send(product);
 }
 
+exports.editDeletePicture = async(req,res)=>{
+
+  var obj = req.body;
+
+  var product = await Product.findOne({"id":obj.id},function(err,master){
+    master.images = obj.images
+    master.save(function(err,m){
+      console.log("Product Edit updated");
+    })
+  })
+
+  console.log(obj);
+
+  res.send(product);
+}
+
+
 exports.setPagination = async(req,res)=>{
 
     var obj = req.body;

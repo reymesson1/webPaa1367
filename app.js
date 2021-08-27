@@ -41,6 +41,8 @@ app.post('/createproduct2', productController.setMaster);
 
 app.post('/editproduct', productController.editProduct);
 
+app.post('/editdeletepicture', productController.editDeletePicture);
+
 app.post('/defaultimage', productController.editPictureProduct);
 
 app.post('/deleteproduct', productController.deleteProduct);

@@ -148,9 +148,14 @@ class EditProductComponent extends Component {
                                     (data, index) =>
                                     <div className="col-md-3">
                                         {/* <button className="btn btn-white" onClick={this.imageClick.bind(this,data)}> */}
-                                        <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
-                                        <img src={this.props.URLExternal+"/images/"+data}  />                                        
-                                        </button>
+                                        <div className="row">
+                                            <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
+                                                <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                
+                                            </button>
+                                        </div>
+                                        <div className="row">
+                                            <button className="btn btn-danger" onClick={this.props.onEditDeletePicture.bind(this, filteredData[0],data)} >Delete</button>
+                                        </div>
                                     </div>                                         
                         )}
                         </div>
