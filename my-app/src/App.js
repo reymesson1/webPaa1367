@@ -464,7 +464,8 @@ class App extends Component {
       console.log('create new company from App.js')
     }
 
-    onEditProduct(event,id){
+    // onEditProduct(event,id){
+    onEditProduct = event =>{
 
       event.preventDefault();
 
@@ -472,7 +473,7 @@ class App extends Component {
       data.append('image', this.state.selectedFile, this.state.selectedFile.name)
       axios.post(API_URL+'/editpictureproduct', data, {
         onUploadProgress: ProgressEvent =>{
-          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+          console.log('Progress ' + Math.round(  (ProgressEvent.loaded / ProgressEvent.total) * 100 ) + '%');
         }
       }).then((res)=>{
 
