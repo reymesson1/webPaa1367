@@ -462,6 +462,31 @@ class App extends Component {
 
       let newImage = replaced +'-'+ event.target.style.value + '-'+ imagesLen +'.jpg';
 
+      const data = new FormData();
+      data.append("description", replaced);
+      data.append("price", event.target.price.value);
+      data.append("company", event.target.company.value);
+      data.append("style", event.target.style.value);
+      data.append("newimage", newImage);
+
+      for (let i = 0; i < this.state.images.length; i++) {
+        data.append('single-file', this.state.images[i])
+      }
+    
+      console.log(data)
+      console.log(replaced)
+
+      axios({
+          url: API_URL+'/editpictureproduct',
+          method: "POST",
+          headers: {
+            authorization: 'done'              
+          },
+          data: data
+      }).then((res)=>{
+
+      });
+
       replacedImages.push(newImage);
 
       let editProduct = {
