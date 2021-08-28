@@ -264,9 +264,10 @@ class App extends Component {
       event.preventDefault(); 
 
       this.setState({
-        productLoadingModal: true,
+        // productLoadingModal: true,
         productLoadingModalLabel: "Loading....",
-        // fileUploaded: true
+        fileUploaded: true,
+        productHiddenBtn: true
       })
 
 
@@ -301,15 +302,14 @@ class App extends Component {
         onUploadProgress: ProgressEvent =>{
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-          // this.setState({
-          //   productLoadingModalLabel: "Loading.... " + dataProgress + "%"
-          // })  
+          this.setState({
+            productLoadingModalLabel:  dataProgress
+          })  
           if(dataProgress == 100){
 
             this.setState({
-              productLoadingModal: false
+              productHiddenBtn: false             
             })  
-  
 
 
           }

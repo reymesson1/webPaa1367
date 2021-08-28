@@ -4,7 +4,7 @@ import { Media, Panel,   Card,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter } from 'reactstrap';
+    ModalFooter, Progress } from 'reactstrap';
 
 class CreateProductComponent extends Component {
 
@@ -55,7 +55,7 @@ class CreateProductComponent extends Component {
 
         if(this.props.fileUploaded){
             showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <label> Image selected </label>
+            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel+'%'} </div> 
 
         }else{
             showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
