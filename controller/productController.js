@@ -161,7 +161,80 @@ exports.setHidden = async(req,res)=>{
 
 }
 
-exports.getMasterIpad = async(req,res)=>{
+exports.getMasterIpadFilter = async(req,res)=>{
+
+    // productBracelet["image2"] = 
+    var productBracelet = await Product.find({category:'Bracelet'});
+    var productRM = await Product.find({category:'RM'});
+    var productRings = await Product.find({category:'Rings'});
+    var productPendant = await Product.find({category:'pendant'});
+    var productPins = await Product.find({category:'Pins'});
+    var productNecklace = await Product.find({category:'Necklace'});
+    var productEarings = await Product.find({category:'Earings'});
+    var productWatches = await Product.find({category:'Watches'});
+    var productFilter = await Product.find({"category":"Necklace"});
+  
+    let data = {
+  
+      "error": false,
+      "message": "successfully",
+      "data": 
+      [
+        {
+         "id":"0",
+         "category":"Bracelets",
+         "items": productBracelet
+        },
+        {
+         "id":"1",
+         "category":"RM",
+         "items": productRM
+        },
+        {
+         "id":"2",
+         "category":"Rings",
+         "items": productRings
+        },
+        {
+         "id":"3",
+         "category":"Pendant",
+         "items": productPendant
+        },
+        {
+         "id":"4",
+         "category":"Pings",
+         "items": productPins
+        },
+        {
+         "id":"5",
+         "category":"Necklace",
+         "items": productNecklace
+        },
+        {
+         "id":"6",
+         "category":"Earings",
+         "items": productEarings
+        },
+        {
+         "id":"7",
+         "category":"Watches",
+         "items": productWatches
+        },
+        {
+         "id":"8",
+         "category":"Filter",
+         "items": productFilter
+        },
+       
+       ]
+    
+    }
+  
+    res.send(data);
+
+}
+
+  exports.getMasterIpad = async(req,res)=>{
 
 
   // productBracelet["image2"] = 
