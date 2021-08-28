@@ -161,6 +161,21 @@ exports.setHidden = async(req,res)=>{
 
 }
 
+exports.getMasterIpadFilter = async(req,res)=>{
+
+  var product = await Product.find({});
+
+  let data = {
+
+    "error": false,
+    "message": "successfully",
+    "data": product
+  }
+  
+  res.send(data);
+
+}
+
 exports.getMasterIpad = async(req,res)=>{
 
 
@@ -232,46 +247,48 @@ exports.setMasterIpad = async(req,res)=>{
 
   console.log(req.body);
 
-  var obj = req.body;
-
-  let data = {
-
-    "error": false,
-    "message": "successfully",
-    "data": [
-      {
-      "id": "1",
-      "title": "testing",
-      "post": "newData"
-    },{
-      "id": "2",
-      "title": "testing",
-      "post": "newData"
-    }]
-  }
+  // var obj = req.body;
 
 
-  let products;
 
-  if(obj.company!=''){
+  // let data = {
 
-    products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
-  } else if(obj.companystyle!=''){
+  //   "error": false,
+  //   "message": "successfully",
+  //   "data": [
+  //     {
+  //     "id": "1",
+  //     "title": "testing",
+  //     "post": "newData"
+  //   },{
+  //     "id": "2",
+  //     "title": "testing",
+  //     "post": "newData"
+  //   }]
+  // }
 
-    products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
-  }
+
+  // let products;
+
+  // if(obj.company!=''){
+
+  //   products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
+  // } else if(obj.companystyle!=''){
+
+  //   products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
+  // }
 
 
 
   
-  let data2 = {
+  // let data2 = {
 
-    "error": false,
-    "message": "successfully",
-    "data": products
-  }
+  //   "error": false,
+  //   "message": "successfully",
+  //   "data": products
+  // }
   
-  res.send(data2);
+  // res.send(data2);
 
 
 
