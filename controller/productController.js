@@ -164,7 +164,15 @@ exports.setHidden = async(req,res)=>{
 exports.getMasterIpad = async(req,res)=>{
 
 
+  // productBracelet["image2"] = 
   var productBracelet = await Product.find({category:'Bracelet'});
+  var productRM = await Product.find({category:'RM'});
+  var productRings = await Product.find({category:'Rings'});
+  var productPendant = await Product.find({category:'pendant'});
+  var productPins = await Product.find({category:'Pins'});
+  var productNecklace = await Product.find({category:'Necklace'});
+  var productEarings = await Product.find({category:'Earings'});
+  var productWatches = await Product.find({category:'Watches'});
 
   let data = {
 
@@ -180,155 +188,42 @@ exports.getMasterIpad = async(req,res)=>{
       {
        "id":"1",
        "category":"RM",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productRM
       },
       {
        "id":"2",
        "category":"Rings",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productRings
       },
       {
        "id":"3",
        "category":"Pendant",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productPendant
       },
       {
        "id":"4",
        "category":"Pings",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productPins
       },
       {
        "id":"5",
        "category":"Necklace",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productNecklace
       },
       {
        "id":"6",
        "category":"Earings",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productEarings
       },
       {
        "id":"7",
        "category":"Watches",
-       "items":[
-       {
-         "id": "1629658342738",
-         "description": "rings-new-water-point",
-         "price": "",
-         "company": "Company1",
-         "style": "Style1",
-         "companystyle": "",
-         "category": "rm",
-         "priceopt": "",
-         "notes": "4 pics",
-         "hidden": false,
-         "image": "rings-new-water-point-Style1-4.jpg"
-       }
-       ]
+       "items": productWatches
       },
      
      ]
   
   }
-
-
-
-  // let products = await Product.find({})
-
-  
-  // let data2 = {
-
-  //   "error": false,
-  //   "message": "successfully",
-  //   "data": products
-  // }
-  
-  // res.send(data2);
-
 
   res.send(data);
 }

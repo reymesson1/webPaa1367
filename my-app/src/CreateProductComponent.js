@@ -198,11 +198,13 @@ class CreateProductComponent extends Component {
                             <Col sm={10}>
                                 <Input type="select" name="category" id="category" placeholder="Category" >
                                     <option>{'Bracelet'}</option>
+                                    <option>{'RM'}</option>
                                     <option>{'Rings'}</option>
-                                    <option>{'Necklace'}</option>
                                     <option>{'Pendant'}</option>
-                                    <option>{'Crowns'}</option>
-                                    <option>{'Gems'}</option>
+                                    <option>{'Pins'}</option>
+                                    <option>{'Necklace'}</option>
+                                    <option>{'Earings'}</option>
+                                    <option>{'Watches'}</option>
                             </Input>
                             </Col>
                         </FormGroup>
