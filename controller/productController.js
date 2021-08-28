@@ -163,36 +163,174 @@ exports.setHidden = async(req,res)=>{
 
 exports.getMasterIpad = async(req,res)=>{
 
+
+  var productBracelet = await Product.find({category:'Bracelet'});
+
   let data = {
 
     "error": false,
     "message": "successfully",
-    "data": [
+    "data": 
+    [
       {
-      "id": "1",
-      "title": "testing",
-      "post": "newData"
-    },{
-      "id": "2",
-      "title": "testing",
-      "post": "newData"
-    }]
+       "id":"0",
+       "category":"Bracelets",
+       "items": productBracelet
+      },
+      {
+       "id":"1",
+       "category":"RM",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"2",
+       "category":"Rings",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"3",
+       "category":"Pendant",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"4",
+       "category":"Pings",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"5",
+       "category":"Necklace",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"6",
+       "category":"Earings",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+      {
+       "id":"7",
+       "category":"Watches",
+       "items":[
+       {
+         "id": "1629658342738",
+         "description": "rings-new-water-point",
+         "price": "",
+         "company": "Company1",
+         "style": "Style1",
+         "companystyle": "",
+         "category": "rm",
+         "priceopt": "",
+         "notes": "4 pics",
+         "hidden": false,
+         "image": "rings-new-water-point-Style1-4.jpg"
+       }
+       ]
+      },
+     
+     ]
+  
   }
 
-  let products = await Product.find({})
+
+
+  // let products = await Product.find({})
 
   
-  let data2 = {
+  // let data2 = {
 
-    "error": false,
-    "message": "successfully",
-    "data": products
-  }
+  //   "error": false,
+  //   "message": "successfully",
+  //   "data": products
+  // }
   
-  res.send(data2);
+  // res.send(data2);
 
 
-  // res.send(data);
+  res.send(data);
 }
 
 exports.setMasterIpad = async(req,res)=>{
