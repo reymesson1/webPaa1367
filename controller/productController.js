@@ -161,7 +161,8 @@ exports.setHidden = async(req,res)=>{
 
 }
 
-exports.setMasterIpadFilter = async(req,res)=>{
+
+  exports.setMasterIpadFilter = async(req,res)=>{
 
   console.log(req.body);
 
@@ -336,50 +337,12 @@ exports.setMasterIpad = async(req,res)=>{
 
     res.send(data);
 
+}
 
-  // var obj = req.body;
+exports.setFilterAPIUI = async(req,res)=>{
 
-  // let data = {
+  var product = await Product.find({})
 
-  //   "error": false,
-  //   "message": "successfully",
-  //   "data": [
-  //     {
-  //     "id": "1",
-  //     "title": "testing",
-  //     "post": "newData"
-  //   },{
-  //     "id": "2",
-  //     "title": "testing",
-  //     "post": "newData"
-  //   }]
-  // }
-
-
-  // let products;
-
-  // if(obj.company!=''){
-
-  //   products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
-  // } else if(obj.companystyle!=''){
-
-  //   products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
-  // }
-
-
-
-  
-  // let data2 = {
-
-  //   "error": false,
-  //   "message": "successfully",
-  //   "data": products
-  // }
-  
-  // res.send(data2);
-
-
-
-  // res.send(data);
+  res.send(product);
 
 }

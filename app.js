@@ -124,6 +124,8 @@ app.get('/gethiddenmode', productController.getHidden);
 
 app.post('/onhiddenmode', productController.setHidden);
 
+app.post('/filterapiui', productController.setFilterAPIUI);
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');

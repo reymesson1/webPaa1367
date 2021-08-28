@@ -31,6 +31,11 @@ class CategoryComponent extends Component {
             <div className="container">
                 <br/>
                 <div className="row">
+                <Link to={'/filter'}> 
+                    <h5>Filter</h5>
+                </Link>
+                </div>
+                <div className="row">
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
                             <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
