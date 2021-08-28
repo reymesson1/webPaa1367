@@ -92,6 +92,7 @@ class CreateStyleComponent extends Component {
                         <FormGroup row>
                             <Col sm={10}>
                             <Input type="select" name="company" id="company" placeholder="Company Name" >
+                                <option>{''}</option>
                                 {this.props.companies.map( 
                                     (data,index) => <option>{data.description}</option>
                                 )}
@@ -106,6 +107,7 @@ class CreateStyleComponent extends Component {
                         <FormGroup row>
                             <Col sm={10}>
                             <Input type="select" name="style" id="style" placeholder="Style" >
+                                    <option>{''}</option>
                                 {this.props.styles.map( 
                                     (data,index) => <option>{data.description}</option>
                                 )}

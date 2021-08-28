@@ -341,8 +341,26 @@ exports.setMasterIpad = async(req,res)=>{
 
 exports.setFilterAPIUI = async(req,res)=>{
 
-  var product = await Product.find({})
+  var obj = req.body;
+  // var productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }, "companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }   })
 
-  res.send(product);
+  var productFilter
+  
+  if(obj.newFilter.company!==''){
+
+    productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  })
+  }else if(obj.newFilter.companystyle!==''){
+
+    productFilter = await Product.find({"companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }  })
+  }else if(obj.newFilter.style!==''){
+
+    productFilter = await Product.find({"style" : { $regex: '.*' + obj.newFilter.style + '.*' }  })
+  }else if(obj.newFilter.price!==''&& obj.newFilter.priceopt!==''){
+
+    productFilter = await Product.find({"price" : { $gte: obj.newFilter.style }  })
+  }
+
+
+  res.send(productFilter);
 
 }
