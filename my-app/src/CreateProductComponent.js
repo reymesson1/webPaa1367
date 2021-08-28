@@ -6,6 +6,9 @@ import { Media, Panel,   Card,
     ModalBody,
     ModalFooter } from 'reactstrap';
 
+import { Progress } from 'reactstrap';
+import LoadingModalComponent from './LoadingModalComponent'; 
+
 class CreateProductComponent extends Component {
 
     constructor(props) {
@@ -48,6 +51,11 @@ class CreateProductComponent extends Component {
         // console.log('open modal');
     }
 
+    // componentDidUpdate(){
+    //     console.log(this.props.loadingMessage);
+    //     console.log(this.props.loadingMessage);
+    // }
+
     render() {
 
         let showUpload;
@@ -78,7 +86,11 @@ class CreateProductComponent extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <h5>{this.props.productLoadingModalLabel}</h5>
+                            <LoadingModalComponent/>
+                            {/* <div>{this.props.productLoadingModalLabel+'%'}</div>
+                            <Progress value={this.props.productLoadingModalLabel} /> */}
+                            {/* <Progress value={this.props.productLoadingModalLabel} /> */}
+                            {/* <h5>{this.props.productLoadingModalLabel}</h5> */}
                         </div>
                     </ModalBody>
                 </Modal>

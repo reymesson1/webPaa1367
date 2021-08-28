@@ -67,6 +67,8 @@ class App extends Component {
 
         this.toggleModal = this.toggleModal.bind(this);
 
+        this.loadingMessage = 0
+
     }
 
     componentDidMount(){
@@ -264,8 +266,8 @@ class App extends Component {
       event.preventDefault(); 
 
       this.setState({
-        productLoadingModal: true,
-        productLoadingModalLabel: "Loading....",
+        // productLoadingModal: true,
+        // productLoadingModalLabel: "Loading....",
         // fileUploaded: true
       })
 
@@ -300,10 +302,12 @@ class App extends Component {
       axios.post(API_URL+'/createproduct', data, {
         onUploadProgress: ProgressEvent =>{
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
-          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-          // this.setState({
-          //   productLoadingModalLabel: "Loading.... " + dataProgress + "%"
-          // })  
+          let dataProgress = Math.round(  (ProgressEvent.loaded / ProgressEvent.total) * 100 );
+          // this.loadingMessage = dataProgress
+          this.setState({
+            productLoadingModalLabel: dataProgress+""
+          })  
+
           if(dataProgress == 100){
 
             this.setState({
@@ -823,6 +827,7 @@ class App extends Component {
                       fileName={this.state.fileName}
                       productLoadingModal={this.state.productLoadingModal}
                       productLoadingModalLabel={this.state.productLoadingModalLabel}
+                      loadingMessage={this.loadingMessage}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
