@@ -173,6 +173,7 @@ exports.getMasterIpad = async(req,res)=>{
   var productNecklace = await Product.find({category:'Necklace'});
   var productEarings = await Product.find({category:'Earings'});
   var productWatches = await Product.find({category:'Watches'});
+  var productFilter = await Product.find({});
 
   let data = {
 
@@ -220,6 +221,11 @@ exports.getMasterIpad = async(req,res)=>{
        "category":"Watches",
        "items": productWatches
       },
+      {
+       "id":"8",
+       "category":"Filter",
+       "items": productFilter
+      },
      
      ]
   
@@ -230,48 +236,69 @@ exports.getMasterIpad = async(req,res)=>{
 
 exports.setMasterIpad = async(req,res)=>{
 
-  console.log(req.body);
+    var obj = req.body;
 
-  var obj = req.body;
+    console.log(obj);
 
-  let data = {
+    var productFilter = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
 
-    "error": false,
-    "message": "successfully",
-    "data": [
-      {
-      "id": "1",
-      "title": "testing",
-      "post": "newData"
-    },{
-      "id": "2",
-      "title": "testing",
-      "post": "newData"
-    }]
-  }
+    let data = {
+      
+      "error": false,
+      "message": "successfully",
+      "data": 
+        [
+          {
+          "id":"8",
+          "category":"Filter",
+          "items": productFilter
+          }
+        ]
+    }
+
+    res.send(data);
 
 
-  let products;
+  // var obj = req.body;
 
-  if(obj.company!=''){
+  // let data = {
 
-    products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
-  } else if(obj.companystyle!=''){
+  //   "error": false,
+  //   "message": "successfully",
+  //   "data": [
+  //     {
+  //     "id": "1",
+  //     "title": "testing",
+  //     "post": "newData"
+  //   },{
+  //     "id": "2",
+  //     "title": "testing",
+  //     "post": "newData"
+  //   }]
+  // }
 
-    products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
-  }
+
+  // let products;
+
+  // if(obj.company!=''){
+
+  //   products = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
+  // } else if(obj.companystyle!=''){
+
+  //   products = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
+  // }
 
 
 
   
-  let data2 = {
+  // let data2 = {
 
-    "error": false,
-    "message": "successfully",
-    "data": products
-  }
+  //   "error": false,
+  //   "message": "successfully",
+  //   "data": products
+  // }
   
-  res.send(data2);
+  // res.send(data2);
 
 
 
