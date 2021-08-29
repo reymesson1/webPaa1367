@@ -358,11 +358,6 @@ class App extends Component {
           "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
-
-        this.setState({
-          products: nextState
-        })
-
   
         fetch(API_URL+'/createproduct2', {
   
