@@ -45,6 +45,8 @@ class EditProductComponent extends Component {
             imagesValue: filteredData[0].images,
         })
 
+        this.props.onEditCloseModal();
+
     }
 
 
@@ -169,6 +171,7 @@ class EditProductComponent extends Component {
                     </ModalBody>
                     <ModalFooter>  
                         <div className="col-md-12">
+                            {/* <button className="btn btn-success" onClick={this.props.onEditCloseModal.bind(this)}  >Close</button> */}
                             <Link className="btn btn-success" to={'/'}>Go Home</Link>
                         </div>
                         <div className="col-md-">

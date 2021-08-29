@@ -679,6 +679,15 @@ class App extends Component {
 
     }
 
+    onEditCloseModal(event){
+
+      this.setState({
+        productLoadingModal: false
+      })
+
+
+    }
+
     render(){
       
       return (
@@ -837,6 +846,7 @@ class App extends Component {
                     onEditDeletePicture={this.onEditDeletePicture.bind(this)}
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
+                    onEditCloseModal={this.onEditCloseModal.bind(this)}
                   />
               )} 
           />
