@@ -52,6 +52,8 @@ class CreateStyleComponent extends Component {
 
     render() {
 
+        let count = this.state.filterAPI.length
+
         const menu = this.state.filterAPI.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-5">
@@ -129,6 +131,13 @@ class CreateStyleComponent extends Component {
                     <div className="col-md-7">
                         <div className="row">
                             {menu}
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4">
+                                <p>{count}</p>
+                            </div>
+                            <div className="col-md-4"></div>
                         </div>
 
                     </div>

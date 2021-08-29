@@ -36,8 +36,9 @@ exports.getMaster = async(req,res)=>{
     //       // .then((v) => res.send(v)  )
     // )
 
-      let products = await Product.find({})
-  
+      let products = await Product.find({}).limit(5).skip(0)
+
+      // > db.products.find({}).limit(5).skip(10).pretty()
       res.send(products);
   
   
@@ -348,7 +349,8 @@ exports.setFilterAPIUI = async(req,res)=>{
   
   if(obj.newFilter.company!==''){
 
-    productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  })
+    productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  }).limit(5).skip(10)
+    // > db.products.find({}).limit(5).skip(10).pretty()
   }else if(obj.newFilter.companystyle!==''){
 
     productFilter = await Product.find({"companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }  })
