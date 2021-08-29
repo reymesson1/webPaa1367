@@ -60,6 +60,12 @@ class Product extends Component {
         })
     }
 
+    onClicked(){
+        window.location.href = '/createproduct'
+    }
+
+
+
     render() {
 
         let filteredData = this.props.products.filter(
@@ -158,7 +164,8 @@ class Product extends Component {
                         <h1>&nbsp;</h1>
                     </div>
                     <div className="col-md-6">
-                        <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link>
+                        {/* <Link className="btn btn-dark" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link> */}
+                        <div className="btn btn-dark" onClick={this.onClicked.bind(this)} style={{'width':'100%'}}  >Create a New Product</div>
                     </div>
                 </div>
                 <div className="row">

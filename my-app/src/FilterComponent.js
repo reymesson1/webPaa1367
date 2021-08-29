@@ -23,12 +23,6 @@ class CreateStyleComponent extends Component {
 
         event.preventDefault();
 
-        console.log(event.target.company.value);
-        console.log(event.target.companystyle.value);
-        console.log(event.target.style.value);
-        console.log(event.target.price.value);
-        console.log(event.target.priceopt.value);
-
         var newFilter = {
             
             "company": event.target.company.value,
