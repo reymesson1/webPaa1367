@@ -1,30 +1,48 @@
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class ProductDetailComponent extends Component {
+class ProductDetailZoomComponent extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            newCompanyModal: false,
-            newStyleModal: false,
-            newLoadingModal: true,
-            descriptionValue: "",
-            companystyleValue: "",
-            priceValue: "",
-            priceoptValue: "",
-            notesValue: "",
-            imagesValue: [],
+            id: 0,
+            backgroundImage: `url(${this.props.URLExternal+'"/images/"+ '+ this.props.match.params.id})`,
+            backgroundPosition: '0% 0%',
+            src: this.props.URLExternal+"/images/"+ this.props.match.params.id
         }
     }
-  
+
+    componentDidMount(){
+        this.setState({
+            id: this.props.match.params.id,
+            backgroundImage: `url(${this.props.URLExternal+"/images/"+ this.props.match.params.id})`,
+        });
+
+
+    }
+
+    handleMouseMove = e => {
+        const { left, top, width, height } = e.target.getBoundingClientRect()
+        const x = (e.pageX - left) / width * 100
+        const y = (e.pageY - top) / height * 100
+        this.setState({ backgroundPosition: `${x}% ${y}%` })
+    }
+
+    onClicked(event){
+
+        console.log(event);
+    }
+    
+
     render() {
 
-        let filteredData = this.props.products.filter(
+        let filterData = this.props.products.filter(
 
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            (data, index) => data.image.indexOf(this.props.match.params.id) !== -1 
         );
+
 
         let style 
             
@@ -36,53 +54,57 @@ class ProductDetailComponent extends Component {
         
         let notes 
 
-        if(filteredData[0].hidden){
+        if(filterData[0].hidden){
             
-            style = filteredData[0].style
+            style = filterData[0].style
             
-            company = filteredData[0].company 
+            company = filterData[0].company 
             
-            companyStyle = filteredData[0].companystyle
+            companyStyle = filterData[0].companystyle
             
-            category = filteredData[0].category
+            category = filterData[0].category
             
-            notes = filteredData[0].notes
+            notes = filterData[0].notes
         }
+        
         return(
-            <div className="container">
-
+            <div className="container">                
                 <br/>
                 <div className="row">
-                    <div className="col-md-1"></div>
-                    <div className="col-md-4">
-                        <div className="row">
-                            <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div className="row">
-                        {filteredData[0].images.map(
+                    <div className="col-md-4"></div>
+                    <div className="col-md-8">
+                        <Link className="btn btn-primary" to={'/editproduct/'+filterData[0].id} >Edit</Link>                                                        
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-8">
+                        <div className="card" style={{'margin':'5%'}}>
+                            <div className="row">
+                                <div className="col-md-7">
+                                    <figure onMouseMove={this.handleMouseMove} style={this.state}>
+                                        <img src={this.state.src} alt="Avatar" style={{"width":"100%","height":"100%"}} />
+                                    </figure>
+                                </div>
+                            </div>
+                            <div className="row">
+                                {filterData[0].images.map(
                                     (data, index) =>
                                     <div className="col-md-3">
-                                        <div className="row">
-                                            <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
-                                                <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                
-                                            </button>
-                                        </div>
+                                        <img onClick={this.onClicked.bind(this)} src={this.props.URLExternal+"/images/"+data} ></img>
                                     </div>                                         
-                        )}
+                                )}
+                            </div>
                         </div>
                     </div>
-                    <div className="col-md-1"></div>
                     <div className="col-md-4">
-
+                        <br/>
                         <br/>
                         <div className="row">
                             <div className="col-md-6">
                                 <h4>Style Number:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filteredData[0].description}</p>
+                                <p>{filterData[0].description}</p>
                             </div>
                         </div>
                         <br/>
@@ -118,7 +140,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Price:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filteredData[0].price}</p>
+                                <p>{filterData[0].price}</p>
                             </div>
                         </div>
                         <br/>
@@ -127,7 +149,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Price Opt:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filteredData[0].priceopt}</p>
+                                <p>{filterData[0].priceopt}</p>
                             </div>
                         </div>
                         <br/>
@@ -150,16 +172,10 @@ class ProductDetailComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-2"></div>
-
-                <br/>
-                <br/>
-                <br/> 
             </div>
-
         );
     }
 
 }
 
-export default ProductDetailComponent; 
+export default ProductDetailZoomComponent; 

@@ -791,6 +791,22 @@ class App extends Component {
                   <ProductDetailComponent match={match}
                     URLExternal={this.state.URLExternal}  
                     products={this.state.products} 
+                    onCreateProduct={this.onCreateProduct.bind(this)}
+                    onCreateProductUpload={this.onCreateProductUpload.bind(this)}
+                    fileUploaded={this.state.fileUploaded}
+                    styles={this.state.styles}
+                    companies={this.state.companies}
+                    productHiddenBtn={this.state.productHiddenBtn}
+                    onCreateCompany={this.onCreateCompany.bind(this)}
+                    onCreateStyle={this.onCreateStyle.bind(this)}
+                    file={this.state.file}
+                    fileName={this.state.fileName}
+                    productLoadingModal={this.state.productLoadingModal}
+                    productLoadingModalLabel={this.state.productLoadingModalLabel}
+                    onEditProduct={this.onEditProduct.bind(this)} 
+                    onEditDeletePicture={this.onEditDeletePicture.bind(this)}
+                    imageClickEdit={this.imageClickEdit.bind(this)}
+                    defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
                   />
               )} 
           />
