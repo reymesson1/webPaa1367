@@ -128,7 +128,7 @@ class EditProductComponent extends Component {
         
         if(this.props.fileUploaded){
             showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel+'%'} </div> 
+            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel} </div> 
 
         }else{
             showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
@@ -164,9 +164,16 @@ class EditProductComponent extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <h5>{this.props.productLoadingModalLabel}</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;{ this.props.productLoadingModalLabel}</h5>
                         </div>
                     </ModalBody>
+                    <ModalFooter>  
+                        <div className="col-md-12">
+                            <Link className="btn btn-success" to={'/'}>Go Home</Link>
+                        </div>
+                        <div className="col-md-">
+                        </div>
+                    </ModalFooter>
                 </Modal>
 
                 <br/>

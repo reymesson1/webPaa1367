@@ -5,6 +5,8 @@ import { Media, Panel,   Card,
     ModalHeader,
     ModalBody,
     ModalFooter, Progress } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 class CreateProductComponent extends Component {
 
@@ -13,7 +15,8 @@ class CreateProductComponent extends Component {
         this.state = {
             newCompanyModal: false,
             newStyleModal: false,
-            newLoadingModal: true
+            newLoadingModal: true,
+            productHiddenBtn: true
         }
     }
 
@@ -45,7 +48,27 @@ class CreateProductComponent extends Component {
 
             newStyleModal: true
         })
-        // console.log('open modal');
+    }
+
+    onChangeDescription(value){
+
+        if(value.length>0){
+
+            this.setState({
+                productHiddenBtn: false
+            })
+        }else{
+
+            this.setState({
+                productHiddenBtn: true
+            })
+        }
+
+    }
+
+    onGotoCreateProduct(event){
+        
+        window.location.reload();
     }
 
     render() {
@@ -55,18 +78,18 @@ class CreateProductComponent extends Component {
 
         if(this.props.fileUploaded){
             showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel+'%'} </div> 
+            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel} </div> 
 
         }else{
             showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
         }
 
-        if(!this.props.productHiddenBtn){
+        if(!this.state.productHiddenBtn){
 
             hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
         }else{
             
-            hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
         
@@ -78,7 +101,25 @@ class CreateProductComponent extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <h5>{this.props.productLoadingModalLabel}</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;{this.props.productLoadingModalLabel}</h5>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>  
+                        <div className="col-md-0">
+                            <Link className="btn btn-success" to={'/product'}>Go Back</Link>
+                        </div>
+                        <div className="col-md-offset'2">
+                            <button className="btn btn-success" onClick={this.onGotoCreateProduct.bind(this)}>Create Product</button>
+                        </div>
+                    </ModalFooter>                    
+                </Modal>
+                <Modal isOpen={this.props.productLoadingModalMessageError}>
+                    <ModalHeader>
+                    <p>Message</p>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>{this.props.productLoadingModalMessageErrorLabel}</h5>
                         </div>
                     </ModalBody>
                 </Modal>
@@ -172,7 +213,7 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="description" sm={2}>Style Number</Label>
                             <Col sm={10}>
-                            <Input type="text" name="description" id="description" placeholder="Style Number" />
+                            <Input type="text" name="description" id="description" onChange={e => this.onChangeDescription(e.target.value)}  placeholder="Style Number" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>

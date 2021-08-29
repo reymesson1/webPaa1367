@@ -24,8 +24,8 @@ import EditProductComponent from './EditProductComponent';
 import FilterComponent from './FilterComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085"; 
-let API_URL = "http://143.198.171.44:8085";
+let API_URL = "http://localhost:8085"; 
+// let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
 
@@ -39,8 +39,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -59,6 +59,8 @@ class App extends Component {
           productHiddenBtn: false,
           productLoadingModal: false,
           productLoadingModalLabel: "Loading...",
+          productLoadingModalMessageErrorLabel: "Loading...",
+          productLoadingModalMessageError: false,
           onHiddenMode: true,
           file: null,
           fileName: "",
@@ -239,7 +241,6 @@ class App extends Component {
       // this.setState({
       //   productLoadingModal: true,
       //   productLoadingModalLabel: "Loading....",
-      //   fileUploaded: true
       // })
 
       if (event.target.files && event.target.files[0]) {
@@ -285,31 +286,18 @@ class App extends Component {
         data.append('single-file', this.state.images[i])
       }
     
-      // console.log(data)
-      // console.log(replaced)
-
-      // axios({
-      //     url: API_URL+'/createproduct',
-      //     method: "POST",
-      //     headers: {
-      //       authorization: 'done'              
-      //     },
-      //     data: data
-      // }).then((res)=>{
-
-      // });
-
       axios.post(API_URL+'/createproduct', data, {
         onUploadProgress: ProgressEvent =>{
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
           this.setState({
-            productLoadingModalLabel:  dataProgress
+            productLoadingModalLabel:  dataProgress + "%"
           })  
           if(dataProgress == 100){
 
             this.setState({
-              productHiddenBtn: false             
+              productLoadingModal: true,
+              productLoadingModalLabel: "Image uploaded successfully completed"             
             })  
 
 
@@ -319,66 +307,37 @@ class App extends Component {
         console.log(res);
       });
 
+      let imagesArr = [];
 
-      if(event.target.description.value==""){
-
-        this.setState({
-          productLoadingModal: true,
-          productLoadingModalLabel: "Style Number field couldn't be empty"
-        })
-
-        setTimeout(() => {
-
-          this.setState({
-            productLoadingModal: false
-          })  
-          
-        }, 5000);
-
-      }else{
-
-        let imagesArr = [];
-
-        for (let i = 0; i < this.state.images.length; i++) {  
-           imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
-        }
-
-        let newProduct = {
-
-          "id": Date.now(),
-          "description": replaced,
-          "price": event.target.price.value,
-          "company": event.target.company.value,
-          "style": event.target.style.value,  
-          "companystyle": event.target.companystyle.value,  
-          "category": event.target.category.value,  
-          "priceopt": event.target.priceopt.value,  
-          "notes": event.target.notes.value,  
-          "hidden": false,  
-          "image": replaced +'-'+ event.target.style.value + '-0.jpg',
-          "images": imagesArr
-        }
-  
-        fetch(API_URL+'/createproduct2', {
-  
-          method: 'post',
-          headers: API_HEADERS,
-          body: JSON.stringify(newProduct)
-        })
-  
-  
-        console.log('create new product from App.js')
-  
-        // this.setState({
-        //   productHiddenBtn: true
-        // })
-  
-        // setTimeout(() => {
-        //   // window.location.reload()
-        //   window.location.href = '/'
-        // }, 50000);
-
+      for (let i = 0; i < this.state.images.length; i++) {  
+          imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
       }
+
+      let newProduct = {
+
+        "id": Date.now(),
+        "description": replaced,
+        "price": event.target.price.value,
+        "company": event.target.company.value,
+        "style": event.target.style.value,  
+        "companystyle": event.target.companystyle.value,  
+        "category": event.target.category.value,  
+        "priceopt": event.target.priceopt.value,  
+        "notes": event.target.notes.value,  
+        "hidden": false,  
+        "image": replaced +'-'+ event.target.style.value + '-0.jpg',
+        "images": imagesArr
+      }
+
+      fetch(API_URL+'/createproduct2', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newProduct)
+      })
+
+
+      console.log('create new product from App.js')
 
 
 
@@ -532,12 +491,14 @@ class App extends Component {
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
           this.setState({
-            productLoadingModalLabel:  dataProgress
+            productLoadingModalLabel:  dataProgress + '%'
           })  
           if(dataProgress == 100){
 
             this.setState({
-              productHiddenBtn: false             
+              productHiddenBtn: false,
+              productLoadingModal: true,
+              productLoadingModalLabel: "Image uploaded successfully completed"             
             })  
           }
 
@@ -717,44 +678,6 @@ class App extends Component {
 
     }
 
-    onEditAddPicture(dataImage, dataId){
-
-      console.log(dataImage);
-      console.log(dataId);
-      // let nextState = this.state.products.filter(
-
-      //   (data, index) => data.id.indexOf(dataImage.id) !== -1
-      // );
-
-      // let nextStateFilter = nextState[0].images.filter(
-
-      //   (data, index) => data.indexOf(dataId) !== 0
-      // );
-
-      // nextState[0].images = nextStateFilter
-
-      // this.setState({
-      //   products: nextState
-      // })
-
-      // let objSelected = {
-      //   "productId": dataImage.id,
-      //   "name": dataId,
-      //   "images": nextStateFilter
-      // }
-
-
-
-      // fetch(API_URL+'/editdeletepicture', {
-
-      //   method: 'post',
-      //   headers: API_HEADERS,
-      //   body: JSON.stringify(objSelected)
-      // })
-
-    }
-
-
     render(){
       
       return (
@@ -846,6 +769,8 @@ class App extends Component {
                       fileName={this.state.fileName}
                       productLoadingModal={this.state.productLoadingModal}
                       productLoadingModalLabel={this.state.productLoadingModalLabel}
+                      productLoadingModalMessageError={this.state.productLoadingModalMessageError}
+                      productLoadingModalMessageErrorLabel={this.state.productLoadingModalMessageErrorLabel}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
@@ -895,7 +820,6 @@ class App extends Component {
                     onEditDeletePicture={this.onEditDeletePicture.bind(this)}
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
-                    onEditAddPicture={this.onEditAddPicture.bind(this)}
                   />
               )} 
           />
