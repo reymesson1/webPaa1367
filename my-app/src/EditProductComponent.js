@@ -9,7 +9,7 @@ import { Input, Media, Panel,   Card,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter, Col, Form, FormGroup, Label } from 'reactstrap';
+    ModalFooter, Col, Form, FormGroup, Label, Progress } from 'reactstrap';
 import { set } from 'mongoose';
 
 class EditProductComponent extends Component {
@@ -123,6 +123,26 @@ class EditProductComponent extends Component {
     
     render() {
 
+        let showUpload;
+        let hiddenBtnCheck;
+        
+        if(this.props.fileUploaded){
+            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <div> <Progress value={this.props.productLoadingModalLabel} /> {this.props.productLoadingModalLabel+'%'} </div> 
+
+        }else{
+            showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+        }
+
+        if(!this.props.productHiddenBtn){
+
+            hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+        }else{
+            
+            hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+        }
+
+
         let filteredData = this.props.products.filter(
 
             (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
@@ -190,7 +210,7 @@ class EditProductComponent extends Component {
                             <FormGroup row>
                                 <Label for="description" sm={2}>&nbsp;</Label>
                                 <Col sm={10}>
-                                <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+                                {showUpload}
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -264,7 +284,8 @@ class EditProductComponent extends Component {
                             <FormGroup row>
                                 <Label for="style" sm={2}>&nbsp;</Label>
                                 <Col sm={10}>
-                                <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+                                {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                {hiddenBtnCheck}
                                 </Col>
                             </FormGroup>
                         </Form>

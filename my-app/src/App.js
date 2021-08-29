@@ -342,7 +342,6 @@ class App extends Component {
         for (let i = 0; i < this.state.images.length; i++) {  
            imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
         }
-  
 
         let newProduct = {
 
@@ -359,6 +358,11 @@ class App extends Component {
           "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
+
+        this.setState({
+          products: nextState
+        })
+
   
         fetch(API_URL+'/createproduct2', {
   
@@ -483,10 +487,16 @@ class App extends Component {
 
       event.preventDefault();
 
+      let nextState = this.state.products.filter(
+
+        (data, index) => data.id.indexOf(event.target.id.value) !== -1
+      );
+
       this.setState({
-        productLoadingModal: true,
+        // productLoadingModal: true,
         productLoadingModalLabel: "Loading....",
-        // fileUploaded: true
+        fileUploaded: true,
+        productHiddenBtn: true
       })
 
       let trimDescription = event.target.description.value;
@@ -498,6 +508,8 @@ class App extends Component {
       let imagesLen = replacedImages.length;
 
       let newImage = replaced +'-'+ event.target.style.value + '-'+ imagesLen +'.jpg';
+
+      nextState[0].images.push(newImage);
 
       const data = new FormData();
       data.append("description", replaced);
@@ -523,15 +535,14 @@ class App extends Component {
       axios.post(API_URL+'/editpictureproduct', data, {
         onUploadProgress: ProgressEvent =>{
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
-
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-          // this.setState({
-          //   productLoadingModalLabel: "Loading.... " + dataProgress + "%"
-          // })  
+          this.setState({
+            productLoadingModalLabel:  dataProgress
+          })  
           if(dataProgress == 100){
 
             this.setState({
-              productLoadingModal: false
+              productHiddenBtn: false             
             })  
           }
 
@@ -680,8 +691,6 @@ class App extends Component {
 
     onEditDeletePicture(dataImage, dataId){
 
-      console.log(dataImage);
-      console.log(dataId);
       let nextState = this.state.products.filter(
 
         (data, index) => data.id.indexOf(dataImage.id) !== -1
@@ -703,8 +712,6 @@ class App extends Component {
         "name": dataId,
         "images": nextStateFilter
       }
-
-
 
       fetch(API_URL+'/editdeletepicture', {
 

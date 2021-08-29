@@ -79,7 +79,19 @@ class Product extends Component {
 
     render() {
 
-        const result = this.props.products.reduce((temp, value) => {
+        var productData  = this.props.products.sort( 
+            (a,b) =>{
+                if(a.id<b.id){
+                    return 1
+                }
+                if(a.id>b.id){
+                    return -1
+                }
+                return 0
+            }
+        )
+
+        const result = productData.reduce((temp, value) => {
             if(temp.length<this.state.limit)
               temp.push(value);
             return temp;
@@ -96,7 +108,7 @@ class Product extends Component {
 
             (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         );
-        
+
         return(
             <div className="container">
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
