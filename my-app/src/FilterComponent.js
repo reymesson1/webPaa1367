@@ -14,7 +14,9 @@ class CreateStyleComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterAPI: []
+            filterAPI: [],
+            limit: 5,
+            sequence: 5
         }
     }
 
@@ -50,9 +52,31 @@ class CreateStyleComponent extends Component {
 
     }
 
+    onViewMore(){
+        let nextState = this.state.limit;
+        nextState+=5;        
+        this.setState({
+
+            limit: nextState
+        })
+    }
+
     render() {
 
-        const menu = this.state.filterAPI.map((product, index) => {
+        const result = this.state.filterAPI.reduce((temp, value) => {
+            if(temp.length<this.state.limit)
+              temp.push(value);
+            return temp;
+        }, []);
+
+        let showViewMore
+
+        if(this.state.limit==result.length){
+
+            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        }
+
+        const menu = result.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-5">
                     <Link to={'/productdetail/'+product.image}> 
@@ -130,7 +154,18 @@ class CreateStyleComponent extends Component {
                         <div className="row">
                             {menu}
                         </div>
-
+                        <div className="row">
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4">
+                                {showViewMore}
+                            </div>
+                            <div className="col-md-4"></div>                            
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
             </div>    
