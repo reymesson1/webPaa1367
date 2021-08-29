@@ -155,7 +155,9 @@ exports.setHidden = async(req,res)=>{
 
   let obj = req.body;
 
-  let reverse = !obj.onhiddenmode
+  let productBracelet = await Product.findOne({category:'Bracelet'},{_id:0, hidden:1});
+
+  let reverse = !productBracelet.hidden
 
   let product = await Product.updateMany({}, {"$set":{"hidden": reverse}});
 
