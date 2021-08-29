@@ -12,7 +12,9 @@ class HomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ""
+            searchText: "",
+            limit: 15,
+            sequence: 5
         }  
     }
 
@@ -26,10 +28,31 @@ class HomeComponent extends Component {
             searchText: event.target.value
         })
     }
+    onViewMore(){
+        let nextState = this.state.limit;
+        nextState+=15;        
+        this.setState({
+
+            limit: nextState
+        })
+    }
 
     render() {
 
-        let filterData = this.props.products.filter(
+        const result = this.props.products.reduce((temp, value) => {
+            if(temp.length<this.state.limit)
+              temp.push(value);
+            return temp;
+        }, []);
+
+        let showViewMore
+
+        if(this.state.limit==result.length){
+
+            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        }
+
+        let filterData = result.filter(
 
             (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         );
@@ -103,6 +126,18 @@ class HomeComponent extends Component {
                 <div className="row">                    
                     {menu}
                 </div>
+                <div className="row">
+                    <div className="col-md-4"></div>
+                    <div className="col-md-4">
+                        {showViewMore}
+                    </div>
+                    <div className="col-md-4"></div>                            
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         );
     }
