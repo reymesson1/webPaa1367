@@ -21,7 +21,9 @@ class Product extends Component {
             description: "",
             price: "",
             style: "",
-            company: ""
+            company: "",
+            limit: 5,
+            sequence: 5
 
         }  
     }
@@ -64,11 +66,33 @@ class Product extends Component {
         window.location.href = '/createproduct'
     }
 
+    onViewMore(){
+        let nextState = this.state.limit;
+        nextState+=5;        
+        this.setState({
+
+            limit: nextState
+        })
+    }
+
 
 
     render() {
 
-        let filteredData = this.props.products.filter(
+        const result = this.props.products.reduce((temp, value) => {
+            if(temp.length<this.state.limit)
+              temp.push(value);
+            return temp;
+        }, []);
+
+        let showViewMore
+
+        if(this.state.limit==result.length){
+
+            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        }
+
+        let filteredData = result.filter(
 
             (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         );
@@ -218,6 +242,18 @@ class Product extends Component {
                 </tbody>
                 </Table>
                 </div>
+                <div className="row">
+                    <div className="col-md-4"></div>
+                    <div className="col-md-4">
+                        {showViewMore}
+                    </div>
+                    <div className="col-md-4"></div>                            
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         );
     }
