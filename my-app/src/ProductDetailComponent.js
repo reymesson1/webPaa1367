@@ -42,6 +42,30 @@ class ProductDetailComponent extends Component {
 
             (data, index) => data.image.indexOf(this.props.match.params.id) !== -1 
         );
+
+
+        let style 
+            
+        let company  
+        
+        let companyStyle 
+        
+        let category 
+        
+        let notes 
+
+        if(filterData[0].hidden){
+            
+            style = filterData[0].style
+            
+            company = filterData[0].company 
+            
+            companyStyle = filterData[0].companystyle
+            
+            category = filterData[0].category
+            
+            notes = filterData[0].notes
+        }
         
         return(
             <div className="container">                
@@ -89,7 +113,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Style:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filterData[0].style}</p>
+                                <p>{style}</p>
                             </div>
                         </div>
                         <br/>
@@ -98,7 +122,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Company:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filterData[0].company}</p>
+                                <p>{company}</p>
                             </div>
                         </div>
                         <br/>
@@ -107,7 +131,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Company Style:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filterData[0].companystyle}</p>
+                                <p>{companyStyle}</p>
                             </div>
                         </div>
                         <br/>
@@ -134,7 +158,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Category:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filterData[0].category}</p>
+                                <p>{category}</p>
                             </div>
                         </div>
                         <br/>
@@ -143,7 +167,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Notes:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filterData[0].notes}</p>
+                                <p>{notes}</p>
                             </div>
                         </div>
                     </div>
