@@ -50,13 +50,27 @@ class ProductDetailComponent extends Component {
         }
         return(
             <div className="container">
-
                 <br/>
+                <br/>
+                <div className="row">
+                    <div className="col-md-6">
+                        <h1>Product Detail</h1>
+                    </div>
+                    <div className="col-md-6">
+                        <Link className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} >Edit</Link>                                                        
+                    </div>
+                </div>
+                <br/>
+                <div className="row">
+                    <br/>
+                </div>
                 <div className="row">
                     <div className="col-md-1"></div>
                     <div className="col-md-4">
                         <div className="row">
-                            <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                            <Link to={'/productdetailzoom/'+filteredData[0].image}>
+                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                            </Link>
                         </div>
                         <br/>
                         <br/>

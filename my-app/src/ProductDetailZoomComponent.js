@@ -28,13 +28,7 @@ class ProductDetailZoomComponent extends Component {
         const x = (e.pageX - left) / width * 100
         const y = (e.pageY - top) / height * 100
         this.setState({ backgroundPosition: `${x}% ${y}%` })
-    }
-
-    onClicked(event){
-
-        console.log(event);
-    }
-    
+    }    
 
     render() {
 
@@ -43,40 +37,15 @@ class ProductDetailZoomComponent extends Component {
             (data, index) => data.image.indexOf(this.props.match.params.id) !== -1 
         );
 
-
-        let style 
-            
-        let company  
-        
-        let companyStyle 
-        
-        let category 
-        
-        let notes 
-
-        if(filterData[0].hidden){
-            
-            style = filterData[0].style
-            
-            company = filterData[0].company 
-            
-            companyStyle = filterData[0].companystyle
-            
-            category = filterData[0].category
-            
-            notes = filterData[0].notes
-        }
         
         return(
             <div className="container">                
                 <br/>
                 <div className="row">
-                    <div className="col-md-4"></div>
-                    <div className="col-md-8">
-                        <Link className="btn btn-primary" to={'/editproduct/'+filterData[0].id} >Edit</Link>                                                        
-                    </div>
+                    <h1>Product Detail Zoom</h1>
                 </div>
                 <div className="row">
+                    <div className="col-md-2"></div>
                     <div className="col-md-8">
                         <div className="card" style={{'margin':'5%'}}>
                             <div className="row">
@@ -86,91 +55,9 @@ class ProductDetailZoomComponent extends Component {
                                     </figure>
                                 </div>
                             </div>
-                            <div className="row">
-                                {filterData[0].images.map(
-                                    (data, index) =>
-                                    <div className="col-md-3">
-                                        <img onClick={this.onClicked.bind(this)} src={this.props.URLExternal+"/images/"+data} ></img>
-                                    </div>                                         
-                                )}
-                            </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
-                        <br/>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Style Number:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{filterData[0].description}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Style:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{style}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Company:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{company}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Company Style:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{companyStyle}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Price:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{filterData[0].price}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Price Opt:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{filterData[0].priceopt}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Category:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{category}</p>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h4>Notes:</h4>
-                            </div>
-                            <div className="col-md-6">
-                                <p>{notes}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div className="col-md-2"></div>
                 </div>
             </div>
         );
