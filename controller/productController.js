@@ -166,8 +166,6 @@ exports.setHidden = async(req,res)=>{
 
   exports.setMasterIpadFilter = async(req,res)=>{
 
-  console.log(req.body);
-
   var obj = req.body;
 
     // productBracelet["image2"] = 
@@ -179,9 +177,23 @@ exports.setHidden = async(req,res)=>{
     var productNecklace = await Product.find({category:'Necklace'});
     var productEarings = await Product.find({category:'Earings'});
     var productWatches = await Product.find({category:'Watches'});
-    // var productFilter = await Product.find({"category":"Necklace"});
-    var productFilter = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
 
+    var productFilter
+
+    if(obj.company!==''){
+
+      productFilter = await Product.find({"company" : { $regex: '.*' + obj.company + '.*' }  })
+    }else if(obj.companystyle!==''){
+  
+      productFilter = await Product.find({"companystyle" : { $regex: '.*' + obj.companystyle + '.*' }  })
+    }else if(obj.style!==''){
+  
+      productFilter = await Product.find({"style" : { $regex: '.*' + obj.style + '.*' }  })
+    }else if(obj.price!==''&& obj.priceopt!==''){
+  
+      productFilter = await Product.find({"price" : { $gte: obj.price, $lte: obj.priceopt }})
+    }
+  
     let data = {
   
       "error": false,
