@@ -344,7 +344,6 @@ exports.setMasterIpad = async(req,res)=>{
 exports.setFilterAPIUI = async(req,res)=>{
 
   var obj = req.body;
-  // var productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }, "companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }   })
 
   var productFilter
   
@@ -359,9 +358,8 @@ exports.setFilterAPIUI = async(req,res)=>{
     productFilter = await Product.find({"style" : { $regex: '.*' + obj.newFilter.style + '.*' }  })
   }else if(obj.newFilter.price!==''&& obj.newFilter.priceopt!==''){
 
-    productFilter = await Product.find({"price" : { $gte: obj.newFilter.style }  })
+    productFilter = await Product.find({"price" : { $gte: obj.newFilter.price }  })
   }
-
 
   res.send(productFilter);
 
