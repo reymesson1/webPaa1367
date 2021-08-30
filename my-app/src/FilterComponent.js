@@ -135,10 +135,10 @@ class CreateStyleComponent extends Component {
                         </FormGroup>
                         <FormGroup row>
                             <Col sm={5}>
-                                <Input type="text" name="price" id="price" placeholder="Price" />
+                                <Input type="text" name="price" id="price" placeholder="Price From" />
                             </Col>
                             <Col sm={5}>
-                                <Input type="text" name="priceopt" id="priceopt" placeholder="Price Opt" />
+                                <Input type="text" name="priceopt" id="priceopt" placeholder="Price To" />
                             </Col>
                         </FormGroup>
                         <br/>
