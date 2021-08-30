@@ -358,7 +358,7 @@ exports.setFilterAPIUI = async(req,res)=>{
     productFilter = await Product.find({"style" : { $regex: '.*' + obj.newFilter.style + '.*' }  })
   }else if(obj.newFilter.price!==''&& obj.newFilter.priceopt!==''){
 
-    productFilter = await Product.find({"price" : { $gte: obj.newFilter.price }  })
+    productFilter = await Product.find({"price" : { $gte: obj.newFilter.price, $lte: obj.newFilter.priceopt }})
   }
 
   res.send(productFilter);
