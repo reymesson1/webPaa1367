@@ -92,7 +92,7 @@ class ProductDetailComponent extends Component {
 
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Style Number:</h4>
                             </div>
                             <div className="col-md-6">
@@ -101,64 +101,64 @@ class ProductDetailComponent extends Component {
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Style:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{style}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Company:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{company}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Company Style:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{companyStyle}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Price:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{filteredData[0].price}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Price Opt:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{filteredData[0].priceopt}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Category:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{category}</p>
                             </div>
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <h4>Notes:</h4>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-align">
                                 <p>{notes}</p>
                             </div>
                         </div>
