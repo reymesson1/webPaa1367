@@ -63,21 +63,21 @@ exports.setMaster = async(req,res)=>{
     }
   })
 
-  setTimeout(() => {
+  // setTimeout(() => {
     
-    let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.image; 
-    let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\'+ newProduct.description +'-' + newProduct.style + '-0-output' +'.jpg';
+  //   let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.image; 
+  //   let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\'+ newProduct.description +'-' + newProduct.style + '-0-output' +'.jpg';
         
-    sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
-    .then(function(newFileInfo) {
-        // newFileInfo holds the output file properties
-        console.log("Success")
-    })
-    .catch(function(err) {
-        console.log("Error occured");
-    });
+  //   sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+  //   .then(function(newFileInfo) {
+  //       // newFileInfo holds the output file properties
+  //       console.log("Success")
+  //   })
+  //   .catch(function(err) {
+  //       console.log("Error occured");
+  //   });
 
-  }, 5000);
+  // }, 5000);
 
   res.send(req.body);
 

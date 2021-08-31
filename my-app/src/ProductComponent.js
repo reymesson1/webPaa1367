@@ -226,8 +226,8 @@ class Product extends Component {
                                             <tr>
                                                 <td style={{"width":"12%","height":"12%"}}>
                                                     <Link to={'/productdetail/'+data.id}> 
-                                                        {/* <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/> */}
-                                                        <img src={this.props.URLExternal+"/images/"+ data.description +  '-' + data.style + '-0-output.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
+                                                        <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
+                                                        {/* <img src={this.props.URLExternal+"/images/"+ data.description +  '-' + data.style + '-0-output.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                                     </Link>
                                                 </td>
                                                 <td>{data.description}</td>
