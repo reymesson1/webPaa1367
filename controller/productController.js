@@ -3,6 +3,7 @@ var fs = require('fs');
 var multer  = require('multer');
 var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
+var sharp = require('sharp');
 
 var Product = require('../models/product.js');
 
@@ -47,10 +48,12 @@ exports.getMaster = async(req,res)=>{
 exports.setMaster = async(req,res)=>{
 
   let newProduct = req.body;
+
+  // console.log(newProduct.description);
   
   let product = new Product(newProduct);
   
-  console.log(product);
+  // console.log(product);
 
   product.save(function(err){
     if(!err){
@@ -59,9 +62,25 @@ exports.setMaster = async(req,res)=>{
         console.log(err)
     }
   })
+
+  setTimeout(() => {
     
+    let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.image; 
+    let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\'+ newProduct.description +'-' + newProduct.style + '-0-output' +'.jpg';
+        
+    sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+    .then(function(newFileInfo) {
+        // newFileInfo holds the output file properties
+        console.log("Success")
+    })
+    .catch(function(err) {
+        console.log("Error occured");
+    });
+
+  }, 5000);
+
   res.send(req.body);
-    
+
 
 }
 
