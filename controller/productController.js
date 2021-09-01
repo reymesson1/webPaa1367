@@ -70,8 +70,10 @@ exports.setMaster = async(req,res)=>{
 
       for(var x=0;x<newProduct.images.length;x++){
         
-        let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
-        let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+        let inputFile  = uploadsFolder2 + newProduct.images[x]; 
+        let outputFile  = uploadsFolder2 + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+        // let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
+        // let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
         // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
         // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
             
@@ -133,8 +135,10 @@ exports.editProduct = async(req,res)=>{
       
       // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
       // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
-      let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
-      let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+      let inputFile  = uploadsFolder2 + newProduct.images[x]; 
+      let outputFile  = uploadsFolder2 + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+      // let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
+      // let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
           
       sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
       .then(function(newFileInfo) {
