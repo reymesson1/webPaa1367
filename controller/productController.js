@@ -4,6 +4,7 @@ var multer  = require('multer');
 var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
 var sharp = require('sharp');
+var uploadsFolder2 = __dirname + '/static/images/';  // defining real upload path
 
 var Product = require('../models/product.js');
 
@@ -63,12 +64,14 @@ exports.setMaster = async(req,res)=>{
     }
   })
 
+  console.log(uploadsFolder2);
+
   setTimeout(() => {
 
       for(var x=0;x<newProduct.images.length;x++){
         
-        let inputFile  = '\\root\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-        let outputFile  = '\\root\\\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+        let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
+        let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
         // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
         // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
             
@@ -130,8 +133,8 @@ exports.editProduct = async(req,res)=>{
       
       // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
       // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
-      let inputFile  = '\\root\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-      let outputFile  = '\\root\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+      let inputFile  = '/root/webPaa1367/static/images/' +newProduct.images[x]; 
+      let outputFile  = '/root/webPaa1367/static/images/output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
           
       sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
       .then(function(newFileInfo) {
