@@ -67,8 +67,10 @@ exports.setMaster = async(req,res)=>{
 
       for(var x=0;x<newProduct.images.length;x++){
         
-        let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-        let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+        let inputFile  = '\\root\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+        let outputFile  = '\\root\\\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+        // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+        // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
             
         sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
         .then(function(newFileInfo) {
@@ -126,8 +128,10 @@ exports.editProduct = async(req,res)=>{
 
     for(var x=0;x<newProduct.images.length;x++){
       
-      let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-      let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+      // let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+      // let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+      let inputFile  = '\\root\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+      let outputFile  = '\\root\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
           
       sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
       .then(function(newFileInfo) {
@@ -195,6 +199,8 @@ exports.getHidden = async(req,res)=>{
 exports.setHidden = async(req,res)=>{
 
   let obj = req.body;
+
+  console.log(obj);
 
   let productBracelet = await Product.findOne({category:'Bracelet'},{_id:0, hidden:1});
 
