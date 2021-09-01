@@ -31,6 +31,8 @@ class EditProductComponent extends Component {
 
     componentDidMount(){
 
+        console.log(this.props.match.params.id);
+
         let filteredData = this.props.products.filter(
 
             (data, index) => data.id.indexOf(this.props.match.params.id) !== -1

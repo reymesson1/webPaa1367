@@ -16,14 +16,65 @@ class ProductDetailComponent extends Component {
             priceoptValue: "",
             notesValue: "",
             imagesValue: [],
+            products: [{
+                "images": [
+                    "NecklaceNewGold-Style2-1.jpg",
+                    "NecklaceNewGold-Style2-1.jpg"
+                ],
+                "_id": "610ff60a33f3286cbc20d431",
+                "id": "1628435977948",
+                "description": "NecklaceNewGold",
+                "price": "1000",
+                "company": "Company1",
+                "style": "Style2",
+                "category": "Necklace",
+                "image": "NecklaceNewGold-Style2.jpg",
+                "__v": 2,
+                "priceopt": "2300.0",
+                "notes": "test blue",
+                "hidden": false,
+                "companystyle": "test"
+            }]
         }
     }
   
+    componentDidMount(){
+        
+        console.log(this.props.match.params.id);
+        console.log(this.props.products);
+
+        let nextState = [{
+            "images": [
+                "NecklaceNewGold-Style2-1.jpg",
+                "NecklaceNewGold-Style2-1.jpg"
+            ],
+            "_id": "610ff60a33f3286cbc20d431",
+            "id": "1628435977948",
+            "description": "NecklaceNewGold",
+            "price": "1000",
+            "company": "Company1",
+            "style": "Style2",
+            "category": "Necklace",
+            "image": "NecklaceNewGold-Style2.jpg",
+            "__v": 2,
+            "priceopt": "2300.0",
+            "notes": "test blue",
+            "hidden": false,
+            "companystyle": "test"
+        }]
+
+        this.setState({
+            products: nextState
+        })
+    
+    }
+
     render() {
 
-        let filteredData = this.props.products.filter(
+        let filteredData = this.state.products.filter(
 
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            (data, index) => data.id.indexOf("1628435977948") !== -1
         );
 
         let style 
