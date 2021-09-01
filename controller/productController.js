@@ -98,7 +98,6 @@ exports.editPictureProduct = async(req,res)=>{
     })
   })
 
-
 }
 
 
@@ -121,7 +120,27 @@ exports.editProduct = async(req,res)=>{
     })
   })
 
-  console.log(obj);
+  var newProduct = req.body;
+  
+  setTimeout(() => {
+
+    for(var x=0;x<newProduct.images.length;x++){
+      
+      let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+      let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+          
+      sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+      .then(function(newFileInfo) {
+          // newFileInfo holds the output file properties
+          console.log("Success")
+      })
+      .catch(function(err) {
+          console.log("Error occured");
+      });
+    }
+
+  }, 5000);
+
 
   // res.send(product);
 
