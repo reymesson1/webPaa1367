@@ -87,8 +87,8 @@ class CreateStyleComponent extends Component {
                                 {/* <img src={"http://localhost:8085/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://143.198.171.44:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                 {/* <img src={"http://143.198.171.44:8085/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                <img src={this.props.URLExternal+"/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
-                                {/* <img src={this.props.URLExternal+"/images/"+ product.description +  '-' + product.style + '-0-output.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                {/* <img src={this.props.URLExternal+"/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                <img src={this.props.URLExternal+"/images/output-"+ product.description +  '-' + product.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
 
                         </div>
                     </Link>
