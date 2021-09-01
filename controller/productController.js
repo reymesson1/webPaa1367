@@ -88,7 +88,7 @@ exports.setMaster = async(req,res)=>{
         });
       }
 
-  }, 5000);
+  }, 50000);
 
   res.send(req.body);
 
@@ -147,7 +147,7 @@ exports.editProduct = async(req,res)=>{
       });
     }
 
-  }, 5000);
+  }, 50000);
 
 
   res.send(product);
