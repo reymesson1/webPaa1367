@@ -3,7 +3,7 @@ var fs = require('fs');
 var multer  = require('multer');
 var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
-var sharp = require('sharp');
+// var sharp = require('sharp');
 
 var Product = require('../models/product.js');
 
@@ -63,24 +63,24 @@ exports.setMaster = async(req,res)=>{
     }
   })
 
-  setTimeout(() => {
+  // setTimeout(() => {
 
-      for(var x=0;x<newProduct.images.length;x++){
+  //     for(var x=0;x<newProduct.images.length;x++){
         
-        let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-        let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+  //       let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+  //       let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
             
-        sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
-        .then(function(newFileInfo) {
-            // newFileInfo holds the output file properties
-            console.log("Success")
-        })
-        .catch(function(err) {
-            console.log("Error occured");
-        });
-      }
+  //       sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+  //       .then(function(newFileInfo) {
+  //           // newFileInfo holds the output file properties
+  //           console.log("Success")
+  //       })
+  //       .catch(function(err) {
+  //           console.log("Error occured");
+  //       });
+  //     }
 
-  }, 5000);
+  // }, 5000);
 
   res.send(req.body);
 
@@ -120,26 +120,26 @@ exports.editProduct = async(req,res)=>{
     })
   })
 
-  var newProduct = req.body;
+  // var newProduct = req.body;
   
-  setTimeout(() => {
+  // setTimeout(() => {
 
-    for(var x=0;x<newProduct.images.length;x++){
+  //   for(var x=0;x<newProduct.images.length;x++){
       
-      let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
-      let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+  //     let inputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\' +newProduct.images[x]; 
+  //     let outputFile  = 'C:\\Users\\Rey Messon\\Desktop\\webPaa1367\\static\\images\\output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
           
-      sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
-      .then(function(newFileInfo) {
-          // newFileInfo holds the output file properties
-          console.log("Success")
-      })
-      .catch(function(err) {
-          console.log("Error occured");
-      });
-    }
+  //     sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+  //     .then(function(newFileInfo) {
+  //         // newFileInfo holds the output file properties
+  //         console.log("Success")
+  //     })
+  //     .catch(function(err) {
+  //         console.log("Error occured");
+  //     });
+  //   }
 
-  }, 5000);
+  // }, 5000);
 
 
   // res.send(product);
