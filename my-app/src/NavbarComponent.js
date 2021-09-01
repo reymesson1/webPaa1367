@@ -46,25 +46,39 @@ class NavbarComponent extends Component {
                     <div className="row">
                         <Nav>
                             <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} href="/">Browse</NavLink>
+                                <Link to={'/'}>                                
+                                    <NavLink style={{'color':'#ef8d09'}}>Browse</NavLink>
+                                </Link>
+                                {/* <NavLink style={{'color':'#ef8d09'}} href="/">Browse</NavLink> */}
+                            </NavItem>
+                            <NavItem>
+                                {/* <Link to={'/'} > */}
+                                    <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
+                                {/* </Link> */}
+                            </NavItem>
+                            <NavItem>
+                                <Link to={'/product'}>
+                                    <NavLink style={{'color':'#aaafaf'}} >Products</NavLink>
+                                    {/* <NavLink style={{'color':'#aaafaf'}} href="/product/">Products</NavLink> */}
+                                </Link>
                             </NavItem>
                             <NavItem>
                                 <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/product/">Products</NavLink>
+                                <Link to={'/companies'}>
+                                    {/* <NavLink style={{'color':'#aaafaf'}} href="/companies/">Companies</NavLink> */}
+                                    <NavLink style={{'color':'#aaafaf'}}>Companies</NavLink>
+                                </Link>
                             </NavItem>
                             <NavItem>
                                 <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/companies/">Companies</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink style={{'color':'#ef8d09'}} >|</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink style={{'color':'#aaafaf'}} href="/styles/">Styles</NavLink>
+                                <Link to={'/styles'}>
+                                    <NavLink style={{'color':'#aaafaf'}}>Styles</NavLink>
+                                    {/* <NavLink style={{'color':'#aaafaf'}} href="/styles/">Styles</NavLink> */}
+                                </Link>
                             </NavItem>
                         </Nav>
                     </div>
