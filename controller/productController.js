@@ -102,28 +102,6 @@ exports.editProduct = async(req,res)=>{
     })
   })
 
-  var newProduct = req.body;
-  
-  setTimeout(() => {
-
-    for(var x=0;x<newProduct.images.length;x++){
-      
-      let inputFile  = reqPath + newProduct.images[x]; 
-      let outputFile  = reqPath + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
-          
-      sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
-      .then(function(newFileInfo) {
-          // newFileInfo holds the output file properties
-          console.log("Success")
-      })
-      .catch(function(err) {
-          console.log("Error occured");
-      });
-    }
-
-  }, 50000);
-
-
   res.send(product);
 
 }

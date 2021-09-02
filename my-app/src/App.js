@@ -25,7 +25,7 @@ import FilterComponent from './FilterComponent';
 import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085"; 
+// let API_URL = "http://localhost:8085";
 let API_URL = "http://143.198.171.44:8085";
 
 const API_HEADERS = {
@@ -60,6 +60,7 @@ class App extends Component {
           productHiddenBtn: false,
           productLoadingModal: false,
           productLoadingModalLabel: "Loading...",
+          productLoadingModalLabelPcnt: "0",
           productLoadingModalMessageErrorLabel: "Loading...",
           productLoadingModalMessageError: false,
           onHiddenMode: true,
@@ -314,7 +315,8 @@ class App extends Component {
           console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
           this.setState({
-            productLoadingModalLabel:  dataProgress + "%"
+            productLoadingModalLabel:  dataProgress + "%",
+            productLoadingModalLabelPcnt: dataProgress
           })  
           if(dataProgress == 100){
 
@@ -497,27 +499,6 @@ class App extends Component {
       // }).then((res)=>{
 
       // });
-      axios.post(API_URL+'/editpictureproduct', data, {
-        onUploadProgress: ProgressEvent =>{
-          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
-          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-          this.setState({
-            productLoadingModalLabel:  dataProgress + '%'
-          })  
-          if(dataProgress == 100){
-
-            this.setState({
-              productHiddenBtn: false,
-              productLoadingModal: true,
-              productLoadingModalLabel: "Image uploaded successfully completed"             
-            })  
-          }
-
-        }
-      }).then((res)=>{
-        console.log(res);
-      });
-
 
       replacedImages.push(newImage);
 
@@ -534,6 +515,40 @@ class App extends Component {
         "image": newImage,
         "images": replacedImages,
       }
+
+      axios.post(API_URL+'/editpictureproduct', data, {
+        onUploadProgress: ProgressEvent =>{
+          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+          this.setState({
+            productLoadingModalLabel:  dataProgress + '%',
+            productLoadingModalLabelPcnt: dataProgress
+          })  
+          if(dataProgress == 100){
+
+            this.setState({
+              productHiddenBtn: false,
+              productLoadingModal: true,
+              productLoadingModalLabel: "Image uploaded successfully completed"             
+            })  
+
+            fetch(API_URL+'/createproduct3', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+
+
+
+
+
+          }
+
+        }
+      }).then((res)=>{
+        console.log(res);
+      });
 
       fetch(API_URL+'/editproduct', {
 
@@ -791,6 +806,7 @@ class App extends Component {
                       productLoadingModalLabel={this.state.productLoadingModalLabel}
                       productLoadingModalMessageError={this.state.productLoadingModalMessageError}
                       productLoadingModalMessageErrorLabel={this.state.productLoadingModalMessageErrorLabel}
+                      productLoadingModalLabelPcnt={this.state.productLoadingModalLabelPcnt}
                       /> } 
           />
           <Route path="/createstyle" component= {() => <CreateStyleComponent 
@@ -857,6 +873,7 @@ class App extends Component {
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
                     onEditCloseModal={this.onEditCloseModal.bind(this)}
+                    productLoadingModalLabelPcnt={this.state.productLoadingModalLabelPcnt}
                   />
               )} 
           />
