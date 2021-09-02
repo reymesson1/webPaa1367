@@ -64,32 +64,6 @@ exports.setMaster = async(req,res)=>{
     }
   })
 
-  // console.log(uploadsFolder2);
-  let path = require('path');
-
-  let reqPath = path.join(__dirname, '../static/images/');
-
-  console.log(reqPath);
-
-  setTimeout(() => {
-
-      for(var x=0;x<newProduct.images.length;x++){
-        
-        let inputFile  = reqPath + newProduct.images[x]; 
-        let outputFile  = reqPath + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
-            
-        sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
-        .then(function(newFileInfo) {
-            // newFileInfo holds the output file properties
-            console.log("Success")
-        })
-        .catch(function(err) {
-            console.log("Error occured");
-        });
-      }
-
-  }, 50000);
-
   res.send(req.body);
 
 
@@ -425,5 +399,36 @@ exports.setFilterAPIUI = async(req,res)=>{
   }
 
   res.send(productFilter);
+
+}
+
+exports.setMasterOutput = async(req,res)=>{
+
+  let path = require('path');
+
+  let reqPath = path.join(__dirname, '../static/images/');
+
+  var newProduct = req.body;
+
+  setTimeout(() => {
+
+      for(var x=0;x<newProduct.images.length;x++){
+        
+        let inputFile  = reqPath + newProduct.images[x]; 
+        let outputFile  = reqPath + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+            
+        sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+        .then(function(newFileInfo) {
+            // newFileInfo holds the output file properties
+            console.log("Success")
+        })
+        .catch(function(err) {
+            console.log("Error occured");
+        });
+      }
+
+  }, 5000);
+
+
 
 }

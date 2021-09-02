@@ -41,6 +41,8 @@ app.post('/createpost', productController.setMasterIpad);
 
 app.post('/createproduct2', productController.setMaster);
 
+app.post('/createproduct3', productController.setMasterOutput);
+
 app.post('/editproduct', productController.editProduct);
 
 app.post('/editdeletepicture', productController.editDeletePicture);

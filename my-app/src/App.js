@@ -286,27 +286,6 @@ class App extends Component {
       for (let i = 0; i < this.state.images.length; i++) {
         data.append('single-file', this.state.images[i])
       }
-    
-      axios.post(API_URL+'/createproduct', data, {
-        onUploadProgress: ProgressEvent =>{
-          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
-          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-          this.setState({
-            productLoadingModalLabel:  dataProgress + "%"
-          })  
-          if(dataProgress == 100){
-
-            this.setState({
-              productLoadingModal: true,
-              productLoadingModalLabel: "Image uploaded successfully completed"             
-            })  
-
-
-          }
-        }
-      }).then((res)=>{
-        console.log(res);
-      });
 
       let imagesArr = [];
 
@@ -329,13 +308,44 @@ class App extends Component {
         "image": replaced +'-'+ event.target.style.value + '-0.jpg',
         "images": imagesArr
       }
+    
+      axios.post(API_URL+'/createproduct', data, {
+        onUploadProgress: ProgressEvent =>{
+          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+          this.setState({
+            productLoadingModalLabel:  dataProgress + "%"
+          })  
+          if(dataProgress == 100){
+
+            this.setState({
+              productLoadingModal: true,
+              productLoadingModalLabel: "Image uploaded successfully completed"             
+            });
+            
+            fetch(API_URL+'/createproduct3', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(newProduct)
+            })
+
+          }
+        }
+      }).then((res)=>{
+        console.log(res);
+      });
 
       fetch(API_URL+'/createproduct2', {
 
         method: 'post',
         headers: API_HEADERS,
         body: JSON.stringify(newProduct)
-      })
+      });
+
+
+
+
 
 
       console.log('create new product from App.js')
