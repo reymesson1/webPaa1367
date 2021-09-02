@@ -661,13 +661,18 @@ class App extends Component {
 
       console.log(this.state.defaultImageSelected);
 
+      this.setState({
+        productLoadingModal: true,
+        productLoadingModalLabel: "Image default selected was successfully completed"             
+      })  
+
+
       fetch(API_URL+'/defaultimage', {
 
         method: 'post',
         headers: API_HEADERS,
         body: JSON.stringify(this.state.defaultImageSelected)
       })
-
 
     }
 

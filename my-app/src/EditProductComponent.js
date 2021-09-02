@@ -172,7 +172,7 @@ class EditProductComponent extends Component {
                     <ModalFooter>  
                         <div className="col-md-12">
                             {/* <button className="btn btn-success" onClick={this.props.onEditCloseModal.bind(this)}  >Close</button> */}
-                            <Link className="btn btn-success" to={'/'}>Go Home</Link>
+                            <Link className="btn btn-success" to={'/product'}>Go Back</Link>
                         </div>
                         <div className="col-md-">
                         </div>

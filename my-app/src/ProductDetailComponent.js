@@ -16,8 +16,27 @@ class ProductDetailComponent extends Component {
             priceoptValue: "",
             notesValue: "",
             imagesValue: [],
+            products: [],
+            defaultImageSelected: null
         }
     }
+
+    imageClickEdit = (dataImage, dataId) => {
+        let objSelected = {
+          "productId": dataImage.id,
+          "name": dataId
+        }
+        let nextState = this.props.products.filter(
+  
+          (data, index) => data.id.indexOf(dataImage.id) !== -1
+        );
+        nextState[0].image = dataId
+        this.setState({
+          products: nextState,
+          defaultImageSelected: objSelected
+        })
+      }
+  
   
     render() {
 
@@ -79,7 +98,8 @@ class ProductDetailComponent extends Component {
                                     (data, index) =>
                                     <div className="col-md-3">
                                         <div className="row">
-                                            <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
+                                            <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
+                                            {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}> */}
                                                 {/* <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                 */}
                                                 <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
                                                 {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0s.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
