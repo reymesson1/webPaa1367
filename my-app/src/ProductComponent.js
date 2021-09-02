@@ -230,15 +230,15 @@ class Product extends Component {
                                                         {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                                     </Link>
                                                 </td>
-                                                <td>{data.description}</td>
-                                                <td>{data.price}</td>
-                                                <td>{data.priceopt}</td>
-                                                <td>{data.style}</td>
-                                                <td>{data.companystyle}</td>
-                                                <td>{data.category}</td>
-                                                <td>{data.company}</td>
-                                                <td>{data.notes}</td>
-                                                <td>
+                                                <td style={{"padding-top":"5%"}} >{data.description}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.price}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.priceopt}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.style}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.companystyle}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.category}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.company}</td>
+                                                <td style={{"padding-top":"5%"}}>{data.notes}</td>
+                                                <td style={{"padding-top":"5%"}}>
                                                     <div className="row">
                                                         <div className="col-md-6">
                                                             {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
