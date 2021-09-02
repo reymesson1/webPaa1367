@@ -19,16 +19,24 @@ class ProductDetailComponent extends Component {
             products: [],
             defaultImageSelected: null
         }
+
     }
 
     imageClickEdit = (dataImage, dataId) => {
+
+        localStorage.setItem('products', JSON.stringify(this.props.products));
+        localStorage.setItem('id', this.props.match.params.id);
+
         let objSelected = {
           "productId": dataImage.id,
           "name": dataId
         }
-        let nextState = this.props.products.filter(
+
+        // let nextState = this.props.products.filter(
+        let nextState = JSON.parse( localStorage.getItem('products') ).filter(
   
-          (data, index) => data.id.indexOf(dataImage.id) !== -1
+          (data, index) => data.id.indexOf(localStorage.getItem('id')) !== -1
+        //   (data, index) => data.id.indexOf(dataImage.id) !== -1
         );
         nextState[0].image = dataId
         this.setState({
@@ -40,9 +48,18 @@ class ProductDetailComponent extends Component {
   
     render() {
 
-        let filteredData = this.props.products.filter(
+        if(this.props.products.length>0){
 
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            localStorage.setItem('products', JSON.stringify(this.props.products));
+            localStorage.setItem('id', this.props.match.params.id);
+        }
+
+        // let filteredData = this.props.products.filter(
+        let filteredData = JSON.parse( localStorage.getItem('products') ).filter(
+
+            (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
+            // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+
         );
 
         let style 
@@ -194,7 +211,8 @@ class ProductDetailComponent extends Component {
             </div>
 
         );
-    }
+
+    }//end render
 
 }
 

@@ -31,9 +31,11 @@ class EditProductComponent extends Component {
 
     componentDidMount(){
 
-        let filteredData = this.props.products.filter(
+        // let filteredData = this.props.products.filter(
+        let filteredData = JSON.parse( localStorage.getItem('products') ).filter(
 
-            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
+            // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
         );
 
         this.setState({
@@ -144,16 +146,34 @@ class EditProductComponent extends Component {
             hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
+        if(this.props.products.length>0){
 
-        let filteredData = this.props.products.filter(
+            localStorage.setItem('products', JSON.stringify(this.props.products));
+            localStorage.setItem('companies', JSON.stringify(this.props.companies));
+            localStorage.setItem('styles', JSON.stringify(this.props.styles));
+            localStorage.setItem('id', this.props.match.params.id);
+        }
+
+        let filteredData2 = JSON.parse( localStorage.getItem('products') ).filter(
+
+            (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
+
+        );
+
+
+        let filteredData = JSON.parse( localStorage.getItem('products') ).filter(
+            // let filteredData = this.props.products.filter(
 
             (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
         );
-        let filteredDataCompany = this.props.companies.filter(
+        // let filteredData2 = JSON.parse( localStorage.getItem('products') ).filter(
+        let filteredDataCompany = JSON.parse( localStorage.getItem('companies') ).filter(
+        // let filteredDataCompany = this.props.companies.filter(
 
             (data, index) => data.description.indexOf(filteredData[0].company) !== -1
         );
-        let filteredDataStyle = this.props.styles.filter(
+        // let filteredDataStyle = this.props.styles.filter(
+        let filteredDataStyle = JSON.parse( localStorage.getItem('styles') ).filter(
 
             (data, index) => data.description.indexOf(filteredData[0].style) !== -1
         );
