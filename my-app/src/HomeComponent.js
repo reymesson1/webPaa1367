@@ -39,9 +39,21 @@ class HomeComponent extends Component {
 
     render() {
 
+        // const result = this.props.products.reduce((temp, value) => {
+        //     if(temp.length<this.state.limit)
+        //       temp.push(value);
+        //     return temp;
+        // }, []);
         const result = this.props.products.reduce((temp, value) => {
-            if(temp.length<this.state.limit)
-              temp.push(value);
+            if(this.state.searchText==""){
+                if(temp.length<this.state.limit){
+
+                    temp.push(value);
+                }
+            }else{
+                
+                temp.push(value);
+            }
             return temp;
         }, []);
 
