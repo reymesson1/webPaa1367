@@ -13,14 +13,16 @@ class HomeComponent extends Component {
         super(props);
         this.state = {
             searchText: "",
-            limit: 15,
+            searchTextCategory: "",
+            limit: 5,
             sequence: 5
         }  
     }
 
     componentDidMount(){
         this.setState({
-            searchText: this.props.match.params.id
+            // searchText: this.props.match.params.id
+            searchTextCategory: this.props.match.params.id
         })   
     }
     onChangeField(event){
@@ -44,18 +46,22 @@ class HomeComponent extends Component {
         //       temp.push(value);
         //     return temp;
         // }, []);
-        const result = this.props.products.reduce((temp, value) => {
-            if(this.state.searchText==""){
-                if(temp.length<this.state.limit){
 
-                    temp.push(value);
-                }
-            }else{
+        console.log(this.state.searchText)
+
+        const result
+        // const result = this.props.products.reduce((temp, value) => {
+        //     if(this.state.searchText==""){
+        //         if(temp.length<this.state.limit){
+
+        //             temp.push(value);
+        //         }
+        //     }else{
                 
-                temp.push(value);
-            }
-            return temp;
-        }, []);
+        //         temp.push(value);
+        //     }
+        //     return temp;
+        // }, []);
 
         let showViewMore
 
@@ -64,10 +70,20 @@ class HomeComponent extends Component {
             showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
         }
 
-        let filterData = result.filter(
+        let filterData
+        if(!this.state.searchText==""){
 
-            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
-        );
+            filterData = result.filter(
+                
+                (data, index) => data.category.toLowerCase().indexOf(this.state.searchTextCategory.toLowerCase()) !== -1 
+                // (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+            );
+        }else{
+            filterData = result.filter(
+                
+                (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+            );
+        }
 
         if(this.props.newest){
             filterData = filterData.sort( 
