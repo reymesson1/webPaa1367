@@ -13,14 +13,16 @@ class HomeComponent extends Component {
         super(props);
         this.state = {
             searchText: "",
-            limit: 15,
+            searchTextCategory: "",
+            limit: 4,
             sequence: 5
         }  
     }
 
     componentDidMount(){
         this.setState({
-            searchText: this.props.match.params.id
+            // searchText: this.props.match.params.id
+            searchTextCategory: this.props.match.params.id
         })   
     }
     onChangeField(event){
@@ -44,7 +46,37 @@ class HomeComponent extends Component {
         //       temp.push(value);
         //     return temp;
         // }, []);
-        const result = this.props.products.reduce((temp, value) => {
+        var productData  = this.props.products.sort( 
+            (a,b) =>{
+                if(a.id<b.id){
+                    return 1
+                }
+                if(a.id>b.id){
+                    return -1
+                }
+                return 0
+            }
+        )
+
+        let filterData
+        // filterData = this.props.products.filter(
+        if(this.state.searchText==""){
+
+            filterData = productData.filter(
+                
+                (data, index) => data.category.toLowerCase().indexOf(this.state.searchTextCategory.toLowerCase()) !== -1 
+                // (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+                );
+        }else{
+
+            filterData = productData.filter(
+                
+                // (data, index) => data.category.toLowerCase().indexOf(this.state.searchTextCategory.toLowerCase()) !== -1 
+                (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+                );
+        }
+
+        const result = filterData.reduce((temp, value) => {
             if(this.state.searchText==""){
                 if(temp.length<this.state.limit){
 
@@ -64,39 +96,7 @@ class HomeComponent extends Component {
             showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
         }
 
-        let filterData = result.filter(
-
-            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
-        );
-
-        if(this.props.newest){
-            filterData = filterData.sort( 
-                (a,b) =>{
-                    if(a.id<b.id){
-                        return 1
-                    }
-                    if(a.id>b.id){
-                        return -1
-                    }
-                    return 0
-                }
-            )
-        }else{
-            filterData = filterData.sort( 
-                (a,b) =>{
-                    if(a.id>b.id){
-                        return 1
-                    }
-                    if(a.id<b.id){
-                        return -1
-                    }
-                    return 0
-                }
-            )
-
-        }
-
-        const menu = filterData.map((product, index) => {
+        const menu = result.map((product, index) => {
             return (
                 <div key={product.id} className="col-md-3">
                     <Link to={'/productdetail/'+product.id}> 
