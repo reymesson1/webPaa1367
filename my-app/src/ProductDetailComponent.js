@@ -17,14 +17,15 @@ class ProductDetailComponent extends Component {
             notesValue: "",
             imagesValue: [],
             products: [],
-            defaultImageSelected: null
+            defaultImageSelected: null,
+            image: "BN555-TENNIS-0.jpg"
         }
 
     }
 
     imageClickEdit = (dataImage, dataId) => {
 
-        localStorage.setItem('products', JSON.stringify(this.props.products));
+        localStorage.setItem('productdetails', JSON.stringify(this.props.products));
         localStorage.setItem('id', this.props.match.params.id);
 
         let objSelected = {
@@ -33,29 +34,30 @@ class ProductDetailComponent extends Component {
         }
 
         // let nextState = this.props.products.filter(
-        let nextState = JSON.parse( localStorage.getItem('products') ).filter(
+        let nextState = JSON.parse( localStorage.getItem('productdetails') ).filter(
   
           (data, index) => data.id.indexOf(localStorage.getItem('id')) !== -1
         //   (data, index) => data.id.indexOf(dataImage.id) !== -1
         );
-        nextState[0].image = dataId
+
         this.setState({
-          products: nextState,
-          defaultImageSelected: objSelected
+            image: objSelected.name
         })
-      }
+
+    }
+
   
   
     render() {
 
         if(this.props.products.length>0){
 
-            localStorage.setItem('products', JSON.stringify(this.props.products));
+            localStorage.setItem('productdetails', JSON.stringify(this.props.products));
             localStorage.setItem('id', this.props.match.params.id);
         }
 
         // let filteredData = this.props.products.filter(
-        let filteredData = JSON.parse( localStorage.getItem('products') ).filter(
+        let filteredData = JSON.parse( localStorage.getItem('productdetails') ).filter(
 
             (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
             // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
@@ -105,7 +107,8 @@ class ProductDetailComponent extends Component {
                     <div className="col-md-4">
                         <div className="row">
                             <Link to={'/productdetailzoom/'+filteredData[0].image}>
-                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                {/* <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/> */}
+                                <img src={this.props.URLExternal+'/images/'+this.state.image}/>
                             </Link>
                         </div>
                         <br/>
