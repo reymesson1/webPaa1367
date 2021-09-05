@@ -18,26 +18,40 @@ class ProductDetailComponent extends Component {
             imagesValue: [],
             products: [],
             defaultImageSelected: null,
-            image: "BN555-TENNIS-0.jpg"
+            image: ""
         }
 
     }
 
+    // componentDidMount(){
+
+    //     let filteredData = JSON.parse( localStorage.getItem('productdetails') ).filter(
+
+    //         (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
+    //         // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+
+    //     );
+
+    //     this.setState({
+    //         image: filteredData[0].image
+    //     })
+    // }
+
     imageClickEdit = (dataImage, dataId) => {
 
-        localStorage.setItem('productdetails', JSON.stringify(this.props.products));
-        localStorage.setItem('id', this.props.match.params.id);
+        // localStorage.setItem('productdetails', JSON.stringify(this.props.products));
+        // localStorage.setItem('id', this.props.match.params.id);
 
         let objSelected = {
           "productId": dataImage.id,
           "name": dataId
         }
 
-        // let nextState = this.props.products.filter(
-        let nextState = JSON.parse( localStorage.getItem('productdetails') ).filter(
+        let nextState = this.props.products.filter(
+        // let nextState = JSON.parse( localStorage.getItem('productdetails') ).filter(
   
-          (data, index) => data.id.indexOf(localStorage.getItem('id')) !== -1
-        //   (data, index) => data.id.indexOf(dataImage.id) !== -1
+        //   (data, index) => data.id.indexOf(localStorage.getItem('id')) !== -1
+          (data, index) => data.id.indexOf(dataImage.id) !== -1
         );
 
         this.setState({
@@ -50,17 +64,17 @@ class ProductDetailComponent extends Component {
   
     render() {
 
-        if(this.props.products.length>0){
+        // if(this.props.products.length>0){
 
-            localStorage.setItem('productdetails', JSON.stringify(this.props.products));
-            localStorage.setItem('id', this.props.match.params.id);
-        }
+        //     localStorage.setItem('productdetails', JSON.stringify(this.props.products));
+        //     localStorage.setItem('id', this.props.match.params.id);
+        // }
 
-        // let filteredData = this.props.products.filter(
-        let filteredData = JSON.parse( localStorage.getItem('productdetails') ).filter(
+        let filteredData = this.props.products.filter(
+        // let filteredData = JSON.parse( localStorage.getItem('productdetails') ).filter(
 
-            (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
-            // (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
+            // (data, index) => data.id.indexOf( localStorage.getItem('id') ) !== -1
+            (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
 
         );
 
@@ -107,8 +121,8 @@ class ProductDetailComponent extends Component {
                     <div className="col-md-4">
                         <div className="row">
                             <Link to={'/productdetailzoom/'+filteredData[0].image}>
-                                {/* <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/> */}
-                                <img src={this.props.URLExternal+'/images/'+this.state.image}/>
+                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                {/* <img src={this.props.URLExternal+'/images/'+this.state.image}/> */}
                             </Link>
                         </div>
                         <br/>
@@ -118,8 +132,8 @@ class ProductDetailComponent extends Component {
                                     (data, index) =>
                                     <div className="col-md-3">
                                         <div className="row">
-                                            <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
-                                            {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}> */}
+                                            {/* <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}> */}
+                                            <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
                                                 {/* <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                 */}
                                                 <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
                                                 {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0s.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
