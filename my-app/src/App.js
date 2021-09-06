@@ -67,7 +67,8 @@ class App extends Component {
           file: null,
           fileName: "",
           defaultImageSelected: {},
-          progressImage: 0
+          progressImage: 0,
+          selectedProductDetail: null
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -718,6 +719,18 @@ class App extends Component {
 
     }
 
+    onSelectedProductDetail(data){
+
+      // console.log('onClicked');
+      // console.log(data);
+
+      this.setState({
+
+        selectedProductDetail: data
+      })
+
+    }
+
     render(){
       
       return (
@@ -848,6 +861,8 @@ class App extends Component {
                     onEditDeletePicture={this.onEditDeletePicture.bind(this)}
                     imageClickEdit={this.imageClickEdit.bind(this)}
                     defaultImageSelectedFunc={this.defaultImageSelectedFunc.bind(this)}
+                    selectedProductDetail={this.state.selectedProductDetail}
+                    productDetailItems={ this.state.products.filter( (data) => data.id === this.state.selectedProductDetail)[0]   }
                   />
               )} 
           />
@@ -916,6 +931,7 @@ class App extends Component {
                     products={this.state.products} 
                     onEditProduct={this.onEditProduct.bind(this)} 
                     onDeleteProduct={this.onDeleteProduct.bind(this)} 
+                    onSelectedProductDetail={this.onSelectedProductDetail.bind(this)}
                 />}
           />
           {/* <Route path="/product" component= {() => <Product

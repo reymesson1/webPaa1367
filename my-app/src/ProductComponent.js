@@ -232,7 +232,7 @@ class Product extends Component {
                         (data, index) => 
                                             <tr>
                                                 <td style={{"width":"12%","height":"12%"}}>
-                                                    <Link to={'/productdetail/'+data.id}> 
+                                                    <Link onClick={this.props.onSelectedProductDetail.bind(this, data.id)} to={'/productdetail/'+data.id}> 
                                                         <img src={this.props.URLExternal+"/images/output-"+ data.image}  alt="Avatar"/>
                                                         {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                                     </Link>
