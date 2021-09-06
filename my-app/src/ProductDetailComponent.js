@@ -45,28 +45,42 @@ class ProductDetailComponent extends Component {
             (data, index) => data.id.indexOf(this.props.match.params.id) !== -1
         );
 
-        let style 
-            
-        let company  
-        
-        let companyStyle 
-        
-        let category 
-        
-        let notes 
+        let assignedValue = null
 
-        if(filteredData[0].hidden){
+        let assignedValueMap = filteredData.map( (data) =>{
+
+            // console.log(data);
+
+            assignedValue = data
+
+            return data
+
+        } )
+
+        console.log(assignedValue);
+
+        let style ="style"
+             
+        let company = "company"
+        
+        let companyStyle = "companystyle"
+        
+        let category = "category"
+        
+        let notes = "notes"
+
+        // if(assignedValue.hidden){
             
-            style = filteredData[0].style
+        //     style = assignedValue.style
             
-            company = filteredData[0].company 
+        //     company = assignedValue.company 
             
-            companyStyle = filteredData[0].companystyle
+        //     companyStyle = assignedValue.companystyle
             
-            category = filteredData[0].category
+        //     category = assignedValue.category
             
-            notes = filteredData[0].notes
-        }
+        //     notes = assignedValue.notes
+        // }
         return(
             <div className="container">
                 <br/>
@@ -76,7 +90,7 @@ class ProductDetailComponent extends Component {
                         <h1>Product Detail</h1>
                     </div>
                     <div className="col-md-6">
-                        <Link className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} >Edit</Link>                                                        
+                        <Link className="btn btn-primary" to={'/editproduct/'+assignedValue.id} >Edit</Link>                                                        
                     </div>
                 </div>
                 <br/>
@@ -87,22 +101,19 @@ class ProductDetailComponent extends Component {
                     <div className="col-md-1"></div>
                     <div className="col-md-4">
                         <div className="row">
-                            <Link to={'/productdetailzoom/'+filteredData[0].image}>
-                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                            <Link to={'/productdetailzoom/'+assignedValue.image}>
+                                <img src={this.props.URLExternal+'/images/'+assignedValue.image}/>
                             </Link>
                         </div>
                         <br/>
                         <br/>
                         <div className="row">
-                        {filteredData[0].images.map(
+                        {assignedValue.images.map(
                                     (data, index) =>
                                     <div className="col-md-3">
                                         <div className="row">
-                                            <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
-                                            {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}> */}
-                                                {/* <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                 */}
+                                            <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,assignedValue,data)}>
                                                 <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
-                                                {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0s.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                             </button>
                                         </div>
                                     </div>                                         
@@ -118,7 +129,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Style Number:</h4>
                             </div>
                             <div className="col-md-6">
-                                <p>{filteredData[0].description}</p>
+                                <p>{assignedValue.description}</p>
                             </div>
                         </div>
                         <br/>
@@ -154,7 +165,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Price:</h4>
                             </div>
                             <div className="col-md-6 text-align">
-                                <p>{filteredData[0].price}</p>
+                                <p>{assignedValue.price}</p>
                             </div>
                         </div>
                         <br/>
@@ -163,7 +174,7 @@ class ProductDetailComponent extends Component {
                                 <h4>Price Opt:</h4>
                             </div>
                             <div className="col-md-6 text-align">
-                                <p>{filteredData[0].priceopt}</p>
+                                <p>{assignedValue.priceopt}</p>
                             </div>
                         </div>
                         <br/>
