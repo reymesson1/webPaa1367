@@ -44,3 +44,20 @@ exports.deleteCompany = async(req,res)=>{
 
   res.send(company);
 }
+
+exports.getCompanyIpad = async(req,res)=>{
+
+
+  // productBracelet["image2"] = 
+  var companies = await Company.find();
+ 
+  let data = {
+
+    "error": false,
+    "message": "successfully",
+    "data": companies
+  }
+
+  res.send(data);
+
+}

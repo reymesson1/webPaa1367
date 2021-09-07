@@ -118,6 +118,8 @@ app.post('/deletestyle', styleController.deleteStyle);
 
 app.get('/companies', companyController.getCompany);
 
+app.get('/postscompanies', companyController.getCompanyIpad);
+
 app.post('/createcompany', companyController.setCompany);
 
 app.post('/deletecompany', companyController.deleteCompany);
