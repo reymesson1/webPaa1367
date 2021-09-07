@@ -116,6 +116,8 @@ app.post('/createstyle', styleController.setStyle);
 
 app.post('/deletestyle', styleController.deleteStyle);
 
+app.get('/postsstyles', styleController.getStyleIpad);
+
 app.get('/companies', companyController.getCompany);
 
 app.get('/postscompanies', companyController.getCompanyIpad);

@@ -44,3 +44,20 @@ exports.deleteStyle = async(req,res)=>{
 
   res.send(style);
 }
+
+exports.getStyleIpad = async(req,res)=>{
+
+
+  // productBracelet["image2"] = 
+  var styles = await Style.find();
+ 
+  let data = {
+
+    "error": false,
+    "message": "successfully",
+    "data": styles
+  }
+
+  res.send(data);
+
+}
