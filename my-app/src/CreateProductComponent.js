@@ -4,7 +4,7 @@ import { Media, Panel,   Card,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter, Progress } from 'reactstrap';
+    ModalFooter, Progress, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -16,8 +16,21 @@ class CreateProductComponent extends Component {
             newCompanyModal: false,
             newStyleModal: false,
             newLoadingModal: true,
-            productHiddenBtn: true
+            productHiddenBtn: true,
+            price: '',
+            touched:{
+                description: false,
+                company: false,
+                companystyle: false,
+                category: false,
+                style: false,
+                price: false,
+                priceopt: false,
+                notes: false
+            }
         }
+        this.handleBlur = this.handleBlur.bind(this);
+
     }
 
 
@@ -71,7 +84,39 @@ class CreateProductComponent extends Component {
         window.location.reload();
     }
 
+    handleBlur = (field) => (evt) =>{
+
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        })
+
+    }
+
+    validate(description, companystyle, price){
+
+        const errors = {
+            description: '',
+            companystyle: '',
+            price
+        }
+
+        if(this.state.touched.description && description.length < 3){
+            errors.description = "Style Number should be >= 3 characters"
+        }
+        if(this.state.touched.companystyle && companystyle.length < 3){
+            errors.companystyle = "Company Style should be >= 3 characters"
+        }
+        if(this.state.touched.price && price.length < 3){
+            errors.price = "Price should be >= 1 characters"
+        }
+
+        return errors;
+        
+    }
+
     render() {
+
+        const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
 
         let showUpload;
         let hiddenBtnCheck;
@@ -213,7 +258,8 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="description" sm={2}>Style Number</Label>
                             <Col sm={10}>
-                            <Input type="text" name="description" id="description" onChange={e => this.onChangeDescription(e.target.value)}  placeholder="Style Number" />
+                                <Input type="text" name="description" id="description" onChange={e => this.onChangeDescription(e.target.value)}  placeholder="Style Number" />
+                                <FormFeedback>{errors.description}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -232,6 +278,7 @@ class CreateProductComponent extends Component {
                             <Label for="companystyle" sm={2}>Comp Style #</Label>
                             <Col sm={10}>
                             <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" />
+                            <FormFeedback>{errors.description}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -263,7 +310,14 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="price" sm={2}>Price</Label>
                             <Col sm={5}>
-                            <Input type="number" name="price" id="price" placeholder="Price" />
+                            <Input 
+                                type="number" name="price" id="price" placeholder="Price" 
+                                value={this.state.price}
+                                onBlur={this.handleBlur('price')}
+                                valid={errors.price === '' }
+                                invalid={errors.price !== '' }
+                            />
+                            <FormFeedback>{errors.price}</FormFeedback>
                             </Col>
                             <Col sm={5}>
                             <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" />

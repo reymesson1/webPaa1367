@@ -5,6 +5,7 @@ import { Input, Media, Panel,   Card,
     CardBody,
     CardTitle,
     CardSubtitle } from 'reactstrap';
+import FooterComponent from './FooterComponent';
 
 class CategoryComponent extends Component {
 
@@ -88,6 +89,7 @@ class CategoryComponent extends Component {
                         </Link>
                     </div>
                 </div>
+                <FooterComponent></FooterComponent>
             </div>
         );
     }
