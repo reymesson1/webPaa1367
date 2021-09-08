@@ -36,6 +36,17 @@ class CategoryComponent extends Component {
                 </Link>
                 </div>
                 <div className="row">
+                        <Link className="box" to={'/home/bracelet'}> 
+                            <div class="ribbon ribbon-top-right"><span>ribbon2</span></div>
+                        </Link>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Link className="box" to={'/home/bracelet'}> 
+                            <div class="ribbon ribbon-top-right"><span>ribbon2</span></div>
+                        </Link>
+                </div>
+                <br/>
+                <br/>
+                <div className="row">
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
                             <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
