@@ -1,13 +1,6 @@
 import React, { useState, Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Button,
-  Container,
-  Modal,
-  ModalTitle,
-  ModalHeader,
-  ModalBody,
-  ModalFooter, Panel  } from 'reactstrap';
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import { BrowserRouter } from 'react-router-dom';
@@ -64,10 +57,7 @@ class MainComponent extends Component {
             subtotal: "0.00",
             total: "0.00"
           }],
-          products: [],
           fileUploaded: false,
-          styles: [],
-          companies: [],
           productHiddenBtn: false,
           productLoadingModal: false,
           productLoadingModalLabel: "Loading...",
@@ -85,56 +75,6 @@ class MainComponent extends Component {
 
     }
 
-    componentDidMount(){
-
-      fetch(API_URL+'/product')
-        .then((response)=>response.json())
-        .then((responseData)=>{
-            this.setState({
-                products: responseData
-            })
-        })
-        .catch((error)=>{
-            console.log('Error fetching and parsing data', error);
-        })
-
-        fetch(API_URL+'/style')
-        .then((response)=>response.json())
-        .then((responseData)=>{
-            this.setState({
-
-                styles: responseData
-            })
-        })
-        .catch((error)=>{
-            console.log('Error fetching and parsing data', error);
-        })
-
-        fetch(API_URL+'/companies')
-        .then((response)=>response.json())
-        .then((responseData)=>{
-            this.setState({
-
-                companies: responseData
-            })
-        })
-        .catch((error)=>{
-            console.log('Error fetching and parsing data', error);
-        })
-
-        fetch(API_URL+'/gethiddenmode')
-        .then((response)=>response.json())
-        .then((responseData)=>{
-            this.setState({
-
-                onHiddenMode: responseData.hidden
-            })
-        })
-        .catch((error)=>{
-            console.log('Error fetching and parsing data', error);
-        })
-
-    }
 
     addToCart(event){
       event.preventDefault();
