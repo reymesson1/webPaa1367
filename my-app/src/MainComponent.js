@@ -11,7 +11,6 @@ import { Button,
 import Product from './ProductComponent';
 import NavbarComponent from './NavbarComponent';
 import { BrowserRouter } from 'react-router-dom';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomeComponent from './HomeComponent';
 import CompanyComponent from './CompanyComponent';
 import StylesComponent from './StylesComponent';
@@ -24,6 +23,18 @@ import EditProductComponent from './EditProductComponent';
 import FilterComponent from './FilterComponent';
 import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import  axios  from 'axios'
+import { Switch, Route, Redirect, withRouter } from 'react-router';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+
+    return {
+        products: state.products,
+        companies: state.companies,
+        styles: state.styles,
+        hidden: state.hidden,
+    }
+}
 
 // let API_URL = "http://localhost:8085";
 let API_URL = "http://143.198.171.44:8085"; 
@@ -454,7 +465,8 @@ class MainComponent extends Component {
 
       event.preventDefault();
 
-      let nextState = this.state.products.filter(
+    //   let nextState = this.state.products.filter(
+      let nextState = this.props.products.filter(
 
         (data, index) => data.id.indexOf(event.target.id.value) !== -1
       );
@@ -645,7 +657,8 @@ class MainComponent extends Component {
         "productId": dataImage.id,
         "name": dataId
       }
-      let nextState = this.state.products.filter(
+    //   let nextState = this.state.products.filter(
+      let nextState = this.props.products.filter(
 
         (data, index) => data.id.indexOf(dataImage.id) !== -1
       );
@@ -678,7 +691,8 @@ class MainComponent extends Component {
 
     onEditDeletePicture(dataImage, dataId){
 
-      let nextState = this.state.products.filter(
+    //   let nextState = this.state.products.filter(
+      let nextState = this.props.products.filter(
 
         (data, index) => data.id.indexOf(dataImage.id) !== -1
       );
@@ -722,18 +736,6 @@ class MainComponent extends Component {
       
       return (
         <div className="App">
-          <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
-            <ModalHeader>
-              <p>Transaction ID 00001</p>
-            </ModalHeader>
-            <ModalBody>
-              Your checkout has been successfully completed.
-            </ModalBody>
-            <ModalFooter>  
-              <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
-            </ModalFooter>
-          </Modal>
-          
           <BrowserRouter>
 
           <NavbarComponent
@@ -742,7 +744,8 @@ class MainComponent extends Component {
             search={this.search.bind(this)}
             orders={this.state.orders}
             onHiddenApp={this.onHiddenApp.bind(this)}
-            onHiddenMode={this.state.onHiddenMode}
+            // onHiddenMode={this.state.onHiddenMode}
+            onHiddenMode={this.props.hidden}
           />  
           <Route path="/" exact component= {() => <CategoryComponent
                     URLExternal={this.state.URLExternal}
@@ -760,7 +763,8 @@ class MainComponent extends Component {
                     newest={this.state.newest}
                     filterText={this.state.filterText}
                     orders={this.state.orders}
-                    products={this.state.products}
+                    // products={this.state.products}
+                    products={this.props.products}
                     addToCart={this.addToCart.bind(this)}    
                     onClickPagination={this.onClickPagination.bind(this)}    
                 />
@@ -777,14 +781,15 @@ class MainComponent extends Component {
                     />}
           />
           <Route path="/filter" component= {() => <FilterComponent
-                    companies={this.state.companies} 
+                    companies={this.props.companies} 
+                    // companies={this.state.companies} 
                     onDeleteCompany={this.onDeleteCompany.bind(this)} 
                     onCreateCompany={this.onCreateCompany.bind(this)} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
                     onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                     fileUploaded={this.state.fileUploaded}
-                    styles={this.state.styles}
-                    companies={this.state.companies}
+                    // styles={this.state.styles}
+                    styles={this.props.styles}
                     productHiddenBtn={this.state.productHiddenBtn}
                     onCreateCompany={this.onCreateCompany.bind(this)}
                     onCreateStyle={this.onCreateStyle.bind(this)}
@@ -800,8 +805,10 @@ class MainComponent extends Component {
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       fileUploaded={this.state.fileUploaded}
-                      styles={this.state.styles}
-                      companies={this.state.companies}
+                      styles={this.props.styles}
+                    //   styles={this.state.styles}
+                    //   companies={this.state.companies}
+                      companies={this.props.companies}
                       productHiddenBtn={this.state.productHiddenBtn}
                       onCreateCompany={this.onCreateCompany.bind(this)}
                       onCreateStyle={this.onCreateStyle.bind(this)}
@@ -831,12 +838,15 @@ class MainComponent extends Component {
               }) => (
                   <ProductDetailComponent match={match}
                     URLExternal={this.state.URLExternal}  
-                    products={this.state.products} 
+                    products={this.props.products} 
+                    // products={this.state.products} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
                     onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                     fileUploaded={this.state.fileUploaded}
-                    styles={this.state.styles}
-                    companies={this.state.companies}
+                    styles={this.props.styles}
+                    // styles={this.state.styles}
+                    companies={this.props.companies}
+                    // companies={this.state.companies}
                     productHiddenBtn={this.state.productHiddenBtn}
                     onCreateCompany={this.onCreateCompany.bind(this)}
                     onCreateStyle={this.onCreateStyle.bind(this)}
@@ -860,12 +870,15 @@ class MainComponent extends Component {
               }) => (
                   <EditProductComponent match={match}
                     URLExternal={this.state.URLExternal}  
-                    products={this.state.products} 
+                    // products={this.state.products} 
+                    products={this.props.products} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
                     onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                     fileUploaded={this.state.fileUploaded}
-                    styles={this.state.styles}
-                    companies={this.state.companies}
+                    // styles={this.state.styles}
+                    styles={this.props.styles}
+                    companies={this.props.companies}
+                    // companies={this.state.companies}
                     productHiddenBtn={this.state.productHiddenBtn}
                     onCreateCompany={this.onCreateCompany.bind(this)}
                     onCreateStyle={this.onCreateStyle.bind(this)}
@@ -891,12 +904,15 @@ class MainComponent extends Component {
               }) => (
                   <ProductDetailZoomComponent match={match}
                     URLExternal={this.state.URLExternal}  
-                    products={this.state.products} 
+                    products={this.props.products} 
+                    // products={this.state.products} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
                     onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                     fileUploaded={this.state.fileUploaded}
-                    styles={this.state.styles}
-                    companies={this.state.companies}
+                    // styles={this.state.styles}
+                    styles={this.props.styles}
+                    companies={this.props.companies}
+                    // companies={this.state.companies}
                     productHiddenBtn={this.state.productHiddenBtn}
                     onCreateCompany={this.onCreateCompany.bind(this)}
                     onCreateStyle={this.onCreateStyle.bind(this)}
@@ -913,7 +929,8 @@ class MainComponent extends Component {
           />
           <Route path="/product" component= {() => <Product
                     URLExternal={this.state.URLExternal}
-                    products={this.state.products} 
+                    products={this.props.products} 
+                    // products={this.state.products} 
                     onEditProduct={this.onEditProduct.bind(this)} 
                     onDeleteProduct={this.onDeleteProduct.bind(this)} 
                 />}
@@ -933,4 +950,5 @@ class MainComponent extends Component {
   }
 }
 
-export default MainComponent;
+export default  withRouter(connect(mapStateToProps)(MainComponent));
+// export default MainComponent;
