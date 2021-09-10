@@ -93,10 +93,12 @@ class ProductDetailComponent extends Component {
             method: 'post',
             headers: API_HEADERS,
             body: JSON.stringify(newEmail)
-          })
-    
+        })
 
-        // console.log(newEmail);
+        this.setState({
+            isModalOpen: false
+        })
+
 
     }
 
