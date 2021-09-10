@@ -1,6 +1,18 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Media, Panel,   Card,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter, Progress } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+
+const API_HEADERS = {
+
+    'Content-Type':'application/json',
+    Authentication: 'any-string-you-like'
+}
 
 class ProductDetailComponent extends Component {
 
@@ -17,8 +29,20 @@ class ProductDetailComponent extends Component {
             notesValue: "",
             imagesValue: [],
             products: [],
-            defaultImageSelected: null
+            defaultImageSelected: null,
+            isModalOpen: false,
+            firstname: '',
+            lastname: '',
+            email: '',
+            touched:{
+                firstname: false,
+                lastname : false,
+                email : false    
+            }
         }
+
+        this.handleBlur = this.handleBlur.bind(this);
+
     }
 
     imageClickEdit = (dataImage, dataId) => {
@@ -35,10 +59,107 @@ class ProductDetailComponent extends Component {
           products: nextState,
           defaultImageSelected: objSelected
         })
-      }
-  
+    }
+
+    onSendEmail(){
+
+        console.log('send email');
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
+    }
+
+    toggleModalStyle = () => {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
+    }
+
+    onSubmit(event){
+
+        event.preventDefault();
+
+        let newEmail = {
+
+            id : event.target.id.value,
+            firstname : event.target.firstname.value,
+            lastname : event.target.lastname.value,
+            email : event.target.email.value
+
+        }
+
+        fetch(this.props.URLExternal+'/sendemail', {
+
+            method: 'post',
+            headers: API_HEADERS,
+            body: JSON.stringify(newEmail)
+          })
+    
+
+        // console.log(newEmail);
+
+    }
+
+    handleBlur = (field) => (evt) =>{
+
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        })
+
+    }
+
+    validate(firstname, lastname, email){
+
+        const errors = {
+            firstname: '',
+            lastname: '',
+            email: ''
+        }
+
+        if(this.state.touched.firstname && firstname.length < 3){
+            errors.firstname = "First Name should be >= 3 characters"
+        }
+        if(this.state.touched.lastname && lastname.length < 3){
+            errors.lastname = "Last Name Style should be >= 3 characters"
+        }
+        if(this.state.touched.email && email.length < 3){
+            errors.email = "Email should be >= 1 characters"
+        }
+
+        return errors;
+        
+    }
+
+    onFirstNameChange(value){
+        this.setState({
+            firstname: value
+        })
+    }
+    onLastNameChange(value){
+        this.setState({
+            lastname: value
+        })
+    }
+    onEmailChange(value){
+        this.setState({
+            email: value
+        })
+    }
   
     render() {
+
+        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
+
+        let submitButton
+        
+        if((this.state.firstname === '') || (this.state.lastname === '') || (this.state.email === '') ){
+
+            submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+        }else{
+            
+            submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+        }
+
 
         let filteredData = this.props.products.filter(
 
@@ -70,7 +191,83 @@ class ProductDetailComponent extends Component {
                 notes = filteredData[0].notes
             }
             return(
-                <div className="container">
+                    <div className="container">
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModalStyle}>
+                        <ModalHeader>
+                        <p>Send an email</p>
+                        </ModalHeader>
+                        <ModalBody>
+                            <div className="row">
+
+                                <Form onSubmit={this.onSubmit.bind(this)}>
+                                        <FormGroup row>
+                                            <Label for="firstname" sm={4}>&nbsp;</Label>
+                                            <Col sm={8}>
+                                            <Input style={{'display':'none'}} type="text" name="id" id="id" value={this.props.match.params.id} disabled />
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label for="firstname" sm={1}>&nbsp;</Label>
+                                            <Label for="firstname" sm={4}>First Name</Label>
+                                            <Col sm={7}>
+                                            <Input type="text" name="firstname" id="firstname" placeholder="First Name" 
+                                                onBlur={this.handleBlur('firstname')}
+                                                valid={this.state.firstname.length >= 3 }
+                                                invalid={this.state.firstname.length < 3 }
+                                                onChange={e => this.onFirstNameChange(e.target.value)}
+                                                value={this.state.firstname}  
+                                                style={{'width':'275px'}}                                                                                                                             
+                                          
+                                            />
+                                            <FormFeedback>{errors.firstname}</FormFeedback>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label for="lastname" sm={1}>&nbsp;</Label>
+                                            <Label for="lastname" sm={4}>Last Name</Label>
+                                            <Col sm={7}>
+                                            <Input type="text" name="lastname" id="lastname" placeholder="Last Name" 
+                                                onBlur={this.handleBlur('lastname')}
+                                                valid={this.state.lastname.length >= 3 }
+                                                invalid={this.state.lastname.length < 3 }
+                                                onChange={e => this.onLastNameChange(e.target.value)}
+                                                value={this.state.lastname}     
+                                                style={{'width':'275px'}}                                                                                                                             
+                                                                                   
+                                            />
+                                            <FormFeedback>{errors.lastname}</FormFeedback>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label for="lastname" sm={1}>&nbsp;</Label>
+                                            <Label for="email" sm={4}>Email</Label>
+                                            <Col sm={7}>
+                                            <Input type="email" name="email" id="email" placeholder="Email" 
+                                                onBlur={this.handleBlur('email')}
+                                                valid={this.state.email.length >= 3 }
+                                                invalid={this.state.email.length < 3 }
+                                                onChange={e => this.onEmailChange(e.target.value)}
+                                                value={this.state.email}       
+                                                style={{'width':'275px'}}                                                                                                                             
+                                            />
+                                            <FormFeedback>{errors.email}</FormFeedback>
+                                            </Col>
+                                        </FormGroup>
+                                        <br/>
+                                        <br/>
+                                        <FormGroup row>
+                                            <Label for="style" sm={2}>&nbsp;</Label>
+                                            <Col sm={10}>
+                                                {submitButton}
+                                                {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                            </Col>
+                                        </FormGroup>
+                                </Form>
+
+                            </div>
+                        </ModalBody>
+                    </Modal>
+
                     <br/>
                     <br/>
                     <div className="row">
@@ -185,6 +382,19 @@ class ProductDetailComponent extends Component {
                                 <div className="col-md-6 text-align">
                                     <p>{notes}</p>
                                 </div>
+                            </div>
+                            <br/>
+                            <div className="row">
+                                <div className="col-md-2">
+                                        <h1 onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
+                                </div>
+                                <div className="col-md-2">
+                                    <h1><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                                </div>
+                                <div className="col-md-2">
+                                    <h1><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                                </div>
+                                <div className="col-md-6"></div>
                             </div>
                         </div>
                     </div>

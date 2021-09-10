@@ -5,7 +5,7 @@ var uploadsFolder = __dirname + '/uploads/';  // defining real upload path
 var upload = multer({ dest: uploadsFolder }); // setting path for multer
 var sharp = require('sharp');
 var uploadsFolder2 = __dirname + '/static/images/';  // defining real upload path
-
+var nodemailer = require("nodemailer");
 var Product = require('../models/product.js');
 
 exports.getMaster = async(req,res)=>{
@@ -409,5 +409,50 @@ exports.setMasterOutput = async(req,res)=>{
   }, 5000);
 
 
+
+}
+
+exports.sendEmail = async(req,res)=>{
+
+  var newEmail = req.body;
+
+  var product = await Product.find({"id" : newEmail.id })
+
+  var smtpTransport = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'reymesson84@gmail.com',
+      pass: '@ltagracia114'
+    }
+  });
+
+  var mail = {
+      from: "Rey Messon <reymesson@gmail.com>",
+      to: newEmail.email,
+      subject: "Amsel eCatalog - Product Detail " + product[0].category ,
+      text: "Node.js New world for me",
+      forceEmbeddedImages: true,
+      html: `
+            
+                  <h1>Product Detail Bracelet</h1>
+                  <p>Style Number: `+ product[0].description +` </p>
+                  <p>Price: `+ product[0].price + `</p>
+                  <p>Image: </p>
+                  <img src="http://143.198.171.44:8085/images/output-`+product[0].image+'"/>'
+
+        
+  }
+
+  smtpTransport.sendMail(mail, function(error, response){
+      if(error){
+          console.log(error);
+      }else{
+          console.log("Message sent: " + response.message);
+      }
+
+      smtpTransport.close();
+  });
+
+  res.send(newEmail);
 
 }
