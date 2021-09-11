@@ -178,7 +178,11 @@ class ProductDetailComponent extends Component {
           body: JSON.stringify(objSelected)
         })
   
-      } 
+    }
+    
+    onPrint(){
+        window.print();
+    }
   
 
   
@@ -448,7 +452,7 @@ class ProductDetailComponent extends Component {
                                         <h1 style={{'text-decoration':'underline','color':'green','cursor':'pointer'}} onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
                                 </div>
                                 <div className="col-md-3">
-                                    <h1 style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                                    <h1 onClick={this.onPrint.bind(this)} style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
                                 </div>
                                 <div className="col-md-3">
                                 </div>

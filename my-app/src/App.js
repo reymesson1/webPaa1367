@@ -26,8 +26,8 @@ import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
 
-let API_URL = "http://localhost:8085";
-// let API_URL = "http://143.198.171.44:8085"; 
+// let API_URL = "http://localhost:8085";
+let API_URL = "http://143.198.171.44:8085"; 
 
 const API_HEADERS = {
 
@@ -41,8 +41,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        // URLExternal: 'http://143.198.171.44:8085', 
-          URLExternal: 'http://localhost:8085',
+        URLExternal: 'http://143.198.171.44:8085', 
+          // URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
