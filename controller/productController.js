@@ -456,3 +456,16 @@ exports.sendEmail = async(req,res)=>{
   res.send(newEmail);
 
 }
+
+exports.setFavorite = async(req,res)=>{
+
+  var obj = req.body;
+
+  var product = await Product.findOne({"id":obj.productId},function(err,master){
+    master.favorite = obj.favorite
+    master.save(function(err,m){
+      console.log("Product Favorite updated");
+    })
+  })
+
+}

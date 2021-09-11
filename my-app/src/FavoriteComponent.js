@@ -9,17 +9,17 @@ const API_HEADERS = {
   }
   
 
-class FilterComponent extends Component {
+class FavoriteComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             filterAPI: [],
+            products: [],
             limit: 5,
             sequence: 5
         }
     }
-
     
     onFilterSearch(event){
 
@@ -61,20 +61,53 @@ class FilterComponent extends Component {
         })
     }
 
+    onClickFavoriteToggle(dataImage, dataId){
+
+        let nextState = this.state.products.filter(
+  
+          (data, index) => data.id.indexOf(dataImage.id) !== -1
+        );
+        
+        nextState[0].favorite = !nextState[0].favorite
+        
+        this.setState({
+          products: nextState
+        })
+  
+        let objSelected = {
+          "productId": dataImage.id,
+          "favorite": nextState[0].favorite,
+        }
+  
+        // fetch(API_URL+'/setfavorite', {
+  
+        //   method: 'post',
+        //   headers: API_HEADERS,
+        //   body: JSON.stringify(objSelected)
+        // })
+  
+      } 
+  
+
     render() {
 
-        const result = this.state.filterAPI.reduce((temp, value) => {
+        let showViewMore
+
+        if(this.state.limit==this.props.products.length){
+
+            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        }
+
+        let filteredData = this.props.products.filter(
+
+            (data, index) => data.favorite === true
+        );
+
+        const result = filteredData.reduce((temp, value) => {
             if(temp.length<this.state.limit)
               temp.push(value);
             return temp;
         }, []);
-
-        let showViewMore
-
-        if(this.state.limit==result.length){
-
-            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
-        }
 
         const menu = result.map((product, index) => {
             return (
@@ -102,57 +135,12 @@ class FilterComponent extends Component {
             <div className="container">
                 <br/>
                 <div className="row">
-                    <h1>Filter</h1>
+                    <h1>Favorite</h1>
                 </div>
                 <br/>
                 <div className="row">
-                    <div className="col-md-5">
-                    <Form onSubmit={this.onFilterSearch.bind(this)} >
-                    {/* <Form > */}
-                        <FormGroup row>
-                            <Col sm={10}>
-                            <Input type="select" name="company" id="company" placeholder="Company Name" >
-                                <option>{''}</option>
-                                {this.props.companies.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-
-                            </Input>                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Col sm={10}>
-                            <Input type="select" name="style" id="style" placeholder="Style" >
-                                    <option>{''}</option>
-                                {this.props.styles.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-
-                            </Input>                            
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Col sm={5}>
-                                <Input type="text" name="price" id="price" placeholder="Price From" />
-                            </Col>
-                            <Col sm={5}>
-                                <Input type="text" name="priceopt" id="priceopt" placeholder="Price To" />
-                            </Col>
-                        </FormGroup>
-                        <br/>
-                        <FormGroup row>
-                            <Col sm={6}></Col>
-                            <Col sm={4}>
-                            <Input type="submit" value="Search" className="btn btn-success" name="image" id="image" placeholder="Image" />
-                            </Col>
-                        </FormGroup>
-                    </Form>
-                    </div>
-                    <div className="col-md-7">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
                         <div className="row">
                             {menu}
                         </div>
@@ -169,6 +157,7 @@ class FilterComponent extends Component {
                         <br/>
                         <br/>
                     </div>
+                    <div className="col-md-2"></div>
                 </div>
             </div>    
         )
@@ -176,4 +165,4 @@ class FilterComponent extends Component {
 
 }
 
-export default FilterComponent;
+export default FavoriteComponent;

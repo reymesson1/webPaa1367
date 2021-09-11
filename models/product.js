@@ -11,6 +11,7 @@ var userSchema = new mongoose.Schema({
     priceopt: String,
     notes: String,
     hidden: Boolean,
+    favorite: Boolean,
     image: String,
     images: Array
 })

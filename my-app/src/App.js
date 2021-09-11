@@ -23,10 +23,11 @@ import CategoryComponent from './CategoryComponent';
 import EditProductComponent from './EditProductComponent';
 import FilterComponent from './FilterComponent';
 import ProductDetailZoomComponent from './ProductDetailZoomComponent';
+import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const API_HEADERS = {
 
@@ -40,8 +41,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -718,21 +719,37 @@ class App extends Component {
 
     }
 
+    onClickFavoriteToggle(dataImage, dataId){
+
+      let nextState = this.state.products.filter(
+
+        (data, index) => data.id.indexOf(dataImage.id) !== -1
+      );
+      
+      nextState[0].favorite = !nextState[0].favorite
+      
+      this.setState({
+        products: nextState
+      })
+
+      let objSelected = {
+        "productId": dataImage.id,
+        "favorite": nextState[0].favorite,
+      }
+
+      fetch(API_URL+'/setfavorite', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(objSelected)
+      })
+
+    } 
+
     render(){
       
       return (
         <div className="App">
-          <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
-            <ModalHeader>
-              <p>Transaction ID 00001</p>
-            </ModalHeader>
-            <ModalBody>
-              Your checkout has been successfully completed.
-            </ModalBody>
-            <ModalFooter>  
-              <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
-            </ModalFooter>
-          </Modal>
           
           <BrowserRouter>
 
@@ -796,6 +813,27 @@ class App extends Component {
 
                     />}
           />
+          <Route path="/favorite" component= {() => <FavoriteComponent          
+                    products={this.state.products} 
+                    companies={this.state.companies} 
+                    onClickFavoriteToggle={this.onClickFavoriteToggle.bind(this)} 
+                    onDeleteCompany={this.onDeleteCompany.bind(this)} 
+                    onCreateCompany={this.onCreateCompany.bind(this)} 
+                    onCreateProduct={this.onCreateProduct.bind(this)}
+                    onCreateProductUpload={this.onCreateProductUpload.bind(this)}
+                    fileUploaded={this.state.fileUploaded}
+                    styles={this.state.styles}
+                    productHiddenBtn={this.state.productHiddenBtn}
+                    onCreateCompany={this.onCreateCompany.bind(this)}
+                    onCreateStyle={this.onCreateStyle.bind(this)}
+                    file={this.state.file}
+                    fileName={this.state.fileName}
+                    productLoadingModal={this.state.productLoadingModal}
+                    productLoadingModalLabel={this.state.productLoadingModalLabel}
+                    URLExternal={this.state.URLExternal}
+
+                    />}
+          />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
@@ -830,6 +868,7 @@ class App extends Component {
                   match 
               }) => (
                   <ProductDetailComponent match={match}
+                    onClickFavoriteToggle={this.onClickFavoriteToggle.bind(this)} 
                     URLExternal={this.state.URLExternal}  
                     products={this.state.products} 
                     onCreateProduct={this.onCreateProduct.bind(this)}

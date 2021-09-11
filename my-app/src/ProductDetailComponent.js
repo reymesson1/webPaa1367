@@ -147,6 +147,40 @@ class ProductDetailComponent extends Component {
             email: value
         })
     }
+
+    onClickFavorite(){
+
+        console.log('onClickFavorite')
+    }
+
+    onClickFavoriteToggle(dataImage, dataId){
+
+        let nextState = this.props.products.filter(
+  
+          (data, index) => data.id.indexOf(dataImage.id) !== -1
+        );
+        
+        nextState[0].favorite = !nextState[0].favorite
+        
+        this.setState({
+          products: nextState
+        })
+  
+        let objSelected = {
+          "productId": dataImage.id,
+          "favorite": nextState[0].favorite,
+        }
+  
+        fetch(this.props.URLExternal+'/setfavorite', {
+  
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(objSelected)
+        })
+  
+      } 
+  
+
   
     render() {
 
@@ -178,6 +212,8 @@ class ProductDetailComponent extends Component {
         
         let notes 
 
+        let favorite 
+
         if(filteredData.length>0){
 
             if(filteredData[0].hidden){
@@ -191,6 +227,22 @@ class ProductDetailComponent extends Component {
                 category = filteredData[0].category
                 
                 notes = filteredData[0].notes
+
+                favorite = filteredData[0].favorite
+            }
+
+            let flagFavorite
+
+            // console.log(filteredData[0].favorite)
+
+            if(filteredData[0].favorite){
+
+                flagFavorite = <h1 onClick={this.onClickFavoriteToggle.bind(this,filteredData[0])} style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>                
+                // flagFavorite = <h1 onClick={this.props.onClickFavoriteToggle.bind(this,filteredData[0])} style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>                
+            }else{
+                
+                flagFavorite = <h1 onClick={this.onClickFavoriteToggle.bind(this,filteredData[0])} style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                // flagFavorite = <h1 onClick={this.props.onClickFavoriteToggle.bind(this,filteredData[0])} style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
             }
             return(
                     <div className="container">
@@ -269,16 +321,21 @@ class ProductDetailComponent extends Component {
                             </div>
                         </ModalBody>
                     </Modal>
-
                     <br/>
                     <br/>
                     <div className="row">
                         <div className="col-md-6">
                             <h1>Product Detail</h1>
                         </div>
-                        <div className="col-md-6">
-                            <Link className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} >Edit</Link>                                                        
+                        <div className="col-md-2"></div>
+                        <div className="col-md-1">
+                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} >Edit</Link>                                                        
                         </div>
+                        <div className="col-md-1">
+                            {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
+                            {flagFavorite}
+                        </div>
+                        <div className="col-md-2"></div>
                     </div>
                     <br/>
                     <div className="row">
@@ -394,7 +451,6 @@ class ProductDetailComponent extends Component {
                                     <h1 style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
                                 </div>
                                 <div className="col-md-3">
-                                    <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
                                 </div>
                                 <div className="col-md-3"></div>
                             </div>

@@ -31,10 +31,20 @@ class CategoryComponent extends Component {
             <div className="container">
                 <br/>
                 <div className="row">
-                <Link to={'/filter'}> 
-                    <h5>Filter</h5>
-                </Link>
+                    <div className="col-md-1">
+                        <Link to={'/favorite'}> 
+                            <h5>Favorite</h5>
+                        </Link>
+                    </div>
+                    |
+                    <div className="col-md-1">
+                        <Link to={'/filter'}> 
+                            <h5>Filter</h5>
+                        </Link>
+                    </div>
+                    <div className="col-md-10"></div>
                 </div>
+                <br/>
                 <div className="row">
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
