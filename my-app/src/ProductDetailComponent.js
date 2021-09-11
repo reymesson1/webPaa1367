@@ -387,16 +387,16 @@ class ProductDetailComponent extends Component {
                             </div>
                             <br/>
                             <div className="row">
-                                <div className="col-md-2">
-                                        <h1 onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
+                                <div className="col-md-3">
+                                        <h1 style={{'text-decoration':'underline','color':'green','cursor':'pointer'}} onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
                                 </div>
-                                <div className="col-md-2">
-                                    <h1><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                                <div className="col-md-3">
+                                    <h1 style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
                                 </div>
-                                <div className="col-md-2">
-                                    <h1><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                                <div className="col-md-3">
+                                    <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
                                 </div>
-                                <div className="col-md-6"></div>
+                                <div className="col-md-3"></div>
                             </div>
                         </div>
                     </div>
