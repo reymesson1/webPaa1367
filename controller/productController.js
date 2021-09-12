@@ -271,6 +271,7 @@ exports.getMasterIpad = async(req,res)=>{
   var productEarings = await Product.find({category:'Earings'});
   var productWatches = await Product.find({category:'Watches'});
   var productFilter = await Product.find({});
+  var productFavorite = await Product.find({"favorite":true});
 
   let data = {
 
@@ -322,6 +323,11 @@ exports.getMasterIpad = async(req,res)=>{
        "id":"8",
        "category":"Filter",
        "items": productFilter
+      },
+      {
+       "id":"9",
+       "category":"Favorite",
+       "items": productFavorite
       },
      
      ]
