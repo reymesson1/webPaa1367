@@ -156,13 +156,15 @@ exports.setHidden = async(req,res)=>{
 
   let obj = req.body;
 
-  console.log(obj);
+  // console.log(obj);
 
   let productBracelet = await Product.findOne({category:'Bracelet'},{_id:0, hidden:1});
 
   let reverse = !productBracelet.hidden
 
   let product = await Product.updateMany({}, {"$set":{"hidden": reverse}});
+
+  res.send(product);
 
 }
 
@@ -467,11 +469,15 @@ exports.setFavorite = async(req,res)=>{
 
   var obj = req.body;
 
+  console.log(obj);
+
   var product = await Product.findOne({"id":obj.productId},function(err,master){
     master.favorite = obj.favorite
     master.save(function(err,m){
       console.log("Product Favorite updated");
     })
   })
+
+  res.send(product)
 
 }

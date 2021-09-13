@@ -136,7 +136,6 @@ app.post('/sendemail', productController.sendEmail);
 
 app.post('/setfavorite', productController.setFavorite);
 
-
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
