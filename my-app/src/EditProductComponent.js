@@ -125,7 +125,12 @@ class EditProductComponent extends Component {
 
     imageClick = (data) => {
         console.log(data);
-    }       
+    }      
+    
+    onClickBack(){
+        window.history.back();
+    }
+
     
     render() {
 
@@ -187,6 +192,18 @@ class EditProductComponent extends Component {
                     </Modal>
 
                     <br/>
+                    <div className="row">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <Link to={'/'}> 
+                                            <p>Home</p>
+                                        </Link>
+                                    </li>
+                                    <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
+                                </ol>
+                            </nav>
+                    </div>
                     <div className="row">
                         <div className="col-md-4">
                             <div className="row">

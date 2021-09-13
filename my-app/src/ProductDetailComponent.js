@@ -183,10 +183,16 @@ class ProductDetailComponent extends Component {
     onPrint(){
         window.print();
     }
+
+    onClickBack(){
+        window.history.back();
+    }
   
 
   
     render() {
+
+        // console.log(window.history.back());
 
         const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
 
@@ -327,6 +333,18 @@ class ProductDetailComponent extends Component {
                     </Modal>
                     <br/>
                     <br/>
+                    <div className="row">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <Link to={'/'}> 
+                                        <p>Home</p>
+                                    </Link>
+                                </li>
+                                <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
+                            </ol>
+                        </nav>
+                    </div>
                     <div className="row">
                         <div className="col-md-6">
                             <h1>Product Detail</h1>

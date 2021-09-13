@@ -133,10 +133,22 @@ class FavoriteComponent extends Component {
         
         return(
             <div className="container">
-                <br/>
                 <div className="row">
-                    <h1>Favorite</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <Link to={'/'}> 
+                                    <p>Home</p>
+                                </Link>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">{'Favorite'}</li>
+                        </ol>
+                    </nav>
                 </div>
+                <br/>
+                {/* <div className="row">
+                    <h1>Favorite</h1>
+                </div> */}
                 <br/>
                 <div className="row">
                     <div className="col-md-2"></div>

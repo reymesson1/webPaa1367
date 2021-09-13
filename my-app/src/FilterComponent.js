@@ -100,6 +100,18 @@ class FilterComponent extends Component {
         
         return(
             <div className="container">
+                <div className="row">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <Link to={'/'}> 
+                                    <p>Home</p>
+                                </Link>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">{'Filter'}</li>
+                        </ol>
+                    </nav>
+                </div>
                 <br/>
                 <div className="row">
                     <h1>Filter</h1>

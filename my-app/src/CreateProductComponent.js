@@ -71,6 +71,11 @@ class CreateProductComponent extends Component {
         window.location.reload();
     }
 
+    onClickBack(){
+        window.history.back();
+    }
+
+
     render() {
 
         let showUpload;
@@ -188,6 +193,18 @@ class CreateProductComponent extends Component {
                     </ModalFooter>
                 </Modal>
                 <br/>
+                <div className="row">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <Link to={'/'}> 
+                                        <p>Home</p>
+                                    </Link>
+                                </li>
+                                <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
+                            </ol>
+                        </nav>
+                </div>
                 <div className="row">
                     <h1>Create New Product</h1>
                 </div>
