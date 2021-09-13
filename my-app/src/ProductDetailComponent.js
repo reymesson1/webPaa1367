@@ -75,7 +75,7 @@ class ProductDetailComponent extends Component {
         })
     }
 
-    onSubmit(event){
+    onSubmitDetail(event){
 
         event.preventDefault();
 
@@ -263,7 +263,7 @@ class ProductDetailComponent extends Component {
                         <ModalBody>
                             <div className="row">
 
-                                <Form onSubmit={this.onSubmit.bind(this)}>
+                                <Form onSubmit={this.onSubmitDetail.bind(this)}>
                                         <FormGroup row>
                                             <Label for="firstname" sm={4}>&nbsp;</Label>
                                             <Col sm={8}>
