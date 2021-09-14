@@ -239,12 +239,6 @@ class App extends Component {
 
     onCreateProductUpload(event){
 
-      // event.preventDefault();
- 
-      // this.setState({
-      //   productLoadingModal: true,
-      //   productLoadingModalLabel: "Loading....",
-      // })
 
       if (event.target.files && event.target.files[0]) {
         let img = event.target.files[0];
@@ -256,20 +250,12 @@ class App extends Component {
         });  
       }
 
-
-      // setTimeout(() => {
-      //   this.setState({
-      //     productLoadingModal: false
-      //   })  
-      // }, 120000);
-
     }
     onCreateProduct(event){
 
       event.preventDefault(); 
 
       this.setState({
-        // productLoadingModal: true,
         productLoadingModalLabel: "Loading....",
         fileUploaded: true,
         productHiddenBtn: true
@@ -306,6 +292,7 @@ class App extends Component {
         "category": event.target.category.value,  
         "priceopt": event.target.priceopt.value,  
         "notes": event.target.notes.value,  
+        "favorite": false,  
         "hidden": false,  
         "image": replaced +'-'+ event.target.style.value + '-0.jpg',
         "images": imagesArr
@@ -345,15 +332,6 @@ class App extends Component {
         headers: API_HEADERS,
         body: JSON.stringify(newProduct)
       });
-
-
-
-
-
-
-      console.log('create new product from App.js')
-
-
 
     }
 

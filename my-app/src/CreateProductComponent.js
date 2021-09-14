@@ -4,7 +4,7 @@ import { Media, Panel,   Card,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter, Progress } from 'reactstrap';
+    ModalFooter, Progress, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -16,8 +16,41 @@ class CreateProductComponent extends Component {
             newCompanyModal: false,
             newStyleModal: false,
             newLoadingModal: true,
-            productHiddenBtn: true
+            productHiddenBtn: true,
+            descriptionValue: "",
+            companystyleValue: "",
+            priceValue: "",
+            priceoptValue: "",
+            notesValue: "",
+            imagesValue: [],
+            products: [],
+            defaultImageSelected: null,
+            isModalOpen: false,
+            firstname: '',
+            lastname: '',
+            email: '',
+            description: '',
+            price: '',
+            company: '',
+            style: '',  
+            companystyle: '',  
+            category: '',  
+            priceopt: '',  
+            notes: '', 
+            touched:{
+                description: false,
+                price: false,
+                company: false,
+                style: false,  
+                companystyle: false,  
+                category: false,  
+                priceopt: false,  
+                notes: false,         
+            }
         }
+
+        this.handleBlur = this.handleBlur.bind(this);
+
     }
 
 
@@ -75,8 +108,82 @@ class CreateProductComponent extends Component {
         window.history.back();
     }
 
+    handleBlur = (field) => (evt) =>{
+
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        })
+
+    }
+
+    validate(description, companystyle, price){
+
+        const errors = {
+            description: '',
+            companystyle: '',
+            price: ''
+        }
+
+        if(this.state.touched.description && description.length < 3){
+            errors.description = "Style Number should be >= 3 characters"
+        }
+        if(this.state.touched.companystyle && companystyle.length < 3){
+            errors.companystyle = "Company Style Style should be >= 3 characters"
+        }
+        if(this.state.touched.price && price.length < 3){
+            errors.price = "Price should be >= 1 characters"
+        }
+
+        return errors;
+        
+    }
+
+    onFirstNameChange(value){
+        this.setState({
+            firstname: value
+        })
+    }
+    onLastNameChange(value){
+        this.setState({
+            lastname: value
+        })
+    }
+    onEmailChange(value){
+        this.setState({
+            email: value
+        })
+    }
+
+    onDescriptionChange(value){
+        this.setState({
+            description: value
+        })
+    }
+    onCompanyStyleChange(value){
+        this.setState({
+            companystyle: value
+        })
+    }
+    onPriceChange(value){
+        this.setState({
+            price: value
+        })
+    }
 
     render() {
+
+        const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
+        // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
+
+        let submitButton
+        
+        if((this.state.description === '') || (this.state.companystyle === '') || (this.state.price === '') ){
+
+            submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+        }else{
+            
+            submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+        }
 
         let showUpload;
         let hiddenBtnCheck;
@@ -219,8 +326,7 @@ class CreateProductComponent extends Component {
                         </div>
                     </div>
                     <div className="col-md-8">
-                    <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
-                    {/* <Form > */}
+                    {/* <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                         <FormGroup row>
                             <Label for="style" sm={2}>Image</Label>
                             <Col sm={10}>
@@ -296,11 +402,124 @@ class CreateProductComponent extends Component {
                         <FormGroup row>
                             <Label for="style" sm={2}>&nbsp;</Label>
                             <Col sm={10}>
-                            {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled /> */}
                             {hiddenBtnCheck}
                             </Col>
                         </FormGroup>
-                    </Form>
+                    </Form> */}
+                        <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
+                                <FormGroup row>
+                                    <Label for="image" sm={2}>Image</Label>
+                                    <Col sm={10}>
+                                        {showUpload}
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="description" sm={2}>Style Number</Label>
+                                    <Col sm={10}>
+                                        <Input type="text" name="description" id="description" placeholder="Style Number" 
+                                            onBlur={this.handleBlur('description')}
+                                            valid={this.state.description.length >= 3 }
+                                            invalid={this.state.description.length < 3 }
+                                            onChange={e => this.onDescriptionChange(e.target.value)}
+                                            value={this.state.description}  
+                                        />
+                                    </Col>
+                                    <FormFeedback>{errors.description}</FormFeedback>
+                                </FormGroup>
+
+                                    {/* <Label for="description" sm={2}>Style Number</Label>
+                                    <Col sm={10}>
+                                    <Input type="text" name="description" id="description" placeholder="Style Number" 
+                                        onBlur={this.handleBlur('description')}
+                                        valid={this.state.description.length >= 3 }
+                                        invalid={this.state.description.length < 3 }
+                                        onChange={e => this.onDescriptionChange(e.target.value)}
+                                        value={this.state.description}  
+                                        style={{'width':'275px'}}                                                                                                                             
+                                    
+                                    /> */}
+                                    <FormFeedback>{errors.description}</FormFeedback>
+                                <FormGroup row>
+                                    <Label for="exampleSelect" sm={2}>Company</Label>
+                                    <Col sm={8}>
+                                        <Input type="select" name="company" id="company" placeholder="Company Name" >
+                                        {this.props.companies.map( 
+                                            (data,index) => <option>{data.description}</option>
+                                        )}
+
+                                    </Input>
+                                    </Col>
+                                    <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="companystyle" sm={2}>Comp Style #</Label>
+                                    <Col sm={10}>
+                                    <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" 
+                                            onBlur={this.handleBlur('companystyle')}
+                                            valid={this.state.companystyle.length >= 3 }
+                                            invalid={this.state.companystyle.length < 3 }
+                                            onChange={e => this.onCompanyStyleChange(e.target.value)}
+                                            value={this.state.companystyle}                                                                        
+                                    />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="exampleSelect" sm={2}>Category</Label>
+                                    <Col sm={10}>
+                                        <Input type="select" name="category" id="category" placeholder="Category" >
+                                            <option>{'Bracelet'}</option>
+                                            <option>{'RM'}</option>
+                                            <option>{'Rings'}</option>
+                                            <option>{'Pendant'}</option>
+                                            <option>{'Pins'}</option>
+                                            <option>{'Necklace'}</option>
+                                            <option>{'Earings'}</option>
+                                            <option>{'Watches'}</option>
+                                    </Input>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="exampleSelect" sm={2}>Style</Label>
+                                    <Col sm={8}>
+                                        <Input type="select" name="style" id="style" placeholder="Style" >
+                                        {this.props.styles.map( 
+                                            (data,index) => <option>{data.description}</option>
+                                        )}
+                                    </Input>
+                                    </Col>
+                                    <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}>Create Style</Label>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="price" sm={2}>Price</Label>
+                                    <Col sm={5}>
+                                    <Input type="number" name="price" id="price" placeholder="Price"
+                                        onBlur={this.handleBlur('price')}
+                                        valid={this.state.price.length >= 3 }
+                                        invalid={this.state.price.length < 3 }
+                                        onChange={e => this.onPriceChange(e.target.value)}
+                                        value={this.state.price}                                                                                                            
+                                    />
+                                    </Col>
+                                    <Col sm={5}>
+                                    <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="notes" sm={2}>Notes</Label>
+                                    <Col sm={10}>
+                                    <Input type="textarea" name="notes" id="notes" placeholder="Notes" />
+                                    </Col>
+                                </FormGroup>
+                                <br/>
+                                <br/>
+                                <FormGroup row>
+                                    <Label for="style" sm={2}>&nbsp;</Label>
+                                    <Col sm={10}>
+                                        {submitButton}
+                                        {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                    </Col>
+                                </FormGroup>
+                        </Form>
                     </div>
                 </div>
             </div>    
