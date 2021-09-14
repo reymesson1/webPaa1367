@@ -25,6 +25,7 @@ import FilterComponent from './FilterComponent';
 import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
+import UserComponent from './UserComponent';
 
 // let API_URL = "http://localhost:8085";
 let API_URL = "http://143.198.171.44:8085"; 
@@ -55,6 +56,7 @@ class App extends Component {
             total: "0.00"
           }],
           products: [],
+          users: [],
           fileUploaded: false,
           styles: [],
           companies: [],
@@ -933,6 +935,11 @@ class App extends Component {
                     products={this.state.products} 
                     onEditProduct={this.onEditProduct.bind(this)} 
                     onDeleteProduct={this.onDeleteProduct.bind(this)} 
+                />}
+          />
+          <Route path="/user" component= {() => <UserComponent
+                    URLExternal={this.state.URLExternal}
+                    users={this.state.users} 
                 />}
           />
           {/* <Route path="/product" component= {() => <Product

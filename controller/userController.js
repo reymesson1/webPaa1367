@@ -85,3 +85,37 @@ exports.getLogout = async(req,res)=>{
     cookies = false;
     res.redirect('/');
 }
+
+exports.getUsers = async(req,res)=>{
+
+    var user = await User.findOne({});
+
+    let users = [];
+
+    users.push(user);
+
+    res.send(users);
+}
+
+exports.createUser = async(req,res)=>{
+
+    var newUser =  req.body;
+
+
+    let user = new User(newUser);
+  
+    // console.log(product);
+  
+    user.save(function(err){
+      if(!err){
+        console.log('User saved');
+      }else{
+          console.log(err)
+      }
+    })
+  
+    res.send(req.body);
+      // var user = await User.findOne({});
+
+    // res.send(user);
+}

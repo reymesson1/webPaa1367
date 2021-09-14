@@ -29,6 +29,8 @@ var styleController = require('./controller/styleController');
 
 var companyController = require('./controller/companyController');
 
+var userController = require('./controller/userController');
+
 app.get('/restaurants', masterController.getMaster);
 
 app.get('/product', productController.getMaster);
@@ -136,6 +138,9 @@ app.post('/sendemail', productController.sendEmail);
 
 app.post('/setfavorite', productController.setFavorite);
 
+app.get('/users', userController.getUsers);
+
+app.post('/createuser', userController.createUser);
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){

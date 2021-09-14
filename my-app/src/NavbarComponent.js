@@ -4,30 +4,25 @@ import './App.css';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { ButtonToggle ,CustomInput,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { ButtonDropdown } from 'reactstrap';
 
 // function NavbarComponent(props) {
 class NavbarComponent extends Component {
 
-        constructor(props) {
-            super(props);
-        }        
- 
-    // const [dropdownOpen, setDropdownOpen] = useState(false);
+    constructor(props) {
+        super(props);
+        this.state = {
+            dropdownOpen: false
+        }
+    }
     
-    // const toggle = () => setDropdownOpen(prevState => !prevState);  
+    toggle = () => {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        })
+    }
 
-
-    // let subTotal = 0;
-    // let total = 0;
-
-    // props.orders[0].orderDetails.map(
-    //     (product) => {
-    //         total += product.price
-    //     }            
-    // )
-
-    // subTotal = (total)-(total*5/100).toFixed(2);
-
+    
     render(){
 
 
@@ -83,8 +78,33 @@ class NavbarComponent extends Component {
                         </Nav>
                     </div>
                 </div>
+                <br/>
                 <div className="col-md-3">
-                    <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
+                    <div className="row" >
+                    <ButtonDropdown style={{'background-color':'#0c343d !important'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <DropdownToggle caret>
+                        Setting
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem header>
+                            <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
+                        </DropdownItem>
+                        <DropdownItem>
+                            <Link >{''}</Link>
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem>
+                            <Link to={'/user'}>User Account</Link>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </ButtonDropdown>
+                    </div>
+                    {/* <div className="row">
+                        <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
+                    </div>
+                    <div className="row">
+                        <Link to={'/user'}>User</Link>
+                    </div> */}
                 </div>
             </Navbar>
         </div>
