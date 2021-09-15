@@ -59,10 +59,12 @@ class NavbarComponent extends Component {
 
     return(
         <div style={{'box-shadow': '0 0 10px #000','z-index':1}}>
-            <Navbar style={{'background-color':'#0c343d','height':'150px','color':'#000000'}}>
+            {/* <Navbar> */}
+            {/* <Navbar style={{'background-color':'#0c343d','height':'150px','color':'#000000'}}> */}
+            <Navbar style={{'height':'150px','color':'#000000'}}>
                 <div className="col-md-3">
-                        <div style={{'color':'#ffffff', 'font-size':'36px'}} href="/"> Amsel </div>
-                        <div style={{'color':'#ef8d09', 'font-size':'16px'}} href="/"> eCatalog </div>
+                    <div style={{'color':'#ffffff', 'font-size':'36px'}} href="/"> Amsel </div>
+                    <div style={{'color':'#ef8d09', 'font-size':'16px'}} href="/"> eCatalog </div>
                 </div>
                 <div className="col-md-6">
                     {/* <Input type="text" onChange={props.search.bind(this)} placeholder="Seach" /> */}
@@ -73,7 +75,7 @@ class NavbarComponent extends Component {
                         <Nav>
                             <NavItem>
                                 <Link to={'/'}>                                
-                                    <NavLink style={{'color':'#ef8d09'}}>Browse</NavLink>
+                                    <NavLink style={{'color':'#ef8d09','text-decoration':'none !important'}}>Browse</NavLink>
                                 </Link>
                                 {/* <NavLink style={{'color':'#ef8d09'}} href="/">Browse</NavLink> */}
                             </NavItem>

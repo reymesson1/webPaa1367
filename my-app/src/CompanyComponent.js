@@ -76,7 +76,7 @@ class CompanyComponent extends Component {
                                                             {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-danger" onClick={this.props.onDeleteCompany.bind(this, data.id)} >Delete</button>                                                        
+                                                            <button className="btn btn-danger" onClick={this.props.onDeleteCompany.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
                                                         </div>
                                                     </div>
                                                 </td>
