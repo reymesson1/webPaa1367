@@ -149,33 +149,33 @@ class CategoryComponent extends Component {
                 <div className="row">
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-bracelets.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickBracelet} color="info">
+                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickBracelet} color="info">
                             {'Bracelet'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/rm'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-rm.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickRM} color="info">
+                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRM} color="info">
                             {'RM'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/rings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-rings.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickRings} color="info">
+                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRings} color="info">
                             {'Rings'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/pendant'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-pendant.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickPendant} color="info">
+                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickPendant} color="info">
                             {'Pendant'}
                         </Button>{' '}
                     </div>
@@ -208,33 +208,33 @@ class CategoryComponent extends Component {
                     </div> */}
                     <div className="col-md-3">
                         <Link to={'/home/pins'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-pins.png"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickPins} color="info">
+                        <Button style={{"position":"absolute","top":"87%","margin-left":"-12%"}} outline onClick={this.handleOnClickPins} color="info">
                             {'Pins'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/necklace'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-necklace.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickNecklace} color="info">
+                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickNecklace} color="info">
                             {'Necklace'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/earings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-earrings.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickEarings} color="info">
+                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickEarings} color="info">
                             {'Earings'}
                         </Button>{' '}
                     </div>
                     <div className="col-md-3">
                         <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
+                            <img src={this.props.URLExternal+"/images/folder-watches.JPG"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
-                        <Button outline onClick={this.handleOnClickWatches} color="info">
+                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickWatches} color="info">
                             {'Watches'}
                         </Button>{' '}
                     </div>
