@@ -441,7 +441,7 @@ class CreateProductComponent extends Component {
                                     <FormFeedback>{errors.description}</FormFeedback>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
-                                    <Col sm={8}>
+                                    <Col sm={7}>
                                         <Input type="select" name="company" id="company" placeholder="Company Name" >
                                         {this.props.companies.map( 
                                             (data,index) => <option>{data.description}</option>
@@ -449,7 +449,7 @@ class CreateProductComponent extends Component {
 
                                     </Input>
                                     </Col>
-                                    <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
+                                    <Label for="exampleSelect" sm={3} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}> <i className="fa fa-plus-circle" style={{'color':'blue'}} aria-hidden="true"></i> Create Company</Label>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="companystyle" sm={2}>Comp Style #</Label>
@@ -487,7 +487,7 @@ class CreateProductComponent extends Component {
                                         )}
                                     </Input>
                                     </Col>
-                                    <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}>Create Style</Label>
+                                    <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}> <i className="fa fa-plus-circle" style={{'color':'blue'}} aria-hidden="true"></i> Create Style</Label>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="price" sm={2}>Price</Label>

@@ -12,9 +12,21 @@ class NavbarComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropdownOpen: false
+            dropdownOpen: false,
+            cachingIcon: false
         }
     }
+
+    componentDidMount(){
+
+        setTimeout(() => {
+            this.setState({
+
+                cachingIcon: true
+            })
+        }, 2000);
+    }
+
     
     toggle = () => {
         this.setState({
@@ -25,9 +37,28 @@ class NavbarComponent extends Component {
     
     render(){
 
+    let onHiddenMode
+
+    if(this.props.onHiddenMode){
+
+        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+    }else{
+
+        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye-slash" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+    }
+
+    let userIcon
+
+    if(this.state.cachingIcon){
+        
+        userIcon =  <i className="fa fa-user" style={{'color':'#ffffff'}} aria-hidden="true"></i>
+    }else{
+
+        userIcon =  <i className="fa fa-user" style={{'color':'#aaafaf'}} aria-hidden="true"></i>
+    }
 
     return(
-        <div>
+        <div style={{'box-shadow': '0 0 10px #000','z-index':1}}>
             <Navbar style={{'background-color':'#0c343d','height':'150px','color':'#000000'}}>
                 <div className="col-md-3">
                         <div style={{'color':'#ffffff', 'font-size':'36px'}} href="/"> Amsel </div>
@@ -83,18 +114,21 @@ class NavbarComponent extends Component {
                     <div className="row" >
                     <ButtonDropdown style={{'background-color':'#0c343d !important'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret>
-                        Setting
+                        {/* <i className="fa fa-user" style={{'color':'#ffffff'}} aria-hidden="true"></i> */}
+                        {userIcon}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem header>
-                            <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
+                            {/* <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" /> */}
+                            {/* <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button> */}
+                            {onHiddenMode}
                         </DropdownItem>
                         <DropdownItem>
                             <Link >{''}</Link>
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem>
-                            <Link to={'/user'}>User Account</Link>
+                            <Link className="btn btn-primary" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
                         </DropdownItem>
                     </DropdownMenu>
                     </ButtonDropdown>

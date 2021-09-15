@@ -351,7 +351,7 @@ class ProductDetailComponent extends Component {
                         </div>
                         <div className="col-md-2"></div>
                         <div className="col-md-1">
-                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} >Edit</Link>                                                        
+                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
                         </div>
                         <div className="col-md-1">
                             {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}

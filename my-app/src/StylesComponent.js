@@ -50,7 +50,7 @@ class StylesComponent extends Component {
                         <h1>&nbsp;</h1>
                     </div>
                     <div className="col-md-6">
-                        <Link className="btn btn-success" to={'/createstyle'} style={{'width':'100%'}}  >Create a New Style</Link>
+                        <Link className="btn btn-success" to={'/createstyle'} style={{'width':'100%'}}  ><i className="fa fa-plus-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i>&nbsp;&nbsp;  Create a New Style</Link>
                     </div>
                 </div>
                 <div className="row">

@@ -55,6 +55,7 @@ class UserComponent extends Component {
         fetch(this.props.URLExternal+'/users')
         .then((response)=>response.json())
         .then((responseData)=>{
+            console.log(responseData);
             this.setState({
                 users: responseData
             })
@@ -116,8 +117,6 @@ class UserComponent extends Component {
             email : event.target.email.value
 
         }
-
-        console.log();
 
         fetch(this.props.URLExternal+'/createuser', {
 
@@ -213,6 +212,33 @@ class UserComponent extends Component {
         })
     }
 
+    onDeleteItem(dataItem,idUser){
+        
+        // console.log(dataItem);
+
+        let nextState = this.state.users.filter(
+
+            (data, index) => data.username.toLowerCase().indexOf(dataItem.toLowerCase()) === -1
+        );
+
+        this.setState({
+            users: nextState
+        })
+
+        let newEmail = {
+
+            username : dataItem
+        }
+
+        fetch(this.props.URLExternal+'/removeuser', {
+
+            method: 'post',
+            headers: API_HEADERS,
+            body: JSON.stringify(newEmail)
+        })
+
+                
+    }
 
 
     render() {
@@ -236,6 +262,7 @@ class UserComponent extends Component {
         
         return(            
             <div className="container">
+                <br/>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModalStyle}>
                     <ModalHeader >
                         <div className="row">
@@ -341,7 +368,8 @@ class UserComponent extends Component {
                         <h1>&nbsp;</h1>
                     </div>
                     <div className="col-md-6">
-                        <Button className="btn btn-success" onClick={this.onOpenModal.bind(this)} style={{'width':'100%'}}  >Create a New User
+                        <Button className="btn btn-success" onClick={this.onOpenModal.bind(this)} style={{'width':'100%'}}  >
+                        <i className="fa fa-plus-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i>&nbsp;&nbsp;  Create a New User
                         </Button>
                         {/* <div className="btn btn-dark" onClick={this.onClicked.bind(this)} style={{'width':'100%'}}  >Create a New Product</div> */}
                     </div>
@@ -355,6 +383,7 @@ class UserComponent extends Component {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -366,6 +395,11 @@ class UserComponent extends Component {
                                     <td>{data.firstname}</td>                                                    
                                     <td>{data.lastname}</td>                                                    
                                     <td>{data.email}</td>                                                    
+                                    <td>
+
+                                        <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this,data.username)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
+
+                                    </td>                                                    
                                 </tr>
                             )}
                         </tbody>

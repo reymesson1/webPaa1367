@@ -50,7 +50,7 @@ class CompanyComponent extends Component {
                         <h1>&nbsp;</h1>
                     </div>
                     <div className="col-md-6">
-                        <Link className="btn btn-success" to={'/createcompany'} style={{'width':'100%'}}  >Create a New Company</Link>
+                        <Link className="btn btn-success" to={'/createcompany'} style={{'width':'100%'}}  ><i className="fa fa-plus-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i>&nbsp;&nbsp;  Create a New Company</Link>
                     </div>
                 </div>
                 <div className="row">

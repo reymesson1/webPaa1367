@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Input, Media, Panel,   Card,
+import { Input, Media, Panel,   Card, Button,
     CardBody,
     CardTitle,
     CardSubtitle,
@@ -108,7 +108,10 @@ class Product extends Component {
 
         if(this.state.limit==result.length){
 
-            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+            // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+            // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+            showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
+
         }
 
         let filteredData = result.filter(
@@ -207,7 +210,7 @@ class Product extends Component {
                         <h1>&nbsp;</h1>
                     </div>
                     <div className="col-md-6">
-                        <Link className="btn btn-success" to={'/createproduct'} style={{'width':'100%'}}  >Create a New Product</Link>
+                        <Link className="btn btn-success" to={'/createproduct'} style={{'width':'100%'}}  ><i className="fa fa-plus-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;&nbsp; Create a New Product</Link>
                         {/* <div className="btn btn-dark" onClick={this.onClicked.bind(this)} style={{'width':'100%'}}  >Create a New Product</div> */}
                     </div>
                 </div>
@@ -250,10 +253,10 @@ class Product extends Component {
                                                         <div className="col-md-6">
                                                             {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
                                                             
-                                                            <Link className="btn btn-primary" to={'/editproduct/'+data.id} >Edit</Link>                                                        
+                                                            <Link className="btn btn-primary" to={'/editproduct/'+data.id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} >Delete</button>                                                        
+                                                            <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
                                                         </div>
                                                     </div>
                                                 </td>

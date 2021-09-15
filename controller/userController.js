@@ -88,13 +88,9 @@ exports.getLogout = async(req,res)=>{
 
 exports.getUsers = async(req,res)=>{
 
-    var user = await User.findOne({});
+    var user = await User.find({});
 
-    let users = [];
-
-    users.push(user);
-
-    res.send(users);
+    res.send(user);
 }
 
 exports.createUser = async(req,res)=>{
@@ -119,3 +115,17 @@ exports.createUser = async(req,res)=>{
 
     // res.send(user);
 }
+
+exports.deleteUser = async(req,res)=>{
+
+    var obj = req.body;
+  
+    var user = await User.remove({"username":obj.username},function(err,master){
+      if(!err){
+        console.log("User removed ");
+      }
+    })
+  
+    res.send(user);
+  }
+  

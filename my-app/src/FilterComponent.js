@@ -100,6 +100,7 @@ class FilterComponent extends Component {
         
         return(
             <div className="container">
+                <br/>
                 <div className="row">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
