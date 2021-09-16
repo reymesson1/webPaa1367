@@ -61,6 +61,11 @@ class FilterComponent extends Component {
         })
     }
 
+    onClickBack(){
+        window.history.back();
+    }
+
+
     render() {
 
         const result = this.state.filterAPI.reduce((temp, value) => {

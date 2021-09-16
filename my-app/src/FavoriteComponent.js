@@ -88,6 +88,9 @@ class FavoriteComponent extends Component {
   
       } 
   
+    onClickBack(){
+        window.history.back();
+    }
 
     render() {
 
@@ -129,7 +132,7 @@ class FavoriteComponent extends Component {
                 </div>
             )
 
-        })
+        })    
         
         return(
             <div className="container">
