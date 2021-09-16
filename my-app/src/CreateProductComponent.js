@@ -197,7 +197,7 @@ class CreateProductComponent extends Component {
 
         }else{
             // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <input className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
+            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
 
         }
 

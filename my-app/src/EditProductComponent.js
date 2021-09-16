@@ -142,7 +142,9 @@ class EditProductComponent extends Component {
             showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
 
         }else{
-            showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
+
         }
 
         if(!this.props.productHiddenBtn){
@@ -260,7 +262,7 @@ class EditProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
                                     <Col sm={10}>
-                                        <Input type="select" name="company" id="company" placeholder="Company Name" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" >
                                         {filteredDataCompany.map( 
                                             (data,index) => <option>{data.description}</option>
                                         )}
@@ -277,7 +279,7 @@ class EditProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Category</Label>
                                     <Col sm={10}>
-                                        <Input type="select" name="category" id="category" placeholder="Category" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" >
                                             <option>{filteredData[0].category}</option>
                                             
                                     </Input>
@@ -286,7 +288,7 @@ class EditProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Style</Label>
                                     <Col sm={10}>
-                                        <Input type="select" name="style" id="style" placeholder="Style" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Style" >
                                         {filteredDataStyle.map(
                                                 (data) => <option>{data.description}</option>
                                         )}
