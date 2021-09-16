@@ -306,8 +306,13 @@ class CreateProductComponent extends Component {
                 </Modal>
                 <br/>
                 <div className="row">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
+                    <div className="col-md-2">
+                        <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
+                    </div>
+                    <div className="col-md-10"></div>
+
+                        {/* <nav aria-label="breadcrumb">
+                            <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
                                 <li class="breadcrumb-item">
                                     <Link to={'/'}> 
                                         <p>Home</p>
@@ -315,7 +320,7 @@ class CreateProductComponent extends Component {
                                 </li>
                                 <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
                             </ol>
-                        </nav>
+                        </nav> */}
                 </div>
                 <div className="row">
                     <h1>Create New Product</h1>

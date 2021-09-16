@@ -102,8 +102,12 @@ class FilterComponent extends Component {
             <div className="container">
                 <br/>
                 <div className="row">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
+                    <div className="col-md-2">
+                        <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
+                    </div>
+                    <div className="col-md-10"></div>
+                    {/* <nav aria-label="breadcrumb">
+                        <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <Link to={'/'}> 
                                     <p>Home</p>
@@ -111,7 +115,7 @@ class FilterComponent extends Component {
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">{'Filter'}</li>
                         </ol>
-                    </nav>
+                    </nav> */}
                 </div>
                 <br/>
                 <div className="row">
@@ -123,32 +127,36 @@ class FilterComponent extends Component {
                     <Form onSubmit={this.onFilterSearch.bind(this)} >
                     {/* <Form > */}
                         <FormGroup row>
+                            <Label for="companystyle" sm={2} style={{'text-align':'left'}}>Company</Label>
                             <Col sm={10}>
-                            <Input type="select" name="company" id="company" placeholder="Company Name" >
+                            <Input type="select" style={{'color':'#fff','height':'50px'}} name="company" id="company" placeholder="Company Name" >
                                 <option>{''}</option>
                                 {this.props.companies.map( 
-                                    (data,index) => <option>{data.description}</option>
+                                    (data,index) => <option style={{'color':'#a59d9d','height':'50px'}}>{data.description}</option>
                                 )}
 
                             </Input>                            </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Col sm={10}>
+                            <Label for="companystyle" style={{'text-align':'left'}} sm={4}>Company Style</Label>
+                            <Col sm={8}>
                                 <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Col sm={10}>
-                            <Input type="select" name="style" id="style" placeholder="Style" >
-                                    <option>{''}</option>
+                            <Label for="companystyle" style={{'text-align':'left'}} sm={4}>Style{'   '}</Label>
+                            <Col sm={8}>
+                            <Input type="select" style={{'color':'#fff','height':'50px'}} name="style" id="style" placeholder="Style" >
+                                    <option style={{'color':'#fff','height':'50px'}}>{''}</option>
                                 {this.props.styles.map( 
-                                    (data,index) => <option>{data.description}</option>
+                                    (data,index) => <option style={{'color':'#a59d9d','height':'50px'}}  >{data.description}</option>
                                 )}
 
                             </Input>                            
                             </Col>
                         </FormGroup>
                         <FormGroup row>
+                            <Label for="companystyle" style={{'text-align':'left'}} sm={2}>Price</Label>
                             <Col sm={5}>
                                 <Input type="text" name="price" id="price" placeholder="Price From" />
                             </Col>
