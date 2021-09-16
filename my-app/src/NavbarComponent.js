@@ -41,10 +41,10 @@ class NavbarComponent extends Component {
 
     if(this.props.onHiddenMode){
 
-        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff','text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
     }else{
 
-        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye-slash" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye-slash" style={{'color':'#007bff', 'text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
     }
 
     let userIcon
@@ -112,17 +112,16 @@ class NavbarComponent extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="col-md-3">
+                <div className="col-md-1">
+                </div>
+                <div className="col-md-2">
                     <div className="row" >
-                    <ButtonDropdown style={{'background-color':'#0c343d !important'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <ButtonDropdown style={{'background-color':'#0c343d !important','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret>
-                        {/* <i className="fa fa-user" style={{'color':'#ffffff'}} aria-hidden="true"></i> */}
                         {userIcon}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem header>
-                            {/* <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" /> */}
-                            {/* <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button> */}
                             {onHiddenMode}
                         </DropdownItem>
                         <DropdownItem>
@@ -135,6 +134,8 @@ class NavbarComponent extends Component {
                     </DropdownMenu>
                     </ButtonDropdown>
                     </div>
+
+
                     {/* <div className="row">
                         <CustomInput onChange={this.props.onHiddenApp.bind(this)} type="switch" id="exampleCustomSwitch" checked={this.props.onHiddenMode} name="customSwitch" label="Hidden Mode" />
                     </div>

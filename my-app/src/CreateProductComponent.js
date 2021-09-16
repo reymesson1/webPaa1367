@@ -189,11 +189,16 @@ class CreateProductComponent extends Component {
         let hiddenBtnCheck;
 
         if(this.props.fileUploaded){
-            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+
+            // showUpload = <div className="form-group"><label for="formFile" className="form-label mt-4">Default file input example</label><input className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} /></div>
+
+            // showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
             showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
 
         }else{
-            showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+            showUpload = <input className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
+
         }
 
         if(!this.state.productHiddenBtn){
@@ -411,6 +416,7 @@ class CreateProductComponent extends Component {
                                     <Label for="image" sm={2}>Image</Label>
                                     <Col sm={10}>
                                         {showUpload}
+                                        {/* <div className="form-group"><label for="formFile" className="form-label mt-4">Default file input example</label><input className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} /></div> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -442,7 +448,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
                                     <Col sm={7}>
-                                        <Input type="select" name="company" id="company" placeholder="Company Name" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" >
                                         {this.props.companies.map( 
                                             (data,index) => <option>{data.description}</option>
                                         )}
@@ -466,7 +472,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Category</Label>
                                     <Col sm={10}>
-                                        <Input type="select" name="category" id="category" placeholder="Category" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" >
                                             <option>{'Bracelet'}</option>
                                             <option>{'RM'}</option>
                                             <option>{'Rings'}</option>
@@ -481,7 +487,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Style</Label>
                                     <Col sm={8}>
-                                        <Input type="select" name="style" id="style" placeholder="Style" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Style" >
                                         {this.props.styles.map( 
                                             (data,index) => <option>{data.description}</option>
                                         )}
