@@ -175,6 +175,11 @@ class HomeComponent extends Component {
         console.log('onClickFavorite')
     }
 
+    onClickBack(){
+        window.history.back();
+    }
+
+
     render() {
 
         // const result = this.props.products.reduce((temp, value) => {
@@ -281,6 +286,8 @@ class HomeComponent extends Component {
                             </CardBody>
                         </Card>
                         </div>
+                        <br/>
+
                     {/* <Link to={'/productdetail/'+product.id}> 
                         <div className="card" style={{'margin':'5%'}}>
                                 <img src={this.props.URLExternal+"/images/output-"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
@@ -386,6 +393,7 @@ class HomeComponent extends Component {
                         </ol>
                     </nav> */}
                 </div>
+                <br/>
                 {/* <br/>
                 <div className="row">
                     <h1>{this.props.match.params.id.toUpperCase()}</h1>
@@ -402,6 +410,7 @@ class HomeComponent extends Component {
                 <div className="row">                    
                     {menu}
                 </div>
+                <br/>
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">

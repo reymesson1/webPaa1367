@@ -210,6 +210,7 @@ class EditProductComponent extends Component {
                                 </ol>
                             </nav> */}
                     </div>
+                    <br/>
                     <div className="row">
                         <div className="col-md-4">
                             <div className="row">
@@ -219,7 +220,7 @@ class EditProductComponent extends Component {
                             <div className="row">
                                 <div className="col-md-8"></div>
                                 <div className="col-md-4">
-                                    <button className="btn btn-warning" onClick={this.props.defaultImageSelectedFunc.bind(this)}>Default</button>
+                                    <button className="btn btn-primary" onClick={this.props.defaultImageSelectedFunc.bind(this)}>Default</button>
                                 </div>
                             </div>
                             <br/>
