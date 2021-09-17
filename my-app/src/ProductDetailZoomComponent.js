@@ -30,6 +30,10 @@ class ProductDetailZoomComponent extends Component {
         this.setState({ backgroundPosition: `${x}% ${y}%` })
     }    
 
+    onClickBack(){
+        window.history.back();
+    }
+
     render() {
 
         let filterData = this.props.products.filter(
@@ -40,6 +44,14 @@ class ProductDetailZoomComponent extends Component {
         
         return(
             <div className="container">                
+                <br/>
+                <br/>
+                <div className="row">
+                        <div className="col-md-2">
+                            <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
+                        </div>
+                        <div className="col-md-10"></div>
+                </div>
                 <br/>
                 <div className="row">
                     <h1>Product Detail Zoom</h1>

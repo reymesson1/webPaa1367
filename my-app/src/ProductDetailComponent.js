@@ -337,7 +337,14 @@ class ProductDetailComponent extends Component {
                         <div className="col-md-2">
                             <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
                         </div>
-                        <div className="col-md-10"></div>
+                        <div className="col-md-8"></div>
+                        <div className="col-md-1">
+                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
+                        </div>
+                        <div className="col-md-1">
+                            {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
+                            {flagFavorite}
+                        </div>
                         {/* <nav aria-label="breadcrumb">
                             <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
                                 <li class="breadcrumb-item">
@@ -352,14 +359,6 @@ class ProductDetailComponent extends Component {
                     <div className="row">
                         <div className="col-md-6">
                             <h1>Product Detail</h1>
-                        </div>
-                        <div className="col-md-2"></div>
-                        <div className="col-md-1">
-                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
-                        </div>
-                        <div className="col-md-1">
-                            {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
-                            {flagFavorite}
                         </div>
                         <div className="col-md-2"></div>
                     </div>
