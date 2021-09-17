@@ -7,12 +7,14 @@ import { Media, Panel,   Card,
     ModalBody,
     ModalFooter, Progress } from 'reactstrap';
 import { Button, Col, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import moment from 'moment'
 
 const API_HEADERS = {
 
     'Content-Type':'application/json',
     Authentication: 'any-string-you-like'
 }
+
 
 class ProductDetailComponent extends Component {
 
@@ -43,6 +45,11 @@ class ProductDetailComponent extends Component {
 
         this.handleBlur = this.handleBlur.bind(this);
 
+
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
     }
 
     imageClickEdit = (dataImage, dataId) => {
@@ -224,21 +231,46 @@ class ProductDetailComponent extends Component {
 
         let favorite 
 
+        let diffDay 
+
         if(filteredData.length>0){
 
             if(filteredData[0].hidden){
                 
-                style = filteredData[0].style
+                style = 'Style: ' + filteredData[0].style
                 
-                company = filteredData[0].company 
+                company =  'Company: ' + filteredData[0].company 
                 
-                companyStyle = filteredData[0].companystyle
+                companyStyle = 'Company Style: ' + filteredData[0].companystyle
                 
-                category = filteredData[0].category
+                category = 'Category: ' + filteredData[0].category
                 
-                notes = filteredData[0].notes
+                notes = 'Notes: ' + filteredData[0].notes
 
                 favorite = filteredData[0].favorite
+
+                var date = parseInt(filteredData[0].id, 10); // you want to use radix 10
+
+                let yesterday = moment(date).format('YYYY-MM-DD');
+                let yesterdayYY = moment(date).format('YYYY');
+                let yesterdayMM = moment(date).format('MM');
+                let yesterdayDD = moment(date).format('DD');
+
+                let today = moment(new Date()).format('YYYY-MM-DD');
+                let todayYY = moment(new Date()).format('YYYY');
+                let todayMM = moment(new Date()).format('MM');
+                let todayDD = moment(new Date()).format('DD');
+                
+                var a = moment([yesterdayYY, yesterdayMM-1, yesterdayDD]);
+                var b = moment([todayYY, todayMM-1, todayDD]);
+
+                console.log(yesterday);
+                console.log(today);
+
+                console.log( b.diff(a, 'days')  )   // =1
+                diffDay = ( b.diff(a, 'days')  )   // =1
+
+                // console.log(yesterday.diff(today));
             }
 
             let flagFavorite
@@ -332,9 +364,8 @@ class ProductDetailComponent extends Component {
                         </ModalBody>
                     </Modal>
                     <br/>
-                    <br/>
                     <div className="row">
-                        <div className="col-md-2">
+                        {/* <div className="col-md-2">
                             <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
                         </div>
                         <div className="col-md-8"></div>
@@ -342,9 +373,8 @@ class ProductDetailComponent extends Component {
                             <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
                         </div>
                         <div className="col-md-1">
-                            {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
                             {flagFavorite}
-                        </div>
+                        </div> */}
                         {/* <nav aria-label="breadcrumb">
                             <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
                                 <li class="breadcrumb-item">
@@ -356,19 +386,81 @@ class ProductDetailComponent extends Component {
                             </ol>
                         </nav> */}
                     </div>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h1>Product Detail</h1>
-                        </div>
-                        <div className="col-md-2"></div>
-                    </div>
                     <br/>
                     <div className="row">
-                        <br/>
+                    <div className="col-md-3">
+                        <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
                     </div>
+                    <div className="col-md-6">
+
+                            <div class="card mb-3">
+                                <h3 class="card-header">{filteredData[0].description}</h3>
+                                <div class="card-body">
+                                    <h5 class="card-title"><p>{style}</p></h5>
+                                    <h6 class="card-subtitle text-muted">{company}</h6>
+                                </div>
+                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                <div class="card-body">
+                                    <p class="card-text">{notes}</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{ 'Price: ' + filteredData[0].price}</li>
+                                    <li class="list-group-item">{ 'Price Opt: ' + filteredData[0].priceopt}</li>
+                                    <li class="list-group-item"></li>
+                                </ul>
+                                <div class="card-body">
+                                    <div className="row">
+                                    {filteredData[0].images.map(
+                                        (data, index) =>
+                                            <div className="col-md-3" style={{'cursor':'pointer'}} onClick={this.imageClickEdit.bind(this,filteredData[0],data)} >
+                                                <img style={{'margin':'2px','border':'4px solid #000000', 'border-radius':'7px'}}  src={this.props.URLExternal+"/images/output-"+data}/>
+                                            </div>
+                                    )}
+                                            
+                                    </div>
+                                    <hr/>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    {diffDay + ' days ago'} 
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-1"></div>
+                        <div className="col-md-1">
+                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
+                        </div>
+                        <div className="col-md-1">
+                            {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
+                            {flagFavorite}
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-10"></div>
+
+                        <div className="col-md-1">
+                                <h1 style={{'text-decoration':'underline','color':'green','cursor':'pointer'}} onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
+                        </div>
+                        <div className="col-md-1">
+                            <h1 onClick={this.onPrint.bind(this)} style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
+                        </div>
+                    </div>
+
+
                     <div className="row">
                         <div className="col-md-1"></div>
-                        <div className="col-md-4">
+                        {/* <div className="col-md-4">
                             <div className="row">
                                 <Link to={'/productdetailzoom/'+filteredData[0].image}>
                                     <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
@@ -382,18 +474,15 @@ class ProductDetailComponent extends Component {
                                         <div className="col-md-3">
                                             <div className="row">
                                                 <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
-                                                {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}> */}
-                                                    {/* <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                 */}
                                                     <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
-                                                    {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0s.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                                 </button>
                                             </div>
                                         </div>                                         
                             )}
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-md-1"></div>
-                        <div className="col-md-4">
+                        {/* <div className="col-md-4">
 
                             <br/>
                             <div className="row">
@@ -479,7 +568,7 @@ class ProductDetailComponent extends Component {
                                 </div>
                                 <div className="col-md-3"></div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-md-2"></div>
 
