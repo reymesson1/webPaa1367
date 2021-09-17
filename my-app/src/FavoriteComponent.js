@@ -154,6 +154,13 @@ class FavoriteComponent extends Component {
                     </nav> */}
                 </div>
                 <br/>
+                <div className="row">
+                    <div className="col-md-3">
+                        <h1>Favorite</h1>
+                    </div>
+                    <div className="col-md-9"></div>
+                </div>
+
                 {/* <div className="row">
                     <h1>Favorite</h1>
                 </div> */}
