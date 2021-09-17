@@ -303,7 +303,6 @@ class ProductDetailComponent extends Component {
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
-                                            <Label for="firstname" sm={1}>&nbsp;</Label>
                                             <Label for="firstname" sm={4}>First Name</Label>
                                             <Col sm={7}>
                                             <Input type="text" name="firstname" id="firstname" placeholder="First Name" 
@@ -319,7 +318,6 @@ class ProductDetailComponent extends Component {
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
-                                            <Label for="lastname" sm={1}>&nbsp;</Label>
                                             <Label for="lastname" sm={4}>Last Name</Label>
                                             <Col sm={7}>
                                             <Input type="text" name="lastname" id="lastname" placeholder="Last Name" 
@@ -335,7 +333,6 @@ class ProductDetailComponent extends Component {
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
-                                            <Label for="lastname" sm={1}>&nbsp;</Label>
                                             <Label for="email" sm={4}>Email</Label>
                                             <Col sm={7}>
                                             <Input type="email" name="email" id="email" placeholder="Email" 
@@ -399,7 +396,9 @@ class ProductDetailComponent extends Component {
                                     <h5 class="card-title"><p>{style}</p></h5>
                                     <h6 class="card-subtitle text-muted">{company}</h6>
                                 </div>
-                                <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                <Link to={'/productdetailzoom/'+filteredData[0].image}>
+                                    <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                </Link>
                                 <div class="card-body">
                                     <p class="card-text">{notes}</p>
                                 </div>
@@ -428,7 +427,7 @@ class ProductDetailComponent extends Component {
                                 </div>
                                 <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Card title</h4>
+                                    <h4 class="card-title">{category}</h4>
                                     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="card-link">Card link</a>

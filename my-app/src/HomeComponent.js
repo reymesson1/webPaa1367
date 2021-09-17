@@ -316,7 +316,6 @@ class HomeComponent extends Component {
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="firstname" sm={1}>&nbsp;</Label>
                                         <Label for="firstname" sm={4}>First Name</Label>
                                         <Col sm={7}>
                                         <Input type="text" name="firstname" id="firstname" placeholder="First Name" 
@@ -332,7 +331,6 @@ class HomeComponent extends Component {
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="lastname" sm={1}>&nbsp;</Label>
                                         <Label for="lastname" sm={4}>Last Name</Label>
                                         <Col sm={7}>
                                         <Input type="text" name="lastname" id="lastname" placeholder="Last Name" 
@@ -348,7 +346,6 @@ class HomeComponent extends Component {
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="lastname" sm={1}>&nbsp;</Label>
                                         <Label for="email" sm={4}>Email</Label>
                                         <Col sm={7}>
                                         <Input type="email" name="email" id="email" placeholder="Email" 
