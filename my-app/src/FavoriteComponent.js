@@ -136,7 +136,7 @@ class FavoriteComponent extends Component {
         
         return(
             <div className="container">
-                <br/>
+                <br/>                
                 <div className="row">
                     <div className="col-md-2">
                         <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
@@ -158,6 +158,13 @@ class FavoriteComponent extends Component {
                     <h1>Favorite</h1>
                 </div> */}
                 <br/>
+                <div className="row">
+                    <div className="col-md-4">
+                        <h1>Favorite</h1>
+                    </div>
+                    <div className="col-md-4"></div>
+                    <div className="col-md-4"></div>
+                </div>
                 <div className="row">
                     <div className="col-md-2"></div>
                     <div className="col-md-8">

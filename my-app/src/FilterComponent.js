@@ -124,7 +124,11 @@ class FilterComponent extends Component {
                 </div>
                 <br/>
                 <div className="row">
-                    <h1>Filter</h1>
+                    <div className="col-md-4">
+                        <h1>Filter</h1>
+                    </div>
+                    <div className="col-md-4"></div>
+                    <div className="col-md-4"></div>
                 </div>
                 <br/>
                 <div className="row">

@@ -354,6 +354,7 @@ class ProductDetailComponent extends Component {
                             <h1>Product Detail</h1>
                         </div>
                         <div className="col-md-2"></div>
+                        <div className="col-md-2"></div>
                         <div className="col-md-1">
                             <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
                         </div>
@@ -361,7 +362,6 @@ class ProductDetailComponent extends Component {
                             {/* <h1 style={{'text-decoration':'underline','color':'red','cursor':'pointer'}} ><i className="fa fa-star fa-lg"></i> <a href="mailto:confusion@food.net"/></h1> */}
                             {flagFavorite}
                         </div>
-                        <div className="col-md-2"></div>
                     </div>
                     <br/>
                     <div className="row">
@@ -369,6 +369,47 @@ class ProductDetailComponent extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-1"></div>
+                        <div className="col-md-10">
+
+                            <div class="card mb-3">
+                                <h3 class="card-header">{'Style Number: ' + filteredData[0].description}</h3>
+                                <div class="card-body">
+                                    <h5 class="card-title">{'Style: ' + style}</h5>
+                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                                </div>
+                                <Link to={'/productdetailzoom/'+filteredData[0].image}>
+                                            <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
+                                </Link>
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Cras justo odio</li>
+                                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                                    <li class="list-group-item">Vestibulum at eros</li>
+                                </ul>
+                                <div class="card-body">
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    2 days ago
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                                </div>
+                        </div>
+                        <div className="col-md-1"></div>
+
+
+                        {/* <div className="col-md-1"></div>
                         <div className="col-md-4">
                             <div className="row">
                                 <Link to={'/productdetailzoom/'+filteredData[0].image}>
@@ -383,16 +424,13 @@ class ProductDetailComponent extends Component {
                                         <div className="col-md-3">
                                             <div className="row">
                                                 <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
-                                                {/* <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}> */}
-                                                    {/* <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                 */}
                                                     <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
-                                                    {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0s.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
                                                 </button>
                                             </div>
                                         </div>                                         
                             )}
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-md-1"></div>
                         <div className="col-md-4">
 
