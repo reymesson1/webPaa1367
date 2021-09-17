@@ -264,8 +264,8 @@ class HomeComponent extends Component {
                             </Link>
                             <CardBody>
                             <CardTitle tag="h5">{product.description}</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{'Company Style: '+product.companystyle}</CardSubtitle>
-                            <CardText>{'Notes: ' + product.notes}</CardText>
+                            <CardText>{product.category}</CardText>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{'$ '+product.price}</CardSubtitle>
                             <div className="row">
                                 <div className="col-md-4">
                                     <Button className="btn btn-success" onClick={this.onSendEmail.bind(this, product)} ><i className="fa fa-envelope" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>

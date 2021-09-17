@@ -17,6 +17,7 @@ class EditProductComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            products: [],
             newCompanyModal: false,
             newStyleModal: false,
             newLoadingModal: true,
@@ -125,7 +126,24 @@ class EditProductComponent extends Component {
 
     imageClick = (data) => {
         console.log(data);
-    }      
+    } 
+    
+    imageClickEdit = (dataImage, dataId) => {
+        let objSelected = {
+          "productId": dataImage.id,
+          "name": dataId
+        }
+        let nextState = this.props.products.filter(
+  
+          (data, index) => data.id.indexOf(dataImage.id) !== -1
+        );
+        nextState[0].image = dataId
+        this.setState({
+          products: nextState,
+          defaultImageSelected: objSelected
+        })
+    }
+
     
     onClickBack(){
         window.history.back();
@@ -185,8 +203,8 @@ class EditProductComponent extends Component {
                         </ModalBody>
                         <ModalFooter>  
                             <div className="col-md-12">
-                                {/* <button className="btn btn-success" onClick={this.props.onEditCloseModal.bind(this)}  >Close</button> */}
-                                <Link className="btn btn-success" to={'/product'}>Go Back</Link>
+                                <button className="btn btn-success" onClick={this.onClickBack.bind(this)}  >Close</button>
+                                {/* <Link className="btn btn-success" to={'/product'}>Go Back</Link> */}
                             </div>
                             <div className="col-md-">
                             </div>
@@ -229,7 +247,7 @@ class EditProductComponent extends Component {
                                         (data, index) =>
                                         <div className="col-md-3">
                                             <div className="row">
-                                                <button className="btn btn-white" onClick={this.props.imageClickEdit.bind(this,filteredData[0],data)}>
+                                                <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
                                                     <img src={this.props.URLExternal+"/images/"+data} height="70px" width="40px" />                                                                                
                                                 </button>
                                             </div>

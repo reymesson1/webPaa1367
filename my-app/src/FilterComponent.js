@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Label, FormText } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Input, Card,
+    CardBody,
+    CardTitle,
+    CardSubtitle } from 'reactstrap';
+import { CardImg, CardText } from 'reactstrap';
 
 const API_HEADERS = {
 
@@ -78,33 +83,42 @@ class FilterComponent extends Component {
 
         if(this.state.limit==result.length){
 
-            showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+            // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+            showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
+
         }
 
         const menu = result.map((product, index) => {
             return (
-                <div key={product.id} className="col-md-5">
-                    <Link to={'/productdetail/'+product.id}> 
-                        <div className="card" style={{'margin':'5%'}}>
-                                {/* <img src={"http://localhost:3000/book.png"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://localhost:3000/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://localhost:8085/executed/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://localhost:8085/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://143.198.171.44:8085/executed/"+ index + ".jpg"}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                {/* <img src={"http://143.198.171.44:8085/images/"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                <img src={this.props.URLExternal+"/images/output-"+ product.image}  alt="Avatar" style={{"width":"100%","height":"100%"}}/>
-                                {/* <img src={this.props.URLExternal+"/images/output-"+ product.description +  '-' + product.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                <div key={product.id} className="col-md-4">
+                    <br/>
+                    <Card>
+                            <Link to={'/productdetail/'+product.id}> 
+                                <CardImg top width="100%" src={this.props.URLExternal+"/images/output-"+ product.image} alt="Card image cap" />
+                            </Link>
+                            <CardBody>
+                            <CardTitle tag="h5">{product.description}</CardTitle>
+                            <CardText>{product.category}</CardText>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{'$ '+product.price}</CardSubtitle>
+                            <div className="row">
+                                <div className="col-md-4">
+                                </div>
+                                <div className="col-md-4">
+                                    {/* <Button className="btn btn-danger" onClick={this.onClickFavoriteToggle.bind(this,product)} ><i className="fa fa-star" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button> */}
+                                </div>
+                                <div className="col-md-4">
 
-                        </div>
-                    </Link>
-                    <h5>{product.description}</h5>
+                                </div>
+                            </div>
+                            </CardBody>
+                        </Card>
                 </div>
             )
 
         })
         
         return(
-            <div className="container">
+            <div>
                 <br/>
                 <div className="row">
                     <div className="col-md-2">
@@ -130,8 +144,8 @@ class FilterComponent extends Component {
                     <div className="col-md-9"></div>
                 </div>
                 <br/>
-                <div className="row">
-                    <div className="col-md-5">
+                <div className="row" style={{'margin-left':'1%'}}>
+                    <div className="col-md-4">
                     <Form onSubmit={this.onFilterSearch.bind(this)} >
                     {/* <Form > */}
                         <FormGroup row>
@@ -185,7 +199,8 @@ class FilterComponent extends Component {
                         <div className="row">
                             {menu}
                         </div>
-                        <div className="row">
+                        <br/>
+                        <div className="row">                            
                             <div className="col-md-4"></div>
                             <div className="col-md-4">
                                 {showViewMore}
