@@ -34,6 +34,12 @@ class NavbarComponent extends Component {
         })
     }
 
+    onLogout(){
+
+        localStorage.removeItem("token");
+        window.location.reload();
+    }
+
     
     render(){
 
@@ -41,10 +47,10 @@ class NavbarComponent extends Component {
 
     if(this.props.onHiddenMode){
 
-        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff','text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+        onHiddenMode = <button className="btn btn-outline-light" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye" style={{'color':'#007bff','text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
     }else{
 
-        onHiddenMode = <button className="btn btn-link" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye-slash" style={{'color':'#007bff', 'text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
+        onHiddenMode = <button className="btn btn-outline-light" onClick={this.props.onHiddenApp.bind(this)}  ><i className="fa fa-eye-slash" style={{'color':'#007bff', 'text-decoration':'none !important'}} aria-hidden="true"></i>&nbsp;&nbsp;Hidden Mode</button>
     }
 
     let userIcon
@@ -125,11 +131,12 @@ class NavbarComponent extends Component {
                             {onHiddenMode}
                         </DropdownItem>
                         <DropdownItem>
-                            <Link >{''}</Link>
+                            <Link className="btn btn-info" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem>
-                            <Link className="btn btn-primary" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
+                            <button className="btn btn-primary" onClick={this.onLogout.bind(this)} ><i className="fa fa-sign-out" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Log out </button>
+                            {/* <Link className="btn btn-primary" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link> */}
                         </DropdownItem>
                     </DropdownMenu>
                     </ButtonDropdown>

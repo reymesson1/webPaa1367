@@ -137,7 +137,28 @@ class App extends Component {
             console.log('Error fetching and parsing data', error);
         })
 
+        // if(localStorage.getItem("token").length>0){
+        //   console.log("logged");
+        //   this.setState({
+        //     isModalLoginOpen: false
+        //   })
+        // }else{
+        //   this.setState({
+        //     isModalLoginOpen: true
+        //   })          
+        // }
+
+        // if(this.isAuthenticated()){
+
+        //   this.setState({
+        //     isModalLoginOpen: false
+        //   })          
+
+        // }
+
     }
+
+
 
     addToCart(event){
       event.preventDefault();
@@ -764,6 +785,7 @@ class App extends Component {
               isModalLoginOpen: false
             })    
             localStorage.setItem("token", responseData.token);
+            window.location.reload();
           }else{
             console.log('login fault');
           }
@@ -831,11 +853,22 @@ class App extends Component {
           
           submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
       }
+
+      let logged
+
+      if(this.isAuthenticated()){
+
+        logged = false
+      }else{
+
+        logged = true
+      }
       
       return (
         <div className="App">
 
-                <Modal isOpen={this.state.isModalLoginOpen}>
+                {/* <Modal isOpen={this.state.isModalLoginOpen}> */}
+                <Modal isOpen={logged}>
                     <ModalHeader >
                         <div className="row">
                                 <p>{'Login'}</p>                                
