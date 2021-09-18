@@ -26,9 +26,12 @@ import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
 import UserComponent from './UserComponent';
+import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 
 // let API_URL = "http://localhost:8085";
 let API_URL = "http://143.198.171.44:8085"; 
+
+const token = "token";
 
 const API_HEADERS = {
 
@@ -70,13 +73,21 @@ class App extends Component {
           file: null,
           fileName: "",
           defaultImageSelected: {},
-          progressImage: 0
+          progressImage: 0,
+          isModalLoginOpen: true,
+          username: '',
+          password: '',
+          touched:{
+              username: false,
+              password : false    
+          }
         }
 
         this.toggleModal = this.toggleModal.bind(this);
 
     }
 
+    //Todo metodo que actualice el products debe estar App.js
     componentDidMount(){
 
       fetch(API_URL+'/product')
@@ -726,10 +737,157 @@ class App extends Component {
 
     } 
 
+    onSubmitLogin(event){
+
+      event.preventDefault();
+
+      let newLogin = {
+
+        "username": event.target.username.value,
+        "password": event.target.password.value
+      }
+
+      console.log('send!')
+
+      fetch(API_URL+'/login', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newLogin)
+      })
+      .then((response)=>response.json())
+      .then((responseData)=>{
+          console.log(responseData);  
+
+          if(responseData.token){
+            this.setState({
+              isModalLoginOpen: false
+            })    
+            localStorage.setItem("token", responseData.token);
+          }else{
+            console.log('login fault');
+          }
+
+      })
+
+
+    }
+
+    isAuthenticated(){
+      return !!localStorage.getItem("token");
+    }
+
+
+    handleBlur = (field) => (evt) =>{
+
+      this.setState({
+          touched: { ...this.state.touched, [field]: true }
+      })
+
+  }
+
+  validate(username, password){
+
+      const errors = {
+          username: '',
+          password: ''
+      }
+
+      if(this.state.touched.username && username.length < 3){
+          errors.username = "User Name should be >= 3 characters"
+      }
+      if(this.state.touched.password && password.length < 3){
+          errors.password = "Password should be >= 3 characters"
+      }
+
+      return errors;
+      
+  }
+
+  onUserNameChangeLogin(value){
+    this.setState({
+        username: value
+    })
+  }
+  onPasswordChangeLogin(value){
+      this.setState({
+          password: value
+      })
+  }
+
+
+
+
     render(){
+
+      const errors = this.validate(this.state.username,this.state.password);
+
+      let submitButton
+      
+      if((this.state.username === '') ||(this.state.password === '') ){
+
+          submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+      }else{
+          
+          submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+      }
       
       return (
         <div className="App">
+
+                <Modal isOpen={this.state.isModalLoginOpen}>
+                    <ModalHeader >
+                        <div className="row">
+                                <p>{'Login'}</p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+
+                    <Form name="contact-form" onSubmit={this.onSubmitLogin.bind(this)}>
+                    {/* <Form name="contact-form"> */}
+                                <FormGroup row>
+                                    <Label for="username" sm={1}>&nbsp;</Label>
+                                    <Label for="username" sm={4}>User Name</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="username" id="username" placeholder="User Name" 
+                                        onBlur={this.handleBlur('username')}
+                                        valid={this.state.username.length >= 3 }
+                                        invalid={this.state.username.length < 3 }
+                                        onChange={e => this.onUserNameChangeLogin(e.target.value)}
+                                        value={this.state.username}                                      
+                                    />
+                                    <FormFeedback>{errors.username}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="password" sm={1}>&nbsp;</Label>
+                                    <Label for="password" sm={4}>Password</Label>
+                                    <Col sm={7}>
+                                    <Input type="password" name="password" id="password" placeholder="Password" 
+                                        onBlur={this.handleBlur('password')}
+                                        valid={this.state.password.length >= 3 }
+                                        invalid={this.state.password.length < 3 }
+                                        onChange={e => this.onPasswordChangeLogin(e.target.value)}
+                                        value={this.state.password}                                      
+                                    />
+                                    <FormFeedback>{errors.password}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <br/>
+                                <br/>
+                                <FormGroup row>
+                                    <Label for="style" sm={2}>&nbsp;</Label>
+                                    <Col sm={10}>
+                                        {submitButton}
+                                        {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                    </Col>
+                                </FormGroup>
+                        </Form>
+
+
+                    </ModalBody>
+                </Modal>
           
           <BrowserRouter>
 

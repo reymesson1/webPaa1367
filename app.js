@@ -144,6 +144,12 @@ app.post('/createuser', userController.createUser);
 
 app.post('/removeuser', userController.deleteUser);
 
+app.post('/login', userController.setLogin);
+
+app.post('/reset', userController.setResetPassword);
+
+app.post('/register', userController.setRegister);
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');

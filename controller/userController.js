@@ -24,24 +24,25 @@ exports.setRegister = async(req,res)=>{
 
 exports.setLogin = async(req,res)=>{
 
-    var log
-    
-    if(req.body.nameValuePairs){
-        log = req.body.nameValuePairs
-    }else{
-        log = req.body
-    }
+    var obj = req.body; 
 
-    var userData = log;
+    console.log(obj);
+
+    var userData = obj;
     var user = await User.findOne({username: userData.username});
-    
+
+    console.log(!user);
+
     if(!user){
         return res.status(401).send({message: 'Email or Password Invalid'})
     }
+
+    console.log(user);
+    // console.log(userData);
     
     bcrypt.compare(userData.password, user.password, (err, isMatch) =>{
         if(!isMatch){
-            return res.status(401).send({message: 'Email or Password Invalid'})
+            return res.status(401).send({message: 'Email or Password Invalid - Password'})
         }
         
         var payload = { sub: user._id }
@@ -50,7 +51,8 @@ exports.setLogin = async(req,res)=>{
 
         console.log(token);
 
-        res.status(200).send(req.body)
+        res.status(200).send({"token":token});
+        // res.status(200).send(req.body)
     })
 
     // res.status(200).send("test")
@@ -127,5 +129,4 @@ exports.deleteUser = async(req,res)=>{
     })
   
     res.send(user);
-  }
-  
+}
