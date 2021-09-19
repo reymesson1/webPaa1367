@@ -879,7 +879,7 @@ class App extends Component {
 
       let passwordError
       
-      passwordError = <Fade in={this.state.isModalLoginError}><div class="alert alert-dismissible alert-danger"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><p class="mb-0">Best check yo self, you're no.</p></div></Fade>
+      passwordError = <Fade in={this.state.isModalLoginError}><div class="alert alert-dismissible alert-danger"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><p class="mb-0">Username or Password Invalid</p></div></Fade>
       
       return (
         <div className="App">
