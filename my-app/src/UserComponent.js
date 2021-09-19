@@ -38,11 +38,13 @@ class UserComponent extends Component {
             firstname: '',
             lastname: '',
             email: '',
+            password: '',
             touched:{
                 username: false,
                 firstname: false,
                 lastname : false,
-                email : false    
+                email : false,    
+                password : false    
             }
         }
 
@@ -114,7 +116,8 @@ class UserComponent extends Component {
             password : "",
             firstname : event.target.firstname.value,
             lastname : event.target.lastname.value,
-            email : event.target.email.value
+            email : event.target.email.value,
+            password : event.target.password.value
 
         }
 
@@ -191,6 +194,11 @@ class UserComponent extends Component {
             email: value
         })
     }
+    onPasswordChange(value){
+        this.setState({
+            password: value
+        })
+    }
 
 
     onClickBack(){
@@ -238,6 +246,25 @@ class UserComponent extends Component {
         })
 
                 
+    }
+
+    onResetItem(dataItem,idUser){
+
+        let newEmail = {
+
+            username : dataItem
+        }
+
+        console.log(dataItem);
+
+        // fetch(this.props.URLExternal+'/reset', {
+
+        //     method: 'post',
+        //     headers: API_HEADERS,
+        //     body: JSON.stringify(newEmail)
+        // })
+
+
     }
 
 
@@ -329,6 +356,20 @@ class UserComponent extends Component {
                                     <FormFeedback>{errors.email}</FormFeedback>
                                     </Col>
                                 </FormGroup>
+                                <FormGroup row>
+                                    <Label for="password" sm={1}>&nbsp;</Label>
+                                    <Label for="password" sm={4}>Password</Label>
+                                    <Col sm={7}>
+                                    <Input type="password" name="password" id="password" placeholder="Password" 
+                                        onBlur={this.handleBlur('password')}
+                                        valid={this.state.password.length >= 3 }
+                                        invalid={this.state.password.length < 3 }
+                                        onChange={e => this.onPasswordChange(e.target.value)}
+                                        value={this.state.password}       
+                                    />
+                                    <FormFeedback>{errors.password}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
                                 <br/>
                                 <br/>
                                 <FormGroup row>
@@ -401,8 +442,17 @@ class UserComponent extends Component {
                                     <td>{data.lastname}</td>                                                    
                                     <td>{data.email}</td>                                                    
                                     <td>
+                                        <div className="row">
+                                            <div className="col-md-4"></div>
+                                            {/* <div className="col-md-1">
+                                                <button className="btn btn-warning" onClick={this.onResetItem.bind(this,data.username)} ><i className="fa fa-undo" title="Reset password" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
+                                            </div> */}
+                                            <div className="col-md-2">
+                                                <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this,data.username)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
+                                            </div>
+                                            <div className="col-md-6"></div>
+                                        </div>
 
-                                        <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this,data.username)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
 
                                     </td>                                                    
                                 </tr>

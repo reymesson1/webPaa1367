@@ -99,18 +99,27 @@ exports.createUser = async(req,res)=>{
 
     var newUser =  req.body;
 
-
-    let user = new User(newUser);
+    // let user = new User(newUser);
   
     // console.log(product);
-  
-    user.save(function(err){
-      if(!err){
-        console.log('User saved');
-      }else{
-          console.log(err)
-      }
+
+    var user = new User(newUser);
+    bcrypt.hash(newUser.password, null, null, (err, hash)=>{                   
+        user.password = hash;          
     })
+    user.save(function(err){
+        if(!err){
+            console.log('User saved');
+        }
+    })
+  
+    // user.save(function(err){
+    //   if(!err){
+    //     console.log('User saved');
+    //   }else{
+    //       console.log(err)
+    //   }
+    // })
   
     res.send(req.body);
       // var user = await User.findOne({});
