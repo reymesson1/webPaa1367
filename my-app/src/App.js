@@ -26,7 +26,7 @@ import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
 import UserComponent from './UserComponent';
-import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
 // let API_URL = "http://localhost:8085";
 let API_URL = "http://143.198.171.44:8085"; 
@@ -75,6 +75,7 @@ class App extends Component {
           defaultImageSelected: {},
           progressImage: 0,
           isModalLoginOpen: true,
+          isModalLoginError: false,
           username: '',
           password: '',
           touched:{
@@ -786,8 +787,20 @@ class App extends Component {
             })    
             localStorage.setItem("token", responseData.token);
             window.location.reload();
+            document.documentElement.webkitRequestFullScreen()
+
           }else{
             console.log('login fault');
+            this.setState({
+              isModalLoginError: true
+            })
+            setTimeout(() => {
+
+              this.setState({
+                isModalLoginError: false
+              })
+  
+            }, 2000);
           }
 
       })
@@ -863,10 +876,13 @@ class App extends Component {
 
         logged = true
       }
+
+      let passwordError
+      
+      passwordError = <Fade in={this.state.isModalLoginError}><div class="alert alert-dismissible alert-danger"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><p class="mb-0">Best check yo self, you're no.</p></div></Fade>
       
       return (
         <div className="App">
-
                 {/* <Modal isOpen={this.state.isModalLoginOpen}> */}
                 <Modal isOpen={logged}>
                     <ModalHeader >
@@ -876,6 +892,8 @@ class App extends Component {
 
                     </ModalHeader>
                     <ModalBody>
+
+                    {passwordError}
 
                     <Form name="contact-form" onSubmit={this.onSubmitLogin.bind(this)}>
                     {/* <Form name="contact-form"> */}
