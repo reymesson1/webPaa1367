@@ -73,8 +73,8 @@ exports.editPictureProduct = async(req,res)=>{
 
   var obj = req.body;
 
-  var product = await Product.findOne({"id":obj.productId},function(err,master){
-    master.image = obj.name
+  var product = await Product.findOne({"id":obj.dataId},function(err,master){
+    master.image = obj.dataImage
     master.save(function(err,m){
       console.log("Product Default updated");
     })

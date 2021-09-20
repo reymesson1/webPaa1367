@@ -238,7 +238,7 @@ class EditProductComponent extends Component {
                             <div className="row">
                                 <div className="col-md-8"></div>
                                 <div className="col-md-4">
-                                    <button className="btn btn-primary" onClick={this.props.defaultImageSelectedFunc.bind(this)}>Default</button>
+                                    <button className="btn btn-primary" onClick={this.props.defaultImageSelectedFunc.bind(filteredData[0], filteredData[0].id, filteredData[0].image)}>Default</button>
                                 </div>
                             </div>
                             <br/>

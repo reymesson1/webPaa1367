@@ -343,11 +343,15 @@ class App extends Component {
           })  
           if(dataProgress == 100){
 
-            this.setState({
-              productLoadingModal: true,
-              productLoadingModalLabel: "Image uploaded successfully completed"             
-            });
-            
+            setTimeout(() => {
+              
+              this.setState({
+                productLoadingModal: true,
+                productLoadingModalLabel: "Image uploaded successfully completed"             
+              });
+
+            }, 7000);
+
             fetch(API_URL+'/createproduct3', {
 
               method: 'post',
@@ -671,9 +675,13 @@ class App extends Component {
       // console.log(nextState);
     }
 
-    defaultImageSelectedFunc(){
+    defaultImageSelectedFunc(data, dataId, dataImage){
+      
+      let nextDefaultImage = {
 
-      console.log(this.state.defaultImageSelected);
+        "dataId": data,
+        "dataImage": dataId
+      }
 
       this.setState({
         productLoadingModal: true,
@@ -685,7 +693,7 @@ class App extends Component {
 
         method: 'post',
         headers: API_HEADERS,
-        body: JSON.stringify(this.state.defaultImageSelected)
+        body: JSON.stringify(nextDefaultImage)
       })
 
     }
