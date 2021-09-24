@@ -22,6 +22,102 @@ exports.setRegister = async(req,res)=>{
     })
 }
 
+exports.setLoginIpad = async(req,res)=>{
+
+    let obj = req.body;
+
+    res.setHeader("Content-Type", "application/json");
+
+
+    console.log(obj);
+
+    var userData = obj;
+    var user = await User.findOne({username: userData.username.toLowerCase()});
+
+    console.log(!user);
+
+    if(!user){
+        return res.status(401).send({message: 'Email or Password Invalid'})
+    }
+
+    bcrypt.compare(userData.password, user.password, (err, isMatch) =>{
+        if(!isMatch){
+
+            let error = {
+                "message": "Email or password invalid"
+            }
+
+            console.log('error')
+
+            let data = {
+                "error": false,
+                "message": "successfully",
+                "data": [error]
+            }        
+    
+            return res.status(401).send(data)
+            // return res.status(401).send({message: 'Email or Password Invalid - Password'})
+        }
+        
+        var payload = { sub: user._id }
+            
+        var token = jwt.encode(payload, '123')
+
+        let tokenData = {
+            "token": token
+        }
+
+        console.log(token);
+
+        let data = {
+            "error": false,
+            "message": "successfully",
+            "data": [tokenData]
+        }        
+
+        console.log(data);
+
+        // res.status(200).send(data)
+        // res.send(data)
+        // res.setHeader("Content-Type", "application/json");
+
+        res.send(data);
+
+
+        // res.status(200).send({"token":token});
+        // res.status(200).send(req.body)
+    })
+
+
+    // let token = {
+    //     "token": "dasd0as0d98a08da0d8d09809a8d09a.8sd"
+    // }
+    // let error = {
+    //     "message": "Email or password invalid"
+    // }
+
+    // let data = {
+    //     "error": false,
+    //     "message": "successfully",
+    //     "data": [token]
+    // }    
+
+    // let data = {
+    //     "error": false,
+    //     "message": "successfully",
+    //     "data": [
+    //         {
+    //             "id": "0",
+    //             "category": "Bracelets",
+    //             "items": []
+    //         }
+    //     ]
+    // }    
+  
+    // res.send(data)
+
+}
+
 exports.setLogin = async(req,res)=>{
 
     var obj = req.body; 

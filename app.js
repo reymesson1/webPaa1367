@@ -150,6 +150,9 @@ app.post('/reset', userController.setResetPassword);
 
 app.post('/register', userController.setRegister);
 
+app.post('/loginipad', userController.setLoginIpad);
+
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
