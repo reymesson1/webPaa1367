@@ -49,7 +49,7 @@ class ProductDetailComponent extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0)        
     }
 
     imageClickEdit = (dataImage, dataId) => {
@@ -249,33 +249,26 @@ class ProductDetailComponent extends Component {
 
                 favorite = filteredData[0].favorite
 
-                var date = parseInt(filteredData[0].id, 10); // you want to use radix 10
-
-                let yesterday = moment(date).format('YYYY-MM-DD');
-                let yesterdayYY = moment(date).format('YYYY');
-                let yesterdayMM = moment(date).format('MM');
-                let yesterdayDD = moment(date).format('DD');
-
-                let today = moment(new Date()).format('YYYY-MM-DD');
-                let todayYY = moment(new Date()).format('YYYY');
-                let todayMM = moment(new Date()).format('MM');
-                let todayDD = moment(new Date()).format('DD');
-                
-                var a = moment([yesterdayYY, yesterdayMM-1, yesterdayDD]);
-                var b = moment([todayYY, todayMM-1, todayDD]);
-
-                console.log(yesterday);
-                console.log(today);
-
-                console.log( b.diff(a, 'days')  )   // =1
-                diffDay = ( b.diff(a, 'days')  )   // =1
-
-                // console.log(yesterday.diff(today));
             }
 
-            let flagFavorite
+            var date = parseInt(filteredData[0].id, 10); // you want to use radix 10
 
-            // console.log(filteredData[0].favorite)
+            let yesterday = moment(date).format('YYYY-MM-DD');
+            let yesterdayYY = moment(date).format('YYYY');
+            let yesterdayMM = moment(date).format('MM');
+            let yesterdayDD = moment(date).format('DD');
+
+            let today = moment(new Date()).format('YYYY-MM-DD');
+            let todayYY = moment(new Date()).format('YYYY');
+            let todayMM = moment(new Date()).format('MM');
+            let todayDD = moment(new Date()).format('DD');
+            
+            var a = moment([yesterdayYY, yesterdayMM-1, yesterdayDD]);
+            var b = moment([todayYY, todayMM-1, todayDD]);
+
+            diffDay = ( b.diff(a, 'days')  )   // =1
+
+            let flagFavorite
 
             if(filteredData[0].favorite){
 
