@@ -463,6 +463,21 @@ exports.sendEmail = async(req,res)=>{
 
 }
 
+exports.setProductDetailsIpad = async(req,res)=>{
+
+  var newDetail = req.body;
+
+  var product = await Product.aggregate([{"$match":{"id":newDetail.id}},{"$project":{"_id":0,"images":1}}])
+
+  console.log(newDetail);
+
+  console.log(product);
+
+  
+
+
+}
+
 exports.setFavorite = async(req,res)=>{
 
   var obj = req.body;
@@ -475,3 +490,4 @@ exports.setFavorite = async(req,res)=>{
   })
 
 }
+

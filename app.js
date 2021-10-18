@@ -152,6 +152,7 @@ app.post('/register', userController.setRegister);
 
 app.post('/loginipad', userController.setLoginIpad);
 
+app.post('/detailsipad', productController.setProductDetailsIpad);
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
