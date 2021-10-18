@@ -12,10 +12,30 @@ class CategoryComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ""
+            searchText: "",
+            category:[]
         }  
 
         
+    }
+
+    componentDidMount(){
+
+        // postscategory
+
+        fetch(this.props.URLExternal+'/postscategory')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+                category: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+
+
     }
 
     handleOnClickFilter = () => {
@@ -129,6 +149,21 @@ class CategoryComponent extends Component {
             return <Redirect push to="/home/watches" />;
         }
         
+        const menu = this.state.category.map((product, index) => {
+            return (
+
+                <div className="col-md-3">
+                         <Link to={'/home/bracelet'}> 
+                             <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+                         </Link>
+                         <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickBracelet} color="info">
+                             {product.description}
+                         </Button>{' '}
+                </div>
+
+                )}
+            )
+
         
         return(
             <div className="container">
@@ -145,128 +180,99 @@ class CategoryComponent extends Component {
                     </div>
                     <div className="col-md-10"></div>
                 </div>
-                <br/>
-                <div className="row">
-                    <div className="col-md-3">
-                        <Link to={'/home/bracelet'}> 
-                            <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickBracelet} color="info">
-                            {'Bracelet'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/rm'}> 
-                            <img src={this.props.URLExternal+"/images/folder-rm.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRM} color="info">
-                            {'RM'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/rings'}> 
-                            <img src={this.props.URLExternal+"/images/folder-rings.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRings} color="info">
-                            {'Rings'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/pendant'}> 
-                            <img src={this.props.URLExternal+"/images/folder-pendant.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickPendant} color="info">
-                            {'Pendant'}
-                        </Button>{' '}
-                    </div>
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/rm'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>RM</h1>
-                        </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/rings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Rings</h1>
-                        </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/pendant'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Pendant</h1>
-                        </Link>
-                    </div> */}
-                </div>
-                <br/>
-                <div className="row">
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/pins'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Pins</h1>
-                        </Link>
-                    </div> */}
-                    <div className="col-md-3">
-                        <Link to={'/home/pins'}> 
-                            <img src={this.props.URLExternal+"/images/folder-pins.png"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute","top":"87%","margin-left":"-12%"}} outline onClick={this.handleOnClickPins} color="info">
-                            {'Pins'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/necklace'}> 
-                            <img src={this.props.URLExternal+"/images/folder-necklace.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickNecklace} color="info">
-                            {'Necklace'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/earings'}> 
-                            <img src={this.props.URLExternal+"/images/folder-earrings.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickEarings} color="info">
-                            {'Earings'}
-                        </Button>{' '}
-                    </div>
-                    <div className="col-md-3">
-                        <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder-watches.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
-                        </Link>
-                        <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickWatches} color="info">
-                            {'Watches'}
-                        </Button>{' '}
-                    </div>
 
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                        </Link>
-                        <Button outline onClick={this.handleOnClickWatches} color="info">
-                            {'Watches'}
-                        </Button>{' '}
-                    </div> */}
-                    {/* <div className="col-md-3">
-                    <Link to={'/home/necklace'}>                         
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Necklace</h1>
-                    </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                    <Link to={'/home/earings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Earings</h1>
-                    </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Watches</h1>
-                        </Link>
-                    </div> */}
+                <br/>
+                <div className="row">                    
+                    {menu}
                 </div>
             </div>
+            // <div className="container">
+                // <br/>
+                // <div className="row">
+                //     <div className="col-md-1">
+                //     <Button outline onClick={this.handleOnClickFilter} color="primary"><i className="fa fa-filter" style={{'color':'blue'}} aria-hidden="true"></i></Button>{' '}
+                //         <Link to={'/filter'}> 
+                //         </Link>
+                //     </div>
+                //     &nbsp;|
+                //     <div className="col-md-1">
+                //         <Button outline onClick={this.handleOnClickFavorite}  color="danger"><i className="fa fa-star" style={{'color':'red'}} aria-hidden="true"></i> </Button>{' '}
+                //     </div>
+                //     <div className="col-md-10"></div>
+                // </div>
+            //     <br/>
+            //     <div className="row">
+            //         <div className="col-md-3">
+            //             <Link to={'/home/bracelet'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickBracelet} color="info">
+            //                 {'Bracelet'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/rm'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-rm.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRM} color="info">
+            //                 {'RM'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/rings'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-rings.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute", "top":"87%", "margin-left":"-12%"}} outline onClick={this.handleOnClickRings} color="info">
+            //                 {'Rings'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/pendant'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-pendant.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickPendant} color="info">
+            //                 {'Pendant'}
+            //             </Button>{' '}
+            //         </div>
+            //     </div>
+            //     <br/>
+            //     <div className="row">
+            //         <div className="col-md-3">
+            //             <Link to={'/home/pins'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-pins.png"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute","top":"87%","margin-left":"-12%"}} outline onClick={this.handleOnClickPins} color="info">
+            //                 {'Pins'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/necklace'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-necklace.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickNecklace} color="info">
+            //                 {'Necklace'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/earings'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-earrings.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickEarings} color="info">
+            //                 {'Earings'}
+            //             </Button>{' '}
+            //         </div>
+            //         <div className="col-md-3">
+            //             <Link to={'/home/watches'}> 
+            //                 <img src={this.props.URLExternal+"/images/folder-watches.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+            //             </Link>
+            //             <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickWatches} color="info">
+            //                 {'Watches'}
+            //             </Button>{' '}
+            //         </div>
+
+                    
+            //     </div>
+            // </div>
         );
     }
 

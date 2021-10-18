@@ -133,6 +133,9 @@ class NavbarComponent extends Component {
                         <DropdownItem>
                             <Link className="btn btn-info" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
                         </DropdownItem>
+                        <DropdownItem>
+                            <Link className="btn btn-info" to={'/category'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Show Category </Link>
+                        </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem>
                             <button className="btn btn-primary" onClick={this.onLogout.bind(this)} ><i className="fa fa-sign-out" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Log out </button>

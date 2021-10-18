@@ -29,6 +29,8 @@ var styleController = require('./controller/styleController');
 
 var companyController = require('./controller/companyController');
 
+var categoryController = require('./controller/categoryController');
+
 var userController = require('./controller/userController');
 
 app.get('/restaurants', masterController.getMaster);
@@ -127,6 +129,12 @@ app.get('/postscompanies', companyController.getCompanyIpad);
 app.post('/createcompany', companyController.setCompany);
 
 app.post('/deletecompany', companyController.deleteCompany);
+
+app.get('/postscategory', categoryController.getCategory);
+
+// app.post('/createcategory', categoryController.setCategory);
+
+// app.post('/deletecategory', categoryController.deleteCategory);
 
 app.get('/gethiddenmode', productController.getHidden);
 
