@@ -67,7 +67,7 @@ class StylesComponent extends Component {
                     {filteredData.map(
                         (data, index) => 
                                             <tr>
-                                                <td>{data.id}</td>
+                                                <td>{index+1}</td>
                                                 <td>{data.description}</td>
                                                 <td>{data.notes}</td>
                                                 <td>
