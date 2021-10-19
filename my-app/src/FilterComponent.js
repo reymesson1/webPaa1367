@@ -73,7 +73,7 @@ class FilterComponent extends Component {
 
     render() {
 
-        const result = this.state.filterAPI.reduce((temp, value) => {
+        const result = this.props.filterAPI.reduce((temp, value) => {
             if(temp.length<this.state.limit)
               temp.push(value);
             return temp;
@@ -146,7 +146,7 @@ class FilterComponent extends Component {
                 <br/>
                 <div className="row" style={{'margin-left':'1%'}}>
                     <div className="col-md-4">
-                    <Form onSubmit={this.onFilterSearch.bind(this)} >
+                    <Form onSubmit={this.props.onFilterSearch.bind(this)} >
                     {/* <Form > */}
                         <FormGroup row>
                             <Label for="companystyle" sm={2} style={{'text-align':'left'}}>Company</Label>
@@ -186,7 +186,10 @@ class FilterComponent extends Component {
                                 <Input type="text" name="priceopt" id="priceopt" placeholder="Price To" />
                             </Col>
                         </FormGroup>
+                        {/* <span class="badge bg-primary">Primary</span> */}
                         <br/>
+                        <br/>
+
                         <FormGroup row>
                             <Col sm={6}></Col>
                             <Col sm={4}>

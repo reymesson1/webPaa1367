@@ -81,7 +81,9 @@ class App extends Component {
           touched:{
               username: false,
               password : false    
-          }
+          },
+          filterData :{},
+          filterAPI:[]
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -858,8 +860,49 @@ class App extends Component {
       })
   }
 
+  onFilterSearch(event){
+
+    event.preventDefault();
+
+    var newFilter = {
+        
+        "company": event.target.company.value,
+        "companystyle": event.target.companystyle.value,
+        "style": event.target.style.value,
+        "price": event.target.price.value,
+        "priceopt": event.target.priceopt.value
+    }
+    
+    let nextState = this.state.filterData;
+
+    nextState = newFilter;
+
+    this.setState({
+      filterData: nextState
+    })
+
+    fetch(API_URL+'/filterapiui', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify({newFilter})
+    })
+    .then((response)=>response.json())
+    .then((responseData)=>{
+        console.log(responseData);
+            this.setState({
+
+                filterAPI: responseData
+            })
+    })
 
 
+  }
+
+  onFilterSearchGoBack(data){
+
+    window.history.back();
+  }
 
     render(){
 
@@ -992,6 +1035,9 @@ class App extends Component {
           />
           <Route path="/filter" component= {() => <FilterComponent
                     companies={this.state.companies} 
+                    filterData={this.state.filterData} 
+                    filterAPI={this.state.filterAPI} 
+                    onFilterSearch={this.onFilterSearch.bind(this)}
                     onDeleteCompany={this.onDeleteCompany.bind(this)} 
                     onCreateCompany={this.onCreateCompany.bind(this)} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
@@ -1065,9 +1111,12 @@ class App extends Component {
                   match 
               }) => (
                   <ProductDetailComponent match={match}
+                    onFilterSearchGoBack={this.onFilterSearchGoBack.bind(this)} 
                     onClickFavoriteToggle={this.onClickFavoriteToggle.bind(this)} 
                     URLExternal={this.state.URLExternal}  
+                    onFilterSearch={this.onFilterSearch.bind(this)}
                     products={this.state.products} 
+                    filterData={this.state.filterData} 
                     onCreateProduct={this.onCreateProduct.bind(this)}
                     onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                     fileUploaded={this.state.fileUploaded}

@@ -49,7 +49,7 @@ class ProductDetailComponent extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)        
+        window.scrollTo(0, 0)      
     }
 
     imageClickEdit = (dataImage, dataId) => {
@@ -193,6 +193,7 @@ class ProductDetailComponent extends Component {
 
     onClickBack(){
         window.history.back();
+        this.props.onFilterSearch();
     }
   
 
@@ -379,7 +380,8 @@ class ProductDetailComponent extends Component {
                     <br/>
                     <div className="row">
                     <div className="col-md-3">
-                        <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
+                        {/* <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button> */}
+                        <button className="btn btn-warning" onClick={this.props.onFilterSearchGoBack.bind(this)}>Back</button>
                     </div>
                     <div className="col-md-6">
 
