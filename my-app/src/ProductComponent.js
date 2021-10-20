@@ -23,8 +23,8 @@ class Product extends Component {
             style: "",
             company: "",
             limit: 5,
-            sequence: 5
-
+            sequence: 5,
+            toDelete: {}
         }  
     }
 
@@ -72,6 +72,13 @@ class Product extends Component {
         this.setState({
 
             limit: nextState
+        })
+    }
+
+    onClickDeleteModal(data){
+        this.setState({
+            showModal: true,
+            toDelete: data
         })
     }
 
@@ -124,69 +131,22 @@ class Product extends Component {
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
                     <ModalHeader >
                         <div className="row">
-                                <p>Edit | {this.state.description}</p>                                
+                                <p>Delete to {this.state.toDelete.description} </p>                                
                         </div>
 
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <Form onSubmit={this.props.onEditProduct.bind(this)}>
-                            {/* <Form> */}
-                                <FormGroup row>
-                                    <Col sm={8}>
-                                    <Input type="text" value={this.state.id} name="id" id="id" placeholder="id" disabled style={{'display':'none'}} />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="description" sm={1}>&nbsp;</Label>
-                                    <Label for="description" sm={3}>Description</Label>
-                                    <Col sm={8}>
-                                    <Input type="text" value={this.state.description} name="description" id="description" placeholder="Description" />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="description" sm={1}>&nbsp;</Label>
-                                    <Label for="price" sm={3}>Price</Label>
-                                    <Col sm={8}>
-                                    <Input type="text" value={this.state.price} name="price" id="price" placeholder="Price" />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="style" sm={1}>&nbsp;</Label>
-                                    <Label for="style" sm={3}>Style</Label>
-                                    <Col sm={8}>
-                                    <Input type="text" value={this.state.style} name="style" id="style" placeholder="Style" />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="style" sm={1}>&nbsp;</Label>
-                                    <Label for="style" sm={3}>Company</Label>
-                                    <Col sm={8}>
-                                    <Input type="text" value={this.state.company} name="company" id="company" placeholder="Company" />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label sm={1}>&nbsp;</Label>
-                                    <Label for="exampleSelect" sm={3}>Category</Label>
-                                    <Col sm={8}>
-                                        <Input type="select" value={this.state.category} name="category" id="category" placeholder="Category" >
-                                            <option>{'Bracelet'}</option>
-                                            <option>{'Rings'}</option>
-                                            <option>{'Necklace'}</option>
-                                            <option>{'Pendant'}</option>
-                                            <option>{'Crowns'}</option>
-                                            <option>{'Gems'}</option>
-                                    </Input>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label sm={1}>&nbsp;</Label>
-                                    <Col sm={10}>
-                                        <Input type="submit" className="btn btn-success" name="submit" id="submit" placeholder="Submit" disabled />
-                                    </Col>
-                                    <Label sm={1}>&nbsp;</Label>
-                                </FormGroup>
-                            </Form>
+                            <h5>Are you sure you want to delete this item?</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-2">
+                                <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, this.state.toDelete.id)} >Yes</button>
+                            </div>
+                            <div className="col-md-2">
+                                <button onClick={this.toggleModal} className="btn btn-primary">No</button>
+                            </div>
                         </div>
                     </ModalBody>
                 </Modal>
@@ -256,7 +216,8 @@ class Product extends Component {
                                                             <Link className="btn btn-primary" to={'/editproduct/'+data.id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
+                                                            <button className="btn btn-danger" onClick={this.onClickDeleteModal.bind(this,data)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
+                                                            {/* <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                         */}
                                                         </div>
                                                     </div>
                                                 </td>

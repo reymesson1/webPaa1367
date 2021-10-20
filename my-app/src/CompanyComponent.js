@@ -5,13 +5,20 @@ import { Input, Media, Panel,   Card,
     CardBody,
     CardTitle,
     CardSubtitle } from 'reactstrap';
+import { Modal,
+        ModalHeader,
+        ModalBody,
+        ModalFooter, Col, Form, FormGroup, Label } from 'reactstrap';
+
 
 class CompanyComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ""
+            searchText: "",
+            showModal: false,
+            toDelete: {}
         }  
     }
 
@@ -19,6 +26,19 @@ class CompanyComponent extends Component {
 
         this.setState({
             searchText: event.target.value
+        })
+    }
+
+    toggleModal = () => {
+        this.setState({
+            showModal: !this.state.showModal
+        })
+    }
+
+    onClickDeleteModal(data){
+        this.setState({
+            showModal: true,
+            toDelete: data
         })
     }
 
@@ -31,6 +51,30 @@ class CompanyComponent extends Component {
         
         return(
             <div className="container">
+                <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
+                    <ModalHeader >
+                        <div className="row">
+                                <p>Delete to {this.state.toDelete.description} </p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>Are you sure you want to delete this item?</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-2">
+                                <button className="btn btn-danger" onClick={this.props.onDeleteCompany.bind(this, this.state.toDelete.id)} >Yes</button>
+                                {/* <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, this.state.toDelete.id)} >Yes</button> */}
+                            </div>
+                            <div className="col-md-2">
+                                <button onClick={this.toggleModal} className="btn btn-primary">No</button>
+                            </div>
+                        </div>
+                    </ModalBody>
+                </Modal>
+
                 <br/>
                 <div className="row">
                     {/* <Input type="text" placeholder="Search" ></Input> */}
@@ -76,7 +120,8 @@ class CompanyComponent extends Component {
                                                             {/* <button className="btn btn-primary" onClick={this.openEditModal.bind(this, data.id)} >Edit</button>                                                         */}
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <button className="btn btn-danger" onClick={this.props.onDeleteCompany.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
+                                                            <button className="btn btn-danger" onClick={this.onClickDeleteModal.bind(this, data)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                        
+                                                            {/* <button className="btn btn-danger" onClick={this.props.onDeleteCompany.bind(this, data.id)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>                                                         */}
                                                         </div>
                                                     </div>
                                                 </td>
