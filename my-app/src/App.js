@@ -28,8 +28,8 @@ import  axios  from 'axios'
 import UserComponent from './UserComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -45,8 +45,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -83,7 +83,8 @@ class App extends Component {
               password : false    
           },
           filterData :{},
-          filterAPI:[]
+          filterAPI:[],
+          newCompanyModal: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -428,29 +429,35 @@ class App extends Component {
     onCreateCompany(event){
 
       event.preventDefault(); 
+      // this.toggleModalCreateCompany();
+      // this.setState({
 
-      let newCompany = {
+      //   newCompanyModal: false
 
-        "id": Date.now(),
-        "description": event.target.description.value,
-        "notes": event.target.notes.value
-      }
+      // });
 
-      let nextState = this.state.companies;
+      // let newCompany = {
 
-      nextState.push(newCompany);
+      //   "id": Date.now(),
+      //   "description": event.target.description.value,
+      //   "notes": event.target.notes.value
+      // }
 
-      this.setState({
+      // let nextState = this.state.companies;
 
-        companies: nextState
-      })
+      // nextState.push(newCompany);
 
-      fetch(API_URL+'/createcompany', {
+      // this.setState({
 
-        method: 'post',
-        headers: API_HEADERS,
-        body: JSON.stringify(newCompany)
-      })
+      //   companies: nextState
+      // })
+
+      // fetch(API_URL+'/createcompany', {
+
+      //   method: 'post',
+      //   headers: API_HEADERS,
+      //   body: JSON.stringify(newCompany)
+      // })
 
       // setTimeout(() => {
       //   window.location.reload();
@@ -904,6 +911,13 @@ class App extends Component {
     window.history.back();
   }
 
+  toggleModalCreateCompany = () => {
+    this.setState({
+        newCompanyModal: !this.state.newCompanyModal
+    })
+}
+
+
     render(){
 
       const errors = this.validate(this.state.username,this.state.password);
@@ -1078,6 +1092,9 @@ class App extends Component {
                     />}
           />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
+                      URLExternal={this.state.URLExternal}
+                      newCompanyModal={this.state.newCompanyModal}
+                      toggleModalCreateCompany={this.toggleModalCreateCompany.bind(this)}
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       fileUploaded={this.state.fileUploaded}

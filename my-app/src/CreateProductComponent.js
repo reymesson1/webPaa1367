@@ -272,7 +272,7 @@ class CreateProductComponent extends Component {
                     <button className="btn btn-white" onClick={this.toggleModalStyle} >Close</button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.newCompanyModal} toggle={this.toggleModal}>
+                <Modal isOpen={this.state.newCompanyModal} toggle={this.props.toggleModalCreateCompany.bind(this)}>
                     <ModalHeader>
                     <p>Create a new Company</p>
                     </ModalHeader>
@@ -301,7 +301,7 @@ class CreateProductComponent extends Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>  
-                    <button className="btn btn-white" onClick={this.toggleModal} >Close</button>
+                    <button className="btn btn-white" onClick={this.props.toggleModalCreateCompany.bind(this)} >Close</button>
                     </ModalFooter>
                 </Modal>
                 <br/>
@@ -336,86 +336,6 @@ class CreateProductComponent extends Component {
                         </div>
                     </div>
                     <div className="col-md-8">
-                    {/* <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
-                        <FormGroup row>
-                            <Label for="style" sm={2}>Image</Label>
-                            <Col sm={10}>
-                                {showUpload}
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="description" sm={2}>Style Number</Label>
-                            <Col sm={10}>
-                            <Input type="text" name="description" id="description" onChange={e => this.onChangeDescription(e.target.value)}  placeholder="Style Number" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Company</Label>
-                            <Col sm={8}>
-                                <Input type="select" name="company" id="company" placeholder="Company Name" >
-                                {this.props.companies.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-
-                            </Input>
-                            </Col>
-                            <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="companystyle" sm={2}>Comp Style #</Label>
-                            <Col sm={10}>
-                            <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Category</Label>
-                            <Col sm={10}>
-                                <Input type="select" name="category" id="category" placeholder="Category" >
-                                    <option>{'Bracelet'}</option>
-                                    <option>{'RM'}</option>
-                                    <option>{'Rings'}</option>
-                                    <option>{'Pendant'}</option>
-                                    <option>{'Pins'}</option>
-                                    <option>{'Necklace'}</option>
-                                    <option>{'Earings'}</option>
-                                    <option>{'Watches'}</option>
-                            </Input>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Style</Label>
-                            <Col sm={8}>
-                                <Input type="select" name="style" id="style" placeholder="Style" >
-                                {this.props.styles.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-                            </Input>
-                            </Col>
-                            <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}>Create Style</Label>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="price" sm={2}>Price</Label>
-                            <Col sm={5}>
-                            <Input type="number" name="price" id="price" placeholder="Price" />
-                            </Col>
-                            <Col sm={5}>
-                            <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="notes" sm={2}>Notes</Label>
-                            <Col sm={10}>
-                            <Input type="textarea" name="notes" id="notes" placeholder="Notes" />
-                            </Col>
-                        </FormGroup>
-                        <br/>
-                        <FormGroup row>
-                            <Label for="style" sm={2}>&nbsp;</Label>
-                            <Col sm={10}>
-                            {hiddenBtnCheck}
-                            </Col>
-                        </FormGroup>
-                    </Form> */}
                         <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                                 <FormGroup row>
                                     <Label for="image" sm={2}>Image</Label>
