@@ -209,6 +209,28 @@ class CreateProductComponent extends Component {
             hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
+        // console.log(this.props.companies);
+
+        let users = this.props.companies;
+
+        // console.log(
+        users.sort(function(a, b){
+            if(a.description < b.description) { return -1; }
+            if(a.description > b.description) { return 1; }
+            return 0;
+        }) 
+        // )
+        
+        let users2 = this.props.styles;
+
+        // console.log(
+        users2.sort(function(a, b){
+            if(a.description < b.description) { return -1; }
+            if(a.description > b.description) { return 1; }
+            return 0;
+        }) 
+        // )
+
         
         return(
             <div className="container">
@@ -310,17 +332,6 @@ class CreateProductComponent extends Component {
                         <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
                     </div>
                     <div className="col-md-10"></div>
-
-                        {/* <nav aria-label="breadcrumb">
-                            <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <Link to={'/'}> 
-                                        <p>Home</p>
-                                    </Link>
-                                </li>
-                                <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
-                            </ol>
-                        </nav> */}
                 </div>
                 <div className="row">
                     <h1>Create New Product</h1>
@@ -336,86 +347,6 @@ class CreateProductComponent extends Component {
                         </div>
                     </div>
                     <div className="col-md-8">
-                    {/* <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
-                        <FormGroup row>
-                            <Label for="style" sm={2}>Image</Label>
-                            <Col sm={10}>
-                                {showUpload}
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="description" sm={2}>Style Number</Label>
-                            <Col sm={10}>
-                            <Input type="text" name="description" id="description" onChange={e => this.onChangeDescription(e.target.value)}  placeholder="Style Number" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Company</Label>
-                            <Col sm={8}>
-                                <Input type="select" name="company" id="company" placeholder="Company Name" >
-                                {this.props.companies.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-
-                            </Input>
-                            </Col>
-                            <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewCompanyModal.bind(this)}>Create Company</Label>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="companystyle" sm={2}>Comp Style #</Label>
-                            <Col sm={10}>
-                            <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Category</Label>
-                            <Col sm={10}>
-                                <Input type="select" name="category" id="category" placeholder="Category" >
-                                    <option>{'Bracelet'}</option>
-                                    <option>{'RM'}</option>
-                                    <option>{'Rings'}</option>
-                                    <option>{'Pendant'}</option>
-                                    <option>{'Pins'}</option>
-                                    <option>{'Necklace'}</option>
-                                    <option>{'Earings'}</option>
-                                    <option>{'Watches'}</option>
-                            </Input>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="exampleSelect" sm={2}>Style</Label>
-                            <Col sm={8}>
-                                <Input type="select" name="style" id="style" placeholder="Style" >
-                                {this.props.styles.map( 
-                                    (data,index) => <option>{data.description}</option>
-                                )}
-                            </Input>
-                            </Col>
-                            <Label for="exampleSelect" sm={2} style={{'font-size':'12px','text-decoration':'underline','color':'blue'}} onClick={this.openNewStyleModal.bind(this)}>Create Style</Label>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="price" sm={2}>Price</Label>
-                            <Col sm={5}>
-                            <Input type="number" name="price" id="price" placeholder="Price" />
-                            </Col>
-                            <Col sm={5}>
-                            <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="notes" sm={2}>Notes</Label>
-                            <Col sm={10}>
-                            <Input type="textarea" name="notes" id="notes" placeholder="Notes" />
-                            </Col>
-                        </FormGroup>
-                        <br/>
-                        <FormGroup row>
-                            <Label for="style" sm={2}>&nbsp;</Label>
-                            <Col sm={10}>
-                            {hiddenBtnCheck}
-                            </Col>
-                        </FormGroup>
-                    </Form> */}
                         <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                                 <FormGroup row>
                                     <Label for="image" sm={2}>Image</Label>
@@ -437,18 +368,6 @@ class CreateProductComponent extends Component {
                                     </Col>
                                     <FormFeedback>{errors.description}</FormFeedback>
                                 </FormGroup>
-
-                                    {/* <Label for="description" sm={2}>Style Number</Label>
-                                    <Col sm={10}>
-                                    <Input type="text" name="description" id="description" placeholder="Style Number" 
-                                        onBlur={this.handleBlur('description')}
-                                        valid={this.state.description.length >= 3 }
-                                        invalid={this.state.description.length < 3 }
-                                        onChange={e => this.onDescriptionChange(e.target.value)}
-                                        value={this.state.description}  
-                                        style={{'width':'275px'}}                                                                                                                             
-                                    
-                                    /> */}
                                     <FormFeedback>{errors.description}</FormFeedback>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
@@ -478,6 +397,7 @@ class CreateProductComponent extends Component {
                                     <Label for="exampleSelect" sm={2}>Category</Label>
                                     <Col sm={10}>
                                         <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" >
+                                            <option>{' '}</option>
                                             <option>{'Bracelet'}</option>
                                             <option>{'RM'}</option>
                                             <option>{'Rings'}</option>
