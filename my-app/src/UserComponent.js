@@ -45,7 +45,9 @@ class UserComponent extends Component {
                 lastname : false,
                 email : false,    
                 password : false    
-            }
+            },
+            showModalDelete: false,
+            toDelete: {}
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -221,8 +223,6 @@ class UserComponent extends Component {
     }
 
     onDeleteItem(dataItem,idUser){
-        
-        // console.log(dataItem);
 
         let nextState = this.state.users.filter(
 
@@ -230,7 +230,8 @@ class UserComponent extends Component {
         );
 
         this.setState({
-            users: nextState
+            users: nextState,
+            showModalDelete: false
         })
 
         let newEmail = {
@@ -267,6 +268,19 @@ class UserComponent extends Component {
 
     }
 
+    toggleModalDelete = () => {
+        this.setState({
+            showModalDelete: !this.state.showModalDelete
+        })
+    }
+
+    onClickDeleteModal(data){
+        // console.log(data);
+        this.setState({
+            showModalDelete: true,
+            toDelete: data
+        })
+    }
 
     render() {
 
@@ -289,6 +303,31 @@ class UserComponent extends Component {
         
         return(            
             <div className="container">
+                <Modal isOpen={this.state.showModalDelete} toggle={this.toggleModalDelete}>
+                    <ModalHeader >
+                        <div className="row">
+                                {/* <p>Delete to {this.state.toDelete.description} </p>                                 */}
+                                <p>Delete to {''} </p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>Are you sure you want to delete this item?</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-2">
+                                <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this, this.state.toDelete.username)} >Yes</button>
+                                {/* <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, this.state.toDelete.id)} >Yes</button> */}
+                            </div>
+                            <div className="col-md-2">
+                                <button onClick={this.toggleModalDelete} className="btn btn-primary">No</button>
+                            </div>
+                        </div>
+                    </ModalBody>
+                </Modal>
+
                 <br/>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModalStyle}>
                     <ModalHeader >
@@ -448,7 +487,8 @@ class UserComponent extends Component {
                                                 <button className="btn btn-warning" onClick={this.onResetItem.bind(this,data.username)} ><i className="fa fa-undo" title="Reset password" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
                                             </div> */}
                                             <div className="col-md-2">
-                                                <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this,data.username)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
+                                                <button className="btn btn-danger" onClick={this.onClickDeleteModal.bind(this, data)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button>
+                                                {/* <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this,data.username)} ><i className="fa fa-trash" style={{'color':'#ffffff'}} aria-hidden="true"></i></button> */}
                                             </div>
                                             <div className="col-md-6"></div>
                                         </div>
