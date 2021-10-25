@@ -368,10 +368,16 @@ exports.setFilterAPIUI = async(req,res)=>{
   var obj = req.body;
 
   var productFilter
-  
-  if(obj.newFilter.company!==''){
 
-    productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  })
+  // productFilter = await Product.find({"company" : { $in: obj.newFilter.company }  })
+
+  console.log(obj);
+  
+  // if(obj.newFilter.company!==''){
+  if(obj.newFilter.company.length>0){
+
+    productFilter = await Product.find({"company" : { $in: obj.newFilter.company }  })
+    // productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  })
   }else if(obj.newFilter.companystyle!==''){
 
     productFilter = await Product.find({"companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }  })

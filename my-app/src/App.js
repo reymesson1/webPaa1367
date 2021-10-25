@@ -28,8 +28,8 @@ import  axios  from 'axios'
 import UserComponent from './UserComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -45,8 +45,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -83,7 +83,10 @@ class App extends Component {
               password : false    
           },
           filterData :{},
-          filterAPI:[]
+          filterDataAdd :{},
+          filterAPIAdd :[],
+          filterAPI:[],
+          companystyle: ""
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -864,22 +867,45 @@ class App extends Component {
 
     event.preventDefault();
 
-    var newFilter = {
-        
-        "company": event.target.company.value,
-        "companystyle": event.target.companystyle.value,
-        "style": event.target.style.value,
-        "price": event.target.price.value,
-        "priceopt": event.target.priceopt.value
+    var newFilter
+
+    if(this.state.filterAPIAdd.length>0){
+
+      newFilter = {
+
+        "company": this.state.filterAPIAdd
+      }
+  
+    }else{
+
+      newFilter = {
+          
+          "companystyle": this.state.company,
+          "style": event.target.style.value,
+          "price": event.target.price.value,
+          "priceopt": event.target.priceopt.value
+      }
+
     }
+
+
+
+    // var newFilter = {
+        
+    //     "company": event.target.company.value,
+    //     "companystyle": event.target.companystyle.value,
+    //     "style": event.target.style.value,
+    //     "price": event.target.price.value,
+    //     "priceopt": event.target.priceopt.value
+    // }
     
-    let nextState = this.state.filterData;
+    // let nextState = this.state.filterData;
 
-    nextState = newFilter;
+    // nextState = newFilter;
 
-    this.setState({
-      filterData: nextState
-    })
+    // this.setState({
+    //   filterData: nextState
+    // })
 
     fetch(API_URL+'/filterapiui', {
 
@@ -899,10 +925,64 @@ class App extends Component {
 
   }
 
+  onFilterSearchReset(){
+
+    console.log('reset');
+ 
+    let nextState = []
+
+    this.setState({
+      filterAPIAdd: nextState
+    })
+
+
+    
+  }
+
+  onFilterSearchAdd(event){
+
+    event.preventDefault();
+
+    console.log(event.target.company.value);
+
+    let nextState = this.state.filterAPIAdd;
+
+    nextState.push(event.target.company.value);
+
+    this.setState({
+      filterAPIAdd: nextState
+    })
+
+    // var newFilter = {
+        
+    //     "company": event.target.company.value,
+    //     "companystyle": event.target.companystyle.value,
+    //     "style": event.target.style.value,
+    //     "price": event.target.price.value,
+    //     "priceopt": event.target.priceopt.value
+    // }
+
+    // console.log(newFilter);
+
+
+  }
+
+  onChangeCompanyStyle(event){
+
+      console.log(event.target.value);
+
+      this.setState({
+          companystyle: event.target.value
+      });
+
+  }
+
+
   onFilterSearchGoBack(data){
 
     window.history.back();
   }
+
 
     render(){
 
@@ -1035,9 +1115,14 @@ class App extends Component {
           />
           <Route path="/filter" component= {() => <FilterComponent
                     companies={this.state.companies} 
+                    companystyle={this.state.companystyle} 
                     filterData={this.state.filterData} 
                     filterAPI={this.state.filterAPI} 
+                    filterAPIAdd={this.state.filterAPIAdd} 
                     onFilterSearch={this.onFilterSearch.bind(this)}
+                    onFilterSearchAdd={this.onFilterSearchAdd.bind(this)}
+                    onFilterSearchReset={this.onFilterSearchReset.bind(this)}
+                    onChangeCompanyStyle={this.onChangeCompanyStyle.bind(this)}
                     onDeleteCompany={this.onDeleteCompany.bind(this)} 
                     onCreateCompany={this.onCreateCompany.bind(this)} 
                     onCreateProduct={this.onCreateProduct.bind(this)}

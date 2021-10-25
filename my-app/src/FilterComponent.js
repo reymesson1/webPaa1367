@@ -21,7 +21,8 @@ class FilterComponent extends Component {
         this.state = {
             filterAPI: [],
             limit: 5,
-            sequence: 5
+            sequence: 5,
+            companystyle: ""
         }
     }
 
@@ -70,6 +71,16 @@ class FilterComponent extends Component {
         window.history.back();
     }
 
+    onChangeCompanyStyle(event){
+
+        console.log(event.target.value);
+
+        this.setState({
+            companystyle: event.target.value
+        });
+
+    }
+
 
     render() {
 
@@ -87,6 +98,18 @@ class FilterComponent extends Component {
             showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
 
         }
+
+        let buttonSearch
+
+        if(this.props.filterAPIAdd.length>0 || this.state.companystyle.length>0){
+
+            buttonSearch = <button className="btn btn-success" onClick={this.props.onFilterSearch.bind(this)}>Search</button>
+        }else{
+            
+            buttonSearch = <button className="btn btn-success" onClick={this.props.onFilterSearch.bind(this)} disabled>Search</button>
+        }
+
+
 
         const menu = result.map((product, index) => {
             return (
@@ -146,7 +169,7 @@ class FilterComponent extends Component {
                 <br/>
                 <div className="row" style={{'margin-left':'1%'}}>
                     <div className="col-md-4">
-                    <Form onSubmit={this.props.onFilterSearch.bind(this)} >
+                    <Form onSubmit={this.props.onFilterSearchAdd.bind(this)} >
                     {/* <Form > */}
                         <FormGroup row>
                             <Label for="companystyle" sm={2} style={{'text-align':'left'}}>Company</Label>
@@ -157,12 +180,13 @@ class FilterComponent extends Component {
                                     (data,index) => <option style={{'color':'#a59d9d','height':'50px'}}>{data.description}</option>
                                 )}
 
-                            </Input>                            </Col>
+                            </Input>                            
+                            </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for="companystyle" style={{'text-align':'left'}} sm={4}>Company Style</Label>
                             <Col sm={8}>
-                                <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style" />
+                                <Input type="text" name="companystyle" id="companystyle" onChange={this.props.onChangeCompanyStyle.bind(this)} value={this.props.companystyle} placeholder="Company Style" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -186,14 +210,31 @@ class FilterComponent extends Component {
                                 <Input type="text" name="priceopt" id="priceopt" placeholder="Price To" />
                             </Col>
                         </FormGroup>
-                        {/* <span class="badge bg-primary">Primary</span> */}
-                        <br/>
-                        <br/>
-
                         <FormGroup row>
-                            <Col sm={6}></Col>
+                            <div className="col-md-8"></div>
+                            <div className="col-md-4">
+                                {/* <button className="btn btn-dark" onClick={this.props.onFilterSearchAdd.bind(this)} ><i className="fa fa-plus"></i></button> */}
+                                <button className="btn btn-dark" type="submit" ><i className="fa fa-plus"></i></button>
+                            </div>    
+                        </FormGroup>
+                        <FormGroup row>
+                            <div className="col-md-6">
+                                {this.props.filterAPIAdd.map( 
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                )}
+                                
+                            </div>    
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col sm={2}></Col>
+                            <Col sm={6}>
+                                <button className="btn btn-danger" onClick={this.props.onFilterSearchReset.bind(this)}>Reset</button>
+                            </Col>
                             <Col sm={4}>
-                            <Input type="submit" value="Search" className="btn btn-success" name="image" id="image" placeholder="Image" />
+                                {buttonSearch}
+                            {/* <button className="btn btn-success" onClick={this.props.onFilterSearch.bind(this)} >Search</button> */}
+                            {/* <Input type="submit" value="Search" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                            {/* <Input type="submit" value="Search" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
                             </Col>
                         </FormGroup>
                     </Form>
