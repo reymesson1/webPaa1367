@@ -28,8 +28,8 @@ import  axios  from 'axios'
 import UserComponent from './UserComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -45,8 +45,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -76,6 +76,9 @@ class App extends Component {
           progressImage: 0,
           isModalLoginOpen: true,
           isModalLoginError: false,
+          firstname: '',
+          lastname: '',
+          email: '',
           username: '',
           password: '',
           touched:{
@@ -83,7 +86,8 @@ class App extends Component {
               password : false    
           },
           filterData :{},
-          filterAPI:[]
+          filterAPI:[],
+          registration: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -849,6 +853,21 @@ class App extends Component {
       
   }
 
+  onFirstNameChangeLogin(value){
+    this.setState({
+        firstname: value
+    })
+  }
+  onLastNameChangeLogin(value){
+    this.setState({
+        lastname: value
+    })
+  }
+  onEmailChangeLogin(value){
+    this.setState({
+        email: value
+    })
+  }
   onUserNameChangeLogin(value){
     this.setState({
         username: value
@@ -904,6 +923,36 @@ class App extends Component {
     window.history.back();
   }
 
+  openRegistration(){
+    console.log('test');
+    this.setState({
+      registration: true
+    })
+  }
+
+  onSubmitRegistration(event){
+
+    event.preventDefault();
+
+    let newUser = {
+
+        username : event.target.username.value,
+        firstname : event.target.firstname.value,
+        email : event.target.email.value,
+        lastname : event.target.lastname.value,
+        password : event.target.password.value,
+
+    }
+
+    fetch(API_URL+'/createuser', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newUser)
+    })
+
+  }
+
     render(){
 
       const errors = this.validate(this.state.username,this.state.password);
@@ -934,7 +983,104 @@ class App extends Component {
       
       return (
         <div className="App">
-                {/* <Modal isOpen={this.state.isModalLoginOpen}> */}
+                <Modal isOpen={this.state.registration}>
+                    <ModalHeader >
+                        <div className="row">
+                                <p>{'Registration'}</p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+
+                    {passwordError}
+
+                    <Form name="contact-form" onSubmit={this.onSubmitRegistration.bind(this)}>
+                    {/* <Form name="contact-form"> */}
+                                <FormGroup row>
+                                    <Label for="firstname" sm={1}>&nbsp;</Label>
+                                    <Label for="firstname" sm={4}>First Name</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="firstname" id="firstname" placeholder="First Name" 
+                                        onBlur={this.handleBlur('firstname')}
+                                        valid={this.state.firstname.length >= 3 }
+                                        invalid={this.state.firstname.length < 3 }
+                                        onChange={e => this.onFirstNameChangeLogin(e.target.value)}
+                                        value={this.state.firstname}                                      
+                                    />
+                                    <FormFeedback>{errors.firstname}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="lastname" sm={1}>&nbsp;</Label>
+                                    <Label for="lastname" sm={4}>Last Name</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="lastname" id="lastname" placeholder="Last Name" 
+                                        onBlur={this.handleBlur('lastname')}
+                                        valid={this.state.lastname.length >= 3 }
+                                        invalid={this.state.lastname.length < 3 }
+                                        onChange={e => this.onLastNameChangeLogin(e.target.value)}
+                                        value={this.state.lastname}                                      
+                                    />
+                                    <FormFeedback>{errors.lastname}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="email" sm={1}>&nbsp;</Label>
+                                    <Label for="email" sm={4}>Email</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="email" id="email" placeholder="Email" 
+                                        onBlur={this.handleBlur('email')}
+                                        valid={this.state.email.length >= 3 }
+                                        invalid={this.state.email.length < 3 }
+                                        onChange={e => this.onEmailChangeLogin(e.target.value)}
+                                        value={this.state.email}                                      
+                                    />
+                                    <FormFeedback>{errors.email}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="username" sm={1}>&nbsp;</Label>
+                                    <Label for="username" sm={4}>User Name</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="username" id="username" placeholder="User Name" 
+                                        onBlur={this.handleBlur('username')}
+                                        valid={this.state.username.length >= 3 }
+                                        invalid={this.state.username.length < 3 }
+                                        onChange={e => this.onUserNameChangeLogin(e.target.value)}
+                                        value={this.state.username}                                      
+                                    />
+                                    <FormFeedback>{errors.username}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="password" sm={1}>&nbsp;</Label>
+                                    <Label for="password" sm={4}>Password</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="password" id="password" placeholder="Password" 
+                                        onBlur={this.handleBlur('password')}
+                                        valid={this.state.password.length >= 3 }
+                                        invalid={this.state.password.length < 3 }
+                                        onChange={e => this.onPasswordChangeLogin(e.target.value)}
+                                        value={this.state.password}                                      
+                                    />
+                                    <FormFeedback>{errors.password}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <br/>
+                                <br/>
+                                <FormGroup row>
+                                    <Label for="style" sm={2}>&nbsp;</Label>
+                                    <Col sm={10}>
+                                        {submitButton}
+                                        {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                    </Col>
+                                </FormGroup>
+                        </Form>
+
+
+                    </ModalBody>
+                </Modal>
+
                 <Modal isOpen={logged}>
                     <ModalHeader >
                         <div className="row">
@@ -943,6 +1089,14 @@ class App extends Component {
 
                     </ModalHeader>
                     <ModalBody>
+
+                      <div className="row">
+
+                        <div className="col-md-8"></div>
+                        <div className="col-md-4">
+                          <button className="btn btn-primary" onClick={this.openRegistration.bind(this)}>Registration</button>                         
+                        </div>
+                      </div>
 
                     {passwordError}
 

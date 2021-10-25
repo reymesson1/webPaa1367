@@ -356,26 +356,6 @@ class ProductDetailComponent extends Component {
                     </Modal>
                     <br/>
                     <div className="row">
-                        {/* <div className="col-md-2">
-                            <button className="btn btn-warning" onClick={this.onClickBack.bind(this)}>Back</button>
-                        </div>
-                        <div className="col-md-8"></div>
-                        <div className="col-md-1">
-                            <Link style={{'margin':'10px'}} className="btn btn-primary" to={'/editproduct/'+filteredData[0].id} ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Link>                                                        
-                        </div>
-                        <div className="col-md-1">
-                            {flagFavorite}
-                        </div> */}
-                        {/* <nav aria-label="breadcrumb">
-                            <ol style={{'padding-top':'1%','padding-left':'1%'}} class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <Link to={'/'}> 
-                                        <p>Home</p>
-                                    </Link>
-                                </li>
-                                <li onClick={this.onClickBack.bind(this)} className="breadcrumb-item active" style={{'text-decoration':'unset','color':'#007bff','cursor':'pointer'}} aria-current="page">{'Back'}</li>
-                            </ol>
-                        </nav> */}
                     </div>
                     <br/>
                     <div className="row">
@@ -444,115 +424,8 @@ class ProductDetailComponent extends Component {
 
                     <div className="row">
                         <div className="col-md-1"></div>
-                        {/* <div className="col-md-4">
-                            <div className="row">
-                                <Link to={'/productdetailzoom/'+filteredData[0].image}>
-                                    <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
-                                </Link>
-                            </div>
-                            <br/>
-                            <br/>
-                            <div className="row">
-                            {filteredData[0].images.map(
-                                        (data, index) =>
-                                        <div className="col-md-3">
-                                            <div className="row">
-                                                <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
-                                                    <img src={this.props.URLExternal+"/images/output-"+data} height="70px" width="40px" />                                                                                
-                                                </button>
-                                            </div>
-                                        </div>                                         
-                            )}
-                            </div>
-                        </div> */}
                         <div className="col-md-1"></div>
-                        {/* <div className="col-md-4">
 
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Style Number:</h4>
-                                </div>
-                                <div className="col-md-6">
-                                    <p>{filteredData[0].description}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Style:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{style}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Company:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{company}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Company Style:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{companyStyle}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Price:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{filteredData[0].price}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Price Opt:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{filteredData[0].priceopt}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Category:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{category}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-6 text-align">
-                                    <h4>Notes:</h4>
-                                </div>
-                                <div className="col-md-6 text-align">
-                                    <p>{notes}</p>
-                                </div>
-                            </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-md-3">
-                                        <h1 style={{'text-decoration':'underline','color':'green','cursor':'pointer'}} onClick={this.onSendEmail.bind(this)} ><i className="fa fa-envelope fa-lg"></i></h1>
-                                </div>
-                                <div className="col-md-3">
-                                    <h1 onClick={this.onPrint.bind(this)} style={{'text-decoration':'underline','color':'gray','cursor':'pointer'}} ><i className="fa fa-print fa-lg"></i> <a href="mailto:confusion@food.net"/></h1>
-                                </div>
-                                <div className="col-md-3">
-                                </div>
-                                <div className="col-md-3"></div>
-                            </div>
-                        </div> */}
                     </div>
                     <div className="col-md-2"></div>
 
