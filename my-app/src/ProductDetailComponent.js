@@ -387,19 +387,25 @@ class ProductDetailComponent extends Component {
 
                             <div class="card mb-3">
                                 <h3 class="card-header">{filteredData[0].description}</h3>
-                                <div class="card-body">
-                                    <h5 class="card-title"><p>{style}</p></h5>
-                                    <h6 class="card-subtitle text-muted">{company}</h6>
-                                </div>
                                 <Link to={'/productdetailzoom/'+filteredData[0].image}>
                                     <img src={this.props.URLExternal+'/images/'+filteredData[0].image}/>
                                 </Link>
                                 <div class="card-body">
+                                    <h5 class="card-text"><p>{'Style Number: ' + filteredData[0].description}</p></h5>
+                                    <h5 class="card-text ">{'Price: ' +filteredData[0].price}</h5>
+                                    <h5 class="card-text ">{'Price opt: ' +filteredData[0].priceopt}</h5>
+                                    <h5 class="card-text ">{company}</h5>
+                                    <h5 class="card-text ">{companyStyle}</h5>
+                                    <h5 class="card-text ">{style}</h5>
+                                    <h5 class="card-text ">{category}</h5>
                                     <p class="card-text">{notes}</p>
                                 </div>
+
+                                <div class="card-body">
+                                </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{ 'Price: ' + filteredData[0].price}</li>
-                                    <li class="list-group-item">{ 'Price Opt: ' + filteredData[0].priceopt}</li>
+                                    {/* <li class="list-group-item">{ 'Price: ' + filteredData[0].price}</li>
+                                    <li class="list-group-item">{ 'Price Opt: ' + filteredData[0].priceopt}</li> */}
                                     <li class="list-group-item"></li>
                                 </ul>
                                 <div class="card-body">
@@ -413,7 +419,6 @@ class ProductDetailComponent extends Component {
                                             
                                     </div>
                                     <hr/>
-                                    <h5>{companyStyle}</h5>
                                 </div>
                                 <div class="card-footer text-muted">
                                     {diffDay + ' days ago'} 
