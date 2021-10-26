@@ -28,8 +28,8 @@ import  axios  from 'axios'
 import UserComponent from './UserComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-let API_URL = "http://localhost:8085";
-// let API_URL = "http://143.198.171.44:8085"; 
+// let API_URL = "http://localhost:8085";
+let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -45,8 +45,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        // URLExternal: 'http://143.198.171.44:8085', 
-          URLExternal: 'http://localhost:8085',
+        URLExternal: 'http://143.198.171.44:8085', 
+          // URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -85,6 +85,10 @@ class App extends Component {
           filterData :{},
           filterDataAdd :{},
           filterAPIAdd :[],
+          filterAPIAddCompanyStyle :[],
+          filterAPIAddCompany :[],
+          filterAPIAddStyle :[],
+          filterAPIAddPrice :[],
           filterAPI:[],
           companystyle: ""
         }
@@ -873,39 +877,49 @@ class App extends Component {
 
       newFilter = {
 
-        "company": this.state.filterAPIAdd
+        "company": this.state.filterAPIAdd,
+        "companystyle": [],
+        "style": [],
+        "price": []
       }
   
-    }else{
+    }
+    
+    if(this.state.filterAPIAddCompanyStyle.length>0){
 
       newFilter = {
           
-          "companystyle": this.state.company,
-          "style": event.target.style.value,
-          "price": event.target.price.value,
-          "priceopt": event.target.priceopt.value
+          "company": [],
+          "companystyle": this.state.filterAPIAddCompanyStyle,
+          "style": [],
+          "price": []
       }
 
     }
 
+    if(this.state.filterAPIAddStyle.length>0){
 
+      newFilter = {
+          
+          "company": [],
+          "companystyle": [],
+          "style": this.state.filterAPIAddStyle,
+          "price": []
+      }
 
-    // var newFilter = {
-        
-    //     "company": event.target.company.value,
-    //     "companystyle": event.target.companystyle.value,
-    //     "style": event.target.style.value,
-    //     "price": event.target.price.value,
-    //     "priceopt": event.target.priceopt.value
-    // }
-    
-    // let nextState = this.state.filterData;
+    }
 
-    // nextState = newFilter;
+    if(this.state.filterAPIAddPrice.length>0){
 
-    // this.setState({
-    //   filterData: nextState
-    // })
+      newFilter = {
+          
+          "company": [],
+          "companystyle": [],
+          "style": [],
+          "price": this.state.filterAPIAddPrice
+      }
+
+    }
 
     fetch(API_URL+'/filterapiui', {
 
@@ -927,15 +941,7 @@ class App extends Component {
 
   onFilterSearchReset(){
 
-    console.log('reset');
- 
-    let nextState = []
-
-    this.setState({
-      filterAPIAdd: nextState
-    })
-
-
+    window.location.reload();
     
   }
 
@@ -944,13 +950,36 @@ class App extends Component {
     event.preventDefault();
 
     console.log(event.target.company.value);
+    console.log(event.target.companystyle.value);
+    console.log(event.target.style.value);
+    console.log(event.target.price.value);
+    console.log(event.target.priceopt.value);
 
     let nextState = this.state.filterAPIAdd;
-
-    nextState.push(event.target.company.value);
+    let nextStateCS = this.state.filterAPIAddCompanyStyle;
+    let nextStateStyle = this.state.filterAPIAddStyle;
+    let nextStatePrice = this.state.filterAPIAddPrice;
+    
+    if(event.target.company.value){
+      
+      nextState.push(event.target.company.value);
+    }else if(event.target.companystyle.value){
+      
+      nextStateCS.push(event.target.companystyle.value);
+    }else if(event.target.style.value){
+      
+      nextStateStyle.push(event.target.style.value);
+    }else if(event.target.price.value){
+      
+      nextStatePrice.push(event.target.price.value);
+      nextStatePrice.push(event.target.priceopt.value);
+    }
 
     this.setState({
-      filterAPIAdd: nextState
+      filterAPIAdd: nextState,
+      filterAPIAddCompanyStyle: nextStateCS,
+      filterAPIAddStyle: nextStateStyle,
+      filterAPIAddPrice: nextStatePrice
     })
 
     // var newFilter = {
@@ -1119,6 +1148,9 @@ class App extends Component {
                     filterData={this.state.filterData} 
                     filterAPI={this.state.filterAPI} 
                     filterAPIAdd={this.state.filterAPIAdd} 
+                    filterAPIAddCompanyStyle={this.state.filterAPIAddCompanyStyle} 
+                    filterAPIAddStyle={this.state.filterAPIAddStyle} 
+                    filterAPIAddPrice={this.state.filterAPIAddPrice} 
                     onFilterSearch={this.onFilterSearch.bind(this)}
                     onFilterSearchAdd={this.onFilterSearchAdd.bind(this)}
                     onFilterSearchReset={this.onFilterSearchReset.bind(this)}

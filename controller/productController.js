@@ -368,26 +368,28 @@ exports.setFilterAPIUI = async(req,res)=>{
   var obj = req.body;
 
   var productFilter
-
-  // productFilter = await Product.find({"company" : { $in: obj.newFilter.company }  })
-
-  console.log(obj);
   
-  // if(obj.newFilter.company!==''){
   if(obj.newFilter.company.length>0){
 
     productFilter = await Product.find({"company" : { $in: obj.newFilter.company }  })
-    // productFilter = await Product.find({"company" : { $regex: '.*' + obj.newFilter.company + '.*' }  })
-  }else if(obj.newFilter.companystyle!==''){
-
-    productFilter = await Product.find({"companystyle" : { $regex: '.*' + obj.newFilter.companystyle + '.*' }  })
-  }else if(obj.newFilter.style!==''){
-
-    productFilter = await Product.find({"style" : { $regex: '.*' + obj.newFilter.style + '.*' }  })
-  }else if(obj.newFilter.price!==''&& obj.newFilter.priceopt!==''){
-
-    productFilter = await Product.find({"price" : { $gte: obj.newFilter.price, $lte: obj.newFilter.priceopt }})
   }
+  
+  if(obj.newFilter.companystyle.length>0){
+
+    productFilter = await Product.find({"companystyle" : { $in: obj.newFilter.companystyle }  })
+  }
+
+  if(obj.newFilter.style.length>0){
+
+    productFilter = await Product.find({"style" : { $in: obj.newFilter.style }  })
+  }
+
+  if(obj.newFilter.price.length>0){
+
+    productFilter = await Product.find({"price" : { $gte: obj.newFilter.price[0], $lte: obj.newFilter.price[1] }})
+
+  }
+
 
   res.send(productFilter);
 

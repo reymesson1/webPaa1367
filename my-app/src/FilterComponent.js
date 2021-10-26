@@ -101,7 +101,7 @@ class FilterComponent extends Component {
 
         let buttonSearch
 
-        if(this.props.filterAPIAdd.length>0 || this.state.companystyle.length>0){
+        if(this.props.filterAPIAdd.length>0 || this.props.filterAPIAddCompanyStyle.length>0 || this.props.filterAPIAddStyle.length>0 || this.props.filterAPIAddPrice.length>0){
 
             buttonSearch = <button className="btn btn-success" onClick={this.props.onFilterSearch.bind(this)}>Search</button>
         }else{
@@ -186,7 +186,7 @@ class FilterComponent extends Component {
                         <FormGroup row>
                             <Label for="companystyle" style={{'text-align':'left'}} sm={4}>Company Style</Label>
                             <Col sm={8}>
-                                <Input type="text" name="companystyle" id="companystyle" onChange={this.props.onChangeCompanyStyle.bind(this)} value={this.props.companystyle} placeholder="Company Style" />
+                                <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -220,6 +220,15 @@ class FilterComponent extends Component {
                         <FormGroup row>
                             <div className="col-md-6">
                                 {this.props.filterAPIAdd.map( 
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                )}
+                                {this.props.filterAPIAddCompanyStyle.map( 
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                )}
+                                {this.props.filterAPIAddStyle.map( 
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                )}
+                                {this.props.filterAPIAddPrice.map( 
                                     (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
                                 )}
                                 
