@@ -81,6 +81,37 @@ app.post('/createproduct', upload.array('single-file'), function(request, respon
 
 });
 
+app.post('/createproduct5', upload.array('single-file'), function(request, response) {
+
+  response.setHeader("Content-Type", "text/html");
+
+  var description = request.body.description;
+  var style = "test";
+
+  console.log(description);
+
+  var fileName = request.files[0].originalname; // original file name
+  var file = request.files[0].path; // real file path with temporary name
+
+  var errorcode = 0;
+  for (var i = 0; i < request.files.length; i++) {
+
+      // fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'-'+i+'.jpg', function (err) {  //working fine
+      fs.rename(request.files[i].path, uploadsFolder + description +'-'+style+'-'+i+'.jpg', function (err) {  //working fine
+        errorcode=err
+      });
+  }
+
+  if (errorcode) {
+    console.log(err);
+    response.json({success:false, message: err});
+    return;
+  }
+
+  response.json({success:true, message: 'File uploaded successfully', fileName: fileName});
+
+});
+
 app.post('/editpictureproduct', upload.array('single-file'), function(request, response) {
 
   response.setHeader("Content-Type", "text/html");

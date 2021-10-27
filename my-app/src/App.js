@@ -28,8 +28,8 @@ import  axios  from 'axios'
 import UserComponent from './UserComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -45,8 +45,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -90,7 +90,8 @@ class App extends Component {
           filterAPIAddStyle :[],
           filterAPIAddPrice :[],
           filterAPI:[],
-          companystyle: ""
+          companystyle: "",
+          uploadingPic: []
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -295,6 +296,73 @@ class App extends Component {
       }
 
     }
+
+    onAddImagePartial(){
+
+
+      let nextState = this.state.uploadingPic;
+
+      let today = Date.now();
+
+      const data = new FormData();
+      data.append("description", today);
+      data.append("price", "");
+      data.append("company", "");
+      data.append("style", "");
+
+      for (let i = 0; i < this.state.images.length; i++) {
+        console.log(this.state.images[i]);
+        data.append('single-file', this.state.images[i]);
+        nextState.push(today+"-test-"+i);
+      }
+
+      this.setState({
+        uploadingPic: nextState
+      })
+
+      axios.post(API_URL+'/createproduct5', data, {
+        onUploadProgress: ProgressEvent =>{
+          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+          let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+          this.setState({
+            productLoadingModalLabel:  dataProgress + "%",
+            productLoadingModalLabelPcnt: dataProgress
+          })  
+          if(dataProgress == 100){
+
+            // setTimeout(() => {
+              
+            //   this.setState({
+            //     productLoadingModal: true,
+            //     productLoadingModalLabel: "Image uploaded successfully completed"             
+            //   });
+
+            // }, 7000);
+
+            // fetch(API_URL+'/createproduct3', {
+
+            //   method: 'post',
+            //   headers: API_HEADERS,
+            //   body: JSON.stringify(newProduct)
+            // })
+
+          }
+        }
+      }).then((res)=>{
+        console.log(res);
+      });
+
+      // fetch(API_URL+'/createproduct2', {
+
+      //   method: 'post',
+      //   headers: API_HEADERS,
+      //   body: JSON.stringify(newProduct)
+      // });
+
+
+
+    }
+
     onCreateProduct(event){
 
       event.preventDefault(); 
@@ -316,6 +384,7 @@ class App extends Component {
       data.append("style", event.target.style.value);
 
       for (let i = 0; i < this.state.images.length; i++) {
+        console.log(this.state.images[i]);
         data.append('single-file', this.state.images[i])
       }
 
@@ -1195,10 +1264,14 @@ class App extends Component {
                     />}
           />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
+                      URLExternal={this.state.URLExternal}
+                      onAddImagePartial={this.onAddImagePartial.bind(this)}
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
                       fileUploaded={this.state.fileUploaded}
                       styles={this.state.styles}
+                      images={this.state.images}
+                      uploadingPic={this.state.uploadingPic}
                       companies={this.state.companies}
                       productHiddenBtn={this.state.productHiddenBtn}
                       onCreateCompany={this.onCreateCompany.bind(this)}

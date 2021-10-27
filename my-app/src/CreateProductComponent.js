@@ -172,6 +172,8 @@ class CreateProductComponent extends Component {
 
     render() {
 
+        console.log(this.props.styles);
+
         const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
         // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
 
@@ -344,6 +346,25 @@ class CreateProductComponent extends Component {
                         </div>
                         <div style={{'text-align':'center'}}>
                             <h5>{this.props.fileName}</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-4">
+                                <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} ><i className="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div className="row">
+                            {this.props.uploadingPic.map(
+                                        (data, index) =>
+                                        <div className="col-md-3">
+                                            <div className="row">
+                                                <button className="btn btn-white">
+                                                    {/* <p>{this.props.URLExternal+'/images/'+data+'.jpg'}</p>  */}
+                                                    <img src={this.props.URLExternal+'/images/'+data+'.jpg'} height="70px" width="40px"/>
+                                                </button>
+                                            </div>
+                                        </div>                                         
+                            )}
                         </div>
                     </div>
                     <div className="col-md-8">
