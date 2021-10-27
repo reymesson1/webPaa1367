@@ -322,44 +322,15 @@ class App extends Component {
 
       axios.post(API_URL+'/createproduct5', data, {
         onUploadProgress: ProgressEvent =>{
-          console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
           let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
           this.setState({
             productLoadingModalLabel:  dataProgress + "%",
             productLoadingModalLabelPcnt: dataProgress
           })  
-          if(dataProgress == 100){
-
-            // setTimeout(() => {
-              
-            //   this.setState({
-            //     productLoadingModal: true,
-            //     productLoadingModalLabel: "Image uploaded successfully completed"             
-            //   });
-
-            // }, 7000);
-
-            // fetch(API_URL+'/createproduct3', {
-
-            //   method: 'post',
-            //   headers: API_HEADERS,
-            //   body: JSON.stringify(newProduct)
-            // })
-
-          }
         }
       }).then((res)=>{
         console.log(res);
       });
-
-      // fetch(API_URL+'/createproduct2', {
-
-      //   method: 'post',
-      //   headers: API_HEADERS,
-      //   body: JSON.stringify(newProduct)
-      // });
-
-
 
     }
 
