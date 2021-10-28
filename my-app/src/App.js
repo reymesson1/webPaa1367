@@ -91,7 +91,8 @@ class App extends Component {
           filterAPIAddPrice :[],
           filterAPI:[],
           companystyle: "",
-          uploadingPic: []
+          uploadingPic: [],
+          today: ""
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -338,10 +339,13 @@ class App extends Component {
 
       event.preventDefault(); 
 
+      let today = Date.now()
+
       this.setState({
         productLoadingModalLabel: "Loading....",
         fileUploaded: true,
-        productHiddenBtn: true
+        productHiddenBtn: true,
+        today: today
       })
 
 
@@ -370,7 +374,7 @@ class App extends Component {
 
       let newProduct = {
 
-        "id": Date.now(),
+        "id": today,
         "description": replaced,
         "price": event.target.price.value,
         "company": event.target.company.value,
@@ -403,7 +407,7 @@ class App extends Component {
                 productLoadingModalLabel: "Image uploaded successfully completed"             
               });
 
-            }, 7000);
+            }, 700);
 
             fetch(API_URL+'/createproduct3', {
 
@@ -411,6 +415,22 @@ class App extends Component {
               headers: API_HEADERS,
               body: JSON.stringify(newProduct)
             })
+
+            setTimeout(() => {
+
+              let newFilter = {
+                "id": today
+              }
+  
+              fetch(API_URL+'/createproduct7', {
+  
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newFilter)
+              })
+  
+  
+            }, 2000);
 
           }
         }

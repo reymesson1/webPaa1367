@@ -481,5 +481,18 @@ exports.setFavorite = async(req,res)=>{
       console.log("Product Favorite updated");
     })
   })
+  
+}
+
+exports.setProductRenamed = async(req,res)=>{
+
+  var obj = req.body;
+
+  let products = await Product.find({"id":obj.id})
+
+  console.log(products);
+  
+
+  console.log(obj);
 
 }
