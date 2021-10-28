@@ -361,8 +361,11 @@ class App extends Component {
 
       let imagesArr = [];
 
-      for (let i = 0; i < this.state.images.length; i++) {  
-          imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
+      // for (let i = 0; i < this.state.images.length; i++) {  
+      //     imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
+      // }
+      for (let i = 0; i < this.state.uploadingPic.length; i++) {  
+          imagesArr.push(this.state.uploadingPic[i]+'.jpg');
       }
 
       let newProduct = {
@@ -378,7 +381,8 @@ class App extends Component {
         "notes": event.target.notes.value,  
         "favorite": false,  
         "hidden": false,  
-        "image": replaced +'-'+ event.target.style.value + '-0.jpg',
+        "image": this.state.uploadingPic[0] + '.jpg',
+        // "image": replaced +'-'+ event.target.style.value + '-0.jpg',
         "images": imagesArr
       }
     
