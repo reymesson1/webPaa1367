@@ -472,14 +472,26 @@ exports.sendEmail = async(req,res)=>{
 }
 
 exports.setFavorite = async(req,res)=>{
-
+  
   var obj = req.body;
-
+  
   var product = await Product.findOne({"id":obj.productId},function(err,master){
     master.favorite = obj.favorite
     master.save(function(err,m){
       console.log("Product Favorite updated");
     })
   })
+  
+}
+
+exports.setProductRename = async(req,res)=>{
+
+  var obj = req.body;
+
+  console.log(obj.newFilter.id)
+
+  var product = await Product.findOne({"id":obj.id})
+
+  console.log(product);
 
 }

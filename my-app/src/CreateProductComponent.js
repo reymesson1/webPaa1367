@@ -250,7 +250,7 @@ class CreateProductComponent extends Component {
                             <Link className="btn btn-success" to={'/product'}>Go Back</Link>
                         </div>
                         <div className="col-md-offset'2">
-                            <button className="btn btn-success" onClick={this.onGotoCreateProduct.bind(this)}>Create Product</button>
+                            <button className="btn btn-success" onClick={this.props.onAddImagePartialUpdate.bind(this)}>Create Product</button>
                         </div>
                     </ModalFooter>                    
                 </Modal>
@@ -365,6 +365,12 @@ class CreateProductComponent extends Component {
                                             </div>
                                         </div>                                         
                             )}
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <button className="btn btn-success" onClick={this.props.onAddImagePartialUpdate.bind(this)} >Success</button>
+                            </div>
+                            <div className="col-md-8"></div>
                         </div>
                     </div>
                     <div className="col-md-8">

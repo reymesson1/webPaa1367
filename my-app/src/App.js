@@ -91,7 +91,8 @@ class App extends Component {
           filterAPIAddPrice :[],
           filterAPI:[],
           companystyle: "",
-          uploadingPic: []
+          uploadingPic: [],
+          today: ""
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -338,10 +339,13 @@ class App extends Component {
 
       event.preventDefault(); 
 
+      let today = Date.now();
+
       this.setState({
         productLoadingModalLabel: "Loading....",
         fileUploaded: true,
-        productHiddenBtn: true
+        productHiddenBtn: true,
+        today: today
       })
 
 
@@ -368,9 +372,11 @@ class App extends Component {
           imagesArr.push(this.state.uploadingPic[i]+'.jpg');
       }
 
+
+
       let newProduct = {
 
-        "id": Date.now(),
+        "id": today,
         "description": replaced,
         "price": event.target.price.value,
         "company": event.target.company.value,
@@ -1056,6 +1062,29 @@ class App extends Component {
     window.history.back();
   }
 
+  onAddImagePartialUpdate(){
+
+    let newFilter = {
+        "id": this.state.today
+    }
+
+    fetch(API_URL+'/createproduct7', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify({newFilter})
+    })
+    .then((response)=>response.json())
+    .then((responseData)=>{
+        console.log(responseData);
+            this.setState({
+
+                filterAPI: responseData
+            })
+    })
+
+  }
+
 
     render(){
 
@@ -1240,6 +1269,7 @@ class App extends Component {
           />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       URLExternal={this.state.URLExternal}
+                      onAddImagePartialUpdate={this.onAddImagePartialUpdate.bind(this)}
                       onAddImagePartial={this.onAddImagePartial.bind(this)}
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
