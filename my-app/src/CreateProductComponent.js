@@ -46,7 +46,8 @@ class CreateProductComponent extends Component {
                 category: false,  
                 priceopt: false,  
                 notes: false,         
-            }
+            },
+            sticker: []
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -233,6 +234,16 @@ class CreateProductComponent extends Component {
         }) 
         // )
 
+        let buttonPlus
+
+        if(this.props.images.length>0 && this.state.description.length>3){
+
+            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} ><i className="fa fa-plus"></i></button>
+        }else{
+                        
+            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} disabled ><i className="fa fa-plus"></i></button>
+        }
+
         
         return(
             <div className="container">
@@ -350,7 +361,7 @@ class CreateProductComponent extends Component {
                         <div className="row">
                             <div className="col-md-8"></div>
                             <div className="col-md-4">
-                                <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} ><i className="fa fa-plus"></i></button>
+                                {buttonPlus}
                             </div>
                         </div>
                         <div className="row">
@@ -381,10 +392,11 @@ class CreateProductComponent extends Component {
                                     <Col sm={10}>
                                         <Input type="text" name="description" id="description" placeholder="Style Number" 
                                             onBlur={this.handleBlur('description')}
-                                            valid={this.state.description.length >= 3 }
-                                            invalid={this.state.description.length < 3 }
-                                            onChange={e => this.onDescriptionChange(e.target.value)}
-                                            value={this.state.description}  
+                                            valid={this.props.description.length >= 3 }
+                                            invalid={this.props.description.length < 3 }
+                                            onChange={e => this.props.onDescriptionChange(e.target.value)}
+                                            // onChange={e => this..onDescriptionChange(e.target.value)}
+                                            value={this.props.description}  
                                         />
                                     </Col>
                                     <FormFeedback>{errors.description}</FormFeedback>

@@ -76,6 +76,8 @@ class App extends Component {
           progressImage: 0,
           isModalLoginOpen: true,
           isModalLoginError: false,
+          description: '',
+          style: '',
           username: '',
           password: '',
           touched:{
@@ -169,7 +171,11 @@ class App extends Component {
 
     }
 
-
+    onDescriptionChange(value){
+        this.setState({
+            description: value
+        })
+    }
 
     addToCart(event){
       event.preventDefault();
@@ -297,8 +303,10 @@ class App extends Component {
 
     }
 
-    onAddImagePartial(){
+    onAddImagePartial(event){
 
+      console.log(this.state.description);
+      // console.log(style);
 
       let nextState = this.state.uploadingPic;
 
@@ -1240,6 +1248,8 @@ class App extends Component {
           />
           <Route path="/createproduct" component= {() => <CreateProductComponent 
                       URLExternal={this.state.URLExternal}
+                      description={this.state.description}
+                      onDescriptionChange={this.onDescriptionChange.bind(this)}
                       onAddImagePartial={this.onAddImagePartial.bind(this)}
                       onCreateProduct={this.onCreateProduct.bind(this)}
                       onCreateProductUpload={this.onCreateProductUpload.bind(this)}
