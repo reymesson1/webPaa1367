@@ -413,7 +413,7 @@ class ProductDetailComponent extends Component {
                                     {filteredData[0].images.map(
                                         (data, index) =>
                                             <div className="col-md-3" style={{'cursor':'pointer'}} onClick={this.imageClickEdit.bind(this,filteredData[0],data)} >
-                                                <img style={{'margin':'2px','border':'4px solid #000000', 'border-radius':'7px'}}  src={this.props.URLExternal+"/images/output-"+data}/>
+                                                <img style={{'margin':'2px','border':'4px solid #000000', 'border-radius':'7px'}}  src={this.props.URLExternal+"/images/"+data}/>
                                             </div>
                                     )}
                                             
