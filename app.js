@@ -152,6 +152,18 @@ app.post('/register', userController.setRegister);
 
 app.post('/loginipad', userController.setLoginIpad);
 
+app.get('/createproductrename', function(req,res){
+
+  console.log('test');
+
+  // fs.rename('/path/to/Afghanistan.png', '/path/to/AF.png', function(err) {
+  fs.rename(uploadsFolder+'/path/to/Afghanistan.png', '/path/to/AF.png', function(err) {
+    if ( err ) console.log('ERROR: ' + err);
+  });
+  
+
+});
+
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
