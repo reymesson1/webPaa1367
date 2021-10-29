@@ -233,6 +233,16 @@ class CreateProductComponent extends Component {
         }) 
         // )
 
+        let buttonPlus
+
+        if(this.props.images.length>0){
+
+            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)}><i className="fa fa-plus"></i></button>
+        }else{
+                        
+            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} disabled><i className="fa fa-plus"></i></button>
+        }
+
         
         return(
             <div className="container">
@@ -350,7 +360,7 @@ class CreateProductComponent extends Component {
                         <div className="row">
                             <div className="col-md-8"></div>
                             <div className="col-md-4">
-                                <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} ><i className="fa fa-plus"></i></button>
+                                {buttonPlus}
                             </div>
                         </div>
                         <div className="row">
