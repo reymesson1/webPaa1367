@@ -1073,7 +1073,7 @@ class App extends Component {
 
       let logged
 
-      if(this.isAuthenticated()){
+      if(true){
 
         logged = false
       }else{
@@ -1147,6 +1147,8 @@ class App extends Component {
           <BrowserRouter>
 
           <NavbarComponent
+            URLExternal={this.state.URLExternal}
+            products={this.state.products}
             doCheckout={this.doCheckout.bind(this)}
             deleteItem={this.deleteItem.bind(this)}
             search={this.search.bind(this)}

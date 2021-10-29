@@ -120,7 +120,10 @@ class NavbarComponent extends Component {
                 </div>
                 <br/>
                 <div className="col-md-3">
-                    <QuickSearchComponent/>
+                    <QuickSearchComponent
+                        products={this.props.products}
+                        URLExternal={this.props.URLExternal}
+                    />
                 </div>
                 <div className="col-md-1">
                     <div className="row" >

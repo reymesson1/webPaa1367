@@ -17,22 +17,42 @@ class QuickSearchComponent extends Component {
         super(props);
         this.state = {
             products: [],
-            dropdownOpen: true
+            dropdownOpen: false,
+            searchText: ""
         }  
     }
-
     toggle = () => {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         })
     }
 
+    onChangeValue(event){
+
+        this.setState({
+
+            searchText: event.target.value,
+            dropdownOpen: true
+        })
+
+
+
+    }
+
     render() {
+
+        let filteredData = this.props.products.filter(
+
+            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 
+        )
+
+        console.log(filteredData);
+
         return(
             <div>
                 <div className="row" >
                     <div className="col-md-10">
-                        <Input  placeholder="Search" ></Input>
+                        <Input  placeholder="Search" name="search" id="search" onChange={this.onChangeValue.bind(this)} ></Input>
                     </div>
                     <div className="col-md-2">
                         {/* <ButtonDropdown style={{'background-color':'#0c343d !important','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}> */}
@@ -42,14 +62,38 @@ class QuickSearchComponent extends Component {
                         <DropdownMenu >
                             <DropdownItem header>
                             </DropdownItem>
-                            <DropdownItem>
-                                <Link className="btn btn-info" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
-                            </DropdownItem>
+                            {filteredData.map(
+                                (data, index) => <DropdownItem>
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                            <div className="row">
+                                                                &nbsp; 
+                                                            </div>    
+                                                            <div className="row">
+                                                                <Link to={'/productdetail/'+data.id}> 
+                                                                    <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
+                                                                    {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                                                </Link>
+                                                            </div>    
+                                                            <div className="row">
+                                                                &nbsp; 
+                                                            </div>    
+                                                        </div>                                                    
+                                                        <div className="col-md-8">
+                                                            <div className="row">
+                                                                <h5>{data.description}</h5> 
+                                                            </div>   
+                                                            <div className="row">
+                                                                <p>{'Category: ' + data.category}</p> 
+                                                            </div>   
+                                                            <div className="row">
+                                                                <p>{'Price: ' + data.price} </p>
+                                                            </div>   
+                                                        </div>                                                    
+                                                    </div>
+                                                 </DropdownItem>
+                            )}
                             <DropdownItem divider />
-                            <DropdownItem>
-                                <button className="btn btn-primary" ><i className="fa fa-sign-out" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Log out </button>
-                                {/* <Link className="btn btn-primary" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link> */}
-                            </DropdownItem>
                         </DropdownMenu>
                         </ButtonDropdown>
                     </div>
