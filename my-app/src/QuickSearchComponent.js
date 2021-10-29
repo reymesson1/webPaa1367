@@ -33,10 +33,8 @@ class QuickSearchComponent extends Component {
 
             searchText: event.target.value,
             dropdownOpen: true
+            
         })
-
-
-
     }
 
     render() {
@@ -46,7 +44,6 @@ class QuickSearchComponent extends Component {
             (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 
         )
 
-        console.log(filteredData);
 
         return(
             <div>
@@ -62,7 +59,7 @@ class QuickSearchComponent extends Component {
                         <DropdownMenu >
                             <DropdownItem header>
                             </DropdownItem>
-                            {filteredData.map(
+                            {filteredData.slice(0,3).map(
                                 (data, index) => <DropdownItem>
                                                     <div className="row">
                                                         <div className="col-md-4">
@@ -93,7 +90,6 @@ class QuickSearchComponent extends Component {
                                                     </div>
                                                  </DropdownItem>
                             )}
-                            <DropdownItem divider />
                         </DropdownMenu>
                         </ButtonDropdown>
                     </div>
