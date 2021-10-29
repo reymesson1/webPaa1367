@@ -403,7 +403,7 @@ class App extends Component {
                 productLoadingModalLabel: "Image uploaded successfully completed"             
               });
 
-            }, 7000);
+            }, 700);
 
             fetch(API_URL+'/createproduct3', {
 
