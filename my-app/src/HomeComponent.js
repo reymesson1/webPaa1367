@@ -214,8 +214,6 @@ class HomeComponent extends Component {
             }
         )
 
-        console.log(productData);
-
         let filterData
         // filterData = this.props.products.filter(
         if(this.state.searchText==""){

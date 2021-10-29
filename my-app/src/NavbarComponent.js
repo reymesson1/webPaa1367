@@ -5,6 +5,7 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { ButtonToggle ,CustomInput,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Table, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { ButtonDropdown } from 'reactstrap';
+import QuickSearchComponent  from './QuickSearchComponent';
 
 // function NavbarComponent(props) {
 class NavbarComponent extends Component {
@@ -72,7 +73,7 @@ class NavbarComponent extends Component {
                     <div style={{'color':'#ffffff', 'font-size':'36px'}} href="/"> Amsel </div>
                     <div style={{'color':'#ef8d09', 'font-size':'16px'}} href="/"> eCatalog </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-5">
                     {/* <Input type="text" onChange={props.search.bind(this)} placeholder="Seach" /> */}
                     <div className="row">
                         <h1>&nbsp;</h1>
@@ -118,9 +119,10 @@ class NavbarComponent extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="col-md-1">
+                <div className="col-md-3">
+                    <QuickSearchComponent/>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-1">
                     <div className="row" >
                     <ButtonDropdown style={{'background-color':'#0c343d !important','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret>
@@ -140,7 +142,7 @@ class NavbarComponent extends Component {
                         </DropdownItem>
                     </DropdownMenu>
                     </ButtonDropdown>
-                    </div>
+                    </div> 
 
 
                     {/* <div className="row">

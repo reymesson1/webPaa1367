@@ -74,3 +74,9 @@ img {
 .text-align{
   text-align: left;
 }
+
+.btn-secondary{
+
+  background-color: transparent !important;
+  width: '400px'
+}
