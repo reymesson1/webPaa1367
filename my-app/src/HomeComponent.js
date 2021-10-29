@@ -204,15 +204,17 @@ class HomeComponent extends Component {
 
         var productData  = this.props.products.sort( 
             (a,b) =>{
-                if(a.id<b.id){
+                if(a.description.toLowerCase()>b.description.toLowerCase()){
                     return 1
                 }
-                if(a.id>b.id){
+                if(a.description.toLowerCase()<b.description.toLowerCase()){
                     return -1
                 }
                 return 0
             }
         )
+
+        console.log(productData);
 
         let filterData
         // filterData = this.props.products.filter(
