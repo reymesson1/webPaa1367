@@ -74,3 +74,15 @@ img {
 .text-align{
   text-align: left;
 }
+
+.btn-secondary{
+
+  background-color: transparent !important;
+  width: '400px' !important;
+}
+
+.dropdown-menu.show{
+
+  width: 400px;
+  /* top: 90px !important; */
+}

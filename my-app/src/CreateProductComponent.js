@@ -170,16 +170,30 @@ class CreateProductComponent extends Component {
         })
     }
 
-    render() {
+    onCompanyChange(value){
+        this.setState({
+            company: value
+        })
+    }
+    onCategoryChange(value){
+        this.setState({
+            category: value
+        })
+    }
+    onStyleChange(value){
+        this.setState({
+            style: value
+        })
+    }
 
-        console.log(this.props.styles);
+    render() {
 
         const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
         // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
 
         let submitButton
         
-        if((this.state.description === '') || (this.state.companystyle === '') || (this.state.price === '') ){
+        if((this.state.description === '') || (this.state.companystyle === '') || (this.state.price === '') || (this.state.company === '') || (this.state.category === '') || (this.state.style === '')  ){
 
             submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }else{
@@ -403,7 +417,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
                                     <Col sm={7}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" onChange={e => this.onCompanyChange(e.target.value)} value={this.state.company} >
                                         {this.props.companies.map( 
                                             (data,index) => <option>{data.description}</option>
                                         )}
@@ -427,7 +441,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Category</Label>
                                     <Col sm={10}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" onChange={e => this.onCategoryChange(e.target.value)} >
                                             <option>{' '}</option>
                                             <option>{'Bracelet'}</option>
                                             <option>{'RM'}</option>
@@ -443,7 +457,7 @@ class CreateProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Style</Label>
                                     <Col sm={8}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Style" >
+                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Style" onChange={e => this.onStyleChange(e.target.value)} >
                                         {this.props.styles.map( 
                                             (data,index) => <option>{data.description}</option>
                                         )}
