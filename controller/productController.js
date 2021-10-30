@@ -60,7 +60,7 @@ exports.setMaster = async(req,res)=>{
     if(!err){
       console.log('Product saved');
     }else{
-        console.log(err)
+        res.send(err);
     }
   })
 
