@@ -84,5 +84,6 @@ img {
 .dropdown-menu.show{
 
   width: 400px;
+  left: -185px !important;
   /* top: 90px !important; */
 }
