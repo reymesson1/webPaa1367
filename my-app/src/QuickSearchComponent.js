@@ -65,7 +65,7 @@ class QuickSearchComponent extends Component {
                     <div className="col-md-2">
                         {/* <ButtonDropdown style={{'background-color':'#0c343d !important','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}> */}
                         <ButtonDropdown style={{'background-color':'transparent','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle} disabled>
-                        <DropdownToggle caret style={{'left':'-330px'}}>
+                        <DropdownToggle caret style={{'left':'-50px'}}>
                         </DropdownToggle  >
                         <DropdownMenu >
                             <DropdownItem header>
