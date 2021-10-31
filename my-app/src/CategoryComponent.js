@@ -12,10 +12,25 @@ class CategoryComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ""
-        }  
+            searchText: "",
+            category:[]
+        }
+    }
 
-        
+    componentDidMount(){
+
+        // postscategory
+
+        fetch(this.props.URLExternal+'/postscategory')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+                category: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
     }
 
     handleOnClickFilter = () => {
@@ -128,6 +143,21 @@ class CategoryComponent extends Component {
         if (this.state.watches) {
             return <Redirect push to="/home/watches" />;
         }
+
+        const menu = this.state.category.map((product, index) => {
+            return (
+
+                <div className="col-md-3">
+                         <Link to={'/home/bracelet'}> 
+                             <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+                         </Link>
+                         <Button style={{"position":"absolute", "top":"87%", "margin-left":"-20%"}} outline onClick={this.handleOnClickBracelet} color="info">
+                             {product.description}
+                         </Button>{' '}
+                </div>
+
+                )}
+            )
         
         
         return(
@@ -147,6 +177,7 @@ class CategoryComponent extends Component {
                 </div>
                 <br/>
                 <div className="row">
+                    
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
                             <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
