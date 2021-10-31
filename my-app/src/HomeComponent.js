@@ -188,6 +188,8 @@ class HomeComponent extends Component {
         //     return temp;
         // }, []);
 
+        console.log(window.);
+
         const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
 
         let submitButton
@@ -213,8 +215,6 @@ class HomeComponent extends Component {
                 return 0
             }
         )
-
-        console.log(productData);
 
         let filterData
         // filterData = this.props.products.filter(
