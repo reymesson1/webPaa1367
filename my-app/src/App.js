@@ -26,6 +26,7 @@ import ProductDetailZoomComponent from './ProductDetailZoomComponent';
 import FavoriteComponent from './FavoriteComponent';
 import  axios  from 'axios'
 import UserComponent from './UserComponent';
+import CategorySettingComponent from './CategorySettingComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
 // let API_URL = "http://localhost:8085";
@@ -1373,6 +1374,11 @@ class App extends Component {
           <Route path="/user" component= {() => <UserComponent
                     URLExternal={this.state.URLExternal}
                     users={this.state.users} 
+                />}
+          />
+          <Route path="/category" component= {() => <CategorySettingComponent
+                    URLExternal={this.state.URLExternal}
+                    categories={this.state.categories} 
                 />}
           />
           {/* <Route path="/product" component= {() => <Product

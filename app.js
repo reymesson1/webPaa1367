@@ -31,6 +31,8 @@ var companyController = require('./controller/companyController');
 
 var userController = require('./controller/userController');
 
+var categoryController = require('./controller/categoryController');
+
 app.get('/restaurants', masterController.getMaster);
 
 app.get('/product', productController.getMaster);
@@ -183,6 +185,7 @@ app.post('/register', userController.setRegister);
 
 app.post('/loginipad', userController.setLoginIpad);
 
+app.get('/categories', categoryController.getCategory);
 
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
