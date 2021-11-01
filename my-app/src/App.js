@@ -92,7 +92,9 @@ class App extends Component {
           filterAPIAddPrice :[],
           filterAPI:[],
           companystyle: "",
-          uploadingPic: []
+          uploadingPic: [],
+          dropdownOpenQS: false,
+          searchTextQS: ""
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -1057,6 +1059,32 @@ class App extends Component {
     window.history.back();
   }
 
+  onChangeValue(value){
+
+      if(value == ''){
+
+          this.setState({
+
+            searchTextQS: value,
+              dropdownOpenQS: false
+          })
+
+      }else{
+
+          this.setState({
+
+            searchTextQS: value,
+              dropdownOpenQS: true
+          })
+      }
+  }
+
+  closeDropdownQS(){
+    this.setState({
+      dropdownOpenQS: false
+    })
+  }
+
 
     render(){
 
@@ -1156,6 +1184,11 @@ class App extends Component {
             orders={this.state.orders}
             onHiddenApp={this.onHiddenApp.bind(this)}
             onHiddenMode={this.state.onHiddenMode}
+            onChangeValue={this.onChangeValue.bind(this)}
+            dropdownOpenQS={this.state.dropdownOpenQS}
+            searchTextQS={this.state.searchTextQS}
+            closeDropdownQS={this.closeDropdownQS.bind(this)} 
+
           />  
           <Route path="/" exact component= {() => <CategoryComponent
                     URLExternal={this.state.URLExternal}
@@ -1279,6 +1312,7 @@ class App extends Component {
                   match 
               }) => (
                   <ProductDetailComponent match={match}
+                    closeDropdownQS={this.closeDropdownQS.bind(this)} 
                     onFilterSearchGoBack={this.onFilterSearchGoBack.bind(this)} 
                     onClickFavoriteToggle={this.onClickFavoriteToggle.bind(this)} 
                     URLExternal={this.state.URLExternal}  

@@ -51,7 +51,7 @@ class QuickSearchComponent extends Component {
 
         let filteredData = this.props.products.filter(
 
-            (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 
+            (data, index) => data.description.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 
         )
 
 
@@ -59,12 +59,12 @@ class QuickSearchComponent extends Component {
             <div>
                 <div className="row" >
                     <div className="col-md-10">
-                        <Input  placeholder="Search" name="search" id="search" onChange={e => this.onChangeValue(e.target.value)} ></Input>
+                        <Input  placeholder="Search" name="search" id="search" onChange={e => this.props.onChangeValue(e.target.value)} ></Input>
                         {/* <Input  placeholder="Search" name="search" id="search" onChange={this.onChangeValue.bind(this)} ></Input> */}
                     </div>
                     <div className="col-md-2">
                         {/* <ButtonDropdown style={{'background-color':'#0c343d !important','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle}> */}
-                        <ButtonDropdown style={{'background-color':'transparent','width':'1%'}} isOpen={this.state.dropdownOpen} toggle={this.toggle} disabled>
+                        <ButtonDropdown style={{'background-color':'transparent','width':'1%'}} isOpen={this.props.dropdownOpenQS} toggle={this.props.closeDropdownQS} disabled>
                         <DropdownToggle caret style={{'left':'-50px'}}>
                         </DropdownToggle  >
                         <DropdownMenu >

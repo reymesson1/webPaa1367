@@ -123,7 +123,11 @@ class NavbarComponent extends Component {
                     <QuickSearchComponent
                         products={this.props.products}
                         URLExternal={this.props.URLExternal}
-                    />
+                        onChangeValue={this.props.onChangeValue.bind(this)}
+                        dropdownOpenQS={this.props.dropdownOpenQS}
+                        searchTextQS={this.props.searchTextQS}
+                        closeDropdownQS={this.props.closeDropdownQS.bind(this)}
+                                />
                 </div>
                 <div className="col-md-1">
                     <div className="row" >
