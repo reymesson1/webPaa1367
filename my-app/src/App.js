@@ -94,7 +94,8 @@ class App extends Component {
           companystyle: "",
           uploadingPic: [],
           dropdownOpenQS: false,
-          searchTextQS: ""
+          searchTextQS: "",
+          categories: []
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -133,6 +134,18 @@ class App extends Component {
             this.setState({
 
                 companies: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        fetch(API_URL+'/categories')
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                categories: responseData
             })
         })
         .catch((error)=>{
@@ -1192,6 +1205,7 @@ class App extends Component {
           />  
           <Route path="/" exact component= {() => <CategoryComponent
                     URLExternal={this.state.URLExternal}
+                    categories={this.state.categories}
                 />}
           />
           <Route 

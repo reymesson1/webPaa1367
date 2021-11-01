@@ -179,33 +179,23 @@ class CategoryComponent extends Component {
                             {'Pendant'}
                         </Button>{' '}
                     </div>
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/rm'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>RM</h1>
-                        </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/rings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Rings</h1>
-                        </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/pendant'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Pendant</h1>
-                        </Link>
-                    </div> */}
                 </div>
                 <br/>
                 <div className="row">
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/pins'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Pins</h1>
-                        </Link>
-                    </div> */}
+                    {/* {this.props.categories.map(
+                                (data, index) => 
+                                    <div className="col-md-3">
+                                        <Link to={'/home/'+data.description.toLowerCase()}>
+                                            <div>&nbsp;</div>
+                                            <img src={this.props.URLExternal+"/images/"+data.image+".jpg"} style={{"position":"relative"}}  alt="Avatar"/>
+                                        </Link>
+                                        <Button style={{"position":"absolute","top":"87%","margin-left":"-12%"}} outline onClick={this.handleOnClickBracelet} color="info">
+                                            {data.description}
+                                        </Button>{' '}
+
+                                    </div>
+                    )} */}
+
                     <div className="col-md-3">
                         <Link to={'/home/pins'}> 
                             <img src={this.props.URLExternal+"/images/folder-pins.png"} style={{"position":"relative"}}  alt="Avatar"/>
@@ -238,33 +228,6 @@ class CategoryComponent extends Component {
                             {'Watches'}
                         </Button>{' '}
                     </div>
-
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                        </Link>
-                        <Button outline onClick={this.handleOnClickWatches} color="info">
-                            {'Watches'}
-                        </Button>{' '}
-                    </div> */}
-                    {/* <div className="col-md-3">
-                    <Link to={'/home/necklace'}>                         
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Necklace</h1>
-                    </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                    <Link to={'/home/earings'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Earings</h1>
-                    </Link>
-                    </div> */}
-                    {/* <div className="col-md-3">
-                        <Link to={'/home/watches'}> 
-                            <img src={this.props.URLExternal+"/images/folder.JPG"} style={{"width":"50%","height":"80%","margin-left":"26%"}}  alt="Avatar"/>
-                            <h1>Watches</h1>
-                        </Link>
-                    </div> */}
                 </div>
             </div>
         );

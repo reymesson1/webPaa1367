@@ -116,7 +116,9 @@ class CategorySettingComponent extends Component {
         let newEmail = {
             
             "id": Date.now(),
-            "description" : event.target.username.value
+            "description" : event.target.username.value,
+            "image" : event.target.firstname.value,
+            "notes" : event.target.lastname.value
         }
 
         fetch(this.props.URLExternal+'/createcategory', {
@@ -220,13 +222,14 @@ class CategorySettingComponent extends Component {
 
     onDeleteItem(dataItem,idUser){
 
+        console.log(dataItem);
         let nextState = this.state.categories.filter(
 
-            (data, index) => data.description.toLowerCase().indexOf(dataItem.toLowerCase()) === -1
+            (data, index) => data.id.indexOf(dataItem) === -1
         );
 
         this.setState({
-            users: nextState,
+            categories: nextState,
             showModalDelete: false
         })
 
@@ -353,6 +356,32 @@ class CategorySettingComponent extends Component {
                                     <FormFeedback>{errors.username}</FormFeedback>
                                     </Col>
                                 </FormGroup>
+                                <FormGroup row>
+                                    <Label for="firstname" sm={1}>&nbsp;</Label>
+                                    <Label for="firstname" sm={4}>Image</Label>
+                                    <Col sm={7}>
+                                    <Input type="text" name="firstname" id="firstname" placeholder="Image" 
+                                        onBlur={this.handleBlur('firstname')}
+                                        valid={this.state.firstname.length >= 3 }
+                                        invalid={this.state.firstname.length < 3 }
+                                        onChange={e => this.onFirstNameChange(e.target.value)}
+                                        value={this.state.firstname}                                      
+                                    />
+                                    <FormFeedback>{errors.firstname}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="lastname" sm={1}>&nbsp;</Label>
+                                    <Label for="lastname" sm={4}>Notes</Label>
+                                    <Col sm={7}>
+                                    <Input type="textarea" name="lastname" id="lastname" placeholder="Notes" 
+                                        onBlur={this.handleBlur('lastname')}
+                                        onChange={e => this.onLastNameChange(e.target.value)}
+                                        value={this.state.lastname}                                      
+                                    />
+                                    <FormFeedback>{errors.lastname}</FormFeedback>
+                                    </Col>
+                                </FormGroup>
                                 <br/>
                                 <br/>
                                 <FormGroup row>
@@ -409,6 +438,8 @@ class CategorySettingComponent extends Component {
                             <tr>
                             <th>#</th>
                             <th>Description</th>
+                            <th>Image</th>
+                            <th>Notes</th>
                             <th>Action</th>
                             </tr>
                         </thead>
@@ -418,6 +449,8 @@ class CategorySettingComponent extends Component {
                                 <tr>
                                     <td>{index+1}</td>                                                    
                                     <td>{data.description}</td>                                                    
+                                    <td>{data.image}</td>                                                    
+                                    <td>{data.notes}</td>                                                    
                                     <td>
                                         <div className="row">
                                             <div className="col-md-4"></div>

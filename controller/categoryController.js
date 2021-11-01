@@ -19,7 +19,9 @@ exports.setCategory = async(req,res)=>{
 
   var category = new Category({
     "id": obj.id,
-    "description": obj.description
+    "description": obj.description,
+    "image": obj.image,
+    "notes": obj.notes
   })
   category.save(function(err){
     if(!err){
