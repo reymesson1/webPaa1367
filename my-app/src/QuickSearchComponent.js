@@ -72,33 +72,32 @@ class QuickSearchComponent extends Component {
                             </DropdownItem>
                             {filteredData.slice(0,3).map(
                                 (data, index) => <DropdownItem>
+                                                    <Link to={'/productdetail/'+data.id}> 
                                                     <div className="row">
+
                                                         <div className="col-md-4">
                                                             <div className="row">
-                                                                &nbsp; 
-                                                            </div>    
-                                                            <div className="row">
-                                                                <Link to={'/productdetail/'+data.id}> 
-                                                                    <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
-                                                                    {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
-                                                                </Link>
-                                                            </div>    
-                                                            <div className="row">
-                                                                &nbsp; 
+                                                                <div style={{'padding-top':'25px','padding-bottom':'25px'}}>
+                                                                    <Link to={'/productdetail/'+data.id}> 
+                                                                        <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
+                                                                        {/* <img src={this.props.URLExternal+"/images/output-"+ data.description +  '-' + data.style + '-0.jpg' }  alt="Avatar" style={{"width":"100%","height":"100%"}}/> */}
+                                                                    </Link>
+                                                                </div>
                                                             </div>    
                                                         </div>                                                    
                                                         <div className="col-md-8">
+                                                                <div className="row">
+                                                                    <h5>{data.description}</h5> 
+                                                                </div>   
                                                             <div className="row">
-                                                                <h5>{data.description}</h5> 
+                                                                    <p>{'Category: ' + data.category}</p> 
                                                             </div>   
                                                             <div className="row">
-                                                                <p>{'Category: ' + data.category}</p> 
-                                                            </div>   
-                                                            <div className="row">
-                                                                <p>{'Price: ' + data.price} </p>
+                                                                    <p>{'Price: ' + data.price} </p>
                                                             </div>   
                                                         </div>                                                    
                                                     </div>
+                                                    </Link>
                                                     <DropdownItem divider />
 
                                                  </DropdownItem>
