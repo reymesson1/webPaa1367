@@ -114,29 +114,24 @@ class CategorySettingComponent extends Component {
         event.preventDefault();
 
         let newEmail = {
-
-            username : event.target.username.value,
-            password : "",
-            firstname : event.target.firstname.value,
-            lastname : event.target.lastname.value,
-            email : event.target.email.value,
-            password : event.target.password.value
-
+            
+            "id": Date.now(),
+            "description" : event.target.username.value
         }
 
-        fetch(this.props.URLExternal+'/createuser', {
+        fetch(this.props.URLExternal+'/createcategory', {
 
             method: 'post',
             headers: API_HEADERS,
             body: JSON.stringify(newEmail)
         })
 
-        let nextState = this.state.users;
+        let nextState = this.state.categories;
 
         nextState.push(newEmail);
 
         this.setState({
-            users: nextState,
+            categories: nextState,
             isModalOpen: false
 
         })
@@ -225,9 +220,9 @@ class CategorySettingComponent extends Component {
 
     onDeleteItem(dataItem,idUser){
 
-        let nextState = this.state.users.filter(
+        let nextState = this.state.categories.filter(
 
-            (data, index) => data.username.toLowerCase().indexOf(dataItem.toLowerCase()) === -1
+            (data, index) => data.description.toLowerCase().indexOf(dataItem.toLowerCase()) === -1
         );
 
         this.setState({
@@ -237,10 +232,10 @@ class CategorySettingComponent extends Component {
 
         let newEmail = {
 
-            username : dataItem
+            id : dataItem
         }
 
-        fetch(this.props.URLExternal+'/removeuser', {
+        fetch(this.props.URLExternal+'/removecategory', {
 
             method: 'post',
             headers: API_HEADERS,
@@ -291,7 +286,7 @@ class CategorySettingComponent extends Component {
 
         let submitButton
         
-        if((this.state.username === '') ||(this.state.firstname === '') || (this.state.lastname === '') || (this.state.email === '') ){
+        if((this.state.username === '') ){
 
             submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }else{
@@ -323,7 +318,7 @@ class CategorySettingComponent extends Component {
                         <div className="row">
                             <div className="col-md-8"></div>
                             <div className="col-md-2">
-                                <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this, this.state.toDelete.username)} >Yes</button>
+                                <button className="btn btn-danger" onClick={this.onDeleteItem.bind(this, this.state.toDelete.id)} >Yes</button>
                                 {/* <button className="btn btn-danger" onClick={this.props.onDeleteProduct.bind(this, this.state.toDelete.id)} >Yes</button> */}
                             </div>
                             <div className="col-md-2">
@@ -346,9 +341,9 @@ class CategorySettingComponent extends Component {
                     <Form name="contact-form" onSubmit={this.onSubmitDetail.bind(this)}>
                                 <FormGroup row>
                                     <Label for="username" sm={1}>&nbsp;</Label>
-                                    <Label for="username" sm={4}>User Name</Label>
+                                    <Label for="username" sm={4}>Description</Label>
                                     <Col sm={7}>
-                                    <Input type="text" name="username" id="username" placeholder="User Name" 
+                                    <Input type="text" name="username" id="username" placeholder="Description" 
                                         onBlur={this.handleBlur('username')}
                                         valid={this.state.username.length >= 3 }
                                         invalid={this.state.username.length < 3 }
@@ -356,62 +351,6 @@ class CategorySettingComponent extends Component {
                                         value={this.state.username}                                      
                                     />
                                     <FormFeedback>{errors.username}</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="firstname" sm={1}>&nbsp;</Label>
-                                    <Label for="firstname" sm={4}>First Name</Label>
-                                    <Col sm={7}>
-                                    <Input type="text" name="firstname" id="firstname" placeholder="First Name" 
-                                        onBlur={this.handleBlur('firstname')}
-                                        valid={this.state.firstname.length >= 3 }
-                                        invalid={this.state.firstname.length < 3 }
-                                        onChange={e => this.onFirstNameChange(e.target.value)}
-                                        value={this.state.firstname}                                      
-                                    />
-                                    <FormFeedback>{errors.firstname}</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="lastname" sm={1}>&nbsp;</Label>
-                                    <Label for="lastname" sm={4}>Last Name</Label>
-                                    <Col sm={7}>
-                                    <Input type="text" name="lastname" id="lastname" placeholder="Last Name" 
-                                        onBlur={this.handleBlur('lastname')}
-                                        valid={this.state.lastname.length >= 3 }
-                                        invalid={this.state.lastname.length < 3 }
-                                        onChange={e => this.onLastNameChange(e.target.value)}
-                                        value={this.state.lastname}     
-                                    />
-                                    <FormFeedback>{errors.lastname}</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="lastname" sm={1}>&nbsp;</Label>
-                                    <Label for="email" sm={4}>Email</Label>
-                                    <Col sm={7}>
-                                    <Input type="email" name="email" id="email" placeholder="Email" 
-                                        onBlur={this.handleBlur('email')}
-                                        valid={this.state.email.length >= 3 }
-                                        invalid={this.state.email.length < 3 }
-                                        onChange={e => this.onEmailChange(e.target.value)}
-                                        value={this.state.email}       
-                                    />
-                                    <FormFeedback>{errors.email}</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="password" sm={1}>&nbsp;</Label>
-                                    <Label for="password" sm={4}>Password</Label>
-                                    <Col sm={7}>
-                                    <Input type="password" name="password" id="password" placeholder="Password" 
-                                        onBlur={this.handleBlur('password')}
-                                        valid={this.state.password.length >= 3 }
-                                        invalid={this.state.password.length < 3 }
-                                        onChange={e => this.onPasswordChange(e.target.value)}
-                                        value={this.state.password}       
-                                    />
-                                    <FormFeedback>{errors.password}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <br/>

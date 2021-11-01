@@ -187,6 +187,10 @@ app.post('/loginipad', userController.setLoginIpad);
 
 app.get('/categories', categoryController.getCategory);
 
+app.post('/createcategory', categoryController.setCategory);
+
+app.post('/removecategory', categoryController.removeCategory);
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');

@@ -12,3 +12,34 @@ exports.getCategory = async(req,res)=>{
 
   res.send(category);
 }
+
+exports.setCategory = async(req,res)=>{
+
+  var obj = req.body;
+
+  var category = new Category({
+    "id": obj.id,
+    "description": obj.description
+  })
+  category.save(function(err){
+    if(!err){
+        console.log('Category saved');
+    }
+  })
+
+  res.send(category);
+}
+
+exports.removeCategory = async(req,res)=>{
+
+  var obj = req.body;
+
+  var category = await Category.remove({"id":obj.id},function(err,master){
+    if(!err){
+      console.log("Category removed ");
+    }
+  })
+
+  res.send(category);
+
+}
