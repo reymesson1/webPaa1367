@@ -59,7 +59,6 @@ class UserComponent extends Component {
         fetch(this.props.URLExternal+'/users')
         .then((response)=>response.json())
         .then((responseData)=>{
-            console.log(responseData);
             this.setState({
                 users: responseData
             })
@@ -119,7 +118,8 @@ class UserComponent extends Component {
             firstname : event.target.firstname.value,
             lastname : event.target.lastname.value,
             email : event.target.email.value,
-            password : event.target.password.value
+            password : event.target.password.value,
+            hide : false,
 
         }
 
@@ -468,6 +468,7 @@ class UserComponent extends Component {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Hide</th>
                             <th>Action</th>
                             </tr>
                         </thead>
@@ -480,6 +481,7 @@ class UserComponent extends Component {
                                     <td>{data.firstname}</td>                                                    
                                     <td>{data.lastname}</td>                                                    
                                     <td>{data.email}</td>                                                    
+                                    <td>{data.hide.toString()}</td>                                                    
                                     <td>
                                         <div className="row">
                                             <div className="col-md-4"></div>

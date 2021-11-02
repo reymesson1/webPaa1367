@@ -147,7 +147,7 @@ exports.setLogin = async(req,res)=>{
 
         console.log(token);
 
-        res.status(200).send({"token":token});
+        res.status(200).send({"token":token,"username":userData.username});
         // res.status(200).send(req.body)
     })
 

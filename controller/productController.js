@@ -7,6 +7,7 @@ var sharp = require('sharp');
 var uploadsFolder2 = __dirname + '/static/images/';  // defining real upload path
 var nodemailer = require("nodemailer");
 var Product = require('../models/product.js');
+var User = require('../models/user.js');
 
 exports.getMaster = async(req,res)=>{
 
@@ -159,10 +160,13 @@ exports.setHidden = async(req,res)=>{
   console.log(obj);
 
   let productBracelet = await Product.findOne({category:'Bracelet'},{_id:0, hidden:1});
+  let userFirst = await User.findOne({username:obj.username});
 
-  let reverse = !productBracelet.hidden
+  let reverse = !productBracelet.hide
+  let reverseUser = !userFirst.hide
 
   let product = await Product.updateMany({}, {"$set":{"hidden": reverse}});
+  let user = await User.updateMany({"username":obj.username}, {"$set":{"hide": reverse}});
 
 }
 
