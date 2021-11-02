@@ -193,7 +193,7 @@ class CreateProductComponent extends Component {
 
         let submitButton
         
-        if((this.state.description === '') || (this.state.companystyle === '') || (this.state.price === '') || (this.state.company === '') || (this.state.category === '') || (this.state.style === '')  ){
+        if((this.state.description === '')  ){
 
             submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }else{
