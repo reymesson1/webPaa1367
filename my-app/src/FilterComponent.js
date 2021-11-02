@@ -220,16 +220,16 @@ class FilterComponent extends Component {
                         <FormGroup row>
                             <div className="col-md-6">
                                 {this.props.filterAPIAdd.map( 
-                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{'Company: '+data}</span>
                                 )}
                                 {this.props.filterAPIAddCompanyStyle.map( 
-                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{'Company Style: '+data}</span>
                                 )}
                                 {this.props.filterAPIAddStyle.map( 
-                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{'Style: '+data}</span>
                                 )}
                                 {this.props.filterAPIAddPrice.map( 
-                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{data}</span>
+                                    (data,index) => <span class="badge bg-primary" style={{'margin-right':'10px'}}>{'Price: '+data}</span>
                                 )}
                                 
                             </div>    
