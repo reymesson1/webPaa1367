@@ -719,9 +719,11 @@ class App extends Component {
         body: JSON.stringify(newHiddenApp)
       })
 
+      localStorage.setItem("token","")
+
       setTimeout(() => {
         window.location.reload()
-      }, 500);
+      }, 1000);
 
     }
 
