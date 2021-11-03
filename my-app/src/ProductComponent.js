@@ -18,6 +18,7 @@ class Product extends Component {
         this.state = {
             searchText: '',
             showModal: false,
+            showModalHidden: false,
             description: "",
             price: "",
             style: "",
@@ -31,6 +32,11 @@ class Product extends Component {
     toggleModal = () => {
         this.setState({
             showModal: !this.state.showModal
+        })
+    }
+    toggleModalHidden = () => {
+        this.setState({
+            showModalHidden: !this.state.showModalHidden
         })
     }
 
@@ -76,10 +82,18 @@ class Product extends Component {
     }
 
     onClickDeleteModal(data){
-        this.setState({
-            showModal: true,
-            toDelete: data
-        })
+        console.log(data.hidden);
+        if(!data.hidden){
+            this.setState({
+                showModalHidden: true,
+                toDelete: data
+            })
+        }else{
+            this.setState({
+                showModal: true,
+                toDelete: data
+            })
+        }
     }
 
 
@@ -128,6 +142,26 @@ class Product extends Component {
 
         return(
             <div className="container">
+                <Modal isOpen={this.state.showModalHidden} toggle={this.toggleModalHidden}>
+                    <ModalHeader >
+                        <div className="row">
+                                <p>Delete to {this.state.toDelete.description} </p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>You should be in unhidden mode to delete this item</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-3">
+                                <button onClick={this.toggleModalHidden} className="btn btn-primary">Close</button>
+                            </div>
+                            <div className="col-md-1"></div>
+                        </div>
+                    </ModalBody>
+                </Modal>
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
                     <ModalHeader >
                         <div className="row">
