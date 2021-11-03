@@ -49,10 +49,16 @@ class QuickSearchComponent extends Component {
 
     render() {
 
+        // let filteredData = this.props.products.filter(
+
+        //     (data, index) => data.description.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 
+        // )
+
         let filteredData = this.props.products.filter(
 
-            (data, index) => data.description.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 
-        )
+            (data, index) => data.description.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1 || data.notes.toLowerCase().indexOf(this.props.searchTextQS.toLowerCase()) !== -1
+        );
+
 
 
         return(
