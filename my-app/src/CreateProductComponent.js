@@ -62,7 +62,8 @@ class CreateProductComponent extends Component {
             images: [],
             file: null,
             fileName: "",
-            fileUploaded: false
+            fileUploaded: false,
+            defaultImage: ""
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -286,6 +287,14 @@ class CreateProductComponent extends Component {
         for (let i = 0; i < this.state.uploadingPic.length; i++) {  
             imagesArr.push(this.state.uploadingPic[i]+'.jpg');
         }
+
+        let defaultImage
+
+        if(this.state.defaultImage!=''){
+            defaultImage = this.state.defaultImage
+        }else{
+            defaultImage = this.state.uploadingPic[0]
+        }
   
         let newProduct = {
   
@@ -300,7 +309,8 @@ class CreateProductComponent extends Component {
           "notes": event.target.notes.value,  
           "favorite": false,  
           "hidden": false,  
-          "image": this.state.uploadingPic[0] + '.jpg',
+          "image": defaultImage + '.jpg',
+        //   "image": this.state.uploadingPic[0] + '.jpg',
           // "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
@@ -345,6 +355,15 @@ class CreateProductComponent extends Component {
         });
   
       }
+
+      onEditDeletePicture(value, data){
+
+        this.setState({
+            defaultImage: data
+        });
+
+      }
+
 
     render() {
 
@@ -547,9 +566,12 @@ class CreateProductComponent extends Component {
                                                     <img src={this.props.URLExternal+'/images/'+data+'.jpg'} height="70px" width="40px"/>
                                                 </button>
                                             </div>
+                                            <div className="row">
+                                                <button className="btn btn-danger" onClick={this.onEditDeletePicture.bind(this, this.state.uploadingPic[0],data)} >Default</button>
+                                            </div>
                                         </div>                                         
                             )}
-                        </div>
+                        </div>                        
                     </div>
                     <div className="col-md-8">
                         <Form onSubmit={this.onCreateProduct.bind(this)} enctype="multipart/form-data" >
