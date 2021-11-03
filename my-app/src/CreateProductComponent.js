@@ -11,8 +11,7 @@ const API_HEADERS = {
 
     'Content-Type':'application/json',
     Authentication: 'any-string-you-like'
-  }
-  
+}
 
 class CreateProductComponent extends Component {
 
@@ -62,7 +61,8 @@ class CreateProductComponent extends Component {
             images: [],
             file: null,
             fileName: "",
-            fileUploaded: false
+            fileUploaded: false,
+            defaultImage: ''
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -228,13 +228,12 @@ class CreateProductComponent extends Component {
         data.append("price", "");
         data.append("company", "");
         data.append("style", "");
-  
+
         for (let i = 0; i < this.state.images.length; i++) {
-          console.log(this.state.images[i]);
-          data.append('single-file', this.state.images[i]);
-          nextState.push(today+"-test-"+i);
+            data.append('single-file', this.state.images[i]);
+            nextState.push(today+"-test-"+i);
         }
-  
+    
         this.setState({
           uploadingPic: nextState
         })
@@ -248,7 +247,7 @@ class CreateProductComponent extends Component {
             })  
           }
         }).then((res)=>{
-          console.log(res);
+        //   console.log(res);
         });
   
       }
@@ -274,7 +273,6 @@ class CreateProductComponent extends Component {
         data.append("style", event.target.style.value);
   
         for (let i = 0; i < this.state.images.length; i++) {
-          console.log(this.state.images[i]);
           data.append('single-file', this.state.images[i])
         }
   
@@ -285,6 +283,14 @@ class CreateProductComponent extends Component {
         // }
         for (let i = 0; i < this.state.uploadingPic.length; i++) {  
             imagesArr.push(this.state.uploadingPic[i]+'.jpg');
+        }
+
+        let defaultImage
+
+        if(this.state.defaultImage!=''){
+            defaultImage = this.state.defaultImage
+        }else{
+            defaultImage = this.state.uploadingPic[0]
         }
   
         let newProduct = {
@@ -300,7 +306,7 @@ class CreateProductComponent extends Component {
           "notes": event.target.notes.value,  
           "favorite": false,  
           "hidden": false,  
-          "image": this.state.uploadingPic[0] + '.jpg',
+          "image": defaultImage + '.jpg',
           // "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
@@ -344,6 +350,19 @@ class CreateProductComponent extends Component {
           body: JSON.stringify(newProduct)
         });
   
+      }
+
+      onDefaultPicture(value, valueSecond, valueThird){
+
+
+      }
+
+      onEditDeletePicture(value, data){
+
+        this.setState({
+            defaultImage: data
+        });
+
       }
 
     render() {
@@ -532,7 +551,10 @@ class CreateProductComponent extends Component {
                             <h5>{this.state.fileName}</h5>
                         </div>
                         <div className="row">
-                            <div className="col-md-8"></div>
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4">
+                            {/* <button className="btn btn-danger" onClick={this.onDefaultPicture.bind(this)}>Default</button> */}
+                            </div>
                             <div className="col-md-4">
                                 {buttonPlus}
                             </div>
@@ -542,10 +564,13 @@ class CreateProductComponent extends Component {
                                         (data, index) =>
                                         <div className="col-md-3">
                                             <div className="row">
-                                                <button className="btn btn-white">
+                                                <button className="btn btn-white" id="gap_id" >
                                                     {/* <p>{this.props.URLExternal+'/images/'+data+'.jpg'}</p>  */}
-                                                    <img src={this.props.URLExternal+'/images/'+data+'.jpg'} height="70px" width="40px"/>
+                                                    <img id="nogreater" src={this.props.URLExternal+'/images/'+data+'.jpg'} height="70px" width="40px"/>
                                                 </button>
+                                            </div>
+                                            <div className="row">
+                                                <button className="btn btn-danger" onClick={this.onEditDeletePicture.bind(this, this.state.uploadingPic[0],data)} >Default</button>
                                             </div>
                                         </div>                                         
                             )}
