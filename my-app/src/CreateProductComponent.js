@@ -7,12 +7,13 @@ import { Media, Panel,   Card,
     ModalFooter, Progress, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import  axios  from 'axios'
+import ButtonDefaultComponent from './ButtonDefaultComponent';
+
 const API_HEADERS = {
 
     'Content-Type':'application/json',
     Authentication: 'any-string-you-like'
   }
-  
 
 class CreateProductComponent extends Component {
 
@@ -62,7 +63,8 @@ class CreateProductComponent extends Component {
             images: [],
             file: null,
             fileName: "",
-            fileUploaded: false
+            fileUploaded: false,
+            defaultImage: ''
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -274,7 +276,6 @@ class CreateProductComponent extends Component {
         data.append("style", event.target.style.value);
   
         for (let i = 0; i < this.state.images.length; i++) {
-          console.log(this.state.images[i]);
           data.append('single-file', this.state.images[i])
         }
   
@@ -285,6 +286,14 @@ class CreateProductComponent extends Component {
         // }
         for (let i = 0; i < this.state.uploadingPic.length; i++) {  
             imagesArr.push(this.state.uploadingPic[i]+'.jpg');
+        }
+
+        let defaultImage
+
+        if(this.state.defaultImage!=''){
+            defaultImage = this.state.defaultImage
+        }else{
+            defaultImage = this.state.uploadingPic[0]
         }
   
         let newProduct = {
@@ -300,7 +309,8 @@ class CreateProductComponent extends Component {
           "notes": event.target.notes.value,  
           "favorite": false,  
           "hidden": false,  
-          "image": this.state.uploadingPic[0] + '.jpg',
+          "image": defaultImage + '.jpg',
+        //   "image": this.state.uploadingPic[0] + '.jpg',
           // "image": replaced +'-'+ event.target.style.value + '-0.jpg',
           "images": imagesArr
         }
@@ -345,6 +355,13 @@ class CreateProductComponent extends Component {
         });
   
       }
+
+    onEditDeletePicture(value, data){
+
+        this.setState({
+            defaultImage: data
+        });
+    }
 
     render() {
 
@@ -415,6 +432,17 @@ class CreateProductComponent extends Component {
         }else{
                         
             buttonPlus = <button className="btn btn-dark" onClick={this.onAddImagePartial.bind(this)} disabled><i className="fa fa-plus"></i></button>
+        }
+
+        let buttonDefault        
+
+        if(true){
+
+            // buttonDefault = <button className="btn btn-danger" onClick={this.onEditDeletePicture.bind(this, this.state.uploadingPic[0],data)} disabled >Default</button>
+
+        }else{
+                        
+            // buttonDefault = <button className="btn btn-danger" onClick={this.onEditDeletePicture.bind(this, this.state.uploadingPic[0],data)} >Default</button>
         }
 
         
@@ -542,10 +570,20 @@ class CreateProductComponent extends Component {
                                         (data, index) =>
                                         <div className="col-md-3">
                                             <div className="row">
+                                                <ButtonDefaultComponent
+                                                    data={data}
+                                                    pictures={this.state.uploadingPic}
+                                                />
+                                                {/* <p style={{'color':'orange'}}>{'________'}</p> */}
+                                            </div>
+                                            <div className="row">
                                                 <button className="btn btn-white">
                                                     {/* <p>{this.props.URLExternal+'/images/'+data+'.jpg'}</p>  */}
                                                     <img src={this.props.URLExternal+'/images/'+data+'.jpg'} height="70px" width="40px"/>
                                                 </button>
+                                            </div>
+                                            <div className="row">
+                                                <button className="btn btn-danger" onClick={this.onEditDeletePicture.bind(this, this.state.uploadingPic[0],data)} >Default</button>
                                             </div>
                                         </div>                                         
                             )}
