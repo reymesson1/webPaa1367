@@ -143,7 +143,7 @@ class NavbarComponent extends Component {
                             <Link className="btn btn-info" to={'/user'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;User Account</Link>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link className="btn btn-danger" to={'/category'}><i className="fa fa-user-circle" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Category</Link>
+                            <Link className="btn btn-danger" to={'/category'}><i className="fa fa-list" style={{'color':'#ffffff'}} aria-hidden="true"></i> &nbsp;Category</Link>
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem>
