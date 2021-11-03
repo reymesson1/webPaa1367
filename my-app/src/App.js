@@ -1300,6 +1300,7 @@ class App extends Component {
                       images={this.state.images}
                       uploadingPic={this.state.uploadingPic}
                       companies={this.state.companies}
+                      products={this.state.products}
                       categories={this.state.categories}
                       productHiddenBtn={this.state.productHiddenBtn}
                       onCreateCompany={this.onCreateCompany.bind(this)}

@@ -63,13 +63,19 @@ class CreateProductComponent extends Component {
             file: null,
             fileName: "",
             fileUploaded: false,
-            defaultImage: ""
+            defaultImage: "",
+            showModalHidden: false
         }
 
         this.handleBlur = this.handleBlur.bind(this);
 
     }
 
+    toggleModalHidden = () => {
+        this.setState({
+            showModalHidden: !this.state.showModalHidden
+        })
+    }
 
     toggleModal = () => {
         this.setState({
@@ -141,9 +147,29 @@ class CreateProductComponent extends Component {
             price: ''
         }
 
-        if(this.state.touched.description && description.length < 3){
-            errors.description = "Style Number should be >= 3 characters"
-        }
+        let filteredProduct
+
+        // if(this.state.description>0){
+
+            filteredProduct = this.props.products.filter(
+  
+                (data, index) => data.description.indexOf(this.state.description) !== -1
+            );
+    
+            console.log(filteredProduct.length)
+
+            if(filteredProduct.length == 1 ){
+            //     console.log(this.state.description.length);
+            //     if(this.state.description.length!=0){
+    
+                    errors.description = "Style Number already exists"    
+            //     }
+        
+            }
+    
+        // }
+
+
         if(this.state.touched.companystyle && companystyle.length < 3){
             errors.companystyle = "Company Style Style should be >= 3 characters"
         }
@@ -295,11 +321,28 @@ class CreateProductComponent extends Component {
         }else{
             defaultImage = this.state.uploadingPic[0]
         }
+
+        let description = event.target.description.value;
+
+        let filteredProduct = this.props.products.filter(
+  
+            (data, index) => data.description.indexOf(description) !== -1
+        );
+
+        if(filteredProduct.length>0){
+            this.setState({
+                showModalHidden: true
+            })
+        }else{
+            this.setState({
+                showModalHidden: false
+            })
+        }
   
         let newProduct = {
   
           "id": Date.now(),
-          "description": replaced,
+          "description": event.target.description.value,
           "price": event.target.price.value,
           "company": event.target.company.value,
           "style": event.target.style.value,  
@@ -434,11 +477,30 @@ class CreateProductComponent extends Component {
         }else{
                         
             buttonPlus = <button className="btn btn-dark" onClick={this.onAddImagePartial.bind(this)} disabled><i className="fa fa-plus"></i></button>
-        }
+        }     
 
-        
         return(
             <div className="container">
+                <Modal isOpen={this.state.showModalHidden} toggle={this.toggleModalHidden}>
+                    <ModalHeader >
+                        <div className="row">
+                                <p>This Style Number already exists </p>                                
+                        </div>
+
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="row">
+                            <h5>It already exists, do you want to continue?</h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8"></div>
+                            <div className="col-md-3">
+                                <button onClick={this.toggleModalHidden} className="btn btn-primary">Close</button>
+                            </div>
+                            <div className="col-md-1"></div>
+                        </div>
+                    </ModalBody>
+                </Modal>
                 <Modal isOpen={this.state.productLoadingModal}>
                     <ModalHeader>
                     <p>Message</p>
@@ -587,15 +649,15 @@ class CreateProductComponent extends Component {
                                     <Col sm={10}>
                                         <Input type="text" name="description" id="description" placeholder="Style Number" 
                                             onBlur={this.handleBlur('description')}
-                                            valid={this.state.description.length >= 3 }
-                                            invalid={this.state.description.length < 3 }
+                                            valid={this.state.description.length >= 10 }
+                                            invalid={this.state.description.length < 10 }
                                             onChange={e => this.onDescriptionChange(e.target.value)}
                                             value={this.state.description}  
                                         />
+                                        <FormFeedback>{errors.description}</FormFeedback>
                                     </Col>
-                                    <FormFeedback>{errors.description}</FormFeedback>
                                 </FormGroup>
-                                    <FormFeedback>{errors.description}</FormFeedback>
+                                    {/* <FormFeedback>{errors.description}</FormFeedback> */}
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
                                     <Col sm={7}>
@@ -619,6 +681,7 @@ class CreateProductComponent extends Component {
                                             value={this.state.companystyle}                                                                        
                                     />
                                     </Col>
+                                    <FormFeedback>{errors.companystyle}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Category</Label>
