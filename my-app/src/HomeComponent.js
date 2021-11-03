@@ -214,8 +214,6 @@ class HomeComponent extends Component {
             }
         )
 
-        console.log(productData);
-
         let filterData
         // filterData = this.props.products.filter(
         if(this.state.searchText==""){
@@ -398,7 +396,7 @@ class HomeComponent extends Component {
                 <div className="row">
                     <h1>{this.props.match.params.id.toUpperCase()}</h1>
                 </div> */}
-                {/* <div className="row">
+                <div className="row">
                     <Card style={{'width':'100%'}}>
                         <CardBody>
                         </CardBody>
@@ -406,7 +404,8 @@ class HomeComponent extends Component {
                             <Input type="text" onChange={this.onChangeField.bind(this)} placeholder="Search" ></Input>
                         </CardBody>
                     </Card>
-                </div> */}
+                </div>
+                <br/>
                 <div className="row">                    
                     {menu}
                 </div>
