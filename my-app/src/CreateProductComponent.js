@@ -6,7 +6,13 @@ import { Media, Panel,   Card,
     ModalBody,
     ModalFooter, Progress, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import  axios  from 'axios'
+const API_HEADERS = {
 
+    'Content-Type':'application/json',
+    Authentication: 'any-string-you-like'
+  }
+  
 
 class CreateProductComponent extends Component {
 
@@ -46,7 +52,17 @@ class CreateProductComponent extends Component {
                 category: false,  
                 priceopt: false,  
                 notes: false,         
-            }
+            },
+            uploadingPic: [],
+            productLoadingModal: false,
+            productLoadingModalLabel: "Loading...",
+            productLoadingModalLabelPcnt: "0",
+            productLoadingModalMessageErrorLabel: "Loading...",
+            productLoadingModalMessageError: false,
+            images: [],
+            file: null,
+            fileName: "",
+            fileUploaded: false
         }
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -186,6 +202,150 @@ class CreateProductComponent extends Component {
         })
     }
 
+    onCreateProductUpload(event){
+
+        if (event.target.files && event.target.files[0]) {
+          let img = event.target.files[0];
+          this.setState({
+            image: img,
+            images: event.target.files,
+            file: URL.createObjectURL(event.target.files[0]),
+            fileName: event.target.files[0].name
+          });  
+        }
+  
+      }
+  
+      onAddImagePartial(){
+  
+  
+        let nextState = this.state.uploadingPic;
+  
+        let today = Date.now();
+  
+        const data = new FormData();
+        data.append("description", today);
+        data.append("price", "");
+        data.append("company", "");
+        data.append("style", "");
+  
+        for (let i = 0; i < this.state.images.length; i++) {
+          console.log(this.state.images[i]);
+          data.append('single-file', this.state.images[i]);
+          nextState.push(today+"-test-"+i);
+        }
+  
+        this.setState({
+          uploadingPic: nextState
+        })
+  
+        axios.post(this.props.URLExternal+'/createproduct5', data, {
+          onUploadProgress: ProgressEvent =>{
+            let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+            this.setState({
+            //   productLoadingModalLabel:  dataProgress + "%",
+            //   productLoadingModalLabelPcnt: dataProgress
+            })  
+          }
+        }).then((res)=>{
+          console.log(res);
+        });
+  
+      }
+  
+      onCreateProduct(event){
+  
+        event.preventDefault(); 
+  
+        this.setState({
+          productLoadingModalLabel: "Loading....",
+          fileUploaded: true,
+          productHiddenBtn: true
+        })
+  
+  
+        let trimDescription = event.target.description.value;
+        let replaced = trimDescription.split(' ').join('');
+  
+        const data = new FormData();
+        data.append("description", replaced);
+        data.append("price", event.target.price.value);
+        data.append("company", event.target.company.value);
+        data.append("style", event.target.style.value);
+  
+        for (let i = 0; i < this.state.images.length; i++) {
+          console.log(this.state.images[i]);
+          data.append('single-file', this.state.images[i])
+        }
+  
+        let imagesArr = [];
+  
+        // for (let i = 0; i < this.state.images.length; i++) {  
+        //     imagesArr.push(replaced +'-'+ event.target.style.value+'-'+i+'.jpg');
+        // }
+        for (let i = 0; i < this.state.uploadingPic.length; i++) {  
+            imagesArr.push(this.state.uploadingPic[i]+'.jpg');
+        }
+  
+        let newProduct = {
+  
+          "id": Date.now(),
+          "description": replaced,
+          "price": event.target.price.value,
+          "company": event.target.company.value,
+          "style": event.target.style.value,  
+          "companystyle": event.target.companystyle.value,  
+          "category": event.target.category.value,  
+          "priceopt": event.target.priceopt.value,  
+          "notes": event.target.notes.value,  
+          "favorite": false,  
+          "hidden": false,  
+          "image": this.state.uploadingPic[0] + '.jpg',
+          // "image": replaced +'-'+ event.target.style.value + '-0.jpg',
+          "images": imagesArr
+        }
+      
+        axios.post(this.props.URLExternal+'/createproduct', data, {
+          onUploadProgress: ProgressEvent =>{
+            console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
+            let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+            this.setState({
+              productLoadingModalLabel:  dataProgress + "%",
+              productLoadingModalLabelPcnt: dataProgress
+            })  
+            if(dataProgress == 100){
+  
+              setTimeout(() => {
+                
+                this.setState({
+                  productLoadingModal: true,
+                  productLoadingModalLabel: "Image uploaded successfully completed"             
+                });
+  
+              }, 700);
+  
+              fetch(this.props.URLExternal+'/createproduct3', {
+  
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newProduct)
+              })
+  
+            }
+          }
+        }).then((res)=>{
+          console.log(res);
+        });
+  
+        fetch(this.props.URLExternal+'/createproduct2', {
+  
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(newProduct)
+        });
+  
+      }
+
     render() {
 
         const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
@@ -204,16 +364,16 @@ class CreateProductComponent extends Component {
         let showUpload;
         let hiddenBtnCheck;
 
-        if(this.props.fileUploaded){
+        if(this.state.fileUploaded){
 
             // showUpload = <div className="form-group"><label for="formFile" className="form-label mt-4">Default file input example</label><input className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} /></div>
 
             // showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
+            showUpload = <div> <Progress value={this.state.productLoadingModalLabelPcnt} /> {this.state.productLoadingModalLabel} </div> 
 
         }else{
             // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
+            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.onCreateProductUpload.bind(this)} />
 
         }
 
@@ -249,24 +409,24 @@ class CreateProductComponent extends Component {
 
         let buttonPlus
 
-        if(this.props.images.length>0){
+        if(this.state.images.length>0){
 
-            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)}><i className="fa fa-plus"></i></button>
+            buttonPlus = <button className="btn btn-dark" onClick={this.onAddImagePartial.bind(this)}><i className="fa fa-plus"></i></button>
         }else{
                         
-            buttonPlus = <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)} disabled><i className="fa fa-plus"></i></button>
+            buttonPlus = <button className="btn btn-dark" onClick={this.onAddImagePartial.bind(this)} disabled><i className="fa fa-plus"></i></button>
         }
 
         
         return(
             <div className="container">
-                <Modal isOpen={this.props.productLoadingModal}>
+                <Modal isOpen={this.state.productLoadingModal}>
                     <ModalHeader>
                     <p>Message</p>
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <h5>&nbsp;&nbsp;&nbsp;{this.props.productLoadingModalLabel}</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;{this.state.productLoadingModalLabel}</h5>
                         </div>
                     </ModalBody>
                     <ModalFooter>  
@@ -278,13 +438,13 @@ class CreateProductComponent extends Component {
                         </div>
                     </ModalFooter>                    
                 </Modal>
-                <Modal isOpen={this.props.productLoadingModalMessageError}>
+                <Modal isOpen={this.state.productLoadingModalMessageError}>
                     <ModalHeader>
                     <p>Message</p>
                     </ModalHeader>
                     <ModalBody>
                         <div className="row">
-                            <h5>{this.props.productLoadingModalMessageErrorLabel}</h5>
+                            <h5>{this.state.productLoadingModalMessageErrorLabel}</h5>
                         </div>
                     </ModalBody>
                 </Modal>
@@ -366,10 +526,10 @@ class CreateProductComponent extends Component {
                 <div className="row">
                     <div className="col-md-4">
                         <div className="row">
-                            <img src={this.props.file} style={{'width':'350px','height':'350px'}}/>
+                            <img src={this.state.file} style={{'width':'350px','height':'350px'}}/>
                         </div>
                         <div style={{'text-align':'center'}}>
-                            <h5>{this.props.fileName}</h5>
+                            <h5>{this.state.fileName}</h5>
                         </div>
                         <div className="row">
                             <div className="col-md-8"></div>
@@ -378,7 +538,7 @@ class CreateProductComponent extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            {this.props.uploadingPic.map(
+                            {this.state.uploadingPic.map(
                                         (data, index) =>
                                         <div className="col-md-3">
                                             <div className="row">
@@ -392,7 +552,7 @@ class CreateProductComponent extends Component {
                         </div>
                     </div>
                     <div className="col-md-8">
-                        <Form onSubmit={this.props.onCreateProduct.bind(this)} enctype="multipart/form-data" >
+                        <Form onSubmit={this.onCreateProduct.bind(this)} enctype="multipart/form-data" >
                                 <FormGroup row>
                                     <Label for="image" sm={2}>Image</Label>
                                     <Col sm={10}>
