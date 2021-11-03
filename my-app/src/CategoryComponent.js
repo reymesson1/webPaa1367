@@ -145,8 +145,8 @@ class CategoryComponent extends Component {
                     </div>
                     <div className="col-md-10"></div>
                 </div>
-                <br/>
-                <div className="row">
+                {/* <br/> */}
+                {/* <div className="row">
                     <div className="col-md-3">
                         <Link to={'/home/bracelet'}> 
                             <img src={this.props.URLExternal+"/images/folder-bracelets.jpg"} style={{"position":"relative"}}  alt="Avatar"/>
@@ -179,24 +179,24 @@ class CategoryComponent extends Component {
                             {'Pendant'}
                         </Button>{' '}
                     </div>
-                </div>
+                </div> */}
                 <br/>
                 <div className="row">
-                    {/* {this.props.categories.map(
+
+                    {this.props.categories.map(
                                 (data, index) => 
-                                    <div className="col-md-3">
+                                    <div className="col-md-3" style={{'margin-bottom':'23px'}}>
                                         <Link to={'/home/'+data.description.toLowerCase()}>
-                                            <div>&nbsp;</div>
                                             <img src={this.props.URLExternal+"/images/"+data.image+".jpg"} style={{"position":"relative"}}  alt="Avatar"/>
                                         </Link>
-                                        <Button style={{"position":"absolute","top":"87%","margin-left":"-12%"}} outline onClick={this.handleOnClickBracelet} color="info">
+                                        <Button style={{"position":"absolute","top":"87%","margin-left":"-18%"}} outline onClick={this.handleOnClickBracelet} color="info">
                                             {data.description}
                                         </Button>{' '}
 
                                     </div>
-                    )} */}
+                    )}
 
-                    <div className="col-md-3">
+                    {/* <div className="col-md-3">
                         <Link to={'/home/pins'}> 
                             <img src={this.props.URLExternal+"/images/folder-pins.png"} style={{"position":"relative"}}  alt="Avatar"/>
                         </Link>
@@ -227,7 +227,7 @@ class CategoryComponent extends Component {
                         <Button style={{"position":"absolute","top":"87%","margin-left":"-20%"}} outline onClick={this.handleOnClickWatches} color="info">
                             {'Watches'}
                         </Button>{' '}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
