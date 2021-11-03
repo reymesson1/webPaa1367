@@ -624,6 +624,7 @@ class CreateProductComponent extends Component {
                                     <Label for="exampleSelect" sm={2}>Category</Label>
                                     <Col sm={10}>
                                         <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" onChange={e => this.onCategoryChange(e.target.value)} >
+                                                <option>{' '}</option>
                                             {this.props.categories.map( 
                                                 (data,index) => <option>{data.description}</option>
                                             )}
