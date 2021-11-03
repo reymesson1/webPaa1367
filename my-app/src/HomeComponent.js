@@ -225,7 +225,13 @@ class HomeComponent extends Component {
                 );
         }else{
 
-            filterData = productData.filter(
+            let filterDataCategory = productData.filter(
+                
+                (data, index) => data.category.toLowerCase().indexOf(this.state.searchTextCategory.toLowerCase()) !== -1 
+                // (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+                );
+
+            filterData = filterDataCategory.filter(
                 
                 // (data, index) => data.category.toLowerCase().indexOf(this.state.searchTextCategory.toLowerCase()) !== -1 
                 (data, index) => data.description.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.style.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.companystyle.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.category.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1 || data.company.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1  || data.notes.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
