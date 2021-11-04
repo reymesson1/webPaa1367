@@ -246,10 +246,12 @@ class CreateProductComponent extends Component {
           data.append('single-file', this.state.images[i]);
           nextState.push(today+"-test-"+i);
         }
-  
-        this.setState({
-          uploadingPic: nextState
-        })
+
+        setTimeout(() => {
+            this.setState({
+                uploadingPic: nextState
+            })
+        }, 2000);
   
         axios.post(this.props.URLExternal+'/createproduct5', data, {
           onUploadProgress: ProgressEvent =>{
