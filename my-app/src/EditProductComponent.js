@@ -11,6 +11,14 @@ import { Input, Media, Panel,   Card,
     ModalBody,
     ModalFooter, Col, Form, FormGroup, Label, Progress } from 'reactstrap';
 import { set } from 'mongoose';
+import  axios  from 'axios'
+
+const API_HEADERS = {
+
+    'Content-Type':'application/json',
+    Authentication: 'any-string-you-like'
+  }
+
 
 class EditProductComponent extends Component {
 
@@ -27,6 +35,12 @@ class EditProductComponent extends Component {
             priceoptValue: "",
             notesValue: "",
             imagesValue: [],
+            image: null,
+            images: [],
+            file: null,
+            fileName: "",
+            fileUploaded: false,
+            uploadingPic: []
         }
     }
 
@@ -149,6 +163,57 @@ class EditProductComponent extends Component {
         window.history.back();
     }
 
+    onCreateProductUpload(event){
+
+        if (event.target.files && event.target.files[0]) {
+          let img = event.target.files[0];
+          this.setState({
+            image: img,
+            images: event.target.files,
+            file: URL.createObjectURL(event.target.files[0]),
+            fileName: event.target.files[0].name
+          });  
+        }
+  
+      }
+
+      onAddImagePartial(){
+
+            let nextState = this.state.uploadingPic;
+    
+            let today = Date.now();
+    
+            const data = new FormData();
+            data.append("description", today);
+            data.append("price", "");
+            data.append("company", "");
+            data.append("style", "");
+    
+            for (let i = 0; i < this.state.images.length; i++) {
+                console.log(this.state.images[i]);
+                data.append('single-file', this.state.images[i]);
+                nextState.push(today+"-test-"+i);
+            }
+    
+            this.setState({
+                uploadingPic: nextState
+            })
+    
+            axios.post(this.props.URLExternal+'/createproduct5', data, {
+            onUploadProgress: ProgressEvent =>{
+                let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
+                this.setState({
+                //   productLoadingModalLabel:  dataProgress + "%",
+                //   productLoadingModalLabelPcnt: dataProgress
+                })  
+            }
+            }).then((res)=>{
+                console.log(res);
+            });    
+
+
+        }
+        
     
     render() {
 
@@ -156,8 +221,8 @@ class EditProductComponent extends Component {
         let hiddenBtnCheck;
         
         if(this.props.fileUploaded){
-            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
+            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.onCreateProductUpload.bind(this)} placeholder="Image" />
+            // showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
 
         }else{
             // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
@@ -242,6 +307,12 @@ class EditProductComponent extends Component {
                                 </div>
                             </div>
                             <br/>
+                            <div className="row">
+                                <div className="col-md-8"></div>
+                                <div className="col-md-4">
+                                    <button className="btn btn-dark" onClick={this.onAddImagePartial.bind(this)}><i className="fa fa-plus"></i></button>
+                                </div>
+                            </div>
                             <div className="row">
                             {filteredData[0].images.map(
                                         (data, index) =>
