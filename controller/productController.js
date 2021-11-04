@@ -88,21 +88,21 @@ exports.editProduct = async(req,res)=>{
   var obj = req.body;
 
   var product = await Product.findOne({"id":obj.id},function(err,master){
-    master.description = obj.description
-    master.price = obj.price
-    master.priceopt = obj.priceopt
-    master.company = obj.company,
-    master.companystyle = obj.companystyle,
-    master.category = obj.category,
-    master.style = obj.style,
-    master.notes = obj.notes
-    master.images.push( obj.image );
+  //   master.description = obj.description
+  //   master.price = obj.price
+  //   master.priceopt = obj.priceopt
+  //   master.company = obj.company,
+  //   master.companystyle = obj.companystyle,
+  //   master.category = obj.category,
+  //   master.style = obj.style,
+  //   master.notes = obj.notes
+    master.images.push( obj.image[0]+'.jpg' );
     master.save(function(err,m){
       console.log("Product Edit updated");
     })
   })
 
-  res.send(product);
+  // res.send(product);
 
 }
 

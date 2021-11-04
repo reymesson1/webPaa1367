@@ -149,6 +149,7 @@ class EditProductComponent extends Component {
         window.history.back();
     }
 
+
     
     render() {
 
@@ -238,6 +239,13 @@ class EditProductComponent extends Component {
                             <div className="row">
                                 <div className="col-md-8"></div>
                                 <div className="col-md-4">
+                                    <button className="btn btn-dark" onClick={this.props.onAddImagePartial.bind(this)}><i className="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <br/>
+                            <div className="row">
+                                <div className="col-md-8"></div>
+                                <div className="col-md-4">
                                     <button className="btn btn-primary" onClick={this.props.defaultImageSelectedFunc.bind(filteredData[0], filteredData[0].id, filteredData[0].image)}>Default</button>
                                 </div>
                             </div>
@@ -257,12 +265,28 @@ class EditProductComponent extends Component {
                                         </div>                                         
                             )}
                             </div>
+                            <div className="row">
+                            {this.props.uploadingPic.map(
+                                        (data, index) =>
+                                        <div className="col-md-3">
+                                            <div className="row">
+                                                <button className="btn btn-white" onClick={this.imageClickEdit.bind(this,filteredData[0],data)}>
+                                                    <img src={this.props.URLExternal+"/images/"+data+'.jpg'} height="70px" width="40px" />                                                                                
+                                                </button>
+                                            </div>
+                                            <div className="row">
+                                                <button className="btn btn-danger" onClick={this.props.onEditDeletePicture.bind(this, filteredData[0],data)} >Delete</button>
+                                            </div>
+                                        </div>                                         
+                            )}
+                            </div>
                         </div>
                         <div className="col-md-8">
                         <br/>
                         <br/>
                         <div className="row">
                         </div>
+                        {/* <Form onSubmit={this.props.onCreateProductUpload.bind(this)} enctype="multipart/form-data" > */}
                         <Form onSubmit={this.props.onEditProduct.bind(this)} enctype="multipart/form-data" >
                             {/* <Form > */}
                                 <FormGroup row>
@@ -342,8 +366,8 @@ class EditProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="style" sm={2}>&nbsp;</Label>
                                     <Col sm={10}>
-                                    {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
-                                    {hiddenBtnCheck}
+                                    <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
+                                    {/* {hiddenBtnCheck} */}
                                     </Col>
                                 </FormGroup>
                             </Form>
