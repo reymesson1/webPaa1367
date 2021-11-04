@@ -381,6 +381,21 @@ class CreateProductComponent extends Component {
         const errors = this.validate(this.state.description, this.state.companystyle, this.state.price);
         // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.email);
 
+        let filteredProductDetect = this.props.products.filter(
+
+            (data, index) => data.description.indexOf(this.state.description) !== -1
+        );
+
+        let detectedExist = false
+
+        if(filteredProductDetect.length == 1 ){
+
+            detectedExist = true
+        }else{
+
+            detectedExist = false
+        }
+
         let submitButton
         
         if((this.state.description === '')  ){
@@ -390,6 +405,8 @@ class CreateProductComponent extends Component {
             
             submitButton = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
         }
+
+
 
         let showUpload;
         let hiddenBtnCheck;
@@ -598,8 +615,10 @@ class CreateProductComponent extends Component {
                                     <Col sm={10}>
                                         <Input type="text" name="description" id="description" placeholder="Style Number" 
                                             onBlur={this.handleBlur('description')}
-                                            valid={this.state.description.length >= 10 }
-                                            invalid={this.state.description.length < 10 }
+                                            // valid={this.state.description.length >= 10 }
+                                            valid={!detectedExist }
+                                            invalid={detectedExist }
+                                            // invalid={this.state.description.length < 10 }
                                             onChange={e => this.onDescriptionChange(e.target.value)}
                                             value={this.state.description}  
                                         />
