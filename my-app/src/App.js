@@ -1299,6 +1299,7 @@ class App extends Component {
                       styles={this.state.styles}
                       images={this.state.images}
                       uploadingPic={this.state.uploadingPic}
+                      products={this.state.products}
                       companies={this.state.companies}
                       categories={this.state.categories}
                       productHiddenBtn={this.state.productHiddenBtn}

@@ -141,9 +141,20 @@ class CreateProductComponent extends Component {
             price: ''
         }
 
-        if(this.state.touched.description && description.length < 3){
-            errors.description = "Style Number should be >= 3 characters"
+        // if(this.state.touched.description && description.length < 3){
+        //     errors.description = "Style Number should be >= 3 characters"
+        // }
+
+        let filteredProduct = this.props.products.filter(
+
+            (data, index) => data.description.indexOf(this.state.description) !== -1
+        );
+
+        if(filteredProduct.length == 1 ){
+
+            errors.description = "Another similar Style Number already exists"    
         }
+
         if(this.state.touched.companystyle && companystyle.length < 3){
             errors.companystyle = "Company Style Style should be >= 3 characters"
         }
@@ -587,15 +598,14 @@ class CreateProductComponent extends Component {
                                     <Col sm={10}>
                                         <Input type="text" name="description" id="description" placeholder="Style Number" 
                                             onBlur={this.handleBlur('description')}
-                                            valid={this.state.description.length >= 3 }
-                                            invalid={this.state.description.length < 3 }
+                                            valid={this.state.description.length >= 10 }
+                                            invalid={this.state.description.length < 10 }
                                             onChange={e => this.onDescriptionChange(e.target.value)}
                                             value={this.state.description}  
                                         />
+                                        <FormFeedback style={{'text-align':'left'}}>{errors.description}</FormFeedback>                                        
                                     </Col>
-                                    <FormFeedback>{errors.description}</FormFeedback>
                                 </FormGroup>
-                                    <FormFeedback>{errors.description}</FormFeedback>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
                                     <Col sm={7}>
