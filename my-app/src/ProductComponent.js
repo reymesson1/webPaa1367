@@ -164,13 +164,13 @@ class Product extends Component {
         let showViewMore
 
         // if(this.state.limit==result.length){
-        if(result.length>limit){
+        // if(result.length>limit){
 
-            // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
-            // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
-            showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
+        //     // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        //     // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
+        //     showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
 
-        }
+        // }
 
         let filteredData = result.filter(
 
