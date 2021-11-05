@@ -15,15 +15,16 @@ import { Media, Panel,   Card,
     ModalBody,
     ModalFooter, Progress } from 'reactstrap';
 import { Button, Col, Form, FormGroup, Label, FormText, FormFeedback } from 'reactstrap';
-
 import QuickFavoriteComponent from './QuickFavoriteComponent';
 
-  const API_HEADERS = {
+const API_HEADERS = {
 
     'Content-Type':'application/json',
     Authentication: 'any-string-you-like'
 }
   
+var limit = 5;
+
 class HomeComponent extends Component {
 
     constructor(props) {
@@ -53,7 +54,8 @@ class HomeComponent extends Component {
                 firstname: false,
                 lastname : false,
                 email : false    
-            }
+            },
+            scrolling: false
         }  
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -65,20 +67,52 @@ class HomeComponent extends Component {
             // searchText: this.props.match.params.id
             searchTextCategory: this.props.match.params.id
         })   
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(event) {
+        if (window.scrollY === 0 && this.state.scrolling === true) {
+            this.setState({scrolling: false});
+        }
+        else if (window.scrollY !== 0 && this.state.scrolling !== true) {
+            this.setState({scrolling: true});
+        }
+    }
+    componentDidUpdate(){
+        if(this.state.scrolling){
+            console.log('see more')
+            // limit += 5;
+            console.log(limit);
+            this.onViewMore()
+            // let nextState = this.state.limit;
+            // nextState+=5;        
+            // this.setState({
+    
+            //     limit: nextState
+            // })
+
+        }
+    }
+
+    onViewMore(){
+        limit += 5;
     }
     onChangeField(event){
         this.setState({
             searchText: event.target.value
         })
     }
-    onViewMore(){
-        let nextState = this.state.limit;
-        nextState+=15;        
-        this.setState({
+    // onViewMore(){
+    //     let nextState = this.state.limit;
+    //     nextState+=15;        
+    //     this.setState({
 
-            limit: nextState
-        })
-    }
+    //         limit: nextState
+    //     })
+    // }
 
     onSendEmail(dataImage, dataId){
 
@@ -240,7 +274,7 @@ class HomeComponent extends Component {
 
         const result = filterData.reduce((temp, value) => {
             if(this.state.searchText==""){
-                if(temp.length<this.state.limit){
+                if(temp.length<limit){
 
                     temp.push(value);
                 }
@@ -253,7 +287,9 @@ class HomeComponent extends Component {
 
         let showViewMore
 
-        if(this.state.limit==result.length){
+        // if(this.state.limit==result.length){
+        if(result.length>limit){
+
             showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
 
             // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>

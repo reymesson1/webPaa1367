@@ -9,8 +9,6 @@ import { Input, Media, Panel,   Card, Button,
     ModalHeader,
     ModalBody,
     ModalFooter, Col, Form, FormGroup, Label } from 'reactstrap';
-
-
 var limit = 5;
 
 class Product extends Component {

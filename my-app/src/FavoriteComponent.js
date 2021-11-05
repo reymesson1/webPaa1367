@@ -13,6 +13,7 @@ const API_HEADERS = {
     Authentication: 'any-string-you-like'
   }
   
+var limit = 5;
 
 class FavoriteComponent extends Component {
 
@@ -22,8 +23,43 @@ class FavoriteComponent extends Component {
             filterAPI: [],
             products: [],
             limit: 5,
-            sequence: 5
+            sequence: 5,
+            scrolling: false
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(event) {
+        if (window.scrollY === 0 && this.state.scrolling === true) {
+            this.setState({scrolling: false});
+        }
+        else if (window.scrollY !== 0 && this.state.scrolling !== true) {
+            this.setState({scrolling: true});
+        }
+    }
+    componentDidUpdate(){
+        if(this.state.scrolling){
+            // console.log('see more')
+            // limit += 5;
+            // console.log(limit);
+            this.onViewMore()
+            // let nextState = this.state.limit;
+            // nextState+=5;        
+            // this.setState({
+    
+            //     limit: nextState
+            // })
+
+        }
+    }
+
+    onViewMore(){
+        limit += 5;
     }
     
     onFilterSearch(event){
@@ -57,14 +93,14 @@ class FavoriteComponent extends Component {
 
     }
 
-    onViewMore(){
-        let nextState = this.state.limit;
-        nextState+=5;        
-        this.setState({
+    // onViewMore(){
+    //     let nextState = this.state.limit;
+    //     nextState+=5;        
+    //     this.setState({
 
-            limit: nextState
-        })
-    }
+    //         limit: nextState
+    //     })
+    // }
 
     onClickFavoriteToggle(dataImage, dataId){
 
@@ -101,7 +137,7 @@ class FavoriteComponent extends Component {
 
         let showViewMore
 
-        if(this.state.limit==this.props.products.length){
+        if(this.props.products.length==limit){
 
             showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
         }
@@ -112,7 +148,8 @@ class FavoriteComponent extends Component {
         );
 
         const result = filteredData.reduce((temp, value) => {
-            if(temp.length<this.state.limit)
+            if(temp.length<limit)
+            // if(temp.length<this.state.limit)
               temp.push(value);
             return temp;
         }, []);

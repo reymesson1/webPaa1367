@@ -13,6 +13,7 @@ const API_HEADERS = {
     Authentication: 'any-string-you-like'
   }
   
+var limit = 5;
 
 class FilterComponent extends Component {
 
@@ -22,11 +23,45 @@ class FilterComponent extends Component {
             filterAPI: [],
             limit: 5,
             sequence: 5,
-            companystyle: ""
+            companystyle: "",
+            scrolling: false
         }
     }
 
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(event) {
+        if (window.scrollY === 0 && this.state.scrolling === true) {
+            this.setState({scrolling: false});
+        }
+        else if (window.scrollY !== 0 && this.state.scrolling !== true) {
+            this.setState({scrolling: true});
+        }
+    }
+    componentDidUpdate(){
+        if(this.state.scrolling){
+            // console.log('see more')
+            // limit += 5;
+            // console.log(limit);
+            this.onViewMore()
+            // let nextState = this.state.limit;
+            // nextState+=5;        
+            // this.setState({
     
+            //     limit: nextState
+            // })
+
+        }
+    }
+
+    onViewMore(){
+        limit += 5;
+    }
+
     onFilterSearch(event){
 
         event.preventDefault();
@@ -58,14 +93,14 @@ class FilterComponent extends Component {
 
     }
 
-    onViewMore(){
-        let nextState = this.state.limit;
-        nextState+=5;        
-        this.setState({
+    // onViewMore(){
+    //     let nextState = this.state.limit;
+    //     nextState+=5;        
+    //     this.setState({
 
-            limit: nextState
-        })
-    }
+    //         limit: nextState
+    //     })
+    // }
 
     onClickBack(){
         window.history.back();
@@ -85,14 +120,16 @@ class FilterComponent extends Component {
     render() {
 
         const result = this.props.filterAPI.reduce((temp, value) => {
-            if(temp.length<this.state.limit)
+            if(temp.length<limit)
+            // if(temp.length<this.state.limit)
               temp.push(value);
             return temp;
         }, []);
 
         let showViewMore
 
-        if(this.state.limit==result.length){
+        // if(this.state.limit==result.length){
+        if(result.length==limit){
 
             // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
             showViewMore = <Button onClick={this.onViewMore.bind(this)} outline color="primary">See More</Button>
