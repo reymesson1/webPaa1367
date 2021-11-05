@@ -123,7 +123,7 @@ class FavoriteComponent extends Component {
                     <br/>
                     <Card>
                             <Link to={'/productdetail/'+product.id}> 
-                                <CardImg top width="100%" src={this.props.URLExternal+"/images/output-"+ product.image} alt="Card image cap" />
+                                <CardImg top width="100%" src={this.props.URLExternal+"/images/"+ product.image} alt="Card image cap" />
                             </Link>
                             <CardBody>
                             <CardTitle tag="h5">{product.description}</CardTitle>
