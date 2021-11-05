@@ -440,8 +440,8 @@ class CreateProductComponent extends Component {
 
         // console.log(
         users.sort(function(a, b){
-            if(a.description < b.description) { return -1; }
-            if(a.description > b.description) { return 1; }
+            if(a.description.toLowerCase() < b.description.toLowerCase()) { return -1; }
+            if(a.description.toLowerCase() > b.description.toLowerCase()) { return 1; }
             return 0;
         }) 
         // )
@@ -450,8 +450,8 @@ class CreateProductComponent extends Component {
 
         // console.log(
         users2.sort(function(a, b){
-            if(a.description < b.description) { return -1; }
-            if(a.description > b.description) { return 1; }
+            if(a.description.toLowerCase() < b.description.toLowerCase()) { return -1; }
+            if(a.description.toLowerCase() > b.description.toLowerCase()) { return 1; }
             return 0;
         }) 
         // )
