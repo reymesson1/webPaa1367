@@ -126,6 +126,26 @@ class FilterComponent extends Component {
             return temp;
         }, []);
 
+        let users = this.props.companies;
+
+        // console.log(
+        users.sort(function(a, b){
+            if(a.description.toLowerCase() < b.description.toLowerCase()) { return -1; }
+            if(a.description.toLowerCase() > b.description.toLowerCase()) { return 1; }
+            return 0;
+        }) 
+        // )
+        
+        let users2 = this.props.styles;
+
+        // console.log(
+        users2.sort(function(a, b){
+            if(a.description.toLowerCase() < b.description.toLowerCase()) { return -1; }
+            if(a.description.toLowerCase() > b.description.toLowerCase()) { return 1; }
+            return 0;
+        }) 
+
+
         let showViewMore
 
         // if(this.state.limit==result.length){
