@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -10,6 +9,9 @@ import { Input, Media, Panel,   Card, Button,
     ModalHeader,
     ModalBody,
     ModalFooter, Col, Form, FormGroup, Label } from 'reactstrap';
+
+
+var limit = 5;
 
 class Product extends Component {
 
@@ -25,8 +27,39 @@ class Product extends Component {
             company: "",
             limit: 5,
             sequence: 5,
-            toDelete: {}
+            toDelete: {},
+            scrolling: false
         }  
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(event) {
+        if (window.scrollY === 0 && this.state.scrolling === true) {
+            this.setState({scrolling: false});
+        }
+        else if (window.scrollY !== 0 && this.state.scrolling !== true) {
+            this.setState({scrolling: true});
+        }
+    }
+    componentDidUpdate(){
+        if(this.state.scrolling){
+            // console.log('see more')
+            // limit += 5;
+            // console.log(limit);
+            this.onViewMore()
+            // let nextState = this.state.limit;
+            // nextState+=5;        
+            // this.setState({
+    
+            //     limit: nextState
+            // })
+
+        }
     }
 
     toggleModal = () => {
@@ -73,16 +106,19 @@ class Product extends Component {
     }
 
     onViewMore(){
-        let nextState = this.state.limit;
-        nextState+=5;        
-        this.setState({
-
-            limit: nextState
-        })
+        limit += 5;
     }
+    // onViewMore(){
+    //     let nextState = this.state.limit;
+    //     nextState+=5;        
+    //     this.setState({
+
+    //         limit: nextState
+    //     })
+    // }
 
     onClickDeleteModal(data){
-        console.log(data.hidden);
+        // console.log(data.hidden);
         if(!data.hidden){
             this.setState({
                 showModalHidden: true,
@@ -100,6 +136,7 @@ class Product extends Component {
 
     render() {
 
+        // console.log(this.state.scrolling);
         var productData  = this.props.products.sort( 
             (a,b) =>{
                 if(a.id<b.id){
@@ -114,7 +151,8 @@ class Product extends Component {
 
         const result = productData.reduce((temp, value) => {
             if(this.state.searchText==""){
-                if(temp.length<this.state.limit){
+                // if(temp.length<this.state.limit){
+                if(temp.length<limit){
 
                     temp.push(value);
                 }
@@ -127,7 +165,8 @@ class Product extends Component {
 
         let showViewMore
 
-        if(this.state.limit==result.length){
+        // if(this.state.limit==result.length){
+        if(result.length>limit){
 
             // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
             // showViewMore = <p style={{'text-decoration':'underline','color':'blue','cursor':'pointer'}} onClick={this.onViewMore.bind(this)} > {'View More'} </p>
@@ -213,6 +252,7 @@ class Product extends Component {
                 <thead>
                     <tr>
                     <th>&nbsp;</th>
+                    <th>No.</th>
                     <th>Style Number</th>
                     <th>Price</th>
                     <th>Price Optional</th>
@@ -228,6 +268,7 @@ class Product extends Component {
                     {filteredData.map(
                         (data, index) => 
                                             <tr>
+                                                <td style={{"padding-top":"5%"}} >{index+1}</td>
                                                 <td style={{"width":"12%","height":"12%"}}>
                                                     <Link to={'/productdetail/'+data.id}> 
                                                         <img src={this.props.URLExternal+"/images/"+ data.image}  alt="Avatar"/>
