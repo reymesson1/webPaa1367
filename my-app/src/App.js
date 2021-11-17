@@ -29,8 +29,8 @@ import UserComponent from './UserComponent';
 import CategorySettingComponent from './CategorySettingComponent';
 import { Col, Form, FormGroup, Label, Input, FormText, FormFeedback, Fade } from 'reactstrap';
 
-// let API_URL = "http://localhost:8085";
-let API_URL = "http://143.198.171.44:8085"; 
+let API_URL = "http://localhost:8085";
+// let API_URL = "http://143.198.171.44:8085"; 
 
 const token = "token";
 
@@ -46,8 +46,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        URLExternal: 'http://143.198.171.44:8085', 
-          // URLExternal: 'http://localhost:8085',
+        // URLExternal: 'http://143.198.171.44:8085', 
+          URLExternal: 'http://localhost:8085',
           showModal: false,
           newest: true,
           filterText: "",
@@ -546,14 +546,7 @@ class App extends Component {
 
       event.preventDefault();
 
-      // let nextState = this.state.products.filter(
-
-      //   (data, index) => data.id.indexOf(event.target.id.value) !== -1
-      // );
-
-      // console.log(nextState);
-
-      // console.log(this.state.uploadingPic);
+      // console.log(this.state.uploadingPic.length);
 
       let editProduct = {
         "id": event.target.id.value,
@@ -582,97 +575,6 @@ class App extends Component {
       // }
 
 
-
-      // let trimDescription = event.target.description.value;
-      // let replaced = trimDescription.split(' ').join('');
-
-      // let trimImages = event.target.images.value;
-      // let replacedImages = trimImages.split(',');
-
-      // let imagesLen = replacedImages.length;
-
-      // let newImage = replaced +'-'+ event.target.style.value + '-'+ imagesLen +'.jpg';
-
-      // nextState[0].images.push(newImage);
-
-      // const data = new FormData();
-      // data.append("description", replaced);
-      // data.append("price", event.target.price.value);
-      // data.append("company", event.target.company.value);
-      // data.append("style", event.target.style.value);
-      // data.append("newimage", newImage);
-
-      // for (let i = 0; i < this.state.images.length; i++) {
-      //   data.append('single-file', this.state.images[i])
-      // }
-
-      // // axios({
-      // //     url: API_URL+'/editpictureproduct',
-      // //     method: "POST",
-      // //     headers: {
-      // //       authorization: 'done'              
-      // //     },
-      // //     data: data
-      // // }).then((res)=>{
-
-      // // });
-
-      // replacedImages.push(newImage);
-
-      // let editProduct = {
-      //   "id": event.target.id.value,
-      //   "description": event.target.description.value,
-      //   "price": event.target.price.value,
-      //   "priceopt": event.target.priceopt.value,
-      //   "company": event.target.company.value,
-      //   "companystyle": event.target.companystyle.value,
-      //   "category": event.target.category.value,
-      //   "style": event.target.style.value,
-      //   "notes": event.target.notes.value,
-      //   "image": newImage,
-      //   "images": replacedImages,
-      // }
-
-      // axios.post(API_URL+'/editpictureproduct', data, {
-      //   onUploadProgress: ProgressEvent =>{
-      //     console.log('Progress ' + Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 ) + '%');
-      //     let dataProgress = Math.round(  ProgressEvent.loaded / ProgressEvent.total * 100 );
-      //     this.setState({
-      //       productLoadingModalLabel:  dataProgress + '%',
-      //       productLoadingModalLabelPcnt: dataProgress
-      //     })  
-      //     if(dataProgress == 100){
-
-      //       this.setState({
-      //         productHiddenBtn: false,
-      //         productLoadingModal: true,
-      //         productLoadingModalLabel: "Image uploaded successfully completed"             
-      //       })  
-
-      //       fetch(API_URL+'/createproduct3', {
-
-      //         method: 'post',
-      //         headers: API_HEADERS,
-      //         body: JSON.stringify(editProduct)
-      //       })
-
-
-
-
-
-      //     }
-
-      //   }
-      // }).then((res)=>{
-      //   console.log(res);
-      // });
-
-      // fetch(API_URL+'/editproduct', {
-
-      //   method: 'post',
-      //   headers: API_HEADERS,
-      //   body: JSON.stringify(editProduct)
-      // })
 
       this.setState({
         productLoadingModal: true,
@@ -1409,6 +1311,7 @@ class App extends Component {
                     fileUploaded={this.state.fileUploaded}
                     styles={this.state.styles}
                     companies={this.state.companies}
+                    categories={this.state.categories}
                     productHiddenBtn={this.state.productHiddenBtn}
                     onCreateCompany={this.onCreateCompany.bind(this)}
                     onCreateStyle={this.onCreateStyle.bind(this)}

@@ -9,8 +9,7 @@ import { Input, Media, Panel,   Card,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter, Col, Form, FormGroup, Label, Progress } from 'reactstrap';
-import { set } from 'mongoose';
+    ModalFooter, Col, Form, FormGroup, Label, Progress, Button } from 'reactstrap';
 
 class EditProductComponent extends Component {
 
@@ -27,6 +26,15 @@ class EditProductComponent extends Component {
             priceoptValue: "",
             notesValue: "",
             imagesValue: [],
+            productHiddenBtn: true,
+            imageHidden: true,
+            companyHidden: true,
+            companyStyleHidden: true,
+            categoryHidden: true,
+            styleHidden: true,
+            priceHidden: true,
+            priceoptHidden: true,
+            notesHidden: true
         }
     }
 
@@ -149,29 +157,104 @@ class EditProductComponent extends Component {
         window.history.back();
     }
 
+    onClickCompanyEdit(){
+
+        this.setState({
+            companyHidden: !this.state.companyHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickCompanyStyleEdit(){
+
+        this.setState({
+            companyStyleHidden: !this.state.companyStyleHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickStyleEdit(){
+
+        this.setState({
+            styleHidden: !this.state.styleHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickCategoryEdit(){
+
+        this.setState({
+            categoryHidden: !this.state.categoryHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickPriceEdit(){
+
+        this.setState({
+            priceHidden: !this.state.priceHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickPriceOptEdit(){
+
+        this.setState({
+            priceoptHidden: !this.state.priceoptHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickNotesEdit(){
+
+        this.setState({
+            notesHidden: !this.state.notesHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
+
+    onClickImageEdit(){
+
+        this.setState({
+            imageHidden: !this.state.imageHidden,
+            productHiddenBtn: !this.state.productHiddenBtn
+        })
+    }
 
     
     render() {
 
         let showUpload;
         let hiddenBtnCheck;
+        let companyHiddenBtn;
+        let companyStyleHiddenBtn;
+        let categoryHiddenBtn;
+        let styleHiddenBtn;
+        let priceHiddenBtn;
+        let priceoptHiddenBtn;
+        let notesHiddenBtn;
         
-        if(this.props.fileUploaded){
-            showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
+        // if(this.props.fileUploaded){
+        //     showUpload = <Input type="file" style={{'display':'none'}} multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" disabled />
+        //     showUpload = <div> <Progress value={this.props.productLoadingModalLabelPcnt} /> {this.props.productLoadingModalLabel} </div> 
 
+        // }else{
+        //     // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
+
+        if(this.state.imageHidden){
+
+            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} disabled />
         }else{
-            // showUpload = <Input type="file" multiple name="single-file" id="single-file"  onChange={this.props.onCreateProductUpload.bind(this)} placeholder="Image" />
-            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
 
+            showUpload = <input style={{'color':'#c7bfbf','height':'50px'}} className="form-control" type="file" multiple name="single-file" id="formFile" onChange={this.props.onCreateProductUpload.bind(this)} />
         }
 
-        if(!this.props.productHiddenBtn){
+        if(!this.state.productHiddenBtn){
 
             hiddenBtnCheck = <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
         }else{
             
-            hiddenBtnCheck = <Input type="submit" value="Loading..." className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
+            hiddenBtnCheck = <Input type="submit" value="Submit" className="btn btn-success" name="image" id="image" placeholder="Image" disabled />
         }
 
 
@@ -190,6 +273,67 @@ class EditProductComponent extends Component {
 
                 (data, index) => data.description.indexOf(filteredData[0].style) !== -1
             );
+            let filteredDataCategory = this.props.categories.filter(
+
+                (data, index) => data.description.indexOf(filteredData[0].category) !== -1
+            );
+
+            if(this.state.companyHidden){
+
+                companyHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" disabled > {filteredDataCompany.map(  (data,index) => <option>{data.description}</option>)}</Input>    
+            }else{
+                
+                companyHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" > {this.props.companies.map(  (data,index) => <option>{data.description}</option>)} </Input>    
+            }
+
+            if(this.state.companyStyleHidden){
+
+                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue} disabled/>  
+            }else{
+                
+                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue}/>  
+            }
+
+            if(this.state.categoryHidden){
+
+                categoryHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Company Name" disabled > {filteredDataCategory.map(  (data,index) => <option>{data.description}</option>)}</Input>    
+            }else{
+                
+                categoryHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Company Name" > {this.props.categories.map(  (data,index) => <option>{data.description}</option>)} </Input>    
+            }
+
+            if(this.state.styleHidden){
+
+                styleHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Company Name" disabled > {filteredDataStyle.map(  (data,index) => <option>{data.description}</option>)}</Input>    
+            }else{
+                
+                styleHiddenBtn = <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Company Name" > {this.props.styles.map(  (data,index) => <option>{data.description}</option>)} </Input>    
+            }
+
+            if(this.state.priceHidden){
+
+                priceHiddenBtn = <Input type="number" name="price" id="price" placeholder="Price" onChange={e => this.onChangePriceValue(e.target.value)} value={this.state.priceValue} disabled/>
+            }else{   
+                             
+                priceHiddenBtn = <Input type="number" name="price" id="price" placeholder="Price" onChange={e => this.onChangePriceValue(e.target.value)} value={this.state.priceValue} />  
+            }
+
+            if(this.state.priceoptHidden){
+
+                priceoptHiddenBtn = <Input type="number" name="priceopt" id="priceopt" placeholder="Price" onChange={e => this.onChangePriceOptValue(e.target.value)} value={this.state.priceValue} disabled/>
+            }else{   
+
+                priceoptHiddenBtn = <Input type="number" name="priceopt" id="priceopt" placeholder="Price" onChange={e => this.onChangePriceOptValue(e.target.value)} value={this.state.priceValue} />  
+            }
+
+            if(this.state.notesHidden){
+
+                notesHiddenBtn = <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} disabled/>
+            }else{   
+
+                notesHiddenBtn = <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} />
+            }
+        
             
             return(
                 <div className="container">
@@ -291,8 +435,11 @@ class EditProductComponent extends Component {
                             {/* <Form > */}
                                 <FormGroup row>
                                     <Label for="description" sm={2}>&nbsp;</Label>
-                                    <Col sm={10}>
-                                    {showUpload}
+                                    <Col sm={8}>
+                                        {showUpload}
+                                    </Col>
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickImageEdit.bind(this)} color="danger" >Edit</Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -303,71 +450,91 @@ class EditProductComponent extends Component {
                                 <FormGroup row>
                                     <Label for="description" sm={2}>Style Number</Label>
                                     <Col sm={10}>
-                                    <Input type="text" name="description" id="description" placeholder="Style Number" onChange={e => this.onChangeDescription(e.target.value)} value={this.state.descriptionValue} />
+                                    <Input type="text" name="description" id="description" placeholder="Style Number" onChange={e => this.onChangeDescription(e.target.value)} value={this.state.descriptionValue} disabled />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Company</Label>
-                                    <Col sm={10}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="company" id="company" placeholder="Company Name" >
-                                        {filteredDataCompany.map( 
-                                            (data,index) => <option>{data.description}</option>
-                                        )}
-
-                                    </Input>
+                                    <Col sm={8}>
+                                        {companyHiddenBtn}
+                                    </Col>
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickCompanyEdit.bind(this)} color="danger" >Edit</Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="companystyle" sm={2}>Comp Style #</Label>
-                                    <Col sm={10}>
-                                    <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue} />
+                                    <Col sm={8}>
+                                    {/* <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue} /> */}
+                                    {companyStyleHiddenBtn}
+                                    </Col>
+                                    <Col sm={2}>
+                                            <Button onClick={this.onClickCompanyStyleEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Category</Label>
-                                    <Col sm={10}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="category" id="category" placeholder="Category" >
-                                            <option>{filteredData[0].category}</option>
-                                            
-                                    </Input>
+                                    <Col sm={8}>
+                                        {categoryHiddenBtn}
+                                    </Col>
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickCategoryEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="exampleSelect" sm={2}>Style</Label>
-                                    <Col sm={10}>
-                                        <Input type="select" style={{'color':'#c7bfbf','height':'50px'}} name="style" id="style" placeholder="Style" >
-                                        {filteredDataStyle.map(
-                                                (data) => <option>{data.description}</option>
-                                        )}
-                                    </Input>
+                                    <Col sm={8}>
+                                        {styleHiddenBtn}
+                                    </Col>
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickStyleEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="price" sm={2}>Price</Label>
-                                    <Col sm={5}>
-                                    <Input type="number" name="price" id="price" placeholder="Price" onChange={e => this.onChangePriceValue(e.target.value)} value={this.state.priceValue} />
+                                    <Col sm={3}>
+                                        {priceHiddenBtn}
                                     </Col>
-                                    <Col sm={5}>
-                                    <Input type="number" name="priceopt" id="priceopt" placeholder="Price Optional" onChange={e => this.onChangePriceOptValue(e.target.value)} value={this.state.priceoptValue} />
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickPriceEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger">Edit</button> */}
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
+                                    </Col>
+                                    <Col sm={3}>
+                                        {priceoptHiddenBtn}
+                                    </Col>
+                                    <Col sm={2}>
+                                    <Button onClick={this.onClickPriceOptEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="notes" sm={2}>Notes</Label>
-                                    <Col sm={10}>
-                                    <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} />
+                                    <Col sm={8}>
+                                        {notesHiddenBtn}
+                                        {/* <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} /> */}
+                                    </Col>
+                                    <Col sm={2}>
+                                        <Button onClick={this.onClickNotesEdit.bind(this)} color="danger" >Edit</Button>
+                                        {/* <button className="btn btn-danger">Edit</button> */}
+                                        {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col sm={10}>
-                                    <Input type="textarea" style={{'display':'none'}} name="images" id="images" placeholder="Images" onChange={e => this.onChangeImagesValue(e.target.value)} value={this.state.imagesValue} disabled />
+                                        {/* {notesHiddenBtn} */}
+                                    {/* <Input type="textarea" style={{'display':'none'}} name="images" id="images" placeholder="Images" onChange={e => this.onChangeImagesValue(e.target.value)} value={this.state.imagesValue} disabled /> */}
                                     </Col>
                                 </FormGroup>
                                 <br/>
                                 <FormGroup row>
                                     <Label for="style" sm={2}>&nbsp;</Label>
                                     <Col sm={10}>
-                                    <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" />
-                                    {/* {hiddenBtnCheck} */}
+                                    {/* <Input type="submit" className="btn btn-success" name="image" id="image" placeholder="Image" /> */}
+                                    {hiddenBtnCheck}
                                     </Col>
                                 </FormGroup>
                             </Form>
