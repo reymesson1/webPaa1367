@@ -444,7 +444,8 @@ class EditProductComponent extends Component {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col sm={10}>
-                                    <Input type="text" style={{'display':'none'}} name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled />
+                                    {/* <Input type="text" style={{'display':'none'}} name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled /> */}
+                                    <Input type="text" name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

@@ -548,6 +548,8 @@ class App extends Component {
 
       // console.log(this.state.uploadingPic.length);
 
+      console.log(event.target.id.value);
+
       let editProduct = {
         "id": event.target.id.value,
         "image": this.state.uploadingPic
