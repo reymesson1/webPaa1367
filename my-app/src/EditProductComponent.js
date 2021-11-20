@@ -21,6 +21,7 @@ class EditProductComponent extends Component {
             newStyleModal: false,
             newLoadingModal: true,
             descriptionValue: "",
+            companyValue: "",
             companystyleValue: "",
             priceValue: "",
             priceoptValue: "",
@@ -49,6 +50,7 @@ class EditProductComponent extends Component {
             
         this.setState({
             descriptionValue: filteredData[0].description,
+            companyValue: filteredData[0].company,
             companystyleValue: filteredData[0].companystyle,
             priceValue: filteredData[0].price,
             priceoptValue: filteredData[0].priceopt,
@@ -101,6 +103,14 @@ class EditProductComponent extends Component {
     }
     onChangeCompanyValue(value){
         // console.log(event.target.description.value);
+        this.setState({
+            companyValue: value
+        })
+                
+    }
+    onChangeCompanyStyleValue(value){
+        // console.log(event.target.description.value);
+        // console.log(value);
         this.setState({
             companystyleValue: value
         })
@@ -288,10 +298,10 @@ class EditProductComponent extends Component {
 
             if(this.state.companyStyleHidden){
 
-                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue} disabled/>  
+                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyStyleValue(e.target.value)} value={this.state.companystyleValue} disabled/>  
             }else{
                 
-                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyValue(e.target.value)} value={this.state.companystyleValue}/>  
+                companyStyleHiddenBtn = <Input type="text" name="companystyle" id="companystyle" placeholder="Company Style Number" onChange={e => this.onChangeCompanyStyleValue(e.target.value)} value={this.state.companystyleValue}/>  
             }
 
             if(this.state.categoryHidden){

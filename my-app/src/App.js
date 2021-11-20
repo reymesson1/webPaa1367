@@ -546,21 +546,132 @@ class App extends Component {
 
       event.preventDefault();
 
-      // console.log(this.state.uploadingPic.length);
+      let productId = event.target.id.value;
 
-      console.log(event.target.id.value);
+      let products = this.state.products.filter(
+        (data,index) => data.id.indexOf(productId) !== -1
+      )
 
-      let editProduct = {
-        "id": event.target.id.value,
-        "image": this.state.uploadingPic
+      if(this.state.uploadingPic.length>0){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "image": this.state.uploadingPic
+            }
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+
+      }else if(products[0].company != event.target.company.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "company": event.target.company.value
+            }
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })      
+      }else if(products[0].companystyle!=event.target.companystyle.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "companystyle": event.target.companystyle.value
+            }
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+      }else if(products[0].category!=event.target.category.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "category": event.target.category.value,
+            } 
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+      }else if(products[0].style!=event.target.style.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "style": event.target.style.value,
+            } 
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+      }else if(products[0].price != event.target.price.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "price": event.target.price.value,
+            } 
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+      }else if(products[0].priceopt != event.target.priceopt.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "priceopt": event.target.priceopt.value,
+            } 
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
+      }else if(products[0].notes != event.target.notes.value){
+
+            let editProduct = {
+              "id": event.target.id.value,
+              "notes": event.target.notes.value,
+            } 
+
+            fetch(API_URL+'/editproduct', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(editProduct)
+            })
       }
 
-      fetch(API_URL+'/editproduct', {
+      // console.log(event.target.id.value);
 
-        method: 'post',
-        headers: API_HEADERS,
-        body: JSON.stringify(editProduct)
-      })
+      // let editProduct = {
+      //   "id": event.target.id.value,
+      //   "image": this.state.uploadingPic
+      // }
+
+      // fetch(API_URL+'/editproduct', {
+
+      //   method: 'post',
+      //   headers: API_HEADERS,
+      //   body: JSON.stringify(editProduct)
+      // })
 
       // let editProduct = {
       //   "id": event.target.id.value,

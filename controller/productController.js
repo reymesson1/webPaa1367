@@ -89,20 +89,152 @@ exports.editProduct = async(req,res)=>{
 
   console.log(req.body);
 
-  var product = await Product.findOne({"id":obj.id},function(err,master){
-  //   master.description = obj.description
-  //   master.price = obj.price
-  //   master.priceopt = obj.priceopt
-  //   master.company = obj.company,
-  //   master.companystyle = obj.companystyle,
-  //   master.category = obj.category,
-  //   master.style = obj.style,
-  //   master.notes = obj.notes
-    master.images.push( obj.image[0]+'.jpg' );
-    master.save(function(err,m){
-      console.log("Product Edit updated");
-    })
-  })
+  if(obj.image){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+      //   master.company = obj.company,
+      //   master.companystyle = obj.companystyle,
+      //   master.category = obj.category,
+      //   master.style = obj.style,
+      //   master.notes = obj.notes
+        master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Image updated");
+        })
+      })
+    
+  }else if(obj.company){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        master.company = obj.company,
+      //   master.companystyle = obj.companystyle,
+      //   master.category = obj.category,
+      //   master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Company updated");
+        })
+      })
+  }else if(obj.companystyle){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        master.companystyle = obj.companystyle,
+      //   master.category = obj.category,
+      //   master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit CompanyStyle updated");
+        })
+      })
+  }else if(obj.category){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        // master.companystyle = obj.companystyle,
+        master.category = obj.category,
+      //   master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Category updated");
+        })
+      })
+  }else if(obj.style){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        // master.companystyle = obj.companystyle,
+        // master.category = obj.category,
+        master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Category updated");
+        })
+      })
+  }else if(obj.price){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+        master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        // master.companystyle = obj.companystyle,
+        // master.category = obj.category,
+        // master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Category updated");
+        })
+      })
+  }else if(obj.priceopt){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+        // master.price = obj.price
+        master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        // master.companystyle = obj.companystyle,
+        // master.category = obj.category,
+        // master.style = obj.style,
+      //   master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Category updated");
+        })
+      })
+  }else if(obj.notes){
+
+    var product = await Product.findOne({"id":obj.id},function(err,master){
+      //   master.description = obj.description
+      //   master.price = obj.price
+      //   master.priceopt = obj.priceopt
+        // master.company = obj.companystyle,
+        // master.companystyle = obj.companystyle,
+        // master.category = obj.category,
+        // master.style = obj.style,
+        master.notes = obj.notes
+        // master.images.push( obj.image[0]+'.jpg' );
+        master.save(function(err,m){
+          console.log("Product Edit Category updated");
+        })
+      })
+
+  }
+
+  // var product = await Product.findOne({"id":obj.id},function(err,master){
+  // //   master.description = obj.description
+  // //   master.price = obj.price
+  // //   master.priceopt = obj.priceopt
+  // //   master.company = obj.company,
+  // //   master.companystyle = obj.companystyle,
+  // //   master.category = obj.category,
+  // //   master.style = obj.style,
+  // //   master.notes = obj.notes
+  //   master.images.push( obj.image[0]+'.jpg' );
+  //   master.save(function(err,m){
+  //     console.log("Product Edit updated");
+  //   })
+  // })
 
   // res.send(product);
 
