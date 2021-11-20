@@ -167,7 +167,7 @@ exports.editProduct = async(req,res)=>{
       //   master.notes = obj.notes
         // master.images.push( obj.image[0]+'.jpg' );
         master.save(function(err,m){
-          console.log("Product Edit Category updated");
+          console.log("Product Edit Style updated");
         })
       })
   }else if(obj.price){
@@ -183,7 +183,7 @@ exports.editProduct = async(req,res)=>{
       //   master.notes = obj.notes
         // master.images.push( obj.image[0]+'.jpg' );
         master.save(function(err,m){
-          console.log("Product Edit Category updated");
+          console.log("Product Edit Price updated");
         })
       })
   }else if(obj.priceopt){
@@ -199,7 +199,7 @@ exports.editProduct = async(req,res)=>{
       //   master.notes = obj.notes
         // master.images.push( obj.image[0]+'.jpg' );
         master.save(function(err,m){
-          console.log("Product Edit Category updated");
+          console.log("Product Edit Priceopt updated");
         })
       })
   }else if(obj.notes){
@@ -215,7 +215,7 @@ exports.editProduct = async(req,res)=>{
         master.notes = obj.notes
         // master.images.push( obj.image[0]+'.jpg' );
         master.save(function(err,m){
-          console.log("Product Edit Category updated");
+          console.log("Product Edit Notes updated");
         })
       })
 
