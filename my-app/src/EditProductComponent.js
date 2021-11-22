@@ -449,13 +449,13 @@ class EditProductComponent extends Component {
                                         {showUpload}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickImageEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickImageEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col sm={10}>
-                                    {/* <Input type="text" style={{'display':'none'}} name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled /> */}
-                                    <Input type="text" name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled />
+                                    <Input type="text" style={{'display':'none'}} name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled />
+                                    {/* <Input type="text" name="id" id="id" placeholder="ID" value={this.props.match.params.id} disabled /> */}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -470,7 +470,7 @@ class EditProductComponent extends Component {
                                         {companyHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickCompanyEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickCompanyEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -480,7 +480,7 @@ class EditProductComponent extends Component {
                                     {companyStyleHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                            <Button onClick={this.onClickCompanyStyleEdit.bind(this)} color="danger" >Edit</Button>
+                                            <Button onClick={this.onClickCompanyStyleEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
@@ -490,7 +490,7 @@ class EditProductComponent extends Component {
                                         {categoryHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickCategoryEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickCategoryEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
@@ -500,7 +500,7 @@ class EditProductComponent extends Component {
                                         {styleHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickStyleEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickStyleEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
@@ -510,7 +510,7 @@ class EditProductComponent extends Component {
                                         {priceHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickPriceEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickPriceEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger">Edit</button> */}
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
@@ -518,7 +518,7 @@ class EditProductComponent extends Component {
                                         {priceoptHiddenBtn}
                                     </Col>
                                     <Col sm={2}>
-                                    <Button onClick={this.onClickPriceOptEdit.bind(this)} color="danger" >Edit</Button>
+                                    <Button onClick={this.onClickPriceOptEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
                                 </FormGroup>
@@ -529,7 +529,7 @@ class EditProductComponent extends Component {
                                         {/* <Input type="textarea" name="notes" id="notes" placeholder="Notes" onChange={e => this.onChangeNotesValue(e.target.value)} value={this.state.notesValue} /> */}
                                     </Col>
                                     <Col sm={2}>
-                                        <Button onClick={this.onClickNotesEdit.bind(this)} color="danger" >Edit</Button>
+                                        <Button onClick={this.onClickNotesEdit.bind(this)} color="danger" ><i className="fa fa-edit" style={{'color':'#ffffff'}} aria-hidden="true"></i></Button>
                                         {/* <button className="btn btn-danger">Edit</button> */}
                                         {/* <button className="btn btn-danger" onClick={this.onClickEditDeletePicture.bind(this, filteredData[0],data)} >Edit</button> */}
                                     </Col>
