@@ -7,6 +7,7 @@ var sharp = require('sharp');
 var uploadsFolder2 = __dirname + '/static/images/';  // defining real upload path
 var nodemailer = require("nodemailer");
 var Product = require('../models/product.js');
+var joinImages = require('join-images');
 
 exports.getMaster = async(req,res)=>{
 
@@ -555,6 +556,119 @@ exports.setMasterOutput = async(req,res)=>{
       }
 
   }, 5000);
+
+
+
+}
+exports.setGroupSelect = async(req,res)=>{
+
+  console.log(req.body);
+
+  let path = require('path');
+
+  let reqPath = path.join(__dirname, '../static/images/');
+
+  let inputFile = reqPath + "1641830634616-test-0.jpg"; 
+  let inputFile2 = reqPath + "1641830601305-test-0.jpg"; 
+  let inputFile3 = reqPath + "1641830569595-test-0.jpg"; 
+  let outputFile  = reqPath + 'output-'+ '1641830634616-test-0' +'-new.jpg';
+
+  // // sharp(path + 'example.jpg')
+  // sharp(inputFile)
+  //      .composite([{input: inputFile2, gravity: 'southeast' }, {input: inputFile3, gravity: 'southeast' }])
+  //      .toFile(reqPath + 'output.png');
+
+
+
+  let composites = [];
+
+  composites.push({input: reqPath + "1641830634616-test-0.jpg", gravity: 'southeast'});
+  composites.push({input: reqPath + "1641830601305-test-0.jpg", gravity: 'southeast'});
+  composites.push({input: reqPath + "1641830569595-test-0.jpg", gravity: 'southeast'});
+  
+  sharp()
+  .composite(composites)
+  .toFile(reqPath+'output.jpg', function(err) {
+        console.log("Error: ", err)
+  })
+
+  console.log(reqPath+'output.jpg');
+
+  sharp(inputFile2)
+  .resize({
+    fit: sharp.fit.contain, // Pass in the fit type.
+    height: 100, // Let's make it a little smaller than the underlying image.
+    width: 100
+  })
+  .toBuffer({ resolveWithObject: true }) 
+  .then(({ data, info }) => { 
+    sharp(inputFile3) 
+      .resize(300,100) 
+      .composite([{ 
+        input: data, gravity: 'southeast'
+      }])
+      .toFile(reqPath+'output.jpg', function(err) {
+        console.log("Error: ", err)
+      });
+    console.log(info);
+  })
+  .catch(err => { 
+    console.log("Error: ", err);
+  });
+
+  // joinImages(['1641830634616-test-0.jpg', '1641830601305-test-0.jpg']).then((img) => {
+  //   // Save image as file
+  //   img.toFile('out.png');
+  // });
+  
+  // // sharp(inputFile).overlayWith([{input: reqPath+'1641830601305-test-0.jpg', gravity: 'cent?re'}])
+  // sharp(inputFile).composite([{input: reqPath+'1641830601305-test-0.jpg'}])
+  // .resize(300, 300) // Resize the image
+  // .toBuffer({ resolveWithObject: true }) // We want it to a buffer
+  // // sharp(inputFile).composite([{input: reqPath+'1641830601305-test-0.jpg', gravity: sharp.gravity.southeast}])
+  // .toFile(outputFile)
+  // //  .resize({ height: 246, width: 230 })
+  // .then(function(newFileInfo) {
+  //     // newFileInfo holds the output file properties
+  //     console.log("Success")
+  // })
+  // .catch(function(err) {
+  //     console.log("Error occured" + error);
+  // });
+
+  console.log(outputFile);
+
+  // sharp(inputFile).overlayWith(reqPath+'1641830601305-test-0.jpg', {gravity: sharp.gravity.southeast})
+  // .toFile(outputFile)
+  // //  .resize({ height: 246, width: 230 })
+  // .then(function(newFileInfo) {
+  //     // newFileInfo holds the output file properties
+  //     console.log("Success")
+  // })
+  // .catch(function(err) {
+  //     console.log("Error occured");
+  // });
+
+  // var newProduct = req.body;
+
+  // setTimeout(() => {
+
+  //     for(var x=0;x<newProduct.images.length;x++){
+        
+  //       let inputFile  = reqPath + newProduct.images[x]; 
+  //       let outputFile  = reqPath + 'output-'+ newProduct.description +'-' + newProduct.style + '-'+ x +'.jpg';
+            
+  //       sharp(inputFile).resize({ height: 246, width: 230 }).toFile(outputFile)
+  //       .then(function(newFileInfo) {
+  //           // newFileInfo holds the output file properties
+  //           console.log("Success")
+  //       })
+  //       .catch(function(err) {
+  //           console.log("Error occured");
+  //       });
+  //     }
+
+  // }, 5000);
 
 
 

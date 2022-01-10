@@ -55,7 +55,9 @@ class HomeComponent extends Component {
                 lastname : false,
                 email : false    
             },
-            scrolling: false
+            scrolling: false,
+            selected: false,
+            groupSelect: []
         }  
 
         this.handleBlur = this.handleBlur.bind(this);
@@ -213,6 +215,40 @@ class HomeComponent extends Component {
         window.history.back();
     }
 
+    onSubmitLogin(event){
+
+        event.preventDefault();
+
+        console.log(this.state.groupSelect);
+
+        fetch(this.props.URLExternal+'/groupselect', {
+
+            method: 'post',
+            headers: API_HEADERS,
+            body: JSON.stringify(this.state.groupSelect)
+        })
+
+
+        
+    }
+
+    onChangeSubmitLogin(event){
+
+        event.preventDefault();
+
+        let nextState = this.state.groupSelect;
+
+        nextState.push(event.target.id);            
+        
+        this.setState({
+
+            groupSelect: nextState
+        })
+
+        console.log(event.target.id);
+
+    }
+
 
     render() {
 
@@ -301,6 +337,7 @@ class HomeComponent extends Component {
                 <div key={product.id} className="col-md-3">
                      <div>
                         <Card>
+                            <Input type="checkbox" onChange={this.onChangeSubmitLogin.bind(this)} name="id" check={this.state.selected} id={product.id} value={product.id} />
                             <Link to={'/productdetail/'+product.id}> 
                                 <CardImg top width="100%" src={this.props.URLExternal+"/images/"+ product.image} alt="Card image cap" />
                                 {/* <CardImg top width="100%" src={this.props.URLExternal+"/images/output-"+ product.image} alt="Card image cap" /> */}
@@ -448,8 +485,11 @@ class HomeComponent extends Component {
                     </Card>
                 </div>
                 <br/>
-                <div className="row">                    
-                    {menu}
+                <div className="row">  
+                    <Form name="contact-form" onSubmit={this.onSubmitLogin.bind(this)}>
+                        {menu}
+                        <Button type="submit">Submit</Button>
+                    </Form>
                 </div>
                 <br/>
                 <div className="row">

@@ -191,6 +191,8 @@ app.post('/createcategory', categoryController.setCategory);
 
 app.post('/removecategory', categoryController.removeCategory);
 
+app.post('/groupselect', productController.setGroupSelect);
+
 mongoose.connect('mongodb://localhost:27017/amsel',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
